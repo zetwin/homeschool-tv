@@ -113,6 +113,8 @@ More: [the setup guide](docs/SETUP.md).
 
 The lessons are written with [Claude Code](https://claude.com/claude-code), following written rules and checked by helpers, so a new lesson can reach the same quality as the existing ones.
 
+**Step-by-step guide for a parent, no coding needed: [How to start making lessons](docs/MAKE-A-LESSON.md).** In short:
+
 1. Install Claude Code (it needs a paid Claude plan) and open it in this folder. It reads [`CLAUDE.md`](CLAUDE.md) first.
 2. Ask for a lesson in plain words, for example: *"Make Science lesson 3 of the skeleton and muscles unit: Movement."*
 3. Claude follows [the 12 lesson steps](docs/rules/LESSON-RULES.md): it places the lesson in the official program, collects facts with sources, writes the script, finds licensed pictures and video clips, records the voice, and runs the checks. Seven helpers in [`.claude/agents/`](.claude/agents/) do the research, fact-checking, licence checks, a first look as a child, and the TV test.

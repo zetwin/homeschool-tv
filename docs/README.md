@@ -2,7 +2,7 @@
 
 Last updated: 2026-11-11. Every file has one job. If something new doesn't fit, add it here.
 
-**New here?** [`product/FEATURES.md`](product/FEATURES.md) lists everything we have and how real it is. [`product/HOW-THE-CODE-WORKS.md`](product/HOW-THE-CODE-WORKS.md) explains the code. [`SETUP.md`](SETUP.md) gets it running. [`DESIGN-GALLERY.md`](DESIGN-GALLERY.md) shows the design rounds.
+**New here?** [`product/FEATURES.md`](product/FEATURES.md) lists everything we have and how real it is. [`product/HOW-THE-CODE-WORKS.md`](product/HOW-THE-CODE-WORKS.md) explains the code. [`SETUP.md`](SETUP.md) gets it running. [`DESIGN-GALLERY.md`](DESIGN-GALLERY.md) shows the design rounds. [`MAKE-A-LESSON.md`](MAKE-A-LESSON.md) is the step-by-step guide to making a new lesson.
 
 **About this public copy:** the team's day-to-day notes (tasks, decisions, the owner's notes and feedback) stay in a private repository, because they quote a real family. What they taught us about quality is summed up in `rules/QUALITY-NOTES.md`. Where a document below mentions "the team's private notes", that's what it means. "The owner" means the product owner, who is also the first family's parent.
 

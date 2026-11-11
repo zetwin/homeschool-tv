@@ -17,6 +17,8 @@ A family learning app for children aged 10 to 12: lessons on the TV, tests on ea
 - `docs/README.md`: the map of all project knowledge
 
 ## Making a lesson
+The person asking may not be technical. `docs/MAKE-A-LESSON.md` is the guide they follow; keep your steps in line with it, explain in simple words, and tell them what only they can do.
+
 Follow the steps in `docs/rules/LESSON-RULES.md`, in order. The helpers in `.claude/agents/` do these steps:
 
 | Step | Helper |
@@ -29,10 +31,12 @@ Follow the steps in `docs/rules/LESSON-RULES.md`, in order. The helpers in `.cla
 | Play it at TV size and phone size, with the remote | `tv-tester` |
 
 Then:
-1. Record the voice: `npm run voice:setup` once, then `npm run voice <id>`. See `docs/product/VOICE-PLAN.md`.
-2. Run `node tools/check-lesson.mjs <id>` until it passes, then `npm run verify` with the server running.
-3. Use `#shot-<sceneId>-<line>` to freeze any scene and look at it. Photograph every scene before trusting a check.
-4. **A person watches the whole lesson and every clip, and listens to the voice.** Claude can't see video or hear audio, so never call a lesson finished before that.
+1. **Put it in the app:** add its `<script src="episodes/<id>.js">` line in `channel/index.html` (in lesson order), and add it to `channel/curriculum.js`, so it shows in the program and the lessons list.
+2. Record the voice: `npm run voice:setup` once, then `npm run voice <id>`. See `docs/product/VOICE-PLAN.md`.
+3. Run `node tools/check-lesson.mjs <id>` until it passes, then `npm run verify` with the server running.
+4. Use `#shot-<sceneId>-<line>` to freeze any scene and look at it. Photograph every scene before trusting a check.
+5. **Give the person the list of video clips to watch, with links,** and add only the ones they approve.
+6. **A person watches the whole lesson and listens to the voice.** Claude can't see video or hear audio, so never call a lesson finished before that.
 
 `channel/episodes/skeleton.js` is the format example. The question types are in `channel/views/questions.js`; add new kinds there.
 
@@ -49,7 +53,13 @@ Then:
 10. **Never test with sound on.** Test only in a hidden, muted browser: `node tools/browser-check.mjs <url> <script.js> <width> <height> [picture.png]`.
 11. **Never serve the family from the folder you work in.** The family uses `npm run live` (port 8080); work happens with `npm run dev` (port 8081); `npm run release` moves checked work across.
 
-## Layout
+## Sharing a lesson
+When the person says a lesson is approved and asks to share it:
+- **This repository is public.** Before committing, check the changes hold no children's names, photos, logins, addresses or emails, and nothing from `data/`.
+- Commit only the lesson's own files and the shared lists it touched (`channel/episodes/<id>.js`, its voice files and `assets/voice/*/manifest.json`, new pictures and `credits.json`, `index.html`, `curriculum.js`, its research notes).
+- Use the person's GitHub noreply email for the commit (`<id>+<username>@users.noreply.github.com`), not a personal email, and add no AI co-author line.
+- Push to `main`. If they can't push, say they need to be invited as a collaborator, and stop.
+
 - `channel/`: the app. Plain HTML, CSS and JavaScript, with GSAP from `channel/vendor/`. No build step
   - `app.js`: TV home, lesson player, reusable scene types
   - `episodes/<id>.js`: one lesson: script, running order, test, custom animations

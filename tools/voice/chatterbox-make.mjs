@@ -11,7 +11,7 @@ import { pipeline } from '@huggingface/transformers';
 import { findTool } from '../lib/find.mjs';
 import { takeKey, takeText, TAKES } from './chatterbox-takes.mjs';
 const here = dirname(fileURLToPath(import.meta.url)), SET = JSON.parse(readFileSync(join(here, 'voices.json'), 'utf8')), ffmpeg = findTool('ffmpeg');
-const id = process.argv[2], python = join(homedir(), '.cache/homeschool-voices/chatterbox/venv/bin/python');
+const id = process.argv[2], python = join(homedir(), '.cache/homeschool-voices/chatterbox/venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
 if (!id) { console.log('Say which lesson, such as: node tools/voice/chatterbox-make.mjs spanish-1'); process.exit(1); }
 if (!existsSync(python)) { console.log('Chatterbox is not installed. See docs/product/VOICE-PLAN.md'); process.exit(1); }
 globalThis.window = { EPISODES: [] };

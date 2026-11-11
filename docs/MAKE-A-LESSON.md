@@ -2,7 +2,7 @@
 
 A guide for a parent who wants to make new lessons for Home School TV. You don't need to know how to code. Claude writes the lesson; you decide what it teaches, and you watch and listen before the children see it.
 
-These steps are for a **Mac**. Setting up takes about an hour the first time. After that, a lesson takes an afternoon: some of it is Claude working, and the most important part is you watching it.
+These steps work on **Windows** and on a **Mac**. Setting up takes about an hour the first time. After that, a lesson takes an afternoon: some of it is Claude working, and the most important part is you watching it.
 
 ---
 
@@ -10,13 +10,14 @@ These steps are for a **Mac**. Setting up takes about an hour the first time. Af
 
 ### 1. Get what you need
 - **A Claude plan that includes Claude Code** (Pro or Max). Sign up at [claude.ai](https://claude.ai).
-- **The Claude app for Mac:** [claude.ai/download](https://claude.ai/download). Install it and sign in.
+- **The Claude app** for Windows or Mac: [claude.ai/download](https://claude.ai/download). Install it and sign in.
 - **Node.js:** go to [nodejs.org](https://nodejs.org), download the version marked **LTS**, and install it like any app.
-- **Microsoft Edge or Google Chrome.** Claude uses it, hidden and with no sound, to check the lessons.
+- **Git** (only on Windows): download it from [git-scm.com](https://git-scm.com/download/win) and install it with the usual choices. A Mac offers it by itself in step 4.
+- **Microsoft Edge or Google Chrome.** Windows already has Edge. Claude uses it, hidden and with no sound, to check the lessons.
 - **About 2 GB of free disk space.**
 
 ### 2. Make a folder
-In Finder, make a folder for the project, for example **Documents → Home School**.
+Make a folder for the project, for example **Documents → Home School** (in File Explorer on Windows, or Finder on a Mac).
 
 ### 3. Open the folder in Claude
 1. Open the Claude app.
@@ -30,9 +31,11 @@ Type this to Claude, as it is:
 
 Claude will ask before it runs each command. Say yes.
 
-**Two things only you can do:**
-- If your Mac asks to install **developer tools** (for `git`), click **Install** and wait.
-- If Claude says **Homebrew** is missing: open the **Terminal** app, paste the command from [brew.sh](https://brew.sh), press Return, and type your Mac password when asked. (The password doesn't show as you type; that's normal.) Then tell Claude it's done.
+**What only you may need to do:**
+- **Windows:** if Windows asks "Do you want to allow this app to make changes?", click **Yes**. If Claude asks you to run a command yourself, open **Terminal** (right-click the Start button → Terminal), paste it, and press Enter.
+- **Mac:** if your Mac asks to install **developer tools** (for `git`), click **Install** and wait. If Claude says **Homebrew** is missing, open the **Terminal** app, paste the command from [brew.sh](https://brew.sh), press Return, and type your Mac password when asked (it doesn't show as you type; that's normal).
+
+Then tell Claude it's done.
 
 ### 5. See the app
 Type to Claude:
@@ -114,3 +117,4 @@ Your copy is separate from the family's app. To add your lesson there:
 - **Say what you think plainly.** "This picture is wrong" or "too long" is enough. Claude asks if it needs more.
 - **Your copy has its own example children,** so testing never touches the family's real data.
 - **Recording voices** downloads about 500 MB. Claude can remove it afterwards to save space.
+- **Spanish voices** use a second, bigger voice tool. On Windows it runs slower than on a Mac. English lessons don't need it.

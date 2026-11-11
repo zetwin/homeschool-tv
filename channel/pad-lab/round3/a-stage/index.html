@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Round 3 A: Stage</title>
+<link rel="stylesheet" href="../base.css"><script src="../data.js"></script>
+<style>
+/* A, Stage: the lesson on now fills most of the screen, like the top of Apple TV. The rest of today waits on the right. */
+.stage { display: grid; flex: 1; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 1em; min-height: 0; padding: .6em 1.2em 1em; }
+.hero { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: .5em; min-height: 0; padding: 1.5em; overflow: hidden; border-radius: 28px; color: #FFFFFF; background: #17131F center / cover no-repeat; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000000E6 0, #000000A6 40%, #0000 75%); }
+.hero > * { position: relative; }
+.tag { display: inline-flex; align-self: flex-start; gap: .4em; padding: .2em .7em; background: #FFFFFF; border-radius: 999px; color: var(--ink); font-size: .9em; font-weight: 700; }
+.hero h2 { font: 800 2.4em/1.05 var(--display); letter-spacing: -.02em; }
+.hero p { font-size: 1.05em; }
+.hero .play { align-self: flex-start; margin-top: .5em; }
+.side { display: flex; flex-direction: column; gap: .7em; min-height: 0; }
+.side h3 { font: 700 1.15em var(--body); }
+.card { display: grid; flex: 1; grid-template-columns: 38% minmax(0, 1fr); min-height: 0; overflow: hidden; padding: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 20px; text-align: left; }
+.card figure { position: relative; min-height: 0; } .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card figure span { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 2.6em; height: 2.6em; margin: -1.3em 0 0 -1.3em; background: #FFFFFFEE; border-radius: 50%; color: var(--play); box-shadow: 0 4px 14px #0004; } .card figure .ic { width: 1em; height: 1em; margin-left: .15em; }
+.card div { display: flex; flex-direction: column; justify-content: center; gap: .2em; padding: .6em .9em; }
+.card small { color: var(--mute); font-size: .9em; }
+.card b { font-size: 1.05em; line-height: 1.2; }
+@media (orientation: portrait) { .stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr); } }
+@media (max-width: 600px) { .stage { flex: none; grid-template-rows: auto; } .hero { min-height: 60vh; } .card { flex: none; min-height: 6.5em; } .hero h2 { font-size: 2em; } }
+</style></head><body>
+<p class="note">Version A: Stage. An example day with real lessons</p>
+<script>
+const now = R3.lessons.find((l) => l.state === 'now'), later = R3.lessons.filter((l) => l.state === 'next' || l.state === 'later'), m = R3.missed[0];
+const card = (l, when) => `<button class="card" aria-label="Play ${l.title}"><figure><img src="${R3.img(l.img)}" alt=""><span>${R3.icon.play}</span></figure><div><small>${when}</small><b>${l.title}</b></div></button>`;
+document.body.insertAdjacentHTML('beforeend', `${R3.top()}
+<main class="stage">
+  <section class="hero" style="background-image:url(${R3.img(now.img)})"><span class="tag">On now, ${now.time}</span><h2>${now.title}</h2><p>${now.subject}</p><button class="play">${R3.icon.play}Play on the TV</button></section>
+  <aside class="side"><h3>Later today</h3>${later.map((l) => card(l, `${l.time}, ${l.subject}`)).join('')}${card(m, `${m.who}, ${m.subject}`)}</aside>
+</main>${R3.places()}`);
+</script></body></html>

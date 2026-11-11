@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+/* Calm: learns from Headspace and Notion. One centred column, a greeting, and short sentences
+   that open when you tap them. Nothing shouts. For a tired parent at the end of the day. */
+:root{
+  --bg:#F2F0F6; --ink:#2A2736; --muted:#5D5970; --soft:#E6E2EE; --line:#D9D4E3; --accent:#4B3F9E; --accent-soft:#E3DEF5;
+  --warm:#8C4A12; --late:#A3262A; --sheet:#FBFAFD;
+  --ana:#D42A20; --leo:#0F766E; --mia:#1D4ED8;
+  --serif:"Newsreader",Georgia,serif; --sans:"Nunito Sans",system-ui,sans-serif;
+}
+html{font-size:18px}
+html[data-size="s"]{font-size:17px}
+html[data-size="xl"]{font-size:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+body.is-admin{overflow:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+.corner{position:fixed;top:18px;right:22px;display:flex;gap:6px;z-index:5}
+.round{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--muted);transition:background .2s}
+.round:hover,.round:active{background:var(--soft)}
+.round svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.col{width:min(700px,calc(100vw - 56px));margin:0 auto;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:48px 0 28px}
+.date{color:var(--muted);font-size:1rem;letter-spacing:.01em}
+h1{font-family:var(--serif);font-weight:300;font-size:3rem;line-height:1.1;letter-spacing:-.015em;margin:10px 0 18px;transition:font-size .45s ease,margin .45s ease;text-wrap:balance}
+.lead{font-size:1.2rem;line-height:1.5;color:var(--ink);max-width:36em;text-wrap:pretty}
+.acts{display:flex;align-items:center;gap:18px;margin-top:18px;transition:margin .45s}
+.play{min-height:54px;padding:0 26px 0 20px;border-radius:27px;background:var(--accent);color:#fff;font-weight:700;display:inline-flex;align-items:center;gap:10px}
+.play svg{width:18px;height:18px;fill:currentColor}
+.link{color:var(--accent);font-weight:700;min-height:48px;display:inline-flex;align-items:center;padding:0 4px;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:rgba(75,63,158,.35)}
+
+.list{margin-top:34px;border-top:1px solid var(--line);transition:margin .45s}
+.item{border-bottom:1px solid var(--line)}
+.say{position:relative;width:100%;display:flex;align-items:center;gap:16px;padding:14px 4px;min-height:60px}
+.say .txt{flex:1;min-width:0}
+.say .s{display:block;font-family:var(--serif);font-size:1.45rem;font-weight:400;line-height:1.25}
+.say .sub{display:block;color:var(--muted);margin-top:2px}
+.say .dot{position:absolute;left:-22px;top:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:var(--late)}
+.say .pm{width:28px;height:28px;flex:none;position:relative;color:var(--muted)}
+.say .pm::before,.say .pm::after{content:"";position:absolute;left:5px;right:5px;top:13px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s}
+.say .pm::after{transform:rotate(90deg)}
+.item.open .say .pm::after{transform:rotate(0)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.more>div{overflow:hidden}
+.item.open .more{grid-template-rows:1fr}
+.inner{padding:0 4px 18px 4px}
+
+/* rows inside a sentence */
+.r{display:flex;align-items:center;gap:14px;padding:9px 0;min-height:52px;width:100%}
+.r+.r{border-top:1px dashed var(--line)}
+.r .w{flex:1;min-width:0}
+.r .w b{font-weight:700;display:block}
+.r .w span{color:var(--muted);display:block}
+.r .tm{width:56px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums}
+.r .kids{display:flex;gap:8px;flex:none}
+.r .k{display:inline-flex;align-items:center;gap:5px;width:96px;font-weight:700;white-space:nowrap}
+.r .k .f{font-size:19px}
+.r .k.missed{color:var(--late)}
+.r .k.later,.r .k.now{color:var(--muted);font-weight:600}
+.r.nowrow .tm{color:var(--warm);font-weight:700}
+.soft{min-height:46px;padding:0 18px;border-radius:23px;background:var(--accent-soft);color:var(--accent);font-weight:700;flex:none}
+.soft.solid{background:var(--accent);color:#fff}
+.inner p{margin:4px 0}
+.inner .foot{margin-top:6px}
+
+/* the greeting steps back when something is open */
+body.focus h1{font-size:2.2rem;margin:6px 0 10px}
+body.focus .acts{margin-top:12px}
+body.focus .list{margin-top:24px}
+@media (min-aspect-ratio:1/1){
+  body.focus h1{font-size:2.05rem;margin:0 0 8px}
+  body.focus .date{display:none}
+  body.focus .lead{font-size:1.05rem}
+  body.focus .acts{margin-top:8px}
+  body.focus .list{margin-top:18px}
+  .say .sub{display:none}
+  body.focus .r{min-height:46px;padding:7px 0}
+  .col{padding:40px 0 24px}
+}
+
+.feedback{margin-top:22px;text-align:center}
+.feedback .link{color:var(--muted);text-decoration-color:rgba(93,89,112,.4)}
+
+/* bottom sheet */
+.veil{position:fixed;inset:0;background:rgba(42,39,54,.28);opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;width:min(720px,100vw);transform:translate(-50%,100%);transition:transform .4s cubic-bezier(.2,.8,.2,1);background:var(--sheet);border-radius:28px 28px 0 0;padding:14px 36px 34px;z-index:40;max-height:88vh;overflow:auto}
+.sheet.on{transform:translate(-50%,0)}
+.grab{width:48px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 14px}
+.sheet h2{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.15}
+.sheet .st{color:var(--muted);margin:4px 0 16px}
+.sheet .kidm{padding:12px 0;border-top:1px solid var(--line)}
+.sheet .kidm .nm{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:8px}
+.nums{display:flex;gap:5px;flex-wrap:wrap}
+.nums button{width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid var(--line);font-weight:700;text-align:center}
+.nums button.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.sheet textarea{width:100%;min-height:130px;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;font:inherit;background:#fff;resize:vertical}
+.sheet .btns{display:flex;gap:12px;margin-top:20px;align-items:center}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:48px;padding:0 20px;border-radius:24px;border:1.5px solid var(--line);background:#fff;font-weight:700}
+.choice button.sel{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,12px);opacity:0;transition:.35s;background:var(--ink);color:#fff;padding:12px 24px;border-radius:24px;font-weight:600;z-index:50;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* admin */
+.admin{display:none;width:min(700px,calc(100vw - 56px));margin:0 auto;padding:30px 0 80px}
+body.is-admin .pad{display:none}
+body.is-admin .admin{display:block}
+.admin .back{min-height:48px;display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:700}
+.admin .back svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+.admin h1{margin:18px 0 6px}
+.admin .intro{color:var(--muted);margin-bottom:26px}
+.admin section{margin-top:34px}
+.admin h2{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin-bottom:6px}
+.arow{display:flex;align-items:center;gap:16px;min-height:56px;padding:8px 0;border-bottom:1px solid var(--line)}
+.arow .k{flex:1;color:var(--muted)}
+.arow .v{font-weight:700}
+.arow .soft{margin-left:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="pad">
+  <div class="corner">
+    <button class="round" data-act="size" aria-label="Text size"><svg viewBox="0 0 24 24"><path d="M3 19l5-14 5 14M4.8 14h6.4M14.5 19l3.2-8.5 3.3 8.5M15.6 16.5h4.3"/></svg></button>
+    <button class="round" data-act="feedback" aria-label="Send feedback"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+    <button class="round" data-act="admin" aria-label="Admin"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.8 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3.1 14H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+  </div>
+  <main class="col" id="col"></main>
+</div>
+<main class="admin" id="admin"></main>
+<div class="veil" id="veil"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes;
+const $ = (s) => document.querySelector(s);
+const nowC = C.find((c) => c.now);
+const WORD = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+const and = (a) => a.length < 2 ? a[0] || '' : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+const given = {};
+const greet = () => { const h = +P.now.split(':')[0]; return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'; };
+const me = P.parents.find((p) => p.you).name;
+const mark = (ci, i) => given[ci + '-' + i] || (C[ci].marks && C[ci].marks[i]) || '';
+
+function kidCell(c, ci, i) {
+  const st = c.state[i], m = mark(ci, i);
+  const t = m || (st === 'done' ? 'done' : st === 'now' ? 'on now' : st === 'missed' ? 'missed' : 'later');
+  return `<span class="k ${m ? '' : st}" title="${K[i].name}"><span class="f">${K[i].face}</span>${t}</span>`;
+}
+
+function sections() {
+  const done = K.reduce((a, k) => a + k.done, 0), all = K.reduce((a, k) => a + k.of, 0);
+  const missed = []; C.forEach((c) => c.state.forEach((s, i) => { if (s === 'missed') missed.push(`${K[i].name} missed ${c.subject}`); }));
+  const lateKid = K.find((k) => k.late);
+  const lateNeed = P.needsYou.find((n) => n.action === 'Remind');
+  const top = P.scores[0];
+  const pm = P.program.where.match(/^(\w+): (.*), lesson (\d+) of (\d+)$/);
+  return [
+    { id: 'needs', dot: true, s: `${WORD[P.needsYou.length]} things need you.`, sub: 'Leo’s written answers, a late homework and a lesson to rate.',
+      body: P.needsYou.map((n, j) => `<div class="r"><span class="w"><b>${n.what}</b><span>${n.detail}</span></span><button class="soft ${j === 0 ? 'solid' : ''}" data-act="need" data-j="${j}">${n.action}</button></div>`).join('') },
+    { id: 'day', s: `${done} of today’s ${all} classes are done.`, sub: `${K.map((k) => `${k.name} ${k.done}`).join(', ')}. ${missed.join('. ')}.`,
+      body: C.map((c, ci) => `<button class="r ${c.now ? 'nowrow' : ''}" data-act="class" data-c="${ci}"><span class="tm">${c.now ? 'Now' : c.time}</span><span class="w"><b>${c.subject}</b></span><span class="kids">${K.map((k, i) => kidCell(c, ci, i)).join('')}</span></button>`).join('') + `<div class="foot"><span style="color:var(--muted)">Tap a class to give a mark or set homework.</span></div>` },
+    { id: 'hw', s: lateKid ? `${lateKid.name}’s ${lateNeed.detail.split(':')[0]} homework is late.` : 'All homework is on time.', sub: K.map((k) => `${k.name} ${k.homework ? k.homework + ' to do' : 'none'}`).join(', ') + '.',
+      body: K.map((k, i) => `<div class="r"><span class="w"><b>${k.face} ${k.name}</b><span>${k.homework ? `${k.homework} to do${k.late ? `. Late: ${lateNeed.detail}` : ''}` : 'No homework right now'}</span></span>${k.late ? `<button class="soft" data-act="remind" data-n="${k.name}">Remind</button>` : `<button class="soft" data-act="hw" data-i="${i}">Set homework</button>`}</div>`).join('') },
+    { id: 'scores', s: `${top.kid} got ${top.score} on the ${top.what.split(',')[0].toLowerCase()} test.`, sub: P.scores.slice(1).map((s) => `${s.kid} got ${s.score}`).join('. ') + '.',
+      body: P.scores.map((s) => `<div class="r"><span class="w"><b>${s.kid}, ${s.what}</b><span>${s.when}</span></span><b style="font-size:1.15rem">${s.score}</b></div>`).join('') + `<p style="margin-top:6px;color:var(--muted)">Averages: ${K.map((k) => `${k.name} ${k.average}`).join(', ')}. <button class="link" data-act="soon" data-t="Every score">See every score</button></p>` },
+    { id: 'program', s: `${pm[1]} is on lesson ${pm[3]} of ${pm[4]}.`, sub: `${pm[2]}. ${P.program.subjects} subjects this year.`,
+      body: `<p>${pm[2]}. Lesson ${pm[3]} of ${pm[4]}.</p><p style="color:var(--muted)">${P.admin.plan}: ${P.program.subjects} subjects, ${P.program.readyLessons} video lessons ready so far.</p><div class="foot"><button class="link" data-act="soon" data-t="The full program">Open the full program</button></div>` },
+  ];
+}
+
+let open = null;
+function render() {
+  const watching = K.filter((k, i) => nowC.state[i] === 'now').map((k) => k.name);
+  const fin = K.filter((k, i) => nowC.state[i] === 'done').map((k) => k.name);
+  $('#col').innerHTML = `<div class="date">${P.today}, ${P.now}</div>
+    <h1>${greet()}, ${me}. ${nowC.subject} is on.</h1>
+    <p class="lead">${and(watching)} ${watching.length > 1 ? 'are' : 'is'} watching the ${nowC.title.split('? ').pop().replace('The ', '').toLowerCase()} lesson. ${and(fin)} has already finished it.</p>
+    <div class="acts"><button class="play" data-act="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>Play on the TV</button><button class="link" data-act="class" data-c="${C.indexOf(nowC)}">Give marks</button></div>
+    <div class="list">${sections().map((x) => `<div class="item ${open === x.id ? 'open' : ''}" data-id="${x.id}"><button class="say" data-act="toggle" aria-expanded="${open === x.id}">${x.dot ? '<span class="dot" aria-hidden="true"></span>' : ''}<span class="txt"><span class="s">${x.s}</span><span class="sub">${x.sub}</span></span><span class="pm" aria-hidden="true"></span></button><div class="more"><div><div class="inner">${x.body}</div></div></div></div>`).join('')}</div>
+`;
+  document.body.classList.toggle('focus', !!open);
+}
+
+/* sheet */
+const sheet = $('#sheet'), veil = $('#veil');
+function openSheet(html) { sheet.innerHTML = `<div class="grab"></div>${html}`; sheet.classList.add('on'); veil.classList.add('on'); }
+function closeSheet() { sheet.classList.remove('on'); veil.classList.remove('on'); }
+let tt; function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => e.classList.remove('on'), 2400); }
+
+let pick = {};
+const act = {
+  toggle: (e) => {
+    const id = e.closest('.item').dataset.id;
+    open = open === id ? null : id;
+    document.querySelectorAll('.item').forEach((it) => { const on = it.dataset.id === open; it.classList.toggle('open', on); it.querySelector('.say').setAttribute('aria-expanded', on); });
+    document.body.classList.toggle('focus', !!open);
+  },
+  admin: () => { location.hash = '#admin'; },
+  back: () => { location.hash = ''; },
+  close: closeSheet,
+  play: () => { closeSheet(); toast(`Playing “${nowC.title}” on the TV`); },
+  soon: (e) => { closeSheet(); toast(`${e.dataset.t} opens here`); },
+  remind: (e) => toast(`Reminder sent to ${e.dataset.n}`),
+  class: (e) => {
+    const ci = +e.dataset.c, c = C[ci]; pick = { ci };
+    const word = { done: 'Done', now: 'Watching now', missed: 'Missed it', later: 'Later today' };
+    openSheet(`<h2>${c.subject}</h2><p class="st">${c.time}. ${c.title}</p>
+      ${K.map((k, i) => `<div class="kidm"><div class="nm"><span style="font-size:22px">${k.face}</span><span>${k.name}<span style="color:var(--muted);font-weight:600">, ${word[c.state[i]].toLowerCase()}</span></span></div>${c.state[i] === 'later' ? '<span style="color:var(--muted)">Nothing to mark yet.</span>' : `<div class="nums" role="group" aria-label="Mark for ${k.name}, out of 12">${Array.from({ length: 12 }, (_, n) => `<button class="${String(n + 1) === mark(ci, i) ? 'sel' : ''}" data-act="num" data-i="${i}" data-n="${n + 1}">${n + 1}</button>`).join('')}</div>`}</div>`).join('')}
+      <div class="btns"><button class="play" data-act="savemarks">Save marks</button><button class="link" data-act="hw" data-c="${ci}">Set homework instead</button></div>`);
+  },
+  num: (e) => { e.parentNode.querySelectorAll('button').forEach((b) => b.classList.remove('sel')); e.classList.add('sel'); pick[e.dataset.i] = e.dataset.n; },
+  savemarks: () => { let n = 0; Object.keys(pick).forEach((i) => { if (i !== 'ci') { given[pick.ci + '-' + i] = pick[i]; n++; } }); closeSheet(); render(); toast(n ? 'Marks saved.' : 'Nothing changed.'); },
+  hw: (e) => {
+    const c = e.dataset.c != null ? C[+e.dataset.c] : null, who = e.dataset.i != null ? K[+e.dataset.i].name : null;
+    openSheet(`<h2>Set homework</h2><p class="st">${c ? `${c.subject}: ${c.title}` : `For ${who}`}</p>
+      ${who ? '' : `<p style="font-weight:700;margin-bottom:8px">For</p><div class="choice">${K.map((k) => `<button data-act="ch">${k.face} ${k.name}</button>`).join('')}</div>`}
+      <p style="font-weight:700;margin:16px 0 8px">What to do</p><textarea placeholder="For example: read pages 16 to 19"></textarea>
+      <p style="font-weight:700;margin:16px 0 8px">Due</p><div class="choice"><button class="sel" data-act="ch1">Tomorrow</button><button data-act="ch1">Friday</button><button data-act="ch1">Next week</button></div>
+      <div class="btns"><button class="play" data-act="soon" data-t="Homework set. It">Set homework</button><button class="link" data-act="close">Cancel</button></div>`);
+  },
+  ch: (e) => e.classList.toggle('sel'),
+  ch1: (e) => { e.parentNode.querySelectorAll('button').forEach((b) => b.classList.remove('sel')); e.classList.add('sel'); },
+  need: (e) => {
+    const n = P.needsYou[+e.dataset.j];
+    if (n.action === 'Remind') return toast('Reminder sent to Leo');
+    if (n.action === 'Mark now') return openSheet(`<h2>Leo’s written answers</h2><p class="st">${n.detail}. Read each one, then choose.</p>${[1, 2, 3].map((q) => `<div class="kidm"><div class="nm">Answer ${q}</div><div class="choice"><button data-act="ch1">Right</button><button data-act="ch1">Partly right</button><button data-act="ch1">Not yet</button></div></div>`).join('')}<div class="btns"><button class="play" data-act="soon" data-t="Saved. Leo’s marks">Save</button><button class="link" data-act="close">Later</button></div>`);
+    openSheet(`<h2>How was the Muscles lesson?</h2><p class="st">${n.detail}.</p><div class="choice">${['1', '2', '3', '4', '5'].map((s) => `<button data-act="ch1" aria-label="${s} stars">${'★'.repeat(+s)}</button>`).join('')}</div><div class="btns"><button class="play" data-act="soon" data-t="Thank you. Your rating">Save rating</button></div>`);
+  },
+  size: () => { const cur = document.documentElement.dataset.size || 'l'; openSheet(`<h2>Text size</h2><p class="st">Choose what is easiest to read.</p><div class="choice">${[['s', 'Standard', 17], ['l', 'Large', 18], ['xl', 'Extra large', 20]].map(([v, t, px]) => `<button class="${v === cur ? 'sel' : ''}" style="font-size:${px}px" data-act="setsize" data-v="${v}">${t}</button>`).join('')}</div>`); },
+  setsize: (e) => { document.documentElement.dataset.size = e.dataset.v; closeSheet(); },
+  feedback: () => openSheet(`<h2>Send feedback</h2><p class="st">What feels good, what gets in the way, what you wish it did.</p><textarea></textarea><div class="btns"><button class="play" data-act="soon" data-t="Thank you. Your note">Send</button><button class="link" data-act="close">Cancel</button></div>`),
+};
+document.addEventListener('click', (ev) => {
+  const a = ev.target.closest('[data-act]'); if (a) { act[a.dataset.act]?.(a); return; }
+  if (ev.target === veil) closeSheet();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+/* admin */
+function renderAdmin() {
+  const A = P.admin;
+  const sec = (t, rows) => `<section><h2>${t}</h2>${rows.map(([k, v, b, act, tt]) => `<div class="arow"><span class="k">${k}</span><span class="v">${v}</span>${b ? `<button class="soft" data-act="${act || 'soon'}" data-t="${tt || b}">${b}</button>` : ''}</div>`).join('')}</section>`;
+  $('#admin').innerHTML = `<button class="back" data-act="back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Back to today</button>
+    <h1>Admin</h1><p class="intro">The things you set once and rarely change.</p>
+    ${sec('Your account', [['Name', A.account.name], ['Username', A.account.username], ['Text size', A.account.textSize, 'Change', 'size'], ['Password', '', 'Change password']])}
+    ${sec('Family', [...P.parents.map((p) => ['Parent', p.name + (p.you ? ', you' : '')]), ...K.map((k) => ['Child', `${k.face} ${k.name}, ${k.year}`]), ['', '', 'Add a child']])}
+    ${sec('Learning plan', [['Curriculum', A.plan], ['Word help', A.wordHelp.replace('Spanish key words: ', 'Spanish key words ')], ['', '', 'Change the plan']])}
+    ${sec('Plan and billing', [['Plan', A.billing], ['', '', 'See plans']])}
+    ${sec('Feedback and checks', [['Exam PIN', A.examPin, 'Change PIN'], ['Feedback', '', 'Send feedback', 'feedback']])}
+    <section><div class="arow"><span class="k">Signed in as ${A.account.name}</span><button class="soft" data-act="soon" data-t="Sign out">Sign out</button></div></section>`;
+}
+
+function route() {
+  closeSheet();
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('is-admin', admin);
+  if (admin) { renderAdmin(); scrollTo(0, 0); } else render();
+}
+route();
+addEventListener('hashchange', route);
+</script>
+</body>
+</html>

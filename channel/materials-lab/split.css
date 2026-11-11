@@ -1,0 +1,99 @@
+/* D and E: the list on the left stays put; the opened page shows large on the right (owner, 2026-11-10:
+   "open Material/document on the right side, and keep the list on the left to keep going and check the others too").
+   Ladder: 1 main: the open page on the right, its title and the one red Print. 2 secondary: the list's group names.
+   3 supporting: rows in the list. 4 quiet: counts, status, the bars. The list stays calm: no strong fills. */
+:root { --sec: calc(var(--fs) * 1.5); }
+.split { display: grid; grid-template-columns: minmax(380px, 44%) minmax(0, 1fr); min-height: 0; }
+.list { position: relative; overflow-y: auto; overscroll-behavior: contain; padding: .3em 1.2em 1.6em; border-right: 1px solid var(--line); }
+.list h2 { margin: .9em 0 .5em; font: 800 var(--sec)/1.1 var(--dfont); letter-spacing: -.01em; }
+.list h2:first-child { margin-top: .2em; }
+.list h2 .quiet { display: block; margin-top: .15em; font: 400 var(--quiet)/1.3 var(--font); letter-spacing: 0; }
+.listBack { margin: .2em 0 .2em -.4em; }
+
+/* One row in the list: a small picture of the page and its name */
+.row { display: grid; grid-template-columns: 2.4em minmax(0, 1fr) auto; align-items: center; gap: .8em; width: 100%; min-height: 3.6em; padding: .45em .7em; border: 1.5px solid transparent; border-radius: 16px; background: none; text-align: left; }
+.row:hover { background: var(--surface); }
+.row .page { width: 2.4em; box-shadow: 0 0 0 1px var(--line); border-radius: 2px; }
+.row span { display: grid; line-height: 1.25; }
+.row[aria-current="true"] { background: var(--selBg); border-color: var(--ink); }
+.rows { display: grid; gap: .15em; }
+.inMark { display: grid; place-items: center; color: var(--ink); }
+
+/* This week: the pack, then each lesson with its pages next to it, then the pages for the whole week */
+.pack { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .9em; width: 100%; padding: .7em .9em; border: 1.5px solid var(--line); border-radius: 18px; background: var(--surface); text-align: left; }
+.pack:hover { border-color: var(--mute); }
+.pack[aria-current="true"] { background: var(--selBg); border-color: var(--ink); }
+.pack .stack { position: relative; width: 4.6em; height: 4.4em; }
+.pack .stack .page { position: absolute; top: 0; width: 2.9em; box-shadow: 0 0 0 1px var(--line), 0 4px 10px -4px #17131F40; }
+.pack span { display: grid; line-height: 1.25; }
+.lesson { margin-top: .5em; }
+.lessonHead { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) auto; align-items: center; gap: .8em; width: 100%; padding: .45em .7em .45em .45em; border: 1.5px solid transparent; border-radius: 16px; background: none; text-align: left; }
+.lessonHead:hover { background: var(--surface); }
+.lessonHead img { width: 3.4em; height: 3.4em; object-fit: cover; border-radius: 10px; }
+.lessonHead .lt { display: grid; line-height: 1.25; }
+.lessonHead > .ic { color: var(--mute); transition: transform .2s ease-out; }
+.lessonHead[aria-expanded="true"] > .ic { transform: rotate(90deg); }
+.lesson .rows { margin: .1em 0 .3em 2.6em; }
+.group { margin-top: 1.1em; }
+.group > .quiet { display: block; margin: 0 0 .3em .7em; }
+
+/* Categories: equal, modest cards. No giant tile, nothing that makes you wonder where to look */
+.cats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6em; }
+.cat { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; align-items: center; gap: .6em; min-height: 4.4em; padding: .55em .7em; border: 1.5px solid var(--line); border-radius: 16px; background: var(--surface); text-align: left; }
+.cat:hover { border-color: var(--mute); }
+.cat .page { width: 2.2em; box-shadow: 0 0 0 1px var(--line); border-radius: 2px; }
+.cat span { display: grid; line-height: 1.2; }
+.cat b { font-weight: 400; }
+.cat.isWeek b { font-weight: 800; }
+.cat[aria-current="true"] { background: var(--selBg); border-color: var(--ink); }
+.cat > .ic:first-child { width: 2.2em; height: 2.2em; color: var(--ink); }
+.cat > .ic:last-child { color: var(--mute); }
+.cats.one { grid-template-columns: 1fr; gap: .45em; }
+.cats.one .cat { min-height: 3.8em; }
+
+/* The right side: one page, large, and what you can do with it */
+.read { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; padding: 1em 1.6em .8em; background: var(--bg); }
+.doc { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: .9em 1.4em; min-height: 0; }
+.docHead { grid-column: 1 / -1; display: grid; gap: .25em; }
+.doc > .page { height: 100%; max-height: 430px; align-self: start; }
+.info { display: flex; flex-direction: column; gap: .6em; min-width: 0; overflow-y: auto; }
+.who .link { margin-left: .4em; }
+.docHead h3 { font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.info .acts { display: grid; gap: .55em; margin-top: .3em; }
+.info .acts .btn { width: 100%; white-space: nowrap; }
+.who { display: flex; flex-wrap: wrap; align-items: center; gap: .35em; }
+.who > .quiet { margin-right: .2em; }
+.inPack { display: inline-flex; align-items: center; gap: .4em; color: var(--mute); }
+.steps { display: flex; align-items: center; justify-content: space-between; gap: 1em; padding-top: .7em; }
+.steps .btn[disabled] { visibility: hidden; }
+.steps .prev .ic { transform: none; }
+/* The pack, opened: its pages side by side, and Print all */
+.packView { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: .9em; min-height: 0; }
+.packView h3 { font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.packPages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: .8em 1em; min-height: 0; padding: .2em; }
+/* Two rows of three: each page fills its cell's height, and its name wraps inside its own column */
+.packPages button { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: .3em; min-height: 0; padding: 0; border: 0; background: none; text-align: left; line-height: 1.2; overflow-wrap: break-word; }
+.packPages button .page { height: 100%; width: auto; max-width: 100%; justify-self: start; }
+.packActs { display: flex; flex-wrap: wrap; align-items: center; gap: .6em; }
+.backList { display: none; }
+
+/* Phone: no room for two sides. The list fills the screen; a page opens over it, and Back returns to the same place */
+@media (max-width: 800px) {
+  :root { --main: 32px; }
+  .split { grid-template-columns: 1fr; position: relative; overflow: hidden; }
+  .list { border-right: 0; padding: .2em 12px 1.2em; }
+  .list h2 { font-size: var(--main); }
+  .read { position: absolute; inset: 0; z-index: 5; padding: .6em 12px .6em; overflow-y: auto; transform: translateX(100%); transition: transform .25s ease-out; visibility: hidden; }
+  .reading .read { transform: none; visibility: visible; }
+  .backList { display: inline-flex; justify-self: start; margin-bottom: .6em; }
+  .read { display: block; } .read .steps { padding-bottom: .4em; }
+  .lesson .rows { margin-left: .6em; }
+  .doc { grid-template-columns: 1fr; grid-template-rows: none; gap: 1em; }
+  .doc > .page { height: 44vh; justify-self: center; }
+  .info { overflow: visible; }
+  .packPages { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; overflow: visible; }
+  .packPages button { grid-template-rows: auto auto; } .packPages button .page { height: auto; width: 100%; }
+  .info .acts { position: sticky; bottom: 0; z-index: 1; padding: .5em 0; background: var(--bg); }
+  .cats { grid-template-columns: 1fr; }
+  .cat .quiet, .row .quiet { font-size: var(--fs); }
+}

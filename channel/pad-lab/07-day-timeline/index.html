@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Direction 07. Learns from Structured (day planner) and the Apple Fitness timeline:
+   the day is one vertical line, classes are stops on it, the line is filled up to now. */
+:root {
+  --bg: #F2F3F7;
+  --card: #FFFFFF;
+  --ink: #171A24;
+  --ink2: #4B5163;
+  --rule: #D3D7E2;
+  --dash: #A9AFC0;
+  --now: #5631D0;
+  --now-soft: #EEE9FF;
+  --late: #8A4B00;
+  --late-soft: #FFF1DC;
+  --ok: #17663A;
+  --radius: 22px;
+  font-size: 18px;
+}
+html.t2 { font-size: 19.5px; }
+html.t3 { font-size: 21px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: 'Figtree', system-ui, sans-serif; color: var(--ink); background: var(--bg);
+  -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; line-height: 1.3;
+}
+button, a { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+:focus-visible { outline: 3px solid var(--now); outline-offset: 3px; }
+svg.i { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- Pad frame ---------- */
+#pad { height: 100vh; display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+#pad[hidden], #admin[hidden] { display: none; }
+.top { display: flex; align-items: center; gap: 12px; padding: 18px 32px 6px; }
+.top h1 { margin: 0; font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em; }
+.top .clock { margin-left: 14px; font-size: 1.05rem; font-weight: 600; color: var(--ink2); }
+.top .tools { margin-left: auto; display: flex; gap: 8px; }
+.tool { min-height: 48px; min-width: 48px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--rule); font-weight: 600; text-decoration: none; }
+.tool:active { transform: scale(.96); }
+
+.body { display: grid; grid-template-columns: 1fr 350px; gap: 24px; padding: 8px 32px 24px; min-height: 0; }
+
+/* ---------- The sentence and the children ---------- */
+.lead { margin: 4px 0 16px; }
+.lead p { margin: 0; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+.lead p span { display: block; font-size: 1rem; font-weight: 500; color: var(--ink2); margin-top: 2px; }
+.kids { display: flex; gap: 10px; margin-top: 14px; }
+.kid { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 4px 16px 4px 5px; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--rule); text-align: left; }
+.kid b { font-weight: 700; }
+.kid small { font-size: .95rem; color: var(--ink2); margin-left: 4px; }
+.kid small.late { color: var(--late); font-weight: 700; }
+
+/* ---------- Child marks (dots) ---------- */
+.dot { --c: #777; width: 38px; height: 38px; border-radius: 50%; display: inline-grid; place-items: center; font-weight: 800; font-size: 1rem; flex: none; position: relative; }
+.dot.done { background: var(--c); color: #fff; }
+.dot.now { background: #fff; color: var(--c); box-shadow: inset 0 0 0 3px var(--c), 0 0 0 5px color-mix(in srgb, var(--c) 18%, transparent); animation: breathe 2.4s ease-in-out infinite; }
+.dot.later { background: transparent; color: var(--ink2); box-shadow: inset 0 0 0 2px var(--rule); }
+.dot.missed { background: #fff; color: var(--ink2); box-shadow: inset 0 0 0 2px var(--c); background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--c) 16%, transparent) 6px 8px); }
+.dot.missed::after { content: ''; position: absolute; left: 7px; right: 7px; top: 50%; height: 2.5px; background: var(--c); transform: rotate(-35deg); border-radius: 2px; }
+.dot.solid { background: var(--c); color: #fff; }
+@keyframes breathe { 50% { box-shadow: inset 0 0 0 3px var(--c), 0 0 0 9px color-mix(in srgb, var(--c) 10%, transparent); } }
+
+/* ---------- The line ---------- */
+.day { min-height: 0; display: flex; flex-direction: column; }
+.line { list-style: none; margin: 0; padding: 0; position: relative; }
+.stop { position: relative; --pinx: 104px; }
+.stop::before { content: ''; position: absolute; left: calc(var(--pinx) - 2px); width: 4px; top: 0; bottom: 0; border-radius: 2px; }
+.stop:first-child::before { top: 38px; }
+.stop:last-child::before { bottom: calc(100% - 38px); }
+.stop.done::before { background: var(--now); }
+.stop.now::before { background: linear-gradient(var(--now) 0 38px, transparent 38px), repeating-linear-gradient(var(--dash) 0 7px, transparent 7px 13px); }
+.stop.later::before { background: repeating-linear-gradient(var(--dash) 0 7px, transparent 7px 13px); }
+
+.row { width: 100%; display: grid; grid-template-columns: 74px 60px 1fr auto; align-items: center; column-gap: 16px; min-height: 76px; text-align: left; border-radius: var(--radius); padding: 0 12px 0 0; }
+.row:active .what b { opacity: .7; }
+.time { text-align: right; font-weight: 700; font-size: 1.05rem; color: var(--ink2); line-height: 1.15; }
+.time em { display: block; font-style: normal; font-size: .95rem; font-weight: 800; color: var(--now); }
+.pin { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; position: relative; z-index: 1; }
+.pin svg.i { width: 26px; height: 26px; }
+.done .pin { background: var(--now-soft); color: var(--now); }
+.now .pin { background: var(--now); color: #fff; box-shadow: 0 0 0 6px rgba(86, 49, 208, .16), 0 6px 22px rgba(86, 49, 208, .45); animation: glow 2.4s ease-in-out infinite; }
+.later .pin { background: var(--card); color: var(--ink2); box-shadow: inset 0 0 0 2px var(--rule); }
+@keyframes glow { 50% { box-shadow: 0 0 0 11px rgba(86, 49, 208, .10), 0 6px 30px rgba(86, 49, 208, .55); } }
+.what { min-width: 0; }
+.what b { display: block; font-size: 1.2rem; font-weight: 800; }
+.what span { display: block; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.done .what b { color: var(--ink2); }
+.dots { display: flex; gap: 8px; }
+.chev { width: 44px; height: 44px; display: grid; place-items: center; color: var(--ink2); transition: transform .25s; }
+.open .chev { transform: rotate(180deg); }
+.row { grid-template-columns: 74px 60px 1fr auto 44px; }
+
+/* Expanded stop: opens in place, under the row */
+.more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s cubic-bezier(.2, .8, .2, 1); margin-left: 150px; position: relative; z-index: 2; }
+.where button { color: var(--now); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; }
+.open .more { grid-template-rows: 1fr; }
+.more > div { overflow: hidden; }
+.panel { background: var(--card); border-radius: var(--radius); padding: 14px 16px 16px; margin: 2px 0 12px; box-shadow: 0 1px 0 rgba(23,26,36,.05), 0 3px 8px rgba(23,26,36,.05); }
+.now .panel { box-shadow: inset 0 0 0 2px var(--now), 0 4px 8px rgba(86, 49, 208, .10); }
+.panel .where { margin: 0 0 10px; color: var(--ink2); }
+.who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.who > div { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.who b { display: block; }
+.who div > span:not(.dot) { display: block; color: var(--ink2); font-size: .95rem; }
+.who span.bad { color: #A11C14; font-weight: 700; }
+.acts { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.btn { min-height: 50px; padding: 0 20px; border-radius: 999px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.btn.main { background: var(--now); color: #fff; box-shadow: 0 6px 18px rgba(86, 49, 208, .3); }
+.btn.small { min-height: 44px; padding: 0 16px; }
+.btn:active { transform: scale(.97); }
+
+/* ---------- Side: the parent's own list (like Structured's inbox) ---------- */
+.side { display: flex; flex-direction: column; gap: 22px; min-height: 0; }
+.side h2 { margin: 0 0 8px; font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+.count { min-width: 30px; height: 30px; padding: 0 8px; border-radius: 15px; background: var(--late-soft); color: var(--late); font-size: 1rem; display: inline-grid; place-items: center; }
+.todo { list-style: none; margin: 0; padding: 0; background: var(--card); border-radius: var(--radius); }
+.todo li { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; padding: 14px 16px; }
+.todo li + li { border-top: 1.5px solid var(--bg); }
+.tick { width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 2.5px var(--dash); margin-top: 1px; display: grid; place-items: center; color: #fff; }
+.todo li.ok .tick { background: var(--ok); box-shadow: none; }
+.todo li.ok b { text-decoration: line-through; color: var(--ink2); }
+.todo b { display: block; font-weight: 700; }
+.todo p { margin: 2px 0 10px; color: var(--ink2); font-size: .95rem; }
+.todo li.ok p, .todo li.ok .btn { display: none; }
+
+.scores { background: var(--card); border-radius: var(--radius); padding: 14px 16px 8px; }
+.score { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 10px; min-height: 40px; }
+.score .dot { width: 30px; height: 30px; font-size: .95rem; }
+.score span { color: var(--ink2); font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.score span b { color: var(--ink); font-weight: 700; }
+.score strong { font-weight: 800; }
+.links { display: flex; gap: 10px; flex-wrap: wrap; }
+.links .btn { background: var(--card); }
+
+/* ---------- Sheets ---------- */
+.veil { position: fixed; inset: 0; background: rgba(23, 26, 36, .38); display: grid; place-items: center; z-index: 50; opacity: 0; transition: opacity .2s; }
+.veil.in { opacity: 1; }
+.sheet { width: min(600px, calc(100vw - 40px)); max-height: calc(100vh - 60px); overflow: auto; background: var(--card); border-radius: 28px; padding: 22px 24px 24px; transform: translateY(24px) scale(.98); transition: transform .32s cubic-bezier(.2, .8, .2, 1); }
+.veil.in .sheet { transform: none; }
+.sheet header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.sheet h3 { margin: 0; font-size: 1.35rem; font-weight: 800; flex: 1; }
+.sheet p { margin: 0 0 12px; color: var(--ink2); }
+.seg { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.seg button { min-height: 48px; padding: 0 18px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--rule); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.seg button[aria-pressed=true] { background: var(--ink); color: #fff; box-shadow: none; }
+.stepper { display: flex; align-items: center; gap: 18px; margin: 6px 0 18px; }
+.stepper button { width: 60px; height: 60px; border-radius: 50%; background: var(--bg); font-size: 1.6rem; font-weight: 700; }
+.stepper output { font-size: 2.6rem; font-weight: 800; min-width: 70px; text-align: center; }
+.stepper span { color: var(--ink2); }
+.field { width: 100%; min-height: 96px; border-radius: 16px; border: 1.5px solid var(--rule); padding: 12px 14px; font: inherit; resize: none; margin-bottom: 14px; }
+.list { list-style: none; margin: 0 0 8px; padding: 0; }
+.list li { display: flex; align-items: center; gap: 12px; min-height: 56px; border-bottom: 1.5px solid var(--bg); }
+.list li > div { flex: 1; min-width: 0; }
+.list li span { color: var(--ink2); }
+.stars { display: flex; gap: 6px; margin: 4px 0 18px; }
+.stars button { width: 56px; height: 56px; border-radius: 16px; color: var(--dash); }
+.stars button svg { width: 38px; height: 38px; }
+.stars button.on { color: #B86E00; }
+.stars button.on svg { fill: currentColor; }
+.foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.toast { position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 20px); opacity: 0; background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 999px; font-weight: 600; transition: .25s; z-index: 60; }
+.toast.in { opacity: 1; transform: translate(-50%, 0); }
+.pop { position: fixed; z-index: 55; background: var(--card); border-radius: 20px; padding: 10px; box-shadow: 0 16px 40px rgba(23,26,36,.22); display: grid; gap: 6px; }
+.pop button { min-height: 50px; padding: 0 18px; border-radius: 14px; text-align: left; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.pop button[aria-pressed=true] { background: var(--now-soft); color: var(--now); }
+
+/* ---------- Admin: its own page ---------- */
+#admin { min-height: 100vh; display: grid; grid-template-columns: 340px 1fr; }
+#admin nav { background: var(--card); padding: 22px 18px; border-right: 1.5px solid var(--rule); }
+#admin nav .back { margin-bottom: 18px; }
+#admin nav h1 { font-size: 1.85rem; font-weight: 800; margin: 0 8px 14px; letter-spacing: -0.02em; }
+#admin nav button.sec { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 12px; border-radius: 16px; font-weight: 600; text-align: left; }
+#admin nav button.sec[aria-current=true] { background: var(--now-soft); color: var(--now); }
+#admin nav button.sec .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--bg); }
+#admin main { padding: 34px 44px; max-width: 760px; }
+#admin main h2 { font-size: 1.6rem; margin: 0 0 6px; font-weight: 800; }
+#admin main > p { color: var(--ink2); margin: 0 0 22px; }
+.group { background: var(--card); border-radius: var(--radius); margin-bottom: 22px; }
+.group > div { display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 8px 18px; }
+.group > div + div { border-top: 1.5px solid var(--bg); }
+.group > div > span:first-child { flex: 1; }
+.group .val { color: var(--ink2); }
+.group-title { font-weight: 700; color: var(--ink2); margin: 0 0 8px 4px; }
+
+/* ---------- Upright iPad ---------- */
+@media (max-aspect-ratio: 1/1) {
+  .top { padding: 18px 26px 6px; }
+  .body { grid-template-columns: 1fr; grid-template-rows: 1fr auto; padding: 8px 26px 22px; gap: 14px; }
+  .side { gap: 14px; }
+  .scores { display: grid; grid-template-columns: repeat(3, 1fr); padding: 12px 6px; }
+  .score { grid-template-columns: 30px 1fr; grid-template-areas: "d s" "t t"; padding: 0 14px; row-gap: 4px; }
+  .score + .score { border-left: 1.5px solid var(--bg); }
+  .score .dot { grid-area: d; } .score strong { grid-area: s; } .score span { grid-area: t; white-space: normal; }
+  .top h1 { font-size: 1.65rem; } .top .clock { display: none; }
+  .row { min-height: 66px; } .pin { width: 50px; height: 50px; border-radius: 16px; }
+  .stop:first-child::before { top: 33px; } .stop:last-child::before { bottom: calc(100% - 33px); }
+  .stop.now::before { background: linear-gradient(var(--now) 0 33px, transparent 33px), repeating-linear-gradient(var(--dash) 0 7px, transparent 7px 13px); }
+  .lead { margin: 0 0 10px; } .kids { margin-top: 10px; }
+  .todo li { padding: 12px 14px; }
+  .side h2 { margin-bottom: 6px; }
+  .todo { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .todo li { grid-template-columns: 1fr; row-gap: 8px; align-content: start; }
+  .todo li + li { border-top: 0; border-left: 1.5px solid var(--bg); }
+  .todo p { margin: 0; }
+  .todo li .btn { justify-self: start; }
+  .more { margin-left: 0; }
+  .stop { --pinx: 96px; }
+  .row { grid-template-columns: 66px 60px 1fr auto 44px; column-gap: 12px; }
+  #admin { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  #admin nav { border-right: 0; border-bottom: 1.5px solid var(--rule); }
+  #admin nav .secs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  #admin main { padding: 26px; }
+}
+/* Larger text: fewer words, same content reachable one tap deeper */
+html.t2 .lead p span, html.t3 .lead p span { display: none; }
+html.t2 .kid, html.t3 .kid { white-space: nowrap; padding-right: 12px; }
+html.t3 .kid small.late { display: none; }
+html.t2 .kids, html.t3 .kids { gap: 8px; margin-top: 10px; }
+html.t2 .row, html.t3 .row { min-height: 70px; }
+html.t2 .acts .btn, html.t3 .acts .btn { padding: 0 15px; }
+html.t2 .acts, html.t3 .acts { gap: 8px; }
+html.t2 .score span, html.t3 .score span { white-space: normal; }
+html.t2 .todo li, html.t3 .todo li { padding: 10px 14px; }
+html.t2 .todo p, html.t3 .todo p { margin-bottom: 6px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="pad"></div>
+<div id="admin" hidden></div>
+<script src="../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const I = {
+  maths: '<path d="M5 8h6M8 5v6M14 8h5M14.5 15.5l4 4M18.5 15.5l-4 4M5 17.5h6"/>',
+  english: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3zM21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>',
+  science: '<path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3M7.5 15h9"/>',
+  history: '<path d="M3 21h18M5 21v-9M9.5 21v-9M14.5 21v-9M19 21v-9M3 10l9-6 9 6z"/>',
+  pe: '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+  gear: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  play: '<path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/>',
+  chev: '<path d="M6 9l6 6 6-6"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  text: '<path d="M4 19l5-14 5 14M5.8 14h6.4M15 19l3-8 3 8M15.9 16.5h4.2"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  family: '<circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M15 14.2a5 5 0 0 1 6.5 4.8"/>',
+  book: '<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5zM4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/>',
+  card: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/>',
+  shield: '<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/>',
+};
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+const subjIcon = { Maths: 'maths', English: 'english', Science: 'science', History: 'history', PE: 'pe' };
+const nowIdx = P.classes.findIndex((c) => c.now);
+const classState = (i) => (i < nowIdx ? 'done' : i === nowIdx ? 'now' : 'later');
+const stateWord = { done: 'Done', now: 'Watching now', later: 'Not started', missed: 'Missed this class' };
+const dot = (k, state, extra = '') => `<span class="dot ${state}" style="--c:${k.color}" title="${esc(k.name)}: ${stateWord[state] || ''}" ${extra}>${k.name[0]}</span>`;
+let openIdx = nowIdx;
+
+/* ---------- The pad ---------- */
+function kidLine(c, ci, k, ki) {
+  const st = c.state[ki];
+  let words = stateWord[st];
+  const mark = c.marks && c.marks[ki];
+  if (st === 'done' && c.marks) words = mark ? `Done, mark ${mark}` : 'Done, no mark yet';
+  if (st === 'done' && c.lesson) {
+    const s = P.scores.find((x) => x.kid === k.name && x.when === 'Today' && c.title.toLowerCase().includes(x.what.split(',')[0].toLowerCase()));
+    if (s) words = `Test: ${s.score}`;
+  }
+  const cls = st === 'missed' ? 'bad' : '';
+  return `<div>${dot(k, st)}<div><b>${esc(k.name)}</b><span class="${cls}">${esc(words)}</span></div></div>`;
+}
+function stop(c, i) {
+  const st = classState(i);
+  const open = i === openIdx;
+  const t = st === 'now' ? `${c.time}<em>Now ${P.now}</em>` : c.time;
+  let acts = '';
+  if (c.lesson && st === 'now') acts += `<button class="btn main" data-act="play" data-i="${i}">${ic('play')}Play on the TV</button>`;
+  if (st !== 'later') acts += `<button class="btn" data-act="mark" data-i="${i}">Give a mark</button>`;
+  acts += `<button class="btn" data-act="homework" data-i="${i}">Set homework</button>`;
+  const where = c.lesson ? `<p class="where"><button data-act="program">${esc(P.program.where.split(': ')[1])}</button></p>` : (st === 'later' ? `<p class="where">Starts at ${c.time}.</p>` : '');
+  return `<li class="stop ${st}${open ? ' open' : ''}">
+    <button class="row" data-act="toggle" data-i="${i}" aria-expanded="${open}">
+      <span class="time">${t}</span>
+      <span class="pin">${ic(subjIcon[c.subject] || 'book')}</span>
+      <span class="what"><b>${esc(c.subject)}</b><span>${esc(c.title)}</span></span>
+      <span class="dots">${P.kids.map((k, ki) => dot(k, c.state[ki])).join('')}</span>
+      <span class="chev">${ic('chev')}</span>
+    </button>
+    <div class="more"><div><div class="panel">${where}<div class="who">${P.kids.map((k, ki) => kidLine(c, i, k, ki)).join('')}</div><div class="acts">${acts}</div></div></div></div>
+  </li>`;
+}
+function renderPad() {
+  const done = P.classes.filter((c, i) => classState(i) === 'done').map((c) => c.subject);
+  const next = P.classes[nowIdx + 1];
+  const nowC = P.classes[nowIdx];
+  $('#pad').innerHTML = `
+  <header class="top">
+    <h1>${esc(P.today)}</h1><span class="clock">${P.now}</span>
+    <div class="tools">
+      <button class="tool" data-act="program">${ic('book')}Program</button>
+      <button class="tool" data-act="feedback">${ic('chat')}Feedback</button>
+      <button class="tool" data-act="text" aria-label="Text size">${ic('text')}</button>
+      <a class="tool" href="#admin">${ic('gear')}Admin</a>
+    </div>
+  </header>
+  <div class="body">
+    <section class="day" aria-label="Today">
+      <div class="lead">
+        <p>${esc(nowC.subject)} is on now, until ${next.time}.<span>${done.join(' and ')} are done. ${esc(next.subject)} is next.</span></p>
+        <div class="kids">${P.kids.map((k, ki) => `<button class="kid" data-act="child" data-k="${ki}">${dot(k, 'solid')}<b>${esc(k.name)}</b><small>${k.done} of ${k.of} done</small>${k.late ? `<small class="late">${k.late} late</small>` : ''}</button>`).join('')}</div>
+      </div>
+      <ol class="line">${P.classes.map(stop).join('')}</ol>
+    </section>
+    <aside class="side">
+      <section class="need"><h2>For you <span class="count">${P.needsYou.length}</span></h2>
+        <ul class="todo">${P.needsYou.map((n, i) => `<li data-n="${i}"><span class="tick">${ic('check')}</span><div><b>${esc(n.what)}</b><p>${esc(n.detail)}</p><button class="btn small" data-act="need" data-n="${i}">${esc(n.action)}</button></div></li>`).join('')}</ul>
+      </section>
+      <section class="scores-wrap"><h2>Latest scores<button class="btn small" data-act="scores" style="margin-left:auto;background:var(--card)">All scores</button></h2>
+        <div class="scores">${P.scores.map((s) => { const k = P.kids.find((x) => x.name === s.kid); return `<div class="score">${dot(k, 'solid')}<span><b>${esc(s.kid)}</b>, ${esc(s.what)}</span><strong>${esc(s.score)}</strong></div>`; }).join('')}</div>
+      </section>
+    </aside>
+  </div>`;
+}
+
+/* ---------- Layers: sheets, popover, toast ---------- */
+function sheet(title, body, onReady) {
+  closeSheet();
+  const v = document.createElement('div');
+  v.className = 'veil';
+  v.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><h3>${esc(title)}</h3><button class="btn small" data-close>Close</button></header>${body}</div>`;
+  document.body.append(v);
+  requestAnimationFrame(() => v.classList.add('in'));
+  v.addEventListener('click', (e) => { if (e.target === v || e.target.closest('[data-close]')) closeSheet(); });
+  onReady && onReady(v);
+  return v;
+}
+function closeSheet() { document.querySelectorAll('.veil, .pop').forEach((n) => n.remove()); }
+function toast(msg) {
+  const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.append(t);
+  requestAnimationFrame(() => t.classList.add('in')); setTimeout(() => { t.classList.remove('in'); setTimeout(() => t.remove(), 300); }, 2200);
+}
+const kidPicker = (sel, filter = () => true) => `<div class="seg" data-pick>${P.kids.map((k, ki) => filter(ki) ? `<button data-k="${ki}" aria-pressed="${ki === sel}">${dot(k, 'solid')}${esc(k.name)}</button>` : '').join('')}</div>`;
+function wirePick(v, cb) {
+  v.querySelectorAll('[data-pick] button').forEach((b) => b.addEventListener('click', () => {
+    b.parentElement.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); cb && cb(+b.dataset.k);
+  }));
+}
+function markSheet(i) {
+  const c = P.classes[i];
+  const first = c.marks ? c.marks.findIndex((m, ki) => !m && c.state[ki] === 'done') : 0;
+  let val = 10;
+  const v = sheet(`Give a mark: ${c.subject}`, `<p>${esc(c.title)}</p>${kidPicker(Math.max(first, 0), (ki) => c.state[ki] !== 'later')}
+    <div class="stepper"><button data-d="-1" aria-label="Lower">−</button><output>${val}</output><button data-d="1" aria-label="Higher">+</button><span>out of 12</span></div>
+    <div class="foot"><button class="btn main" data-save>Save the mark</button></div>`);
+  wirePick(v);
+  v.querySelectorAll('[data-d]').forEach((b) => b.addEventListener('click', () => { val = Math.min(12, Math.max(0, val + +b.dataset.d)); v.querySelector('output').textContent = val; }));
+  v.querySelector('[data-save]').addEventListener('click', () => { const k = P.kids[+v.querySelector('[aria-pressed=true]').dataset.k]; closeSheet(); toast(`Saved: ${k.name}, ${c.subject}, ${val} of 12`); });
+}
+function homeworkSheet(i) {
+  const c = P.classes[i];
+  const v = sheet(`Set homework: ${c.subject}`, `<p>${esc(c.title)}</p><div class="seg" data-all><button aria-pressed="true" data-all="1">All three</button>${P.kids.map((k, ki) => `<button data-k="${ki}" aria-pressed="false">${dot(k, 'solid')}${esc(k.name)}</button>`).join('')}</div>
+    <textarea class="field" placeholder="What to do, for example: read pages 16 to 18"></textarea>
+    <div class="seg" data-due><button aria-pressed="true">Due tomorrow</button><button aria-pressed="false">Due Friday</button></div>
+    <div class="foot"><button class="btn main" data-save>Set homework</button></div>`);
+  v.querySelectorAll('[data-all] button, [data-due] button').forEach((b) => b.addEventListener('click', () => { b.parentElement.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); }));
+  v.querySelector('[data-save]').addEventListener('click', () => { closeSheet(); toast(`Homework set for ${c.subject}`); });
+}
+function needSheet(n) {
+  const item = P.needsYou[n];
+  const finish = (msg) => { closeSheet(); const li = document.querySelector(`.todo li[data-n="${n}"]`); li && li.classList.add('ok'); toast(msg); };
+  if (item.action === 'Remind') return finish('Leo will see a reminder on his screen');
+  if (item.action === 'Rate') {
+    const v = sheet('Rate the Muscles lesson', `<p>All three children watched it. Your stars sit beside theirs.</p><div class="stars">${[1, 2, 3, 4, 5].map((s) => `<button data-s="${s}" aria-label="${s} stars">${ic('star')}</button>`).join('')}</div><div class="foot"><button class="btn main" data-save>Save my stars</button></div>`);
+    v.querySelectorAll('[data-s]').forEach((b) => b.addEventListener('click', () => v.querySelectorAll('[data-s]').forEach((x) => x.classList.toggle('on', +x.dataset.s <= +b.dataset.s))));
+    v.querySelector('[data-save]').addEventListener('click', () => finish('Stars saved'));
+    return;
+  }
+  const v = sheet('Mark Leo’s written answers', `<p>${esc(item.detail)}</p><ul class="list">${[1, 2, 3].map((a) => `<li><div><b>Answer ${a}</b><br><span>Open to read what Leo wrote</span></div><div class="seg" style="margin:0"><button aria-pressed="false">Right</button><button aria-pressed="false">Not yet</button></div></li>`).join('')}</ul><div class="foot"><button class="btn main" data-save>Save marking</button></div>`);
+  v.querySelectorAll('.list .seg button').forEach((b) => b.addEventListener('click', () => b.parentElement.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b))));
+  v.querySelector('[data-save]').addEventListener('click', () => finish('Marking saved'));
+}
+function childSheet(ki) {
+  const k = P.kids[ki];
+  const sc = P.scores.filter((s) => s.kid === k.name);
+  sheet(`${k.name}, ${k.year}`, `<p>${k.done} of ${k.of} classes done today. Average mark ${k.average}. ${k.homework ? `${k.homework} homework to do${k.late ? `, ${k.late} late` : ''}.` : 'No homework.'}</p>
+    <ul class="list">${P.classes.map((c) => `<li>${dot(k, c.state[ki])}<div><b>${c.time} ${esc(c.subject)}</b><br><span>${stateWord[c.state[ki]]}${c.marks && c.marks[ki] ? `, mark ${c.marks[ki]}` : ''}</span></div></li>`).join('')}</ul>
+    ${sc.length ? `<p style="margin-top:12px">Latest: ${sc.map((s) => `${esc(s.what)}, ${esc(s.score)} (${s.when.toLowerCase()})`).join('; ')}</p>` : ''}`);
+}
+function scoresSheet() {
+  sheet('All scores', `<ul class="list">${P.scores.map((s) => { const k = P.kids.find((x) => x.name === s.kid); return `<li>${dot(k, 'solid')}<div><b>${esc(s.kid)}: ${esc(s.score)}</b><br><span>${esc(s.what)}, ${s.when.toLowerCase()}</span></div></li>`; }).join('')}</ul>
+    <p style="margin-top:12px">Averages: ${P.kids.map((k) => `${k.name} ${k.average}`).join(', ')}.</p>`);
+}
+function programSheet() {
+  sheet('The program', `<p>${P.program.subjects} subjects, following ${esc(P.admin.plan)}. ${P.program.readyLessons} video lessons are ready.</p><ul class="list"><li><span class="dot now" style="--c:var(--now)">${ic('science').replace('class="i"', 'class="i" style="width:20px;height:20px"')}</span><div><b>We are here</b><br><span>${esc(P.program.where)}</span></div></li></ul><div class="foot"><button class="btn main" data-close>Open the full program</button></div>`);
+}
+function feedbackSheet() {
+  const v = sheet('Send feedback', `<p>Tell us what works and what doesn’t. We read every note.</p><textarea class="field"></textarea><div class="foot"><button class="btn main" data-save>Send</button></div>`);
+  v.querySelector('[data-save]').addEventListener('click', () => { closeSheet(); toast('Thank you. Feedback sent'); });
+}
+function textPop(btn) {
+  closeSheet();
+  const r = btn.getBoundingClientRect();
+  const p = document.createElement('div'); p.className = 'pop';
+  const cur = ['', 't2', 't3'].find((c) => c && document.documentElement.classList.contains(c)) || '';
+  p.innerHTML = [['', 'Large'], ['t2', 'Larger'], ['t3', 'Largest']].map(([c, n]) => `<button data-t="${c}" aria-pressed="${c === cur}">${n}<span style="font-size:${c === 't3' ? 1.3 : c === 't2' ? 1.15 : 1}em">Aa</span></button>`).join('');
+  p.style.top = r.bottom + 8 + 'px'; p.style.right = innerWidth - r.right + 'px';
+  document.body.append(p);
+  p.addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (!b) return; document.documentElement.classList.remove('t2', 't3'); b.dataset.t && document.documentElement.classList.add(b.dataset.t); p.remove(); });
+}
+
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-act]'); if (!b) { if (!e.target.closest('.pop')) document.querySelectorAll('.pop').forEach((n) => n.remove()); return; }
+  const a = b.dataset.act, i = +b.dataset.i;
+  if (a === 'toggle') { openIdx = openIdx === i ? -1 : i; document.querySelectorAll('.stop').forEach((s, si) => { s.classList.toggle('open', si === openIdx); s.querySelector('.row').setAttribute('aria-expanded', si === openIdx); }); }
+  if (a === 'play') toast('Playing Science on the TV');
+  if (a === 'mark') markSheet(i);
+  if (a === 'homework') homeworkSheet(i);
+  if (a === 'need') needSheet(+b.dataset.n);
+  if (a === 'child') childSheet(+b.dataset.k);
+  if (a === 'scores') scoresSheet();
+  if (a === 'program') programSheet();
+  if (a === 'feedback') feedbackSheet();
+  if (a === 'text') { e.stopPropagation(); textPop(b); }
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+/* ---------- Admin ---------- */
+const A = P.admin;
+const secIcon = ['user', 'family', 'book', 'card', 'shield'];
+let adminSec = 0;
+const row = (k, v, act) => `<div><span>${esc(k)}</span>${v ? `<span class="val">${esc(v)}</span>` : ''}${act ? `<button class="btn small">${esc(act)}</button>` : ''}</div>`;
+function adminBody(n) {
+  if (n === 0) return `<h2>Your account</h2><p>How you sign in. Everyone in the family uses one sign-in.</p>
+    <div class="group">${row('Name', A.account.name)}${row('Username', A.account.username)}${row('Password', '', 'Change')}</div>
+    <div class="group">${row('Text size', A.account.textSize, 'Change')}</div><div class="group">${row('Sign out', '', 'Sign out')}</div>`;
+  if (n === 1) return `<h2>Family</h2><p>Parents and children. Children sign in inside this account, with no email.</p>
+    <p class="group-title">Parents</p><div class="group">${P.parents.map((p) => row(p.name + (p.you ? ' (you)' : ''), p.you ? 'Owner' : 'Parent')).join('')}${row('Invite a parent', '', 'Invite')}</div>
+    <p class="group-title">Children</p><div class="group">${P.kids.map((k) => `<div>${dot(k, 'solid')}<span>${esc(k.name)}</span><span class="val">${esc(k.year)}</span><button class="btn small">Edit</button></div>`).join('')}</div>`;
+  if (n === 2) return `<h2>Learning plan</h2><p>What the children learn, and in what order.</p>
+    <div class="group">${row('Follows', A.plan)}${row('Subjects', String(P.program.subjects))}${row('Video lessons ready', String(P.program.readyLessons))}</div>
+    <div class="group">${row(A.wordHelp.split(': ')[0], cap(A.wordHelp.split(': ')[1]), 'Change')}</div>`;
+  if (n === 3) return `<h2>Plan and billing</h2><p>What you pay, per child.</p><div class="group">${row('Your plan', A.billing)}${row('Children on the plan', String(P.kids.length))}</div>`;
+  return `<h2>Feedback and checks</h2><p>Exam safety, and notes to us.</p><div class="group">${row('Exam PIN', A.examPin, 'Change')}${row('Send feedback', '', 'Write')}</div>`;
+}
+function renderAdmin() {
+  $('#admin').innerHTML = `<nav><a class="tool back" href="#">${ic('back')}Back to the day</a><h1>Admin</h1><div class="secs">${A.sections.map((s, n) => `<button class="sec" data-sec="${n}" aria-current="${n === adminSec}"><span class="ic">${ic(secIcon[n])}</span>${esc(s)}</button>`).join('')}</div></nav><main>${adminBody(adminSec)}</main>`;
+  $('#admin').querySelectorAll('[data-sec]').forEach((b) => b.addEventListener('click', () => { adminSec = +b.dataset.sec; renderAdmin(); }));
+}
+function route() {
+  closeSheet();
+  const admin = location.hash.startsWith('#admin');
+  $('#pad').hidden = admin; $('#admin').hidden = !admin;
+  document.body.style.overflow = admin ? 'auto' : 'hidden';
+  if (admin) renderAdmin(); else renderPad();
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>

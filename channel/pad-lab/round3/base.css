@@ -1,0 +1,28 @@
+/* Round 3 (owner, 2026-11-10): the pad opens on today's lessons. Its one job: play them on the TV. Very little, very big.
+   Shared parts: tokens, the top line, the four big buttons at the bottom. Each version has its own layout. */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
+:root { --bg: #F6F5F9; --surface: #FFFFFF; --ink: #17131F; --mute: #57516A; --line: #DDD9E6; --play: #D42A20; --playInk: #FFFFFF; --focus: #2457D6;
+  --fs: clamp(18px, max(min(1.8vw, 2.6vh), min(2.55vw, 1.8vh)), 30px); --display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; --body: 'DM Sans', system-ui, sans-serif; }
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 var(--fs)/1.3 var(--body); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.ic { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ic.fill { fill: currentColor; stroke: none; }
+/* Top line: the day, quiet; one tool */
+.top { display: flex; align-items: center; gap: 1em; padding: .7em 1.2em .2em; }
+.top h1 { margin-right: auto; font: 800 1.5em/1.1 var(--display); letter-spacing: -.01em; }
+.top h1 small { margin-left: .5em; color: var(--mute); font: 400 .6em var(--body); letter-spacing: 0; }
+.tool { display: inline-flex; align-items: center; gap: .45em; min-height: 2.8em; padding: 0 1em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; font-size: .9em; }
+.tool b { font-weight: 700; }
+.tool.icon { justify-content: center; width: 2.9em; min-height: 2.9em; padding: 0; font-size: 1em; } .tool.icon .ic { width: 1.3em; height: 1.3em; }
+/* The Play button: the one loud thing */
+.play { display: inline-flex; align-items: center; justify-content: center; gap: .55em; min-height: 3.2em; padding: 0 1.7em 0 1.4em; background: var(--play); border: 0; border-radius: 999px; color: var(--playInk); font: 700 1.1em var(--body); }
+.play .ic { width: 1em; height: 1em; }
+/* Four big buttons at the bottom: everything else is one tap away */
+.places { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6em; padding: .55em 1.2em .8em; border-top: 1px solid var(--line); }
+.places button { display: flex; align-items: center; justify-content: center; gap: .55em; min-height: 3.1em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; font-size: 1em; }
+.places .ic { color: var(--mute); }
+.note { position: fixed; left: 50%; top: 8px; transform: translateX(-50%); padding: .2em .8em; background: #FFFFFFE6; border: 1px solid var(--line); border-radius: 999px; color: var(--mute); font-size: 15px; }
+@media (max-width: 600px) { body { overflow: auto; height: auto; min-height: 100%; } .places { grid-template-columns: repeat(2, minmax(0, 1fr)); } .top h1 small { display: block; margin: .2em 0 0; } .note { display: none; } }

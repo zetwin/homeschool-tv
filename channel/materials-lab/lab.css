@@ -1,0 +1,77 @@
+/* Shared by the three Materials prototypes: the pad's tokens, its header (title left, round icon tools right)
+   and its fixed bottom bar of five places, exactly as on the pad (pad-looks, owner-approved 2026-11-10).
+   Sizes follow docs/rules/VISUAL-HIERARCHY.md: body 21 px on an iPad, 18 px on a phone; quiet text never under 18 / 16. */
+:root {
+  --bg: #F6F5F9; --surface: #FFFFFF; --surface2: #F0EEF5; --ink: #17131F; --mute: #57516A; --line: #DDD9E6;
+  --acc: #D42A20; --accInk: #FFFFFF; --selBg: #ECE8F6; --focus: #2457D6;
+  --font: 'DM Sans', -apple-system, system-ui, sans-serif; --dfont: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
+  --fs: clamp(18px, max(min(1.8vw, 2.6vh), min(2.55vw, 1.8vh)), 30px);
+  --main: calc(var(--fs) * 2.1); --sec: calc(var(--fs) * 1.3); --quiet: max(18px, calc(var(--fs) * .86));
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--fs)/1.35 var(--font); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+b, strong { font-weight: 800; }
+img { display: block; }
+
+/* The frame: header, a page that scrolls, the bar. Nothing else is fixed. */
+.app { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; height: 100dvh; }
+.main { overflow-y: auto; overscroll-behavior: contain; padding: .2em 1.2em 1.4em; }
+
+/* Header: like Today on the Stage pad */
+.head { display: flex; align-items: center; gap: .6em; padding: .7em 1.2em .5em; }
+.head h1 { min-width: 0; margin-right: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 800 1.5em/1.1 var(--dfont); letter-spacing: -.01em; }
+.back { display: inline-flex; align-items: center; gap: .3em; min-height: 2.9em; padding: 0 .8em 0 .5em; margin-left: -.5em; background: none; border: 0; border-radius: 999px; }
+.back:hover { background: var(--surface2); }
+.tools { display: flex; gap: .5em; }
+.tool { display: grid; place-items: center; flex: none; width: 2.9em; height: 2.9em; padding: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 50%; }
+.tool:hover { border-color: var(--mute); }
+.tool b { font: 800 1em var(--font); }
+.ic { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tool .ic { width: 1.3em; height: 1.3em; }
+
+/* The bottom bar: five places, the same on every parent page; Materials is marked */
+.nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .6em; padding: .55em 1.2em max(.8em, env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); }
+.nav button { display: flex; align-items: center; justify-content: center; gap: .5em; min-width: 0; min-height: 3.1em; padding: 0 .4em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+.nav button:hover { border-color: var(--mute); }
+.nav .ic { color: var(--mute); }
+.nav [aria-current="page"] { background: var(--selBg); border-color: var(--ink); }
+.nav [aria-current="page"] .ic { color: var(--ink); }
+.nav .short { display: none; }
+
+/* Buttons: one filled (the main action), outline for the second, plain for the rest */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5em; min-height: 2.8em; padding: 0 1.2em; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--surface); font-weight: 400; white-space: nowrap; }
+.btn.fill { background: var(--acc); border-color: var(--acc); color: var(--accInk); font-weight: 800; }
+.btn.fill:hover { background: #B8231A; }
+.btn:not(.fill):hover { background: var(--surface2); }
+.link { padding: .3em 0; background: none; border: 0; color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+
+/* A printed page, shown as paper */
+.page { position: relative; aspect-ratio: 210 / 297; background: #fff; border-radius: 4px; box-shadow: 0 1px 2px #17131F1F, 0 8px 22px -6px #17131F33; overflow: hidden; }
+.page { min-width: 0; min-height: 0; }
+.page > svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+
+/* Children: small marks that grow in number, never big cards */
+.kid { display: inline-flex; align-items: center; gap: .4em; min-height: 2.6em; padding: 0 .9em 0 .3em; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); }
+.kid i { display: grid; place-items: center; width: 1.8em; height: 1.8em; border-radius: 50%; background: var(--surface2); font-style: normal; font-weight: 800; font-size: max(16px, .85em); }
+.kid[aria-pressed="true"] { border-color: var(--ink); background: var(--selBg); }
+.kid[aria-pressed="true"] i { background: var(--ink); color: #fff; }
+
+.quiet { color: var(--mute); font-size: var(--quiet); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Phone: five on one row, icon above a short word */
+@media (max-width: 600px) {
+  .head { padding: .6em 12px .4em; gap: .4em; }
+  .back span { display: none; } .back { padding: 0 .4em; margin-left: -.4em; } .tool { width: 2.6em; height: 2.6em; } .tools { gap: .35em; }
+  .main { padding: .2em 12px 1em; }
+  .nav { gap: 4px; padding-inline: 6px; }
+  .nav button { flex-direction: column; gap: .1em; min-height: 3.5em; padding: .2em 0; border-radius: 14px; }
+  .nav .long { display: none; } .nav .short { display: inline; font-size: max(16px, .85em); white-space: nowrap; }
+  :root { --main: 30px; --sec: 22px; --quiet: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

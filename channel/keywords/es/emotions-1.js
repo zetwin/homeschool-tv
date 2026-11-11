@@ -1,0 +1,27 @@
+/* Spanish word help for Emotional Intelligence, lesson 1. Each pair: the English word as said in the lesson (forms split by |), then the Spanish.
+   Written by Claude on 2026-11-07, in neutral Latin American Spanish. A fluent speaker should read it; parents never have to. See docs/product/LANGUAGES.md. */
+((window.KEYWORDS ??= {}).es ??= {})['emotions-1'] = [
+  ['feeling|feelings', 'el sentimiento'],
+  ['emotion|emotions', 'la emoción'],
+  ['emotional intelligence', 'la inteligencia emocional'],
+  ['fear', 'el miedo'],
+  ['anger', 'el enojo'],
+  ['sadness', 'la tristeza'],
+  ['joy', 'la alegría'],
+  ['happy', 'feliz'],
+  ['scared', 'asustado'],
+  ['angry', 'enojado'],
+  ['nervous', 'nervioso'],
+  ['furious', 'furioso'],
+  ['worried', 'preocupado'],
+  ['calm', 'tranquilo'],
+  ['surprise', 'la sorpresa'],
+  ['disgust', 'el asco'],
+  ['body', 'el cuerpo'],
+  ['heart', 'el corazón'],
+  ['breathe', 'respirar'],
+  ['notice', 'notar'],
+  ['choice', 'la elección'],
+  ['choose', 'elegir'],
+  ['friends|friend', 'el amigo'],
+];

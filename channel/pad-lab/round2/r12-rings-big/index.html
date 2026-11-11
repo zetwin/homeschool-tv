@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Big rings: one ring per child</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Round 2 from 11 Progress rings. One big ring per child is the whole first screen.
+   The ring has five parts, one per class today. Tap a ring to open that child. */
+:root{
+  --bg:#0f1c36; --card:#182a4d; --card2:#213560; --line:#2d4372; --track:#2a3d66;
+  --ink:#fff; --ink2:#bac5dc; --late:#ff9b8f; --late-bg:#3d2233;
+  --go:#fff; --go-ink:#0f1c36; --link:#9cc2ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px}
+html.t2{font-size:19px} html.t3{font-size:21px}
+body{font-family:Outfit,system-ui,sans-serif;background:var(--bg);color:var(--ink);height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;line-height:1.3}
+body.scroll{height:auto;min-height:100vh;overflow:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:16px}
+svg{display:block;flex:none}
+.num{font-variant-numeric:tabular-nums}
+.page{display:none}
+.page.on{display:flex}
+
+/* ---------- pad ---------- */
+#pad{flex-direction:column;height:100vh;padding:22px 30px 22px;gap:16px}
+.top{display:flex;align-items:center;gap:12px}
+.top h1{font-size:2.2rem;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+.top .date{color:var(--ink2);font-size:1.06rem}
+.tools{margin-left:auto;display:flex;gap:10px;align-items:center}
+.circ{min-width:50px;height:50px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+.circ:hover{background:var(--card2)}
+.badge{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 18px 0 8px;border-radius:99px;background:var(--card);font-weight:600;white-space:nowrap}
+.badge .n{min-width:34px;height:34px;border-radius:99px;background:var(--late);color:#3a0d08;display:grid;place-items:center;font-weight:800}
+.badge:hover{background:var(--card2)}
+
+.now{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:24px;padding:12px 12px 12px 22px}
+.now .lv{width:14px;height:14px;border-radius:50%;background:var(--late);flex:none;box-shadow:0 0 0 5px rgba(255,155,143,.2);animation:beat 2s ease-in-out infinite}
+@keyframes beat{50%{box-shadow:0 0 0 10px rgba(255,155,143,.05)}}
+.now .w{flex:1;min-width:0;display:flex;flex-direction:column}
+.now .w b{font-size:1.25rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.now .w span{color:var(--ink2)}
+.play{display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 26px;border-radius:99px;background:var(--go);color:var(--go-ink);font-weight:700;font-size:1.06rem;white-space:nowrap}
+.play:hover{background:#e6ecf7}
+
+/* the three rings */
+.rings{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:center}
+.kid{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.ringlink{position:relative;display:block;border-radius:50%;width:var(--rs);height:var(--rs)}
+.ringlink:hover .ring{transform:scale(1.025)}
+.ring{transition:transform .25s cubic-bezier(.3,1.4,.5,1);animation:arrive .9s cubic-bezier(.2,.9,.3,1) both}
+.kid:nth-child(2) .ring{animation-delay:.08s} .kid:nth-child(3) .ring{animation-delay:.16s}
+@keyframes arrive{from{transform:rotate(-70deg) scale(.9);opacity:0}}
+.ring circle{fill:none}
+.seg-now{animation:glow 2.2s ease-in-out infinite}
+@keyframes glow{50%{stroke-opacity:.35}}
+.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.mid .f{font-size:calc(var(--rs) * .2);line-height:1}
+.mid b{font-size:calc(var(--rs) * .135);font-weight:700;line-height:1.05;margin-top:6px}
+.mid b small{font-size:max(17px,.5em);font-weight:500;color:var(--ink2);margin-left:4px}
+.mid span{color:var(--ink2)}
+.kname{font-size:1.75rem;font-weight:700;line-height:1}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{min-height:46px;padding:0 16px;border-radius:99px;background:var(--card);display:inline-flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap}
+.chip span{color:var(--ink2);font-weight:500}
+button.chip:hover{background:var(--card2)}
+.chip.bad{background:var(--late-bg);color:var(--late)}
+.chip.bad span{color:var(--late)}
+.key{display:flex;gap:10px 28px;justify-content:center;color:var(--ink2);flex-wrap:wrap}
+.key .states{display:flex;gap:18px}
+.key span{display:inline-flex;align-items:center;gap:8px}
+.key i{width:26px;height:12px;border-radius:6px;display:inline-block}
+
+/* bottom */
+.foot{display:flex;align-items:center;gap:10px}
+.task{display:flex;align-items:center;gap:12px;min-height:56px;padding:0 6px 0 18px;border-radius:99px;background:var(--card);font-weight:600;white-space:nowrap}
+.task .e{font-size:20px}
+.task .act{min-height:44px;padding:0 16px;border-radius:99px;background:var(--card2);font-weight:700}
+.task .act:hover{background:#2c4478}
+.look{margin-left:auto;display:flex;gap:8px}
+.lk{min-height:56px;padding:0 18px;border-radius:99px;background:var(--card);font-weight:600;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.lk:hover{background:var(--card2)}
+.lk .c{color:var(--ink2);font-weight:500}
+.lk .c.late{color:var(--late);font-weight:700}
+
+/* ---------- sheet ---------- */
+.veil{position:fixed;inset:0;background:rgba(5,10,22,.6);display:none;z-index:40;align-items:center;justify-content:center;padding:24px}
+.veil.on{display:flex;animation:fade .18s}
+@keyframes fade{from{opacity:0}}
+.sheet{background:var(--card);border-radius:28px;width:580px;max-width:100%;max-height:calc(100vh - 48px);overflow:auto;animation:rise .26s cubic-bezier(.2,1,.3,1);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+@keyframes rise{from{transform:translateY(30px);opacity:.4}}
+.sh-bar{display:flex;align-items:center;gap:12px;padding:16px 12px 4px 24px}
+.sh-bar h2{font-size:1.5rem;font-weight:700;flex:1}
+.x{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--card2)}
+.sh-in{padding:4px 24px 8px}
+.sub{color:var(--ink2)}
+.lines{margin-top:12px;background:var(--bg);border-radius:18px;padding:2px 16px}
+.line{display:flex;align-items:center;gap:12px;min-height:58px;border-top:1px solid var(--line)}
+.line:first-child{border-top:0}
+.line .lf{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.line .lf .f{font-size:22px}
+.line .st{color:var(--ink2)}
+.line .v{font-weight:700;text-align:right}
+.st-done{color:#8ee3a8!important;font-weight:600} .st-now{color:var(--link)!important;font-weight:700} .st-missed{color:var(--late)!important;font-weight:700}
+.link{min-height:44px;padding:0 14px;border-radius:99px;color:var(--link);font-weight:700;background:var(--card2)}
+.lbl{display:block;font-weight:700;margin:16px 0 8px}
+.sheet .chips{justify-content:flex-start}
+.sheet .chip{background:var(--card2);color:var(--ink)}
+.sheet .chip.on{background:#fff;color:var(--go-ink)}
+.sheet input{font:inherit;width:100%;min-height:52px;border-radius:16px;border:0;background:var(--bg);color:#fff;padding:0 16px}
+.sheet input::placeholder{color:#93a0bd}
+.grid12{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
+.grid12 button{min-height:52px;border-radius:14px;background:var(--card2);text-align:center;font-weight:700;font-size:1.15rem}
+.grid12 button.on{background:#fff;color:var(--go-ink)}
+.sizes{display:flex;gap:10px;margin-top:16px}
+.sizes button{flex:1;min-height:64px;border-radius:18px;background:var(--card2);text-align:center;font-weight:700}
+.sizes button.on{box-shadow:inset 0 0 0 3px #fff}
+.sh-foot{display:flex;gap:10px;flex-wrap:wrap;padding:12px 24px 22px}
+.btn{min-height:52px;padding:0 24px;border-radius:99px;font-weight:700;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.pri{background:#fff;color:var(--go-ink)}
+.btn.sec{background:var(--card2)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,200%);background:#fff;color:var(--go-ink);font-weight:600;border-radius:99px;padding:6px 6px 6px 24px;display:flex;align-items:center;gap:12px;min-height:56px;transition:transform .35s cubic-bezier(.2,1.2,.4,1);z-index:60}
+.toast.on{transform:translate(-50%,0)}
+.toast button{color:#1f4fc9;font-weight:800;min-height:44px;padding:0 16px}
+
+/* ---------- child page ---------- */
+#kid{flex-direction:column;min-height:100vh;padding:18px 30px 28px;gap:12px}
+.back{display:inline-flex;align-items:center;gap:4px;min-height:48px;padding:0 18px 0 8px;border-radius:99px;background:var(--card);font-weight:700;font-size:1.06rem;align-self:flex-start}
+.back:hover{background:var(--card2)}
+.kp{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.kp .left{display:flex;flex-direction:column;align-items:center;gap:12px}
+.kp .right{display:flex;flex-direction:column;gap:14px;min-width:0}
+.box{background:var(--card);border-radius:24px;padding:8px 18px}
+.crow{display:flex;align-items:center;gap:14px;min-height:62px;border-top:1px solid var(--line);width:100%}
+.crow:first-child{border-top:0}
+.crow .mk{width:26px;height:14px;border-radius:7px;flex:none}
+.crow .w{flex:1;min-width:0;display:flex;flex-direction:column}
+.crow .w b{font-weight:600;font-size:1.08rem}
+.crow .w span{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .s{font-weight:700;white-space:nowrap}
+button.crow:hover{background:rgba(255,255,255,.03)}
+.box h2{font-size:1.2rem;font-weight:700;margin:8px 0 2px}
+.box h2 + .crow{border-top:0}
+
+/* ---------- admin ---------- */
+#admin{min-height:100vh;flex-direction:column;padding:18px 30px 60px;gap:10px}
+.ahead{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ahead h1{font-size:2.2rem;font-weight:700}
+.agrid{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:start}
+.anav{display:flex;flex-direction:column;gap:6px;position:sticky;top:18px}
+.nav{min-height:56px;padding:0 18px;border-radius:18px;background:var(--card);font-weight:600;width:100%}
+.nav.on{background:#fff;color:var(--go-ink)}
+.asec h2{font-size:1.7rem;font-weight:700}
+.asec .lead{color:var(--ink2);margin-top:4px}
+.grp{margin-top:18px}
+.grp h3{font-weight:600;color:var(--ink2);margin:0 0 8px 6px;font-size:1rem}
+.abox{background:var(--card);border-radius:20px;padding:0 18px}
+.r{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;border-top:1px solid var(--line);width:100%}
+.r:first-child{border-top:0}
+.r .v{color:var(--ink2);text-align:right}
+.r.act{color:var(--link);font-weight:700}
+.r.bad{color:var(--late);font-weight:700}
+
+/* ---------- upright ---------- */
+@media (max-aspect-ratio:1/1){
+  #pad{padding:26px 24px 24px;gap:16px}
+  .now{flex-wrap:wrap;padding:16px 16px 16px 22px}
+  .now .w{flex-basis:calc(100% - 40px)}
+  .now .play{flex:1;justify-content:center}
+  .rings{gap:8px}
+  .chips{flex-direction:column;align-items:stretch;width:100%;padding:0 6px}
+  .chip{justify-content:center}
+  .foot{flex-direction:column;align-items:stretch}
+  .task{border-radius:22px;padding:0 8px 0 18px}
+  .task .lbl3{flex:1}
+  .look{margin-left:0;display:grid;grid-template-columns:repeat(4,1fr)}
+  .lk{justify-content:center;flex-direction:column;gap:0;border-radius:22px;min-height:92px}
+  .rings{flex:none;margin-top:auto}
+  .key{flex-direction:column;align-items:center;margin:6px 0 auto}
+  .kname{font-size:1.75rem!important}
+  .kp{grid-template-columns:1fr;justify-items:center}
+  .kp .right{width:100%}
+  .kp .chips{flex-direction:row;justify-content:center}
+  .agrid{grid-template-columns:1fr}
+  .anav{position:static;flex-direction:row;flex-wrap:wrap}
+  .anav .nav{width:auto}
+}
+/* bigger text */
+html.t2 #pad,html.t3 #pad{gap:12px;padding-top:16px;padding-bottom:16px}
+html.t2 .top h1,html.t3 .top h1{font-size:1.9rem}
+@media (min-aspect-ratio:1/1){html.t2 .key .states,html.t3 .key .states{display:none}}
+html.t3 .key{display:none}
+html.t3 .now .w span,html.t3 .lk .c{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="page" id="pad"></div>
+<div class="page" id="kid"></div>
+<div class="page" id="admin"></div>
+<div class="veil" id="veil"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status"><span id="tmsg"></span><button id="tundo">Undo</button></div>
+
+<script src="../../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes, A = P.admin;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const NOWI = C.findIndex((c) => c.now), NOWC = C[NOWI];
+const MARK = P.needsYou.find((n) => /^mark/i.test(n.action));
+const NEEDS = P.needsYou.filter((n) => n !== MARK);
+const ANS = MARK ? +((MARK.detail.match(/(\d+) answers?/) || [0, 0])[1]) : 0;
+const kidIdx = (t) => K.findIndex((k) => t.includes(k.name));
+const short = (c) => c.title.replace(/^.*\?\s*/, '').replace(/, lesson \d+$/, '');
+const WORD = { done: 'Done', now: 'Watching now', later: 'Later today', missed: 'Missed' };
+const I = {
+  gear: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+  play: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>',
+  back: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  x: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+};
+/* Light versions of each child's colour, so the ring reads on the dark page. */
+const LIGHT = ['#ff7b6e', '#3fd6c0', '#7fb0ff'];
+const st = K.map((_, j) => C.map((c) => c.state[j]));
+const doneOf = (j) => st[j].filter((s) => s === 'done').length;
+const youDone = new Set();
+const face = (k) => `<span class="f" aria-hidden="true">${k.face}</span>`;
+
+/* One ring, five parts: one per class today, in timetable order, starting at the top. */
+function segRing(j, size) {
+  const n = C.length, sw = size * .105, r = size / 2 - sw / 2 - 2, c = size / 2, L = 2 * Math.PI * r;
+  const slot = L / n, seg = slot - sw - 9, col = LIGHT[j];
+  const parts = st[j].map((s, i) => {
+    const off = -(i * slot + (sw + 9) / 2);
+    const base = `cx="${c}" cy="${c}" r="${r}" stroke-dasharray="${seg} ${L - seg}" stroke-dashoffset="${off}" stroke-linecap="round"`;
+    if (s === 'done') return `<circle ${base} stroke="${col}" stroke-width="${sw}"/>`;
+    if (s === 'now') return `<circle ${base} stroke="var(--track)" stroke-width="${sw}"/><circle class="seg-now" ${base} stroke="${col}" stroke-width="${sw}" stroke-opacity=".8"/>`;
+    if (s === 'missed') return `<circle ${base} stroke="var(--track)" stroke-width="${sw}"/><circle ${base} stroke="var(--late)" stroke-width="${sw * .3}"/>`;
+    return `<circle ${base} stroke="var(--track)" stroke-width="${sw}"/>`;
+  }).join('');
+  return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true"><g transform="rotate(-90 ${c} ${c})">${parts}</g></svg>`;
+}
+function ringSize() {
+  const up = innerHeight > innerWidth, big = !!document.documentElement.className;
+  if (up) return Math.min(256, Math.floor((innerWidth - 48 - 16) / 3) - 4);
+  return big ? 262 : 300;
+}
+function hwChip(k, j) {
+  const late1 = NEEDS.findIndex((n) => kidIdx(n.what) === j && /late/.test(n.what));
+  return late1 >= 0 ? `<button class="chip bad" data-need="${late1}"><span>Homework</span>${k.late} late</button>`
+    : `<button class="chip" data-sheet="homework"><span>Homework</span>${k.homework ? k.homework : 'none'}</button>`;
+}
+function renderPad() {
+  const watching = K.filter((_, j) => st[j][NOWI] === 'now').map((k) => k.name);
+  const fin = K.filter((_, j) => st[j][NOWI] === 'done').map((k) => k.name);
+  const hw = K.reduce((a, k) => a + k.homework, 0), late = K.reduce((a, k) => a + k.late, 0);
+  const rs = ringSize();
+  const shared = NEEDS.map((n, i) => ({ n, i })).filter(({ n }) => kidIdx(n.what) < 0);
+  $('#pad').innerHTML = `
+    <header class="top"><div><p class="date">${P.today}</p><h1>Today</h1></div>
+      <div class="tools">${ANS ? `<button class="badge" data-answers><span class="n num">${ANS}</span>answers to mark</button>` : ''}
+      <button class="circ" data-sheet="size" aria-label="Text size">Aa</button><a class="circ" href="#admin" aria-label="Admin: account, family and plan">${I.gear}</a></div></header>
+    <section class="now"><span class="lv" aria-hidden="true"></span><div class="w"><b>${esc(NOWC.subject)}: ${esc(short(NOWC))}</b><span>${watching.join(' and ')} watching now. ${fin.join(' and ')} finished.</span></div>
+      <button class="play" data-play>${I.play}Play on the TV</button></section>
+    <div class="rings" style="--rs:${rs}px">${K.map((k, j) => `<div class="kid">
+      <a class="ringlink" href="#kid-${k.name.toLowerCase()}" aria-label="${k.name}: ${doneOf(j)} of ${k.of} classes done. Open ${k.name}">${segRing(j, rs)}
+        <span class="mid"><span class="f" aria-hidden="true">${k.face}</span><b class="num">${doneOf(j)}<small>of ${k.of}</small></b><span>done</span></span></a>
+      <div class="kname">${k.name}</div>
+      <div class="chips"><button class="chip" data-sheet="scores"><span>Average</span>${k.average}</button>${hwChip(k, j)}</div></div>`).join('')}</div>
+    <div class="key"><span class="order">Each ring, from the top: ${C.map((c) => esc(c.subject)).join(', ')}</span><span class="states" aria-hidden="true"><span><i style="background:#fff"></i>Done</span><span><i style="background:rgba(255,255,255,.55)"></i>Now</span><span><i style="background:var(--track)"></i>Later</span><span><i style="background:var(--track);box-shadow:inset 0 0 0 4px var(--track),inset 0 0 0 12px var(--late)"></i>Missed</span></span></div>
+    <footer class="foot">
+      ${shared.map(({ n, i }) => `<div class="task"><span class="e" aria-hidden="true">⭐</span><span class="lbl3">${esc(n.what)}</span><button class="act" data-need="${i}">${esc(n.action)}</button></div>`).join('')}
+      <div class="look"><button class="lk" data-sheet="scores">Scores <span class="c">${P.scores.length} new</span></button>
+        <button class="lk" data-sheet="homework">Homework <span class="c${late ? ' late' : ''}">${late ? late + ' late' : hw}</span></button>
+        <button class="lk" data-sheet="program">Program</button>
+        <button class="lk" data-sheet="feedback">Feedback</button></div>
+    </footer>`;
+}
+
+function renderKid(name) {
+  const j = K.findIndex((k) => k.name.toLowerCase() === name), k = K[j];
+  if (!k) { location.hash = ''; return; }
+  const sc = P.scores.filter((s) => s.kid === k.name);
+  const late = NEEDS.findIndex((n) => kidIdx(n.what) === j && /late/.test(n.what));
+  const mine = MARK && kidIdx(MARK.what) === j;
+  const up = innerHeight > innerWidth, rs = up ? 300 : 330;
+  const mk = (s) => s === 'done' ? `background:${LIGHT[j]}` : s === 'now' ? `background:${LIGHT[j]};opacity:.6` : s === 'missed' ? 'background:var(--track);box-shadow:inset 0 0 0 4px var(--track),inset 0 0 0 12px var(--late)' : 'background:var(--track)';
+  $('#kid').innerHTML = `<a class="back" href="#">${I.back}Today</a>
+    <div class="kp">
+      <div class="left" style="--rs:${rs}px"><div class="ringlink" style="pointer-events:none">${segRing(j, rs)}<span class="mid"><span class="f" aria-hidden="true">${k.face}</span><b class="num">${doneOf(j)}<small>of ${k.of}</small></b><span>done</span></span></div>
+        <div class="kname">${k.name} <span style="color:var(--ink2);font-size:1.1rem;font-weight:500">${k.year}</span></div>
+        <div class="chips"><span class="chip"><span>Average</span>${k.average}</span>${hwChip(k, j)}</div></div>
+      <div class="right">
+        <div class="box">${C.map((c, ci) => { const s = st[j][ci], m = c.marks && c.marks[j];
+          return `<button class="crow" data-cls="${ci}"><span class="mk" style="${mk(s)}"></span><span class="w"><b>${c.time} ${esc(c.subject)}</b><span>${esc(c.title)}</span></span><span class="s st-${s}">${WORD[s]}${m ? `, ${m} of 12` : ''}</span></button>`; }).join('')}</div>
+        ${late >= 0 || mine ? `<div class="box"><h2>For you</h2>
+          ${mine ? `<div class="crow"><span class="w"><b>Written answers</b><span>${esc(MARK.detail)}</span></span><button class="link" data-answers>Mark</button></div>` : ''}
+          ${late >= 0 ? `<div class="crow"><span class="w"><b>Homework late</b><span>${esc(NEEDS[late].detail)}</span></span><button class="link" data-need="${late}">${esc(NEEDS[late].action)}</button></div>` : ''}</div>` : ''}
+        <div class="box"><h2>Latest tests</h2>${sc.length ? sc.map((s) => `<div class="crow"><span class="w"><b>${esc(s.what)}</b><span>${s.when}</span></span><span class="s num">${s.score}</span></div>`).join('') : '<div class="crow"><span class="sub">No new tests.</span></div>'}</div>
+      </div>
+    </div>`;
+}
+
+/* ---------- sheets (shared by every page) ---------- */
+let ctx = {};
+function sheet(title, body, foot) {
+  $('#sheet').innerHTML = `<div class="sh-bar"><h2>${title}</h2><button class="x" data-close aria-label="Close">${I.x}</button></div><div class="sh-in">${body}</div>${foot ? `<div class="sh-foot">${foot}</div>` : ''}`;
+  $('#veil').classList.add('on');
+}
+const closeSheet = () => $('#veil').classList.remove('on');
+function toast(m, undo) {
+  $('#tmsg').textContent = m; $('#tundo').style.display = undo ? '' : 'none'; toast.undo = undo;
+  $('#toast').classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => $('#toast').classList.remove('on'), 4000);
+}
+const S = {
+  cls(ci) {
+    const c = C[ci]; ctx = { ci };
+    sheet(esc(c.subject), `<p class="sub">${esc(c.title)}. Starts ${c.time}${c.lesson ? '. Video lesson; its test marks itself' : ''}.</p>
+      <div class="lines">${K.map((k, j) => { const s = st[j][ci], m = c.marks && c.marks[j];
+        return `<div class="line"><span class="lf">${face(k)}<b>${k.name}</b></span><span class="st st-${s}">${WORD[s]}${m ? `, mark ${m}` : ''}</span>${s === 'done' && !c.lesson ? `<button class="link" data-mark="${j}">${m ? 'Change mark' : 'Add a mark'}</button>` : ''}</div>`; }).join('')}</div>`,
+      `${c.lesson ? `<button class="btn pri" data-play>${I.play}Play on the TV</button>` : ''}<button class="btn sec" data-hw="${ci}">Add homework</button>`);
+  },
+  mark(ci, j) {
+    ctx = { ci, j };
+    sheet(`Mark for ${K[j].name}`, `<p class="sub">${esc(C[ci].subject)}: ${esc(C[ci].title)}. Out of 12.</p>
+      <div class="grid12">${Array.from({ length: 12 }, (_, n) => `<button class="num${C[ci].marks && C[ci].marks[j] == n + 1 ? ' on' : ''}" data-m="${n + 1}">${n + 1}</button>`).join('')}</div>`,
+      `<button class="btn pri" data-savemark>Save mark</button><button class="btn sec" data-close>Cancel</button>`);
+  },
+  hw(ci = NOWI) {
+    sheet('Add homework', `<p class="sub">Homework goes to everyone. Pick one child only if it is just for them.</p>
+      <span class="lbl">For</span><div class="chips"><button class="chip on" data-who="-1">Everyone</button>${K.map((k, j) => `<button class="chip" data-who="${j}">${k.face} ${k.name}</button>`).join('')}</div>
+      <span class="lbl">Class</span><div class="chips">${C.map((c, i) => `<button class="chip${i === ci ? ' on' : ''}">${esc(c.subject)}</button>`).join('')}</div>
+      <label class="lbl" for="hwt">What to do</label><input id="hwt" placeholder="For example: read pages 16 to 18">
+      <span class="lbl">Due</span><div class="chips"><button class="chip on">Tomorrow</button><button class="chip">Wednesday</button><button class="chip">Friday</button></div>`,
+      `<button class="btn pri" data-savehw>Add homework</button><button class="btn sec" data-close>Cancel</button>`);
+  },
+  answers() {
+    const k = K[kidIdx(MARK.what)];
+    sheet('Answers to mark', `<p class="sub">${esc(MARK.detail)}.</p><div class="lines">${Array.from({ length: ANS }, (_, n) => `<div class="line"><span class="lf">${face(k)}<b>${k.name}, answer ${n + 1}</b></span><span class="st">Waiting for you</span></div>`).join('')}</div>`,
+      `<button class="btn pri" data-go="Opening ${k.name}’s first answer">Start marking</button><button class="btn sec" data-close>Later</button>`);
+  },
+  need(i) {
+    const n = NEEDS[i];
+    sheet(esc(n.what), `<p class="sub">${esc(n.detail)}.</p>`, `<button class="btn pri" data-go="${n.action === 'Remind' ? 'Reminder sent to ' + K[kidIdx(n.what)].name : 'Opening the rating'}">${esc(n.action)}</button><button class="btn sec" data-close>Later</button>`);
+  },
+  scores() {
+    sheet('Scores', `<p class="sub">Tests mark themselves. Newest first, out of 12 unless shown.</p><div class="lines">${P.scores.map((s) => `<div class="line"><span class="lf">${face(K[kidIdx(s.kid)])}<span><b>${s.kid}</b> ${esc(s.what)}, ${s.when.toLowerCase()}</span></span><span class="v num">${s.score}</span></div>`).join('')}</div>
+      <span class="lbl">Averages</span><div class="lines">${K.map((k) => `<div class="line"><span class="lf">${face(k)}<b>${k.name}</b></span><span class="v num">${k.average}</span></div>`).join('')}</div>`);
+  },
+  homework() {
+    const lt = NEEDS.find((n) => /late/.test(n.what));
+    sheet('Homework', `<p class="sub">Set and not yet handed in.</p><div class="lines">${K.map((k) => `<div class="line"><span class="lf">${face(k)}<b>${k.name}</b></span><span class="v${k.late ? ' st-missed' : ''}">${k.homework ? `${k.homework} to do${k.late ? `, ${k.late} late` : ''}` : 'Nothing set'}</span></div>`).join('')}</div>
+      ${lt ? `<p class="sub" style="margin-top:10px">Late: ${esc(lt.detail)}.</p>` : ''}`, `<button class="btn pri" data-hw="${NOWI}">Add homework</button>`);
+  },
+  program() {
+    sheet('The program', `<p class="sub">Follows ${esc(A.plan)}.</p><div class="lines"><div class="line"><span class="lf">Subjects</span><span class="v">${P.program.subjects}</span></div><div class="line"><span class="lf">Video lessons ready</span><span class="v">${P.program.readyLessons}</span></div><div class="line"><span class="lf">Where you are</span><span class="v" style="max-width:60%">${esc(P.program.where)}</span></div></div>`);
+  },
+  size() {
+    const cur = document.documentElement.className || 't1';
+    sheet('Text size', `<p class="sub">Bigger text shows fewer words. Nothing is cut.</p><div class="sizes">${['Normal', 'Large', 'Largest'].map((n, i) => `<button data-size="${i + 1}" class="${cur === 't' + (i + 1) ? 'on' : ''}" style="font-size:${17 + i * 3}px">${n}</button>`).join('')}</div>`);
+  },
+  feedback() {
+    sheet('Send feedback', `<p class="sub">Tell us what works and what doesn’t. We read every note.</p><label class="lbl" for="fb">Your note</label><input id="fb" placeholder="Write here">`, `<button class="btn pri" data-go="Thank you. Your note is sent.">Send</button><button class="btn sec" data-close>Cancel</button>`);
+  },
+};
+
+function tick(j, ci, row) {
+  const prev = st[j][ci];
+  if (prev === 'done' || prev === 'missed') return S.cls(ci);
+  st[j][ci] = 'done';
+  row.className = 'it s-done pop';
+  setTimeout(() => { route(); toast(`${C[ci].subject} ticked for ${K[j].name}`, () => { st[j][ci] = prev; route(); }); }, 450);
+}
+
+document.addEventListener('click', (e) => {
+  const t = (s) => e.target.closest(s); let el;
+  if (e.target.id === 'veil' || t('[data-close]')) return closeSheet();
+  if (t('[data-play]')) { closeSheet(); return toast(`Playing ${NOWC.subject} on the TV: ${short(NOWC)}`); }
+  if ((el = t('[data-tick]'))) { const row = el.closest('.it'); return tick(+row.dataset.j, +row.dataset.ci, row); }
+  if ((el = t('[data-youtick]'))) { const box = el.closest('.you'), i = +box.dataset.you; if (youDone.has(i)) youDone.delete(i); else { youDone.add(i); box.classList.add('s-done'); setTimeout(() => toast('Done: ' + NEEDS[i].what, () => { youDone.delete(i); route(); }), 300); return; } return route(); }
+  if ((el = t('#sheet .chips .chip'))) { el.parentNode.querySelectorAll('.chip').forEach((x) => x.classList.toggle('on', x === el)); return; }
+  if ((el = t('[data-m]'))) { el.parentNode.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === el)); return; }
+  if ((el = t('[data-size]'))) { document.documentElement.className = el.dataset.size === '1' ? '' : 't' + el.dataset.size; el.parentNode.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === el)); route(true); return; }
+  if ((el = t('[data-cls]'))) return S.cls(+el.dataset.cls);
+  if ((el = t('[data-mark]'))) return S.mark(ctx.ci, +el.dataset.mark);
+  if ((el = t('[data-hw]'))) return S.hw(+el.dataset.hw);
+  if (t('[data-savehw]')) { const w = +$('#sheet [data-who].on').dataset.who; closeSheet(); return toast(`Homework added for ${w < 0 ? 'everyone' : K[w].name}`); }
+  if (t('[data-savemark]')) { const m = $('#sheet [data-m].on'); if (!m) return; closeSheet(); return toast(`Mark ${m.dataset.m} saved for ${K[ctx.j].name}`); }
+  if ((el = t('[data-need]'))) return S.need(+el.dataset.need);
+  if (t('[data-answers]')) return S.answers();
+  if ((el = t('[data-go]'))) { closeSheet(); return toast(el.dataset.go); }
+  if ((el = t('[data-sheet]'))) return S[el.dataset.sheet]();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); if (e.key === 'Enter' && e.target.matches('div[data-cls]')) e.target.click(); });
+$('#tundo').onclick = () => { toast.undo && toast.undo(); $('#toast').classList.remove('on'); };
+
+/* ---------- admin, its own page ---------- */
+const AS = {
+  'Your account': `<h2>Your account</h2><p class="lead">How you sign in, and how the app looks for you.</p>
+    <div class="grp"><div class="box"><div class="r"><span>Name</span><span class="v">${A.account.name}</span></div><div class="r"><span>Username</span><span class="v">${A.account.username}</span></div><button class="r"><span>Password</span><span class="v">Change</span></button><button class="r" data-sheet="size"><span>Text size</span><span class="v">${A.account.textSize}</span></button></div></div>
+    <div class="grp"><div class="box"><button class="r bad">Sign out</button></div></div>`,
+  'Family': `<h2>Family</h2><p class="lead">Everyone uses one sign-in. Children have their own logins inside your account, with no email.</p>
+    <div class="grp"><h3>Parents</h3><div class="box">${P.parents.map((p) => `<div class="r"><span>${p.name}</span><span class="v">${p.you ? 'You' : 'Parent'}</span></div>`).join('')}<button class="r act">Invite a parent</button></div></div>
+    <div class="grp"><h3>Children</h3><div class="box">${K.map((k) => `<button class="r"><span>${k.face}&nbsp; ${k.name}</span><span class="v">${k.year}</span></button>`).join('')}</div></div>`,
+  'Learning plan': `<h2>Learning plan</h2><p class="lead">The program follows a curriculum. It is not approved by anyone.</p>
+    <div class="grp"><div class="box"><button class="r"><span>Curriculum</span><span class="v">${A.plan}</span></button><button class="r"><span>Word help</span><span class="v">${A.wordHelp}</span></button><div class="r"><span>Subjects</span><span class="v">${P.program.subjects}</span></div><div class="r"><span>Video lessons ready</span><span class="v">${P.program.readyLessons}</span></div></div></div>`,
+  'Plan and billing': `<h2>Plan and billing</h2><p class="lead">The service is charged per child.</p>
+    <div class="grp"><div class="box"><div class="r"><span>Your plan</span><span class="v">${A.billing}</span></div><div class="r"><span>Children on the plan</span><span class="v">${K.length}</span></div></div></div>`,
+  'Feedback and checks': `<h2>Feedback and checks</h2><p class="lead">Tell us what to fix, and keep exams fair.</p>
+    <div class="grp"><div class="box"><button class="r" data-sheet="feedback"><span>Send feedback</span><span class="v">Write a note</span></button><button class="r"><span>Exam PIN</span><span class="v">${A.examPin}</span></button></div></div>`,
+};
+let aCur = A.sections[0];
+function renderAdmin() {
+  const fix = (h) => h.replace(/class="box"/g, 'class="abox"');
+  $('#admin').innerHTML = `<div class="ahead"><a class="back" href="#">${I.back}Today</a><h1>Admin</h1></div>
+    <div class="agrid"><nav class="anav">${A.sections.map((s) => `<button class="nav${s === aCur ? ' on' : ''}" data-sec="${s}">${s}</button>`).join('')}</nav>
+    <div class="asec">${fix(AS[aCur])}</div></div>`;
+}
+$('#admin').addEventListener('click', (e) => { const b = e.target.closest('[data-sec]'); if (b) { aCur = b.dataset.sec; renderAdmin(); } });
+
+function route(keep) {
+  if (!keep) closeSheet();
+  const h = location.hash.slice(1);
+  document.querySelectorAll('.page').forEach((p) => p.classList.remove('on'));
+  let pg = 'pad';
+  if (h === 'admin') { renderAdmin(); pg = 'admin'; }
+  else if (h.startsWith('kid-')) { renderKid(h.slice(4)); pg = 'kid'; }
+  else renderPad();
+  $('#' + pg).classList.add('on');
+  document.body.classList.toggle('scroll', pg !== 'pad');
+  if (!keep) scrollTo(0, 0);
+}
+addEventListener('hashchange', () => route()); route();
+</script>
+</body>
+</html>

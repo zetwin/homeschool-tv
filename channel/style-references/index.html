@@ -1,0 +1,143 @@
+<title>Style References</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Geist:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&family=Roboto+Flex:opsz,wght@8..144,400..700&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.18.2/dist/motion.js"></script>
+<style>
+/* The page itself uses plain framework-style defaults. Only the samples carry a style. */
+:root { --bg: #FFFFFF; --fg: #09090B; --muted: #71717A; --line: #E4E4E7; --soft: #F4F4F5; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #09090B; --fg: #FAFAFA; --muted: #A1A1AA; --line: #27272A; --soft: #18181B; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #09090B; --fg: #FAFAFA; --muted: #A1A1AA; --line: #27272A; --soft: #18181B; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: 'Geist', 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-block: 40px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.muted { color: var(--muted); } .rule { border-top: 1px solid var(--line); }
+.ref { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 32px; padding-block: 36px; border-top: 1px solid var(--line); }
+@media (max-width: 860px) { .ref { grid-template-columns: minmax(0, 1fr); gap: 18px; } }
+.ref h2 { font-size: 22px; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; }
+.kind { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.ref dl { margin: 14px 0 0; display: grid; gap: 10px; font-size: 15px; line-height: 1.5; }
+.ref dt { font-size: 13px; font-weight: 600; } .ref dd { margin: 0; color: var(--muted); }
+.ref a { text-decoration: underline; text-underline-offset: 2px; }
+.stack td, .stack th { padding: 10px 12px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 15px; line-height: 1.4; }
+.stack th { font-weight: 600; font-size: 13px; color: var(--muted); border-top: 0; }
+.tableWrap { overflow-x: auto; }
+
+/* ---------- Samples: the same question in each style ---------- */
+.s { --r: 8px; position: relative; overflow: hidden; border-radius: 12px; padding: 22px; min-height: 340px; display: flex; flex-direction: column; gap: 14px; background: var(--sBg); color: var(--sFg); font-family: var(--sFont); }
+.s .small { font-size: 13px; color: var(--sMute); font-weight: 500; }
+.s h3 { font-family: var(--sHead, var(--sFont)); font-size: var(--qSize, 24px); line-height: 1.15; font-weight: var(--qW, 600); letter-spacing: var(--qT, -.015em); }
+.s .opts { display: grid; gap: var(--gap, 8px); }
+.s .opt { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 10px 14px; text-align: left; font-size: 16px; font-weight: var(--oW, 500); line-height: 1.2; background: var(--oBg); color: var(--sFg); border: var(--oLine, 1px solid var(--sLine)); border-radius: var(--r); cursor: pointer; }
+.s .opt:hover { background: var(--oHover); }
+.s .opt:focus-visible, .s .cta:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.s .opt.sel { border-color: var(--acc); background: var(--oSel); color: var(--oSelFg, var(--sFg)); }
+.s .opt.right { border-color: var(--ok); background: var(--okBg); color: var(--okFg, var(--sFg)); }
+.s .opt.wrong { border-color: var(--no); background: var(--noBg); color: var(--noFg, var(--sFg)); }
+.s .opt:disabled { cursor: default; }
+.s .foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.s .why { flex: 1 1 180px; font-size: 14px; line-height: 1.35; font-weight: 500; }
+.s .cta { min-height: 44px; padding: 9px 22px; border-radius: var(--ctaR, var(--r)); background: var(--acc); color: var(--accFg); font-size: 15px; font-weight: var(--ctaW, 600); border: 0; cursor: pointer; }
+.s .cta:disabled { opacity: .4; cursor: default; }
+.s .bar { height: var(--barH, 4px); border-radius: var(--barR, 2px); background: var(--sLine); overflow: hidden; } .s .bar i { display: block; height: 100%; width: 30%; background: var(--acc); }
+
+/* Neutral Pro */
+.neutral { --sBg: #FFFFFF; --sFg: #09090B; --sMute: #71717A; --sLine: #E4E4E7; --sFont: 'Geist', sans-serif; --oBg: #FFFFFF; --oHover: #F4F4F5; --oSel: #F4F4F5; --acc: #18181B; --accFg: #FAFAFA; --ok: #16A34A; --okBg: #F0FDF4; --no: #DC2626; --noBg: #FEF2F2; --r: 6px; box-shadow: inset 0 0 0 1px #E4E4E7; }
+/* Apple Clear */
+.apple { --sBg: #F2F2F7; --sFg: #1C1C1E; --sMute: #6C6C70; --sLine: #D1D1D6; --sFont: 'Inter', sans-serif; --qSize: 27px; --qW: 700; --qT: -.022em; --oBg: #FFFFFF; --oHover: #FFFFFF; --oSel: #FFFFFF; --oLine: 0; --acc: #007AFF; --accFg: #fff; --ok: #34C759; --okBg: #E8F9ED; --no: #FF3B30; --noBg: #FFECEB; --r: 14px; --ctaR: 14px; --barR: 3px; --gap: 8px; }
+.apple .opt { min-height: 52px; box-shadow: 0 1px 2px #0000000F; } .apple .opt.sel { box-shadow: 0 0 0 2px #007AFF; } .apple .opt.right { box-shadow: 0 0 0 2px #34C759; } .apple .opt.wrong { box-shadow: 0 0 0 2px #FF3B30; } .apple .cta { min-height: 50px; flex: 1 1 100%; font-weight: 600; font-size: 17px; }
+/* Expressive */
+.expressive { --sBg: #FEF7FF; --sFg: #1D1B20; --sMute: #49454F; --sLine: #E7E0EC; --sFont: 'Roboto Flex', sans-serif; --qSize: 26px; --qW: 600; --oBg: #F3EDF7; --oHover: #E8DEF8; --oSel: #E8DEF8; --oLine: 0; --acc: #6750A4; --accFg: #fff; --ok: #146C2E; --okBg: #C4EED0; --no: #B3261E; --noBg: #F9DEDC; --r: 16px; --ctaR: 999px; --barH: 6px; --barR: 3px; }
+.expressive .opt { transition: border-radius .28s cubic-bezier(.05,.7,.1,1); min-height: 54px; } .expressive .opt.sel { border-radius: 28px; font-weight: 600; } .expressive .opt.right, .expressive .opt.wrong { border-radius: 28px; }
+/* Friendly Tactile */
+.tactile { --sBg: #FFFFFF; --sFg: #3C3C3C; --sMute: #777777; --sLine: #E5E5E5; --sFont: 'Nunito', sans-serif; --qSize: 24px; --qW: 800; --qT: -.005em; --oW: 700; --oBg: #fff; --oHover: #F7F7F7; --oSel: #DDF4FF; --oSelFg: #1899D6; --oLine: 2px solid #E5E5E5; --acc: #1CB0F6; --accFg: #fff; --ok: #58CC02; --okBg: #D7FFB8; --okFg: #58A700; --no: #EA2B2B; --noBg: #FFDFE0; --noFg: #EA2B2B; --r: 14px; --ctaR: 14px; --ctaW: 800; --barH: 10px; --barR: 5px; box-shadow: inset 0 0 0 1px #E5E5E5; }
+.tactile .opt { border-bottom-width: 4px; transition: transform .06s, border-bottom-width .06s; } .tactile .opt:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; } .tactile .opt.sel { border-color: #84D8FF; } .tactile .bar i { background: #58CC02; }
+.tactile .cta { box-shadow: 0 4px 0 #1899D6; text-transform: uppercase; letter-spacing: .04em; font-size: 14px; transition: transform .06s, box-shadow .06s; } .tactile .cta:active:not(:disabled) { transform: translateY(4px); box-shadow: none; }
+/* Strong Simple */
+.strong { --sBg: #14213D; --sFg: #FFFFFF; --sMute: #AEBBD6; --sLine: #2A3B63; --sFont: 'Hanken Grotesk', sans-serif; --qSize: 27px; --qW: 800; --oW: 700; --oBg: #22345C; --oHover: #2B4172; --oSel: #FFC233; --oSelFg: #14213D; --oLine: 0; --acc: #FFC233; --accFg: #14213D; --ok: #2FBF71; --okBg: #2FBF71; --okFg: #06281A; --no: #E5484D; --noBg: #E5484D; --r: 12px; --ctaW: 800; --barH: 8px; --barR: 4px; }
+.strong .opt { min-height: 54px; font-size: 17px; box-shadow: 0 4px 0 #0E1830; transition: transform .07s, box-shadow .07s; } .strong .opt:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #0E1830; } .strong .cta { box-shadow: 0 4px 0 #B98500; min-height: 50px; font-size: 17px; transition: transform .07s, box-shadow .07s; } .strong .cta:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #B98500; }
+/* Swiss Precision */
+.swiss { --sBg: #0E0F11; --sFg: #ECEDEE; --sMute: #8A8D91; --sLine: #2B2D31; --sFont: 'Inter Tight', sans-serif; --qSize: 29px; --qW: 500; --qT: -.025em; --oBg: transparent; --oHover: #1A1C1F; --oSel: #1A1C1F; --oLine: 0; --acc: #ECEDEE; --accFg: #0E0F11; --ok: #7BD88F; --okBg: transparent; --no: #FF7A70; --noBg: transparent; --r: 0px; --gap: 0px; --barH: 1px; --barR: 0; }
+.swiss .opt { border-top: 1px solid #2B2D31; padding-inline: 2px; min-height: 52px; font-weight: 400; } .swiss .opt.sel { border-top-color: #ECEDEE; padding-left: 12px; transition: padding .15s; } .swiss .opt.right { border-top-color: #7BD88F; color: #7BD88F; } .swiss .opt.wrong { border-top-color: #FF7A70; color: #FF7A70; } .swiss .small { letter-spacing: .02em; }
+/* Console Calm */
+.console { --sBg: #0A1020; --sFg: #FFFFFF; --sMute: #AEB7CC; --sLine: #FFFFFF26; --sFont: 'Inter', sans-serif; --qSize: 26px; --qW: 500; --oBg: #FFFFFF14; --oHover: #FFFFFF24; --oSel: #FFFFFF; --oSelFg: #0A1020; --oLine: 0; --acc: #FFFFFF; --accFg: #0A1020; --ok: #4ADE80; --okBg: #4ADE80; --okFg: #052E16; --no: #F87171; --noBg: #F87171; --noFg: #450A0A; --r: 10px; --ctaR: 999px; }
+.console::before { content: ''; position: absolute; inset: 0; background: url(../assets/img/muscle-cardiac.jpg) center/cover; opacity: .2; } .console > * { position: relative; }
+.console .opt { min-height: 52px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+/* Bold Solid */
+.bold { --sBg: #111111; --sFg: #FFFFFF; --sMute: #A3A3A3; --sLine: #2A2A2A; --sFont: 'Archivo', sans-serif; --sHead: 'Archivo', sans-serif; --qSize: 31px; --qW: 800; --qT: -.02em; --oW: 700; --oBg: #1F1F1F; --oHover: #2A2A2A; --oSel: #FF4655; --oSelFg: #fff; --oLine: 0; --acc: #FF4655; --accFg: #fff; --ok: #fff; --okBg: #fff; --okFg: #111; --no: #6B6B6B; --noBg: #333; --r: 0; --ctaW: 800; --barH: 6px; --barR: 0; }
+.bold h3 { font-stretch: 80%; text-transform: uppercase; line-height: 1; } .bold .opt { min-height: 54px; font-stretch: 90%; font-size: 17px; } .bold .cta { font-stretch: 85%; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; }
+</style>
+
+<button id="modeBtn" aria-label="Switch between light and dark" style="position:fixed;top:max(12px,env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:9;width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font-size:20px">◐</button>
+<div class="wrap">
+  <header class="max-w-2xl">
+    <h1 class="text-3xl font-semibold tracking-tight">Style references</h1>
+    <p class="muted mt-2 leading-relaxed">The tools and references we could build on, what each really does, and what we'd take. Each sample is <b>the same question and the same simple framework parts</b>, restyled by that reference's principles. Tap an answer, then check it.</p>
+    <p class="muted mt-2 leading-relaxed text-sm"><b>What these aren't:</b> copies of those products. They're original samples of a principle, so also open the real screens linked below. Notes marked "observed" are my own reading, without a published source.</p>
+  </header>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold tracking-tight">The tools</h2>
+    <div class="tableWrap mt-3"><table class="stack w-full"><thead><tr><th>Job</th><th>Proposed</th><th>Why</th></tr></thead><tbody>
+      <tr><td>App screens</td><td><b>Tailwind + shadcn/ui</b>, on Radix</td><td>Popular, clean, accessible, and we own the code</td></tr>
+      <tr><td>Interface motion</td><td><b>Motion</b></td><td>Spring physics for touch. Used in these samples</td></tr>
+      <tr><td>TV lessons</td><td><b>GSAP</b></td><td>Already works, timed to the voice</td></tr>
+      <tr><td>Characters and reactive icons</td><td><b>Rive</b>, later</td><td>Interactive animation, needs a real animator</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <div id="refs" class="mt-10"></div>
+
+  <section class="rule pt-8">
+    <h2 class="text-xl font-semibold tracking-tight">See real screens</h2>
+    <p class="muted mt-2 leading-relaxed"><a class="underline" href="https://interfaceingame.com/" target="_blank" rel="noopener">Interface In Game</a>, <a class="underline" href="https://www.gameuidatabase.com/" target="_blank" rel="noopener">Game UI Database</a>, and <a class="underline" href="https://mobbin.com/" target="_blank" rel="noopener">Mobbin</a> for apps. The best next step is a few screens you personally love, because that says more than any list.</p>
+  </section>
+</div>
+
+<script>
+document.getElementById('modeBtn').onclick = () => { const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = dark ? 'light' : 'dark'; };
+const REFS = [
+  { id: 'neutral', name: 'Neutral Pro', kind: 'Framework: shadcn/ui, Radix', how: 'Plain neutral parts, thin lines, small corners and strict spacing. Quality comes from precision.', take: 'The base for every screen. The parent area could look exactly like this.', skip: 'Alone it may feel too plain for a child.', link: ['shadcn/ui', 'https://ui.shadcn.com/'] },
+  { id: 'apple', name: 'Apple Clear', kind: 'App guidelines: Apple', how: 'Large readable text, roomy touch areas, grouped lists and one clear accent. Observed: soft springs.', take: 'Touch sizes, grouped lists, and large clear headings on phones and tablets.', skip: 'Its system look can feel like a settings page.', link: ['Human Interface Guidelines', 'https://developer.apple.com/design/human-interface-guidelines'] },
+  { id: 'expressive', name: 'Expressive', kind: 'App guidelines: Google Material 3', how: 'Rich color tones, spring physics, and shapes that change when selected (reported by third-party packages).', take: 'Shape change to show a state, and a complete color system.', skip: 'Can look like an Android app.', link: ['Material 3', 'https://m3.material.io/'] },
+  { id: 'tactile', name: 'Friendly Tactile', kind: 'Learning app: Duolingo', how: 'Observed: buttons with a thick lower edge that press down, bright clear right and wrong. Duolingo says it composes sound and haptics together, and warns: if everything is exciting, nothing is.', take: 'Pressing feels physical, and answers are obvious. Proven with learners.', skip: 'Its characters, green branding and streak pressure.', link: ['Duolingo on its animation', 'https://blog.duolingo.com/world-character-visemes'] },
+  { id: 'strong', name: 'Strong Simple', kind: 'Mobile games: Clash Royale, Brawl Stars', how: 'High contrast, oversized elements, simple layouts, clear hierarchy, and one art style throughout. Supercell asks for motion that is "responsive, satisfying, and alive".', take: 'Big, confident parts, a firm press, and saving the reward moment for the end.', skip: 'Fantasy art, chests, and any game story.', link: ['Clash Royale UX analysis', 'https://discover.therookies.co/2020/02/24/game-design-ux-best-practices-detailed-breakdown-of-clash-royale/'] },
+  { id: 'swiss', name: 'Swiss Precision', kind: 'Console game: Destiny 2', how: 'One analysis says it avoids sci-fi styling, using Swiss-style type, clean shapes and clear hierarchy.', take: 'Type does the work, with thin lines and no decoration. Excellent for exams.', skip: 'Too cold for everyday use with children?', link: ['Thoughts on the Destiny UI', 'https://notesof.com/thoughts-on-the-destiny-ui/'] },
+  { id: 'console', name: 'Console Calm', kind: 'Console: PlayStation', how: 'Observed: quiet menus with a large picture behind, and quick, firm motion. An unofficial measurement lists 180–200 ms.', take: 'The lesson’s real picture sits softly behind the question. Fits our TV channel.', skip: 'Dark blur can hurt reading, so it needs testing.', link: ['One Month of PS5 UI', 'https://peterfinaldi.medium.com/one-month-of-playstation-5-user-interface-caf016d21f8'] },
+  { id: 'bold', name: 'Bold Solid', kind: 'PC game study: Valorant redesign', how: 'A designer’s redesign argues for high contrast, solid filled shapes, and tall, heavy type.', take: 'Strong poster-like headings, and a hard, confident motion.', skip: 'Can feel aggressive at this age.', link: ['Valorant UI explorations', 'https://www.dahlanrefal.com/case-studies/valorant-revamp.html'] },
+];
+const Q = { q: 'Where is cardiac muscle found?', o: ['Only in your heart', 'In your arms and legs', 'In your stomach'], a: 0, why: 'Cardiac muscle is found only in the heart.' };
+const spring = { type: 'spring', stiffness: 520, damping: 30 };
+const A = (el, kf, o) => { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; window.Motion?.animate(el, kf, o || spring); };
+function sampleHtml() {
+  return `<p class="small">Question 3 of 12</p><div class="bar"><i></i></div><h3>${Q.q}</h3>
+    <div class="opts" role="radiogroup">${Q.o.map((t, k) => `<button class="opt" role="radio" aria-checked="false" data-k="${k}">${t}</button>`).join('')}</div>
+    <div class="foot"><p class="why" aria-live="polite"></p><button class="cta" disabled>Check answer</button></div>`;
+}
+function reset(box) { box.innerHTML = sampleHtml(); box.dataset.state = ''; box.dataset.pick = ''; }
+document.getElementById('refs').innerHTML = REFS.map((r) => `<article class="ref"><div><h2>${r.name}</h2><p class="kind">${r.kind}</p><dl><div><dt>What they do</dt><dd>${r.how}</dd></div><div><dt>What we’d take</dt><dd>${r.take}</dd></div><div><dt>What we’d leave</dt><dd>${r.skip}</dd></div><div><dt>Look at it</dt><dd><a href="${r.link[1]}" target="_blank" rel="noopener">${r.link[0]}</a></dd></div></dl></div><div class="s ${r.id}" data-sample="${r.id}"></div></article>`).join('');
+document.querySelectorAll('[data-sample]').forEach(reset);
+document.addEventListener('click', (ev) => {
+  const box = ev.target.closest('[data-sample]'); if (!box) return;
+  const opt = ev.target.closest('.opt'), cta = ev.target.closest('.cta');
+  if (opt && !box.dataset.state) {
+    box.querySelectorAll('.opt').forEach((o) => { o.classList.remove('sel'); o.setAttribute('aria-checked', 'false'); });
+    opt.classList.add('sel'); opt.setAttribute('aria-checked', 'true'); box.dataset.pick = opt.dataset.k;
+    box.querySelector('.cta').disabled = false;
+    A(opt, { scale: [.98, 1] });
+  }
+  if (cta && !cta.disabled) {
+    if (box.dataset.state) { reset(box); return; }
+    box.dataset.state = 'done';
+    const pick = +box.dataset.pick, ok = pick === Q.a;
+    box.querySelectorAll('.opt').forEach((o, k) => { o.disabled = true; o.classList.remove('sel'); if (k === Q.a) o.classList.add('right'); else if (k === pick) o.classList.add('wrong'); });
+    const right = box.querySelector('.opt.right');
+    A(right, { scale: [1, 1.025, 1] }, { duration: .28, ease: 'easeOut' });
+    if (!ok) A(box.querySelector('.opt.wrong'), { x: [0, -5, 4, -2, 0] }, { duration: .28 });
+    box.querySelector('.why').innerHTML = `<b>${ok ? 'Correct.' : 'Not quite.'}</b> ${Q.why}`;
+    A(box.querySelector('.why'), { opacity: [0, 1], y: [5, 0] }, { duration: .18, ease: 'easeOut' });
+    const fill = box.querySelector('.bar i'); A(fill, { width: ['30%', '38%'] }, { duration: .3, ease: 'easeOut' }); fill.style.width = '38%';
+    cta.textContent = 'Try again';
+  }
+});
+</script>

@@ -1,0 +1,5043 @@
+{
+ "hook-0": {
+  "seconds": 2.45,
+  "text": "Right now, something is holding you up.",
+  "voice": "af_heart"
+ },
+ "hook-1": {
+  "seconds": 3.67,
+  "text": "It’s hard. It’s alive. And you have never seen yours.",
+  "voice": "af_heart"
+ },
+ "hook-2": {
+  "seconds": 2.35,
+  "text": "Take it away, and this happens.",
+  "voice": "af_heart"
+ },
+ "hook-3": {
+  "seconds": 2.25,
+  "text": "You would be a puddle on the floor.",
+  "voice": "af_heart"
+ },
+ "title-0": {
+  "seconds": 2.5,
+  "text": "This is the story of your skeleton.",
+  "voice": "af_heart"
+ },
+ "ch1-0": {
+  "seconds": 2.95,
+  "text": "Chapter one. Two hundred and six bones.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "count-0": {
+  "seconds": 3.42,
+  "text": "An adult skeleton has two hundred and six bones.",
+  "voice": "af_heart"
+ },
+ "count-1": {
+  "seconds": 2.23,
+  "text": "But you didn’t start with that number.",
+  "voice": "af_heart"
+ },
+ "count-2": {
+  "seconds": 2.9,
+  "text": "A newborn baby has around three hundred.",
+  "voice": "af_heart"
+ },
+ "fuse-0": {
+  "seconds": 3.4,
+  "text": "Many of those bones start out soft and separate.",
+  "voice": "af_heart"
+ },
+ "fuse-1": {
+  "seconds": 4.55,
+  "text": "As you grow, they join together, like puzzle pieces becoming one.",
+  "voice": "af_heart"
+ },
+ "fuse-2": {
+  "seconds": 5.8,
+  "text": "It’s happening inside you right now. Your skeleton usually isn’t finished until your twenties.",
+  "voice": "af_heart"
+ },
+ "guess-hands-0": {
+  "seconds": 3.48,
+  "text": "Quick question. Where are more than half of all your bones?",
+  "voice": "af_heart"
+ },
+ "guess-hands-1": {
+  "seconds": 1.82,
+  "text": "Shout your answer now!",
+  "voice": "af_heart"
+ },
+ "guess-hands-2": {
+  "seconds": 4.67,
+  "text": "Your hands and feet! One hundred and six of your bones are right there.",
+  "voice": "af_heart"
+ },
+ "guess-hands-3": {
+  "seconds": 4.58,
+  "text": "That’s why your fingers can tie a knot, play piano, or type a message.",
+  "voice": "af_heart"
+ },
+ "ch2-0": {
+  "seconds": 4.6,
+  "text": "Chapter two. Your bones have five jobs, and they never take a break.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "job-support-0": {
+  "seconds": 2.15,
+  "text": "Job one. Support.",
+  "voice": "af_heart"
+ },
+ "job-support-1": {
+  "seconds": 5.17,
+  "text": "A tent without poles is just a pile of cloth. Your skeleton is your poles.",
+  "voice": "af_heart"
+ },
+ "job-protect-0": {
+  "seconds": 2.13,
+  "text": "Job two. Protect.",
+  "voice": "af_heart"
+ },
+ "job-protect-1": {
+  "seconds": 2.2,
+  "text": "Your skull guards your brain.",
+  "voice": "af_heart"
+ },
+ "job-protect-2": {
+  "seconds": 3.48,
+  "text": "And your ribs make a cage around your heart and lungs.",
+  "voice": "af_heart"
+ },
+ "job-move-0": {
+  "seconds": 2,
+  "text": "Job three. Move.",
+  "voice": "af_heart"
+ },
+ "job-move-1": {
+  "seconds": 6.85,
+  "text": "Muscles can only pull. When a muscle pulls on a bone, the bone swings like a lever, and you lift the weight.",
+  "voice": "af_heart"
+ },
+ "job-make-0": {
+  "seconds": 1.75,
+  "text": "Job four. Make.",
+  "voice": "af_heart"
+ },
+ "job-make-1": {
+  "seconds": 7.35,
+  "text": "Soft marrow inside your bones makes blood cells. About two million new red blood cells, every single second.",
+  "voice": "af_heart"
+ },
+ "job-store-0": {
+  "seconds": 2,
+  "text": "Job five. Store.",
+  "voice": "af_heart"
+ },
+ "job-store-1": {
+  "seconds": 7.35,
+  "text": "Bones are a bank for calcium. Almost all the calcium in your body is kept here, ready to be sent out when you need it.",
+  "voice": "af_heart"
+ },
+ "jobs-recap-0": {
+  "seconds": 4.7,
+  "text": "Support. Protect. Move. Make. Store. Say them with me, one more time.",
+  "voice": "af_heart"
+ },
+ "video-1-0": {
+  "seconds": 6.35,
+  "text": "Before we open the atlas, here’s a quick tour of your skeleton. Watch for one thing. What does it do for you?",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "ch3-0": {
+  "seconds": 2.75,
+  "text": "Chapter three. Let’s meet your bones.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "atlas-0": {
+  "seconds": 4.67,
+  "text": "At the top is your skull. Twenty-two bones, but only your jaw moves.",
+  "voice": "af_heart"
+ },
+ "atlas-1": {
+  "seconds": 4.1,
+  "text": "Next, twenty-four ribs curve around your chest like a cage.",
+  "voice": "af_heart"
+ },
+ "atlas-2": {
+  "seconds": 5.65,
+  "text": "Down the middle is your spine. A stack of twenty-six bones that lets you bend and twist.",
+  "voice": "af_heart"
+ },
+ "atlas-3": {
+  "seconds": 4.25,
+  "text": "The pelvis is a strong bowl. It joins your spine to your legs.",
+  "voice": "af_heart"
+ },
+ "atlas-4": {
+  "seconds": 4.6,
+  "text": "Your arm has the humerus up top, then the radius and ulna below.",
+  "voice": "af_heart"
+ },
+ "atlas-5": {
+  "seconds": 2.83,
+  "text": "Each hand packs in twenty-seven bones.",
+  "voice": "af_heart"
+ },
+ "atlas-6": {
+  "seconds": 4.72,
+  "text": "And down here is your kneecap, with the tibia and fibula running to your foot.",
+  "voice": "af_heart"
+ },
+ "records-0": {
+  "seconds": 6.7,
+  "text": "Now for the record holders. The longest bone is the femur, your thigh bone. It’s about a quarter of your height.",
+  "voice": "af_heart"
+ },
+ "records-1": {
+  "seconds": 4.25,
+  "text": "Here’s the smallest, drawn at the same scale. Can you even see it?",
+  "voice": "af_heart"
+ },
+ "records-2": {
+  "seconds": 6.38,
+  "text": "It’s the stapes, deep inside your ear. About three millimeters long, smaller than a grain of rice.",
+  "voice": "af_heart"
+ },
+ "ch4-0": {
+  "seconds": 3.6,
+  "text": "Chapter four. Bones can’t bend. So how do you?",
+  "voice": "af_heart"
+ },
+ "joint-hinge-0": {
+  "seconds": 6.6,
+  "text": "The answer is joints, the places where bones meet. A hinge joint opens and closes like a door.",
+  "voice": "af_heart"
+ },
+ "joint-hinge-1": {
+  "seconds": 2.6,
+  "text": "Your elbows and knees work like this.",
+  "voice": "af_heart"
+ },
+ "joint-ball-0": {
+  "seconds": 4,
+  "text": "A ball and socket joint swings in almost any direction.",
+  "voice": "af_heart"
+ },
+ "joint-ball-1": {
+  "seconds": 3.4,
+  "text": "Try it. Stand up and make big circles with your arm.",
+  "voice": "af_heart"
+ },
+ "joint-fixed-0": {
+  "seconds": 5.35,
+  "text": "Some joints don’t move at all. The plates of your skull lock together like a jigsaw.",
+  "voice": "af_heart"
+ },
+ "joint-cushion-0": {
+  "seconds": 6.35,
+  "text": "And why don’t your moving joints grind? Smooth cartilage and slippery fluid keep the bones gliding.",
+  "voice": "af_heart"
+ },
+ "ch5-0": {
+  "seconds": 3.25,
+  "text": "Chapter five. Here’s what most people get wrong.",
+  "voice": "af_heart"
+ },
+ "myth-0": {
+  "seconds": 4.33,
+  "text": "In a museum, a bone looks dead, dry and hard, like a rock.",
+  "voice": "af_heart"
+ },
+ "myth-1": {
+  "seconds": 5.65,
+  "text": "But the bones inside you are alive. They have blood vessels, nerves, and living cells.",
+  "voice": "af_heart"
+ },
+ "slice-0": {
+  "seconds": 2,
+  "text": "Let’s slice one open.",
+  "voice": "af_heart"
+ },
+ "slice-1": {
+  "seconds": 2.75,
+  "text": "The hard outer shell is compact bone.",
+  "voice": "af_heart"
+ },
+ "slice-2": {
+  "seconds": 7.47,
+  "text": "Inside the ends is spongy bone, full of tiny spaces like a honeycomb. That keeps bones strong, but light.",
+  "voice": "af_heart"
+ },
+ "slice-3": {
+  "seconds": 3.88,
+  "text": "Marrow fills the spaces. That’s your blood cell factory.",
+  "voice": "af_heart"
+ },
+ "rebuild-0": {
+  "seconds": 4.45,
+  "text": "Your body is always taking old bone apart and building new bone.",
+  "voice": "af_heart"
+ },
+ "rebuild-1": {
+  "seconds": 4.22,
+  "text": "Over about ten years, nearly your whole skeleton gets replaced.",
+  "voice": "af_heart"
+ },
+ "video-2-0": {
+  "seconds": 4.83,
+  "text": "TED-Ed shows it brilliantly. Watch for the four stages of healing.",
+  "voice": "af_heart"
+ },
+ "heal-0": {
+  "seconds": 3.75,
+  "text": "Let’s check. Stage one. Blood clots around the break.",
+  "voice": "af_heart"
+ },
+ "heal-1": {
+  "seconds": 4.25,
+  "text": "Stage two. Soft cartilage builds a bridge across the gap.",
+  "voice": "af_heart"
+ },
+ "heal-2": {
+  "seconds": 3.52,
+  "text": "Stage three. Hard new bone replaces the bridge.",
+  "voice": "af_heart"
+ },
+ "heal-3": {
+  "seconds": 4.35,
+  "text": "Stage four. Over months, your body reshapes it until it’s smooth.",
+  "voice": "af_heart"
+ },
+ "whale-0": {
+  "seconds": 4.75,
+  "text": "This is a real blue whale skeleton, more than twenty-five meters long.",
+  "voice": "af_heart"
+ },
+ "whale-1": {
+  "seconds": 3.1,
+  "text": "Those giant bones at the front are its jaws.",
+  "voice": "af_heart"
+ },
+ "guess-giraffe-0": {
+  "seconds": 2.92,
+  "text": "So how many neck bones does a giraffe have?",
+  "voice": "af_heart"
+ },
+ "guess-giraffe-1": {
+  "seconds": 1.52,
+  "text": "Shout it out!",
+  "voice": "af_heart"
+ },
+ "guess-giraffe-2": {
+  "seconds": 5.22,
+  "text": "Seven! Exactly the same as you. Its neck bones are just much, much longer.",
+  "voice": "af_heart"
+ },
+ "guess-giraffe-3": {
+  "seconds": 2.42,
+  "text": "Different animal. Same plan.",
+  "voice": "af_heart"
+ },
+ "ch7-0": {
+  "seconds": 2.92,
+  "text": "Chapter seven. This part is about you.",
+  "voice": "af_heart"
+ },
+ "strong-0": {
+  "seconds": 5.1,
+  "text": "One. Jump, run and climb. Bones grow stronger when they carry your weight.",
+  "voice": "af_heart"
+ },
+ "strong-1": {
+  "seconds": 5.35,
+  "text": "Two. Eat foods with calcium, like milk, yogurt, beans and leafy greens.",
+  "voice": "af_heart"
+ },
+ "strong-2": {
+  "seconds": 5.78,
+  "text": "Three. Get vitamin D, from sunlight and food. It helps your body use that calcium.",
+  "voice": "af_heart"
+ },
+ "strong-3": {
+  "seconds": 5.58,
+  "text": "Most of the bone you will ever have gets built by about age twenty. So now is the time.",
+  "voice": "af_heart"
+ },
+ "try-0": {
+  "seconds": 6.8,
+  "text": "Want to see what calcium does? With an adult’s help, clean a cooked chicken bone and put it in a jar of vinegar.",
+  "voice": "af_heart"
+ },
+ "try-1": {
+  "seconds": 1.93,
+  "text": "Wait about five days.",
+  "voice": "af_heart"
+ },
+ "try-2": {
+  "seconds": 7.5,
+  "text": "Now rinse it and bend it. The vinegar dissolved the calcium, so what’s left is rubbery. Wash your hands when you’re done.",
+  "voice": "af_heart"
+ },
+ "recap-0": {
+  "seconds": 8.22,
+  "text": "Let’s lock it in. Two hundred and six bones. Five jobs. Joints let you move. Bones are alive. And breaks can heal.",
+  "voice": "af_heart"
+ },
+ "recap-1": {
+  "seconds": 2.4,
+  "text": "Think you’ve got it? Take the test.",
+  "voice": "af_heart"
+ },
+ "whale-2": {
+  "seconds": 5.55,
+  "text": "And that fan-shaped bone behind them is a shoulder blade. You have two of those yourself.",
+  "voice": "af_heart"
+ },
+ "whale-3": {
+  "seconds": 5.97,
+  "text": "Its flippers even hide arm bones and finger bones, the same basic plan as your hand.",
+  "voice": "af_heart"
+ },
+ "ch-heal-0": {
+  "seconds": 3.15,
+  "text": "Chapter six. What happens when a bone breaks?",
+  "voice": "af_heart"
+ },
+ "bonus-0": {
+  "seconds": 4.83,
+  "text": "Bonus chapter. Whales and giraffes are built on the same plan as you.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "mu-hook-0": {
+  "seconds": 1.8,
+  "text": "Quick. Name a muscle.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-hook-1": {
+  "seconds": 2.75,
+  "text": "Biceps? Lots of people say that.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-hook-2": {
+  "seconds": 5.55,
+  "text": "But right now, sitting perfectly still, you have muscles working that you have never flexed.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-hook-3": {
+  "seconds": 4.95,
+  "text": "One is squeezing blood around your body. Another is moving your food along.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-hook-4": {
+  "seconds": 2,
+  "text": "And you never told them to.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-title-0": {
+  "seconds": 3.52,
+  "text": "This is the story of your muscles. All three kinds.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch1-0": {
+  "seconds": 3.35,
+  "text": "Chapter one. What is a muscle actually made of?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-count-0": {
+  "seconds": 3.67,
+  "text": "You have more than six hundred muscles joined to your bones.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-count-1": {
+  "seconds": 3.35,
+  "text": "Together, they make up about a third of your body’s weight.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-zoom-0": {
+  "seconds": 4.83,
+  "text": "Let’s zoom in. From the outside, a muscle looks like one solid lump.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-zoom-1": {
+  "seconds": 4.58,
+  "text": "But it’s made of thousands of long, thin cells, packed side by side.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-zoom-2": {
+  "seconds": 5.05,
+  "text": "A muscle cell is a specialized cell. Its special job is to get shorter.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-zoom-3": {
+  "seconds": 6.33,
+  "text": "That takes energy, so it has many mitochondria, the tiny parts of a cell that release energy.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-micro-0": {
+  "seconds": 5.47,
+  "text": "Here’s the real thing, under a microscope. Each long band is one muscle cell.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-micro-1": {
+  "seconds": 3.42,
+  "text": "The pink is a dye, added so that we can see them.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-long-0": {
+  "seconds": 3.75,
+  "text": "Quick question. How long can a single muscle cell get?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-long-1": {
+  "seconds": 1.82,
+  "text": "Shout your answer now!",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-long-2": {
+  "seconds": 6.1,
+  "text": "Longer than your hand! The longest ones, in an adult’s thigh, can reach about thirty centimeters.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-long-3": {
+  "seconds": 6.88,
+  "text": "These are giants among cells. But they’re about as thin as a hair, so you need a microscope to see one clearly.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch2-0": {
+  "seconds": 3.35,
+  "text": "Chapter two. So how does a muscle actually move?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-contract-0": {
+  "seconds": 5.15,
+  "text": "A muscle cell does two things. First, it contracts. That means it gets shorter.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-contract-1": {
+  "seconds": 4.7,
+  "text": "Second, it relaxes. It stops working, and it can get longer again.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-contract-2": {
+  "seconds": 5.08,
+  "text": "When thousands of cells contract together, the whole muscle gets shorter and thicker.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-try-flex-0": {
+  "seconds": 4.65,
+  "text": "Try it. Put one hand on your upper arm, then bend that arm and squeeze.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-try-flex-1": {
+  "seconds": 4.3,
+  "text": "Feel it get hard and bulge? Those are muscle cells contracting.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-try-flex-2": {
+  "seconds": 4.13,
+  "text": "Now let your arm drop. Feel it go soft? That’s relaxing.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch3-0": {
+  "seconds": 4.55,
+  "text": "Chapter three. Getting shorter takes energy. So where does it come from?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fuel-0": {
+  "seconds": 4.88,
+  "text": "Your muscle cell mainly uses two things, and your blood delivers them both.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fuel-1": {
+  "seconds": 1.93,
+  "text": "Sugar, from your food.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fuel-2": {
+  "seconds": 2.77,
+  "text": "And oxygen, from the air you breathe.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fuel-3": {
+  "seconds": 6.95,
+  "text": "In the mitochondria, these two release energy. That’s called respiration. Now the cell can contract.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fist-0": {
+  "seconds": 5.65,
+  "text": "Hold one hand up in the air. Open and close your fist as fast as you can. Go!",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fist-1": {
+  "seconds": 2.85,
+  "text": "Stop! Does it ache? Did it slow down?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-fist-2": {
+  "seconds": 10.07,
+  "text": "Your muscle was using energy faster than it could release more. That’s one reason it got tired. It’s also why you breathe harder when you run, and your heart speeds up.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch4-0": {
+  "seconds": 4.83,
+  "text": "Chapter four. Three kinds of muscle. Here’s what lots of people get wrong.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-0": {
+  "seconds": 4.85,
+  "text": "Lots of people think muscles are only there to move your arms and legs.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-1": {
+  "seconds": 2.33,
+  "text": "But that’s just one of three kinds.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-video-1-0": {
+  "seconds": 6.5,
+  "text": "This video takes a tour of your muscles. Watch for one thing. Which ones work without you thinking about them?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-skeletal-0": {
+  "seconds": 5.78,
+  "text": "Kind one. Skeletal muscle. Most of it is joined to your bones, and it makes them move.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-skeletal-1": {
+  "seconds": 5.95,
+  "text": "You’re in charge of it. You can decide when to kick a ball or wave. We call that voluntary.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-smooth-0": {
+  "seconds": 5.95,
+  "text": "Kind two. Smooth muscle. It’s in the walls of your stomach, intestines and other organs.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-smooth-1": {
+  "seconds": 7.05,
+  "text": "It squeezes behind your food in a wave, like squeezing a tube of toothpaste. That’s how muscle moves your food.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-smooth-2": {
+  "seconds": 3.35,
+  "text": "You can’t control it. We call that involuntary.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-cardiac-0": {
+  "seconds": 4.28,
+  "text": "Kind three. Cardiac muscle. It’s found only in your heart.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-cardiac-1": {
+  "seconds": 6.65,
+  "text": "Every heartbeat is cardiac muscle contracting. It does this about one hundred thousand times a day.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kind-cardiac-2": {
+  "seconds": 6.28,
+  "text": "It’s involuntary too. You can’t stop your heart just by thinking about it, and that’s a very good thing.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-upside-0": {
+  "seconds": 5.92,
+  "text": "So here’s a puzzle about that muscle. If you swallowed food while upside down, where would it go?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-upside-1": {
+  "seconds": 1.52,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-upside-2": {
+  "seconds": 5.2,
+  "text": "On to your stomach! Muscle squeezes food along, with or without gravity’s help.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-guess-upside-3": {
+  "seconds": 2.92,
+  "text": "Please don’t test this one. You could choke.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-kinds-recap-0": {
+  "seconds": 4.78,
+  "text": "Skeletal, smooth and cardiac. Only one of them takes orders from you.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch5-0": {
+  "seconds": 3.63,
+  "text": "Chapter five. Let’s meet a few of your skeletal muscles.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-atlas-0": {
+  "seconds": 5.67,
+  "text": "Your face has dozens of muscles. That’s how you smile, frown and raise an eyebrow.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-atlas-1": {
+  "seconds": 4.67,
+  "text": "This cap on your shoulder is the deltoid. It lifts your arm out to the side.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-atlas-2": {
+  "seconds": 5,
+  "text": "Here’s your biceps again, on the front of your upper arm. It helps you bend your elbow.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-atlas-3": {
+  "seconds": 4.92,
+  "text": "Down the middle of your front is the rectus abdominis, the famous six pack.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-atlas-4": {
+  "seconds": 4.35,
+  "text": "And the front of your thigh is the quadriceps. It straightens your knee.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-records-0": {
+  "seconds": 6.5,
+  "text": "Now for the record holders. Your biggest muscle is in your bottom. It’s called the gluteus maximus.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-records-1": {
+  "seconds": 3.75,
+  "text": "Your smallest is the stapedius, deep inside your ear.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-records-2": {
+  "seconds": 3.15,
+  "text": "And the one that never takes a day off is your heart.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-records-3": {
+  "seconds": 5.72,
+  "text": "Remember the stapes, the tiniest bone from last lesson? The stapedius is joined to it.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-ch6-0": {
+  "seconds": 3.08,
+  "text": "Chapter six. How do muscles get stronger?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-video-2-0": {
+  "seconds": 7.08,
+  "text": "TED-Ed takes a look inside. Watch for one thing. What happens in a muscle after hard exercise?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-repair-0": {
+  "seconds": 4.15,
+  "text": "Let’s check. Hard exercise tells your muscle cells to build.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-repair-1": {
+  "seconds": 3.85,
+  "text": "Over the next days, your body can make them a little thicker.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-repair-2": {
+  "seconds": 6.38,
+  "text": "You may have heard about tiny tears in muscles. Scientists are still working out how much those matter.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-strong-0": {
+  "seconds": 3.27,
+  "text": "One. Move. Run, climb, swim and play.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-strong-1": {
+  "seconds": 4.28,
+  "text": "Two. Eat protein, like beans, eggs, fish, meat and nuts.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-strong-2": {
+  "seconds": 4.13,
+  "text": "Three. Rest and sleep, so your body has time to recover.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-strong-3": {
+  "seconds": 4.38,
+  "text": "And remember, your heart is a muscle too. Exercise trains it.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-bonus-0": {
+  "seconds": 4.55,
+  "text": "Bonus chapter. This won’t be in the test, but you may hear these myths.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-tongue-0": {
+  "seconds": 3.25,
+  "text": "Myth one. Your tongue is your strongest muscle.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-tongue-1": {
+  "seconds": 7,
+  "text": "Scientists don’t name it the strongest. And it isn’t even one muscle. It’s a group of muscles, working together.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-fat-0": {
+  "seconds": 4.38,
+  "text": "Myth two. If you stop exercising, muscle turns into fat.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-myth-fat-1": {
+  "seconds": 5.33,
+  "text": "It can’t. Muscle and fat are made of different cells. One can’t turn into the other.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-recap-0": {
+  "seconds": 9.45,
+  "text": "Let’s lock it in. Muscles are made of muscle cells. They contract and relax. They run mainly on sugar and oxygen. And there are three kinds.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "co-hook-0": {
+  "seconds": 2.63,
+  "text": "Picture Colombia. What do you see?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-hook-1": {
+  "seconds": 2.13,
+  "text": "Rainforest? You’re right.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-hook-2": {
+  "seconds": 2.7,
+  "text": "A desert by the sea? Also right.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-hook-3": {
+  "seconds": 3.8,
+  "text": "A busy modern city, high in the mountains? Right again.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-hook-4": {
+  "seconds": 2.95,
+  "text": "Beaches on two different coasts? Yes.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-hook-5": {
+  "seconds": 5.45,
+  "text": "Lots of people think a country is one kind of place. Colombia is all of these.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-title-0": {
+  "seconds": 3.63,
+  "text": "This is Colombia. One country, six regions.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-ch1-0": {
+  "seconds": 2.48,
+  "text": "Chapter one. Where is Colombia?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-map-0": {
+  "seconds": 3.83,
+  "text": "Colombia sits in the top left corner of South America.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-map-1": {
+  "seconds": 5.17,
+  "text": "It has five neighbors: Panama, Venezuela, Brazil, Peru and Ecuador.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-map-2": {
+  "seconds": 4.5,
+  "text": "The line around the middle of the Earth, the Equator, runs through its south.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-coast-0": {
+  "seconds": 4.42,
+  "text": "Quick question. Colombia has coasts on which sea and which ocean?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-coast-1": {
+  "seconds": 1.82,
+  "text": "Shout your answer now!",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-coast-2": {
+  "seconds": 6.8,
+  "text": "The Caribbean Sea and the Pacific Ocean! It’s the only country in South America with coasts on both.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-coast-3": {
+  "seconds": 3.23,
+  "text": "This is Cartagena, on the Caribbean side.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-count-0": {
+  "seconds": 5.5,
+  "text": "About fifty-three million people live in Colombia, and Spanish is the main language.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-count-1": {
+  "seconds": 6.5,
+  "text": "The capital is Bogota, a big modern city about two thousand six hundred meters up in the mountains.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-named-0": {
+  "seconds": 5.8,
+  "text": "Where does the name come from? Colombia is named after Christopher Columbus, the explorer.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-named-1": {
+  "seconds": 8.07,
+  "text": "In Italian, his name was Colombo. So Colombia has two Os and no U: C, O, L, O, M, B, I, A.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-ch2-0": {
+  "seconds": 6.53,
+  "text": "Chapter two. Colombians often divide their country into six regions. Let’s visit each one.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-0": {
+  "seconds": 10.2,
+  "text": "In the north is the Caribbean region: hot beaches, an old walled city called Cartagena, and even a desert, in La Guajira, home of the Wayuu people.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-1": {
+  "seconds": 13.68,
+  "text": "In the west is the Pacific region: thick rainforest and one of the rainiest places on Earth. Many Afro-Colombians live here, whose ancestors were brought from Africa by force. Humpback whales visit too.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-2": {
+  "seconds": 10.55,
+  "text": "Through the middle, the Andes mountains split into three ranges. This is the Andean region, with coffee farms and big cities like Bogota, Medellin and Cali.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-3": {
+  "seconds": 6.7,
+  "text": "In the east is the Orinoquia: huge grassy plains called the Yah-nos, with many cattle ranches.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-4": {
+  "seconds": 7.1,
+  "text": "In the south is the Amazon: rainforest and great rivers, and home to many Indigenous peoples today.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-5": {
+  "seconds": 8.35,
+  "text": "And out at sea are the islands of the Insular region, like San Andres, far out in the Caribbean, with coral reefs nearby.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-where-0": {
+  "seconds": 6.15,
+  "text": "The Orinoquia and the Amazon cover nearly two thirds of the land, but few people live there.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-where-1": {
+  "seconds": 4.42,
+  "text": "Far more Colombians live in the Andes and on the Caribbean coast.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-regions-recap-0": {
+  "seconds": 5.95,
+  "text": "Caribbean. Pacific. Andean. Orinoquia. Amazon. Insular. Say them with me.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-ch3-0": {
+  "seconds": 5.3,
+  "text": "Chapter three. The Equator runs through Colombia, so shouldn’t it be hot everywhere?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-0": {
+  "seconds": 7.88,
+  "text": "No. The higher you climb, the colder it gets. Colombians call these layers peesos tehrmeecos, or thermal floors.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-1": {
+  "seconds": 4.2,
+  "text": "Below about one thousand meters it’s hot, good for bananas.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-2": {
+  "seconds": 5.03,
+  "text": "Climb to about two thousand meters and it’s mild. Coffee grows well here.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-3": {
+  "seconds": 6.6,
+  "text": "Up to about three thousand meters it’s cold. Bogota is here, and farmers grow potatoes.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-4": {
+  "seconds": 7.47,
+  "text": "Higher still is the pahramo: misty, chilly grassland, with strange furry plants called fry-lay-HOH-ness.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-floors-5": {
+  "seconds": 3.58,
+  "text": "And on a few of the highest peaks, there’s snow all year.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-floor-0": {
+  "seconds": 3.17,
+  "text": "So where would you most likely find coffee farms?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-floor-1": {
+  "seconds": 1.52,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-floor-2": {
+  "seconds": 4.35,
+  "text": "On the mild mountain slopes, about one to two thousand meters up.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-guess-floor-3": {
+  "seconds": 4.67,
+  "text": "One mountain can give you bananas at the bottom, and potatoes further up.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-ch4-0": {
+  "seconds": 4.55,
+  "text": "Chapter four. All these different places create some amazing things.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-birds-0": {
+  "seconds": 9.2,
+  "text": "So many kinds of home mean so many kinds of life. Colombia has more than eighteen hundred kinds of bird, the most of any country in recent counts.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-palm-0": {
+  "seconds": 3.5,
+  "text": "This is the wax palm, Colombia’s national tree.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-palm-1": {
+  "seconds": 6.78,
+  "text": "It’s one of the tallest palms in the world, and can reach about sixty meters. It grows high in the Andes.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-river-0": {
+  "seconds": 4.22,
+  "text": "And this river is Cahnyo Cristahles. Those colors are real.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-river-1": {
+  "seconds": 5.95,
+  "text": "A water plant turns it green, yellow and shades of red, and the colors change with the rains.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-recap-0": {
+  "seconds": 12.05,
+  "text": "Let’s lock it in. Colombia is in the top left of South America. It has Caribbean and Pacific coasts. People often describe six regions. And the higher you climb, the colder it gets.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "cc-hook-0": {
+  "seconds": 5.25,
+  "text": "A normal day in Colombia. On this beach, people are swimming in the warm sea.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hook-1": {
+  "seconds": 3.3,
+  "text": "On this mountain, on the same day, there’s deep snow.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hook-2": {
+  "seconds": 4.65,
+  "text": "Both places are close to the Equator, where lots of people expect heat.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hook-3": {
+  "seconds": 4.63,
+  "text": "And a mountain top is closer to the Sun. So shouldn’t it be hotter up there?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-title-0": {
+  "seconds": 5.35,
+  "text": "Today, we climb from the sea to the snow, and find out why it’s cold near the Equator.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch1-0": {
+  "seconds": 3.67,
+  "text": "Chapter one. Why does the air get colder as you climb?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-sun-0": {
+  "seconds": 5.2,
+  "text": "Climb a mountain and you get a little closer to the Sun. So what happens to the air?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-sun-1": {
+  "seconds": 1.82,
+  "text": "Shout your answer now!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-sun-2": {
+  "seconds": 4.38,
+  "text": "It gets colder! Being closer to the Sun makes almost no difference.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-sun-3": {
+  "seconds": 4.03,
+  "text": "Here’s the snow to prove it, on a mountain called El Coh-cooy.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sun-0": {
+  "seconds": 5.05,
+  "text": "Here’s why. The Sun is about a hundred and fifty million kilometers away.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sun-1": {
+  "seconds": 4.58,
+  "text": "Colombia’s highest mountains are less than six kilometers high.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sun-2": {
+  "seconds": 6.92,
+  "text": "So climbing one is like taking one step toward a campfire on the other side of the world. You wouldn’t feel any warmer.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-0": {
+  "seconds": 5.47,
+  "text": "So where does the warmth come from? Sunlight shines through the air, without warming it much.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-1": {
+  "seconds": 2.17,
+  "text": "It warms the ground instead.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-2": {
+  "seconds": 4.53,
+  "text": "Then the warm ground warms the air touching it, like a pan on a stove.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-3": {
+  "seconds": 4.42,
+  "text": "Higher up, there’s less air above, pressing down. So the air is thinner.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-4": {
+  "seconds": 5.35,
+  "text": "When air rises, it has room to spread out. And air that spreads out gets colder.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-5": {
+  "seconds": 6.33,
+  "text": "It works the other way too. Pump up a bike tire and the pump gets warm, because you’re squeezing air.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-air-6": {
+  "seconds": 5.5,
+  "text": "So high up, the air is thin, and far from the warm ground. That’s why it’s colder.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-rule-0": {
+  "seconds": 8.72,
+  "text": "Here’s a handy rule. You lose about six degrees Celsius for every thousand meters you climb. Start by the sea, at about twenty-eight.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-rule-1": {
+  "seconds": 3.17,
+  "text": "Climb a thousand meters. About twenty-two.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-rule-2": {
+  "seconds": 2.9,
+  "text": "Two thousand meters. About sixteen.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-rule-3": {
+  "seconds": 4.2,
+  "text": "Three thousand meters. About ten. Time for a warm coat.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-rule-4": {
+  "seconds": 7,
+  "text": "By about four thousand seven hundred meters, it’s around freezing. So only the highest peaks keep their snow.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-predict-0": {
+  "seconds": 6.7,
+  "text": "Your turn. It’s thirty degrees at the bottom of a hill. You climb a thousand meters. How warm is it now?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-predict-1": {
+  "seconds": 1.52,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-predict-2": {
+  "seconds": 4.05,
+  "text": "About twenty-four degrees. You lost about six on the way up.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-predict-3": {
+  "seconds": 3.38,
+  "text": "Warm, but not too hot, for farms like these.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-year-0": {
+  "seconds": 8.63,
+  "text": "In many places, the month decides how warm it is. In London, January is about six degrees, and July about nineteen.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-year-1": {
+  "seconds": 3.7,
+  "text": "In Bogota, every month is about fourteen degrees.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-year-2": {
+  "seconds": 5.83,
+  "text": "Hee-rar-dot is a town much lower down. It stays around twenty-eight degrees, all year.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-year-3": {
+  "seconds": 6.25,
+  "text": "Months can bring rain. But near the Equator, it’s how high you are that decides how warm you are.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch2-0": {
+  "seconds": 9.43,
+  "text": "Chapter two. Colombians call these layers peesos tehrmeecos, or thermal floors. Each floor has its own food. Let’s ride the elevator.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hot-0": {
+  "seconds": 9.72,
+  "text": "First stop: tee-air-ah cah-lee-en-tay, the hot land. It runs from the sea up to about one thousand meters, and it’s usually over twenty-four degrees.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hot-1": {
+  "seconds": 4,
+  "text": "Cartagena is on this floor, right by the Caribbean Sea.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hot-2": {
+  "seconds": 1.93,
+  "text": "Bananas love it here.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hot-3": {
+  "seconds": 3.77,
+  "text": "So does sugar cane. This worker is cutting it by hand.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-hot-4": {
+  "seconds": 4.58,
+  "text": "And these red pods are cacao. The beans inside give us chocolate.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-mild-0": {
+  "seconds": 8.57,
+  "text": "Up to the second floor: tee-air-ah tem-plah-dah, the mild land. About one to two thousand meters, and often around twenty degrees.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-mild-1": {
+  "seconds": 5.15,
+  "text": "This is Meh-deh-yeen, the City of Eternal Spring, because it’s mild all year.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-mild-2": {
+  "seconds": 7.15,
+  "text": "And this is coffee’s favorite floor: neither too hot nor too cold. We’ll visit a coffee farm in a later lesson.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-crop-0": {
+  "seconds": 4.85,
+  "text": "Imagine your farm is two thousand eight hundred meters up. What should you plant?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-crop-1": {
+  "seconds": 1.52,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-crop-2": {
+  "seconds": 4.28,
+  "text": "Potatoes! Bananas and cacao would be far too cold up here.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-guess-crop-3": {
+  "seconds": 4.1,
+  "text": "This is a real potato harvest, high up in Boh-yah-kah.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-cold-0": {
+  "seconds": 8.85,
+  "text": "Welcome to the third floor: tee-air-ah free-ah, the cold land. About two to three thousand meters, and around twelve to eighteen degrees.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-cold-1": {
+  "seconds": 3.35,
+  "text": "Bogota, Colombia’s capital, is on this floor.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-cold-2": {
+  "seconds": 6.92,
+  "text": "Farmers grow potatoes, barley and oats. Potatoes first came from the Andes, so they’re right at home.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-roses-0": {
+  "seconds": 7.45,
+  "text": "And a surprise: roses. Around Bogota, growers raise them in greenhouses, and send them around the world.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-market-0": {
+  "seconds": 10.28,
+  "text": "Trucks carry food up and down the mountains. So in this market in Bogota, green bananas from the hot land can sit beside vegetables from the cold land.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-floors-page-0": {
+  "seconds": 6.35,
+  "text": "Five floors, on one mountain. Hot. Mild. Cold. Pahramo. And snow. Say them with me.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch3-0": {
+  "seconds": 5.03,
+  "text": "Chapter three. How does all this change the way people live? Let’s take a road trip.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-0": {
+  "seconds": 8.25,
+  "text": "Imagine a family from Bogota, on a holiday weekend in Hee-rar-dot, where lots of Bogota families go to swim.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-1": {
+  "seconds": 6.1,
+  "text": "It’s about two hundred and ninety meters up, and about twenty-eight degrees. T-shirts and sandals.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-2": {
+  "seconds": 4.1,
+  "text": "Now it’s time to drive home. The road climbs and climbs.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-3": {
+  "seconds": 7.1,
+  "text": "Here’s Foo-sah-gah-soo-gah, about one thousand seven hundred meters up, and about twenty degrees. Long sleeves.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-4": {
+  "seconds": 4.38,
+  "text": "On a clear day, you can even see a snowy peak from here, far away.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-5": {
+  "seconds": 6.95,
+  "text": "Then on to Bogota: about two thousand six hundred meters up, and about fourteen degrees. Jackets on!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-6": {
+  "seconds": 7.92,
+  "text": "One road, about a hundred and thirty-four kilometers, about three hours in good traffic. And about fourteen degrees colder.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-road-7": {
+  "seconds": 3.77,
+  "text": "Like going from summer to autumn, just by driving home.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-try-0": {
+  "seconds": 4.92,
+  "text": "Try it now! Stand up. You’re on the hot coast, and it’s roasting. Fan yourself!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-try-1": {
+  "seconds": 4.35,
+  "text": "Climb to the mild land. Ahh. Stop fanning. It’s just right.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-try-2": {
+  "seconds": 3.98,
+  "text": "Up to Bogota. It’s getting cold! Zip up your jacket.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-try-3": {
+  "seconds": 4.17,
+  "text": "Up to the pahramo. Wrap your arms around yourself, and shiver!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-try-4": {
+  "seconds": 2.7,
+  "text": "Nice work. Sit down, and warm up.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-living-0": {
+  "seconds": 7.75,
+  "text": "People dress for their floor. This is a roo-ah-nah: a thick square of sheep’s wool, worn by farmers in cold Boh-yah-kah.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-living-1": {
+  "seconds": 7.78,
+  "text": "In the hot lowlands near the Caribbean, Zeh-noo people weave this hat, the sombrero vwel-tee-ow, a national symbol.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-living-2": {
+  "seconds": 7.28,
+  "text": "And in chilly Bogota, a favorite food is ah-hee-ah-ko, a warming chicken soup with three kinds of potato.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch4-0": {
+  "seconds": 5.5,
+  "text": "Chapter four. Now for some special mountains, with every floor, all close together.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-map-0": {
+  "seconds": 5.65,
+  "text": "This is the See-air-ah Neh-vah-dah deh Santa Marta, in Colombia’s Caribbean region.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-map-1": {
+  "seconds": 4.47,
+  "text": "It stands on its own, apart from the Andes, right beside the sea.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-0": {
+  "seconds": 7.92,
+  "text": "Its twin peaks rise to over five thousand seven hundred meters. It’s the highest coastal mountain range in the tropics.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-1": {
+  "seconds": 7.67,
+  "text": "And those peaks are only about forty-two kilometers from the coast, in a straight line. That’s about the length of a marathon.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-2": {
+  "seconds": 5.17,
+  "text": "Imagine walking up from the sea. First, hot beaches and palm trees.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-3": {
+  "seconds": 4.1,
+  "text": "Above about one thousand meters, you’re in misty cloud forest.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-4": {
+  "seconds": 4.17,
+  "text": "Higher still, it turns cold, and then you reach the pahramo.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-5": {
+  "seconds": 4.85,
+  "text": "And at the top, snow and ice. Every floor, in about one marathon.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-people-0": {
+  "seconds": 7.15,
+  "text": "Four Indigenous peoples call the Sierra home today: the Koh-ghee, Ar-wah-ko, Kan-kwah-mo and Wee-wah.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-sierra-people-1": {
+  "seconds": 7.05,
+  "text": "They’re about seventy thousand people. Yoo-ness-ko lists their knowledge of these mountains as cultural heritage.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch5-0": {
+  "seconds": 5.42,
+  "text": "Chapter five. Back up to the pahramo, because a lot of Colombia’s water starts here.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-paramo-0": {
+  "seconds": 5.7,
+  "text": "Above about three thousand meters, forest gives way to this: cold, misty grassland.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-half-0": {
+  "seconds": 3.6,
+  "text": "About half of all the world’s pahramos are in Colombia.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-monks-0": {
+  "seconds": 7.15,
+  "text": "These strange plants are fry-lay-hoh-ness. The name means big monks. Can you see them, in a line in the mist?",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-plant-0": {
+  "seconds": 5.45,
+  "text": "How do they survive the cold? First, a woolly coat. Soft hairs cover the leaves.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-plant-1": {
+  "seconds": 4.2,
+  "text": "Second, their dead leaves stay on the stem, like a thick jacket.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-growth-0": {
+  "seconds": 4.5,
+  "text": "They grow very slowly: often just one or two centimeters a year.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-growth-1": {
+  "seconds": 4.58,
+  "text": "You grew to about one point four meters tall in about eleven years.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-growth-2": {
+  "seconds": 6.8,
+  "text": "But a fry-lay-hohn just one meter tall can be up to a hundred years old. Maybe older than your grandparents!",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-water-0": {
+  "seconds": 5.05,
+  "text": "Now for the pahramo’s big job. Cold, wet clouds drift across it.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-water-1": {
+  "seconds": 4.25,
+  "text": "Woolly leaves catch the moisture, and drops run into the ground.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-water-2": {
+  "seconds": 3.83,
+  "text": "The deep, soft soil soaks it up, like a giant sponge.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-water-3": {
+  "seconds": 5.63,
+  "text": "Then it lets the water out slowly, so streams keep flowing, even when it hasn’t rained.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-water-4": {
+  "seconds": 3.23,
+  "text": "Those streams feed the rivers that cities drink from.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-drink-0": {
+  "seconds": 6.85,
+  "text": "About seventeen million Colombians drink water that starts in a pahramo. That’s about one in every three.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-drink-1": {
+  "seconds": 5.45,
+  "text": "Most of Bogota’s water comes through one pahramo, Cheen-gah-sah. That’s its lake.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-drink-2": {
+  "seconds": 3.42,
+  "text": "So Colombia has a law to protect its pahramos.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ch6-0": {
+  "seconds": 5.2,
+  "text": "Chapter six. On the highest mountains, there’s ice. But less of it every year.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-map-0": {
+  "seconds": 6.78,
+  "text": "This map shows one mountain, the Neh-vah-doh del Roo-eess. All the purple was ice in about eighteen fifty.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-map-1": {
+  "seconds": 3.1,
+  "text": "The white shows what was left by twenty sixteen.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-0": {
+  "seconds": 7.97,
+  "text": "Across Colombia, there were about three hundred and fifty square kilometers of ice in the eighteen hundreds. Each square here is one.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-1": {
+  "seconds": 6.5,
+  "text": "By twenty twenty-four, only about thirty-one were left. That’s about nine out of every ten gone.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-2": {
+  "seconds": 6.92,
+  "text": "All of it would fit in a square about five and a half kilometers wide. You could walk across in a little over an hour.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-3": {
+  "seconds": 6.95,
+  "text": "In twenty twenty-six, scientists confirmed that one glacier on El Coh-cooy had melted away completely.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-ice-4": {
+  "seconds": 7.75,
+  "text": "Scientists link this to Earth’s warming climate. They keep measuring the ice, and Colombians work to protect their mountains.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-bonus-0": {
+  "seconds": 4.08,
+  "text": "Bonus! This isn’t in the test. Thin air does strange things.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-boil-0": {
+  "seconds": 7.85,
+  "text": "By the sea, water boils at a hundred degrees. In Bogota, at about ninety-one. So food can take longer to cook.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-bernal-0": {
+  "seconds": 10.1,
+  "text": "And Egan Ber-nal grew up about two thousand six hundred meters up. In twenty nineteen, aged twenty-two, he became the first Colombian to win the Tour de France.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-bernal-1": {
+  "seconds": 3.77,
+  "text": "Thin air may have helped. Years of hard training did too.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-recap-0": {
+  "seconds": 12.38,
+  "text": "Let’s lock it in. Thin air high up is colder. Each floor grows its own food. The See-air-ah Neh-vah-dah goes from sea to snow. Pahramos store water. And Colombia’s ice is shrinking.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "co-video-regions-0": {
+  "seconds": 4.4,
+  "text": "Now let’s see these regions on film. Look for the ones you just met.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-video-wild-0": {
+  "seconds": 6.2,
+  "text": "Let’s see some of Colombia’s wild places on film. Look for an animal you’ve never seen before.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "cc-video-air-0": {
+  "seconds": 5.65,
+  "text": "Here’s a short film that explains it another way. Listen for why high air is colder.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-video-coffee-0": {
+  "seconds": 4.3,
+  "text": "Coffee likes those mild slopes. Watch how it’s picked and washed.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-video-paramo-0": {
+  "seconds": 5.35,
+  "text": "Let’s go up there on film. Watch how this high land gives water to a huge city.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "sp-hook-0": {
+  "seconds": 1.96,
+  "text": "Here’s one English letter: ay.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-hook-1": {
+  "seconds": 4.51,
+  "text": "In English, it makes lots of different sounds. Cat. Cake. Car. About.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-hook-2": {
+  "seconds": 7.6,
+  "text": "Lots of people expect Spanish letters to change like that too. But listen. {cb:dora s3 0.9 es-419: casa} [0.35s] {cb:dora s3 0.9 es-419: cama} [0.35s] {cb:dora s3 0.9 es-419: nada} [0.35s] {cb:dora s3 0.9 es-419: mapa}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hook-3": {
+  "seconds": 3.25,
+  "text": "In Spanish, this letter makes one sound, every time.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-title-0": {
+  "seconds": 5.5,
+  "text": "{cb:dora s3 0.9 es-419: ¡Hola!} [0.3s] Today, you’ll say your first words in Spanish: hello, goodbye, and where you are.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-how-0": {
+  "seconds": 12.63,
+  "text": "You’ll hear two voices today. I explain in English, and a Spanish voice says the Spanish. This lesson only works if you speak. When you see Your turn, say it out loud. Nobody’s marking you, and louder is better.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-ch1-0": {
+  "seconds": 6.43,
+  "text": "Chapter one. The Spanish a. It’s a good first sound to learn, because it never changes. Let’s learn to make it.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-a-0": {
+  "seconds": 4.3,
+  "text": "Open your mouth wide, and say: {cb:dora s3 0.9 es-419: a} [0.6s] {cb:dora s3 0.9 es-419: a} [0.6s] {cb:dora s3 0.9 es-419: a}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-a-1": {
+  "seconds": 7.07,
+  "text": "It’s close to the a in father, but shorter and cleaner. Think of a doctor asking you to say ah, and then cut it short.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-a-2": {
+  "seconds": 9.03,
+  "text": "Your mouth stays still, from start to finish. It doesn’t slide into another sound, the way the a in cake does. The Spanish a just stays where it is.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-words-0": {
+  "seconds": 5.11,
+  "text": "Here’s a word with that sound. It means high, or tall. {cb:dora s3 0.75 es-419: alto} [0.5s] {cb:dora s3 0.9 es-419: alto}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-words-1": {
+  "seconds": 5.76,
+  "text": "A house. This word has two a’s, and they sound exactly the same. {cb:dora s3 0.75 es-419: casa} [0.5s] {cb:dora s3 0.9 es-419: casa}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-words-2": {
+  "seconds": 6.43,
+  "text": "A bed. Only one letter is different from the last word, and the a’s don’t change at all. {cb:dora s3 0.75 es-419: cama} [0.5s] {cb:dora s3 0.9 es-419: cama}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-words-3": {
+  "seconds": 6.25,
+  "text": "A map. It looks almost like the English word, so listen closely to the a’s. {cb:dora s3 0.75 es-419: mapa} [0.5s] {cb:dora s3 0.9 es-419: mapa}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-clap-0": {
+  "seconds": 4.12,
+  "text": "A listening game. Clap if you hear the Spanish a. If you don’t, stay still.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-clap-1": {
+  "seconds": 0.61,
+  "text": "{cb:dora s3 0.9 es-419: cama}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-clap-2": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: dos}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-clap-3": {
+  "seconds": 0.81,
+  "text": "{cb:dora s3 0.9 es-419: planta}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-compare-0": {
+  "seconds": 5.02,
+  "text": "Some words look nearly the same in both languages. English: animal, plant, May.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-compare-1": {
+  "seconds": 3.75,
+  "text": "Spanish: {cb:dora s3 0.9 es-419: animal} [0.4s] {cb:dora s3 0.9 es-419: planta} [0.4s] {cb:dora s3 0.9 es-419: mayo}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-compare-2": {
+  "seconds": 8.49,
+  "text": "That was the wrong idea we started with. English has lots of a sounds, and Spanish has only one. Use that one, and say all three.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-spot-0": {
+  "seconds": 3.31,
+  "text": "Which English word has the closest sound to the Spanish a?",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-spot-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-spot-2": {
+  "seconds": 3.76,
+  "text": "Father! And here’s a word to try it on. A plant: {cb:dora s3 0.9 es-419: planta}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-read-0": {
+  "seconds": 3.99,
+  "text": "Now you go first. Read this country’s name out loud, before I do.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-read-1": {
+  "seconds": 2.22,
+  "text": "{cb:dora s3 0.9 es-419: Panamá} [0.5s] {cb:dora s3 0.9 es-419: Panamá}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-read-2": {
+  "seconds": 5.44,
+  "text": "That little line on the last a doesn’t change the sound. It tells you to say that part loudest.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-read-3": {
+  "seconds": 2.64,
+  "text": "Now this city in Venezuela. You first.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-read-4": {
+  "seconds": 2.06,
+  "text": "{cb:dora s3 0.9 es-419: Caracas} [0.5s] {cb:dora s3 0.9 es-419: Caracas}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-video-a-0": {
+  "seconds": 3.99,
+  "text": "Here’s a short film about it. Listen for what stays the same each time.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-ch2-0": {
+  "seconds": 4.52,
+  "text": "Chapter two. Where do people speak Spanish? And how do you say where something is?",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-world-0": {
+  "seconds": 11.55,
+  "text": "More than six hundred million people around the world can speak Spanish. That’s about one in every thirteen people on Earth, from Mexico in the north, down to Chile and Argentina in the south.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-map-0": {
+  "seconds": 8.8,
+  "text": "It’s an official language in about twenty countries. They’re dark blue here. Most are in the Americas, and one, Equatorial Guinea, is in Africa.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-map-1": {
+  "seconds": 5.91,
+  "text": "Here’s {cb:dora s3 0.9 es-419: Colombia.} Its capital is {cb:dora s3 0.9 es-419: Bogotá.} Listen for the a at the end. {cb:dora s3 0.9 es-419: Bogotá.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-map-2": {
+  "seconds": 5.7,
+  "text": "Here’s Mexico. In Spanish, the x in this name sounds like a breathy h. {cb:dora s3 0.9 es-419: México.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-map-3": {
+  "seconds": 3.73,
+  "text": "And across the sea, Spain, where the language began: {cb:dora s3 0.9 es-419: España.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-nye-0": {
+  "seconds": 9.69,
+  "text": "Did you spot the new letter? It’s an n with a wave on top, and it sounds like the middle of the word canyon. You’ll also hear it in {cb:dora s3 0.9 es-419: mañana,} which means tomorrow.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-nye-1": {
+  "seconds": 2.2,
+  "text": "{cb:dora s3 0.75 es-419: España} [0.5s] {cb:dora s3 0.9 es-419: España}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estar-0": {
+  "seconds": 4.84,
+  "text": "Now your first verb. It means to be, or being. {cb:dora s3 0.9 es-419: estar} [0.5s] {cb:dora s3 0.9 es-419: estar}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estar-1": {
+  "seconds": 4.96,
+  "text": "We use {cb:dora s3 0.9 es-419: estar} for where someone or something is. That’s called location.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estar-2": {
+  "seconds": 9.73,
+  "text": "English has one verb for to be. Spanish has two. This one isn’t for the time, or for someone’s job. The other verb does that, and you’ll meet it later in this unit.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-madrid-0": {
+  "seconds": 7.2,
+  "text": "This is Madrid, the capital of Spain. Listen. {ef_dora s3 0.75 es-419: Madrid está en España.} [0.5s] {ef_dora s3 0.9 es-419: Madrid está en España.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-madrid-1": {
+  "seconds": 6.58,
+  "text": "{cb:dora s3 0.9 es-419: Está} means is. {cb:dora s3 0.9 es-419: En} means in, or sometimes on. So: Madrid is in Spain. Your turn.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-bogota-0": {
+  "seconds": 7.31,
+  "text": "Now Colombia’s capital, high in the mountains. {ef_dora s3 0.75 es-419: Bogotá está en Colombia.} [0.5s] {ef_dora s3 0.9 es-419: Bogotá está en Colombia.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-london-0": {
+  "seconds": 9.48,
+  "text": "In Spanish, London is {cb:dora s3 0.9 es-419: Londres,} and England is {cb:dora s3 0.9 es-419: Inglaterra.} [0.4s] {ef_dora s3 0.75 es-419: Londres está en Inglaterra.} [0.5s] {ef_dora s3 0.9 es-419: Londres está en Inglaterra.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-donde-0": {
+  "seconds": 7.73,
+  "text": "To ask where, use {cb:dora s3 0.9 es-419: dónde.} The line tells you to say the first part loudest. [0.3s] {cb:dora s3 0.75 es-419: ¿Dónde está?} [0.4s] {cb:dora s3 0.9 es-419: ¿Dónde está?} Where is it?",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-donde-1": {
+  "seconds": 4.99,
+  "text": "Spanish puts an upside-down question mark at the start, so you know a question is coming.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-donde-2": {
+  "seconds": 0.89,
+  "text": "{cb:dora s3 0.9 es-419: ¿Dónde está?}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-q1-0": {
+  "seconds": 3.8,
+  "text": "{ef_dora s3 0.9 es-419: ¿Dónde está Machu Picchu?} Read the answers, and choose one.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-q1-1": {
+  "seconds": 1.3,
+  "text": "Shout it in Spanish!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-q1-2": {
+  "seconds": 5,
+  "text": "{cb:dora s3 0.9 es-419: Está en Perú.} It’s in Peru. See that? On its own, the word can also mean it is.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-sofia-0": {
+  "seconds": 2.26,
+  "text": "{cb:dora s3 0.9 es-419: ¿Dónde está Sofía?} Where’s Sofia?",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-sofia-1": {
+  "seconds": 2.57,
+  "text": "{cb:dora s3 0.9 es-419: Está en Cartagena.} She’s in Cartagena.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-sofia-2": {
+  "seconds": 10.27,
+  "text": "One word does all of that: is, it is, she is and he is. Spanish doesn’t need a separate word for she or he, because you already know who we’re talking about. Now you.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-video-world-0": {
+  "seconds": 4.52,
+  "text": "Let’s see more of South America on film. Spot the countries that speak Spanish.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-ch3-0": {
+  "seconds": 4.91,
+  "text": "Chapter three. You can say where other people and places are. Now, say where you are.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-estoy-0": {
+  "seconds": 4.25,
+  "text": "Here’s how to say I am: {cb:dora s3 0.75 es-419: estoy} [0.5s] {cb:dora s3 0.9 es-419: estoy}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estoy-1": {
+  "seconds": 7.26,
+  "text": "The end rhymes with boy, and that’s the loud part. There’s no separate word for I. The end of the word already tells us.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-where-0": {
+  "seconds": 5.91,
+  "text": "You’re standing in Mexico City, under that huge flag. {cb:dora s3 0.75 es-419: Estoy en México.} [0.5s] {cb:dora s3 0.9 es-419: Estoy en México.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-where-1": {
+  "seconds": 5.8,
+  "text": "Now you’re in Colombia, looking at the city of Bogota. {cb:dora s3 0.75 es-419: Estoy en Colombia.} [0.5s] {cb:dora s3 0.9 es-419: Estoy en Colombia.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-try-0": {
+  "seconds": 6.88,
+  "text": "Try it now! Stand up. When you hear {cb:dora s3 0.9 es-419: estoy,} point at yourself. When you hear {cb:dora s3 0.9 es-419: está,} point away.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-try-1": {
+  "seconds": 1.15,
+  "text": "{cb:dora s3 0.9 es-419: Estoy.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-try-2": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: Está.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-try-3": {
+  "seconds": 1.27,
+  "text": "{cb:dora s3 0.9 es-419: Está en Bogotá.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-try-4": {
+  "seconds": 4.31,
+  "text": "{cb:dora s3 0.9 es-419: Estoy en Bogotá.} [1.6s] Nice work. Sit down.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-pick-0": {
+  "seconds": 8.53,
+  "text": "Now just listen. Is it about me, or about someone else? Point left for I am, and right for she or he is. [0.4s] {ef_dora s3 0.9 es-419: Estoy en Chichén Itzá.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-pick-1": {
+  "seconds": 3.79,
+  "text": "{cb:dora s3 0.9 es-419: Estoy.} I’m in this ancient Maya city, in Mexico.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-pick-2": {
+  "seconds": 1.13,
+  "text": "{cb:dora s3 0.9 es-419: Está en Madrid.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-pick-3": {
+  "seconds": 2.38,
+  "text": "{cb:dora s3 0.9 es-419: Está.} She or he is in Madrid.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-first-0": {
+  "seconds": 2.52,
+  "text": "Say it before I do. I am in Mexico.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-first-1": {
+  "seconds": 2.63,
+  "text": "{cb:dora s3 0.75 es-419: Estoy en México.} [0.5s] {cb:dora s3 0.9 es-419: Estoy en México.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-first-2": {
+  "seconds": 1.46,
+  "text": "Madrid is in Spain.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-first-3": {
+  "seconds": 4.34,
+  "text": "{ef_dora s3 0.75 es-419: Madrid está en España.} [0.5s] {ef_dora s3 0.9 es-419: Madrid está en España.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-page-0": {
+  "seconds": 9.29,
+  "text": "Here’s your verb so far. {cb:dora s3 0.9 es-419: Estar:} to be. {cb:dora s3 0.9 es-419: Estoy:} I am. {cb:dora s3 0.9 es-419: Estoy en Colombia.} {cb:dora s3 0.9 es-419: Está:} she, he or it is. {cb:dora s3 0.9 es-419: Está en México.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-ch4-0": {
+  "seconds": 4.59,
+  "text": "Chapter four. Time to say hello, and goodbye. You’ll use these two every day.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-hola-0": {
+  "seconds": 5.14,
+  "text": "Hello: {cb:dora s3 0.75 es-419: hola} It works with anyone, at any time of day. {cb:dora s3 0.9 es-419: hola}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hola-1": {
+  "seconds": 6.36,
+  "text": "Look at the first letter. In Spanish, the letter h is silent. It’s written down, but you don’t say it at all.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-0": {
+  "seconds": 3.9,
+  "text": "Now goodbye: {cb:dora s3 0.75 es-419: hasta luego.} It means bye, or see you later.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-1": {
+  "seconds": 3.36,
+  "text": "Another silent h, and two of your a sounds. {cb:dora s3 0.75 es-419: hasta}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-2": {
+  "seconds": 2.16,
+  "text": "Now the second word. {cb:dora s3 0.75 es-419: luego}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-3": {
+  "seconds": 1.89,
+  "text": "All together. {cb:dora s3 0.9 es-419: hasta luego}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-4": {
+  "seconds": 4.31,
+  "text": "In many Latin American countries, you’ll hear this for bye too: {cb:dora s3 0.9 es-419: chao}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-bang-0": {
+  "seconds": 5.02,
+  "text": "When you write it, you’ll see that trick again. An upside-down exclamation mark goes first.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-call-0": {
+  "seconds": 5.69,
+  "text": "Ana is in {cb:dora s3 0.9 es-419: Bogotá.} Mateo is in Mexico. They’re on a video call. Just listen.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-1": {
+  "seconds": 4.34,
+  "text": "{ef_dora s3 0.9 es-419: ¡Hola, Mateo! Estoy en Bogotá.} [0.3s] Hello, Mateo. I’m in Bogota.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-2": {
+  "seconds": 4.11,
+  "text": "{em_alex s3 0.9 es-419: ¡Hola, Ana! Estoy en México.} [0.3s] Hello, Ana. I’m in Mexico.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-3": {
+  "seconds": 2.42,
+  "text": "{cb:dora s3 0.9 es-419: ¿Dónde está Sofía?} [0.3s] Where’s Sofia?",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-4": {
+  "seconds": 2.99,
+  "text": "{cb:alex s3 0.9 es-419: Está en Cartagena.} [0.3s] She’s in Cartagena.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-5": {
+  "seconds": 1.84,
+  "text": "{cb:dora s3 0.9 es-419: ¡Hasta luego, Mateo!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call-6": {
+  "seconds": 2.23,
+  "text": "{cb:alex s3 0.9 es-419: ¡Hasta luego, Ana!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call2-0": {
+  "seconds": 11.18,
+  "text": "Did you notice? Ana used {cb:dora s3 0.9 es-419: estoy} about herself, and Mateo used {cb:dora s3 0.9 es-419: está} about Sofia. Now it’s your turn. You’re Mateo. Ana speaks, then you answer in the silence.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call2-1": {
+  "seconds": 1.24,
+  "text": "{cb:dora s3 0.9 es-419: ¿Dónde está Sofía?}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call2-2": {
+  "seconds": 1.77,
+  "text": "Say: she’s in Cartagena.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-call2-3": {
+  "seconds": 1.43,
+  "text": "{cb:alex s3 0.9 es-419: Está en Cartagena.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call2-4": {
+  "seconds": 1.84,
+  "text": "{cb:dora s3 0.9 es-419: ¡Hasta luego, Mateo!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-call2-5": {
+  "seconds": 1.54,
+  "text": "Now say goodbye to Ana.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-call2-6": {
+  "seconds": 2.23,
+  "text": "{cb:alex s3 0.9 es-419: ¡Hasta luego, Ana!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-video-talk-0": {
+  "seconds": 8.3,
+  "text": "Here’s a short film of two people practicing introductions. You’ll hear words you haven’t learned, and that’s fine. Just listen to how it sounds.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-ch5-0": {
+  "seconds": 4.13,
+  "text": "Chapter five. Now put it all together. You’re going to be an interpreter.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-booths-0": {
+  "seconds": 13.31,
+  "text": "An interpreter turns speech into another language, while people are talking. This is the view from inside a booth. The interpreters sit behind glass, looking down on the meeting. They listen, and speak at the same time.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-interp-0": {
+  "seconds": 9.77,
+  "text": "Interpreters have to think fast, and today, so do you. Lucia only speaks English, and she needs you. Hear her words, then say them in Spanish, in the silence.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-interp-1": {
+  "seconds": 2.17,
+  "text": "Hi! I’m in Mexico. See you later!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-interp-2": {
+  "seconds": 5.71,
+  "text": "{ef_dora s3 0.75 es-419: ¡Hola! Estoy en México. ¡Hasta luego!} [0.6s] {ef_dora s3 0.9 es-419: ¡Hola! Estoy en México. ¡Hasta luego!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-interp-3": {
+  "seconds": 2.3,
+  "text": "Hi! Leo is in England. See you later!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-interp-4": {
+  "seconds": 6.06,
+  "text": "{ef_dora s3 0.75 es-419: ¡Hola! Leo está en Inglaterra. ¡Hasta luego!} [0.6s] {ef_dora s3 0.9 es-419: ¡Hola! Leo está en Inglaterra. ¡Hasta luego!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-interp-5": {
+  "seconds": 2.27,
+  "text": "Hi! Ana is in Colombia. Bye!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-interp-6": {
+  "seconds": 5.16,
+  "text": "{ef_dora s3 0.75 es-419: ¡Hola! Ana está en Colombia. ¡Chao!} [0.6s] {ef_dora s3 0.9 es-419: ¡Hola! Ana está en Colombia. ¡Chao!}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-you-0": {
+  "seconds": 5.06,
+  "text": "Last one, and it’s all yours. Say hello. Say what country you’re in. Then say goodbye.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-bonus-0": {
+  "seconds": 4.56,
+  "text": "Bonus! This isn’t in the test. Spanish changes a little from place to place.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-papa-0": {
+  "seconds": 5.66,
+  "text": "In Latin America, a potato is a {cb:dora s3 0.9 es-419: papa.} That’s what these farmers are picking, in Colombia.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-papa-1": {
+  "seconds": 8.19,
+  "text": "In Spain, it’s a {cb:dora s3 0.9 es-419: patata.} Both are right. These lessons use Latin American Spanish, and people in Spain will understand you too.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-ola-0": {
+  "seconds": 6.67,
+  "text": "And since the h is silent, {cb:dora s3 0.9 es-419: hola} sounds just like another word: {cb:dora s3 0.9 es-419: ola.} It means a wave in the sea.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-recap-0": {
+  "seconds": 14.74,
+  "text": "Here’s what we learned. The Spanish a has one sound. {cb:dora s3 0.9 es-419: Estar} is for location. {cb:dora s3 0.9 es-419: Estoy} means I am. {cb:dora s3 0.9 es-419: Está} means she, he or it is. And {cb:dora s3 0.9 es-419: ¡hola!} and {cb:dora s3 0.9 es-419: ¡hasta luego!} are hello, and see you later.",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hola": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: Hola}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-hasta-luego": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: Hasta luego}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estoy": {
+  "seconds": 1.15,
+  "text": "{cb:dora s3 0.9 es-419: Estoy}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-esta": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: Está}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-estar": {
+  "seconds": 0.79,
+  "text": "{cb:dora s3 0.9 es-419: Estar}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-cama": {
+  "seconds": 0.61,
+  "text": "{cb:dora s3 0.9 es-419: Cama}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-casa": {
+  "seconds": 0.72,
+  "text": "{cb:dora s3 0.9 es-419: Casa}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-mapa": {
+  "seconds": 0.72,
+  "text": "{cb:dora s3 0.9 es-419: Mapa}",
+  "voice": "cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-welcome-0": {
+  "seconds": 10.49,
+  "text": "People speak Spanish in Colombia, Mexico, Spain and many more countries. By the end of this unit, you’ll be able to say hello, say where you are, and ask where your friends are.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-journey-0": {
+  "seconds": 4.07,
+  "text": "This unit has six lessons, and this is the first. Here’s where you are.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-today-0": {
+  "seconds": 8.22,
+  "text": "Today, you’ll be able to do three things. Make the Spanish a sound. Say where you are, and where someone else is. And say hello and goodbye.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-after-a-0": {
+  "seconds": 3.4,
+  "text": "Keep that sound in your head. You’ll use it in every word today.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-after-world-0": {
+  "seconds": 4.4,
+  "text": "Next time you see one of those countries, try it: it’s in Peru. {cb:dora s3 0.9 es-419: Está en Perú.}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-after-talk-0": {
+  "seconds": 3.34,
+  "text": "Did you catch any words you know? Even one is a good start.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-answer-0": {
+  "seconds": 7.5,
+  "text": "Remember the letter a at the start? In English, it changes all the time. In Spanish, it makes one sound, every time.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-next-0": {
+  "seconds": 3.32,
+  "text": "Next lesson, you’ll ask a friend where they are: {cb:dora s3 0.9 es-419: ¿Dónde estás?}",
+  "voice": "af_heart+cb:dora",
+  "ep": "spanish-1"
+ },
+ "sp-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "em-hook-0": {
+  "seconds": 4.13,
+  "text": "Imagine a magic wand. Wave it, and you’ll never feel scared again.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-hook-1": {
+  "seconds": 4.45,
+  "text": "Or sad. Or angry. Or nervous. Just happy, for the rest of your life.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-hook-2": {
+  "seconds": 3.75,
+  "text": "Would you wave it? Don’t say it out loud. Just think about your answer.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-hook-3": {
+  "seconds": 8.15,
+  "text": "Some people would. Some people think certain feelings are simply bad. They think being clever about feelings means being happy all the time.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-hook-4": {
+  "seconds": 3.55,
+  "text": "By the end of this lesson, you might think differently about that wand.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-welcome-0": {
+  "seconds": 7.74,
+  "text": "This subject is about something you carry everywhere: your feelings. They’re there in every game, every argument, and every hard day.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-welcome-1": {
+  "seconds": 5.46,
+  "text": "You can get better at it with practice. And it can help you with friends, with family, and with yourself.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-how-0": {
+  "seconds": 12.77,
+  "text": "This subject has one rule. Your feelings are yours. Nobody here will make you say how you feel. When we ask you to think of something, you can keep it in your head. And if you want to talk about a feeling, that’s good too.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-how-1": {
+  "seconds": 3.96,
+  "text": "And the test only checks what you’ve learned. It never asks how you feel.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-journey-0": {
+  "seconds": 4.65,
+  "text": "Here’s where we’re going: six lessons on knowing your feelings. This is the first.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-title-0": {
+  "seconds": 2.45,
+  "text": "Today’s question: what are emotions for?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-today-0": {
+  "seconds": 12.76,
+  "text": "Today, you’ll say what emotional intelligence really is, and what job an emotion may be doing. You’ll name a feeling exactly, and how strong it is. You’ll tell a feeling from a choice. And you’ll know when to tell someone.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch1-0": {
+  "seconds": 3.63,
+  "text": "Chapter one. What is emotional intelligence? And what isn’t it?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-not-0": {
+  "seconds": 7.43,
+  "text": "First, what it isn’t. It isn’t being happy all the time. It isn’t being nice all the time. And it isn’t hiding what you feel.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-not-1": {
+  "seconds": 3.85,
+  "text": "It means being clever about feelings: your own, and other people’s.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-1990-0": {
+  "seconds": 11.46,
+  "text": "Two psychologists, Peter Salovey and John Mayer, set out the idea in an article in nineteen ninety. A writer, Daniel Goleman, made it famous with a book in nineteen ninety-five.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-1990-1": {
+  "seconds": 4.28,
+  "text": "A psychologist is a scientist who studies how people think and feel.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-nnc-0": {
+  "seconds": 5.57,
+  "text": "In this subject, we’ll practice three things. One: notice. Something’s going on inside you.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-nnc-1": {
+  "seconds": 2.26,
+  "text": "Two: name it. Find the word for it.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-nnc-2": {
+  "seconds": 2.39,
+  "text": "Three: choose. Decide what to do next.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-nnc-3": {
+  "seconds": 3.47,
+  "text": "Notice. Name. Choose. You’ll see those three words a lot.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-who-0": {
+  "seconds": 5.11,
+  "text": "Your turn. Four people, and these aren’t about you. Who’s using emotional intelligence?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-who-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-who-2": {
+  "seconds": 3.91,
+  "text": "Sam! He felt angry. He noticed it. Then he chose what to do.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-who-3": {
+  "seconds": 3.72,
+  "text": "Being angry wasn’t the problem. Sam just knew what to do with it.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch2-0": {
+  "seconds": 11.86,
+  "text": "Chapter two. So what are emotions for? Scientists still argue about exactly how they work. But many think emotions help us deal with problems and chances in our lives. Let’s meet six of them.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-0": {
+  "seconds": 7.62,
+  "text": "Fear says: watch out! Your body gets ready to get away. That’s why you step back from the edge of a cliff, before you’ve even thought about it.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-1": {
+  "seconds": 7.38,
+  "text": "Nervousness is a smaller kind of fear. It can mean: this matters to you. You might feel it before a race or a big test.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-2": {
+  "seconds": 7.64,
+  "text": "Anger says: that’s not fair, or something’s in your way. It can give you the energy to stand up for yourself, or to change something.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-3": {
+  "seconds": 6.76,
+  "text": "Sadness says: you’ve lost something that matters. It slows you down. And when people see you’re sad, they may come and help.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-4": {
+  "seconds": 4.63,
+  "text": "Surprise can make you stop, and look. Something just happened that you didn’t expect.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-jobs-5": {
+  "seconds": 5.95,
+  "text": "Happiness says: this is good. Do more of it. It can pull you toward people and things that are good for you.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-job-0": {
+  "seconds": 4.5,
+  "text": "Someone takes credit for your friend’s drawing. Which feeling says: that’s not fair?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-job-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-job-2": {
+  "seconds": 2.31,
+  "text": "Anger. It’s pointing at something unfair.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-job-3": {
+  "seconds": 2.52,
+  "text": "It’s a signal. What you do with it comes later.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-sm-0": {
+  "seconds": 10.87,
+  "text": "What if a feeling was nearly gone? Scientists have studied a woman they call S M. Damage to two small parts of her brain means she feels very little fear of dangers around her.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-sm-1": {
+  "seconds": 8.1,
+  "text": "They took her to a pet shop. She held a snake for over three minutes. She tried to touch a big spider, a tarantula, and had to be stopped.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-sm-2": {
+  "seconds": 4.91,
+  "text": "They asked how scared she felt, from zero to ten. Her answer was never above two.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-sm-3": {
+  "seconds": 7.22,
+  "text": "She’s just one person, so we have to be careful. But it hints at what life can be like with less of the warning that fear gives.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-normal-0": {
+  "seconds": 5.88,
+  "text": "Hard feelings are normal too. Worrying and feeling down happen to everyone, at different times.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-normal-1": {
+  "seconds": 6.23,
+  "text": "On their own, they don’t mean something’s wrong with you. And in chapter six, you’ll hear what to do if one gets too big.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch3-0": {
+  "seconds": 4.33,
+  "text": "Chapter three. How do you notice a feeling? Often, your body tells you first.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-700-0": {
+  "seconds": 8.72,
+  "text": "In one study, more than seven hundred people from Finland and Taiwan colored in an outline of a body. They showed where they felt each emotion.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-700-1": {
+  "seconds": 4.39,
+  "text": "This is what people reported feeling. It isn’t a measurement of their bodies.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-body-0": {
+  "seconds": 3.44,
+  "text": "For most of the main emotions, people marked the upper chest.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-body-1": {
+  "seconds": 6.16,
+  "text": "For anger and happiness, they also marked the arms. Those are the parts you’d use to go and do something.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-body-2": {
+  "seconds": 3.57,
+  "text": "For sadness, the arms and legs felt less active than usual.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-body-3": {
+  "seconds": 3.12,
+  "text": "And for happiness, people marked almost the whole body.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-body-4": {
+  "seconds": 9.22,
+  "text": "Your body may do it differently, and that’s fine. Some people get a tight tummy, a hot face, or a fast heartbeat. It’s worth finding out what yours does.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-try-0": {
+  "seconds": 5.96,
+  "text": "Try it now. This one’s private, so you don’t need to say anything. Sit still. You can close your eyes.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-try-1": {
+  "seconds": 2.74,
+  "text": "Notice your shoulders. Are they tight, or loose?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-try-2": {
+  "seconds": 2.63,
+  "text": "Notice your tummy. Is it tight, or calm?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-try-3": {
+  "seconds": 2.65,
+  "text": "Notice your heartbeat. Is it fast, or slow?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-try-4": {
+  "seconds": 6.32,
+  "text": "That’s it. There’s no right answer, and you don’t have to tell anyone. You’ve just practiced the first step: notice.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch4-0": {
+  "seconds": 6.93,
+  "text": "Chapter four. Remember: notice, name, choose. Now it’s time to name. And “bad” isn’t a very useful name.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ladder-0": {
+  "seconds": 3.56,
+  "text": "Feelings come in sizes. Anger starts small. Annoyed.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ladder-1": {
+  "seconds": 3.54,
+  "text": "Then cross. Then angry. And at the very top: furious.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ladder-2": {
+  "seconds": 4.13,
+  "text": "Fear has sizes too. Uneasy. Nervous. Scared. Terrified.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ladder-3": {
+  "seconds": 4.23,
+  "text": "And so does sadness. Disappointed. Sad. Very sad. Heartbroken.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ladder-4": {
+  "seconds": 6.54,
+  "text": "The right word tells you, and everyone else, much more. “I’m annoyed” and “I’m furious” need very different help.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-size-0": {
+  "seconds": 5.26,
+  "text": "Here’s a story. A little brother borrows a pencil without asking. Which word fits best?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-size-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-size-2": {
+  "seconds": 4.66,
+  "text": "Annoyed. Most people would call that a small problem, so a small feeling fits.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-size-3": {
+  "seconds": 3.87,
+  "text": "Now ask yourself: is my feeling the right size for what happened?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-size-0": {
+  "seconds": 6.55,
+  "text": "Sometimes a feeling comes out bigger than the problem. That happens to everyone. Noticing it is a real skill.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-size-1": {
+  "seconds": 5.2,
+  "text": "And one thing can bring two feelings. Before a big trip, you might feel excited and nervous.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-39-0": {
+  "seconds": 11.09,
+  "text": "Can a word really help? In one small brain scan study, thirty-nine adults aged fifty-five to seventy-five looked at upsetting pictures, and chose a word for how they felt.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-39-1": {
+  "seconds": 11.14,
+  "text": "Choosing a word went with less activity in a part of the brain called the uh-mig-duh-luh, one of the parts that responds to upsetting things. The pictures felt a little less unpleasant, too.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-39-2": {
+  "seconds": 7.01,
+  "text": "They were older adults, and it helped only a little. So a word isn’t magic. But it’s free, and you can always try it.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch5-0": {
+  "seconds": 5.2,
+  "text": "Chapter five. Now it’s time to choose. Here’s the most useful idea in this lesson.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-split-0": {
+  "seconds": 4.51,
+  "text": "A feeling just arrives. You don’t pick it. So you’re allowed to feel anything at all.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-split-1": {
+  "seconds": 4.31,
+  "text": "But what you do next is your choice. And what you do can hurt people, or help.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-split-2": {
+  "seconds": 4.07,
+  "text": "You feel furious with your brother. That’s allowed. Breaking his game isn’t.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-split-3": {
+  "seconds": 4.6,
+  "text": "You feel nervous before a race. That’s allowed. Warming up is a great choice.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-split-4": {
+  "seconds": 5.18,
+  "text": "You feel sad after an argument. That’s allowed. Talking to someone is a great choice.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-choice-0": {
+  "seconds": 4.88,
+  "text": "A boy in a story is furious, and wants to throw his tablet. What’s the best choice?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-choice-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-choice-2": {
+  "seconds": 4,
+  "text": "Walk away, and come back later. He doesn’t have to pretend he’s fine.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-guess-choice-3": {
+  "seconds": 1.62,
+  "text": "Notice. Name. Choose.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-care-0": {
+  "seconds": 10.87,
+  "text": "Some choices often help on hard days. Moving your body, or going outside. Resting. Time with friends or family. Doing something you enjoy. And helping someone else.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-ch6-0": {
+  "seconds": 5.04,
+  "text": "Chapter six. You don’t have to handle every feeling alone. So when should you tell someone?",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-when-0": {
+  "seconds": 12.09,
+  "text": "Tell someone when a feeling is too big to handle. When it goes on for a long time. When it gets in the way of sleep, food or fun. And always, if someone is hurting you or making you feel unsafe.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-who-0": {
+  "seconds": 6.42,
+  "text": "Who should you tell? An adult you trust: a parent, a grandparent, a doctor, or someone else who looks after you.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-who-1": {
+  "seconds": 4.71,
+  "text": "You don’t need perfect words. You can just say, “Something’s bothering me. Can we talk?”",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-who-2": {
+  "seconds": 5.05,
+  "text": "And if the first person doesn’t help, tell someone else. Keep telling until someone listens.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-who-3": {
+  "seconds": 10.41,
+  "text": "If the problem is at home, tell an adult outside your home: another relative, a doctor, or a friend’s parent. Many countries also have a phone line just for children.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-who-4": {
+  "seconds": 4.25,
+  "text": "And if you ever feel you might hurt yourself, tell an adult you trust straight away.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-strong-0": {
+  "seconds": 5.63,
+  "text": "Telling someone isn’t weak. It’s a smart choice, and getting help early can make a real difference.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-bonus-0": {
+  "seconds": 4.37,
+  "text": "Bonus! This isn’t in the test. People keep inventing words for feelings.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-words-0": {
+  "seconds": 7.97,
+  "text": "In German, there’s shah-den-froy-duh: enjoying someone else’s bad luck. If a friend slips on a banana peel and you laugh, that’s it.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-words-1": {
+  "seconds": 6.28,
+  "text": "And newer English has hangry: bad-tempered because you’re hungry. So next time you’re cross, check when you last ate.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-answer-0": {
+  "seconds": 9.5,
+  "text": "So, would you still wave that wand? Remember what fear does. Remember what anger and sadness can do. Those feelings can be hard, but they’re often doing a job.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-recap-0": {
+  "seconds": 15.25,
+  "text": "Here’s what we learned. Emotional intelligence is being clever about feelings. Emotions often do a job. Notice it, then find the word and size. Feeling is not the same as doing. And if it’s too big, too long or unsafe, tell someone.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-next-0": {
+  "seconds": 5.22,
+  "text": "Next lesson, you’ll collect many more words for your feelings, and learn the difference between them.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "ne-hook-0": {
+  "seconds": 6.17,
+  "text": "Imagine your finger touches something very hot. Your hand jumps away, before you’ve had any time to think.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-hook-1": {
+  "seconds": 6.61,
+  "text": "So who decided to move it? Lots of people would say, your brain, of course. The brain is the boss of everything.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-hook-2": {
+  "seconds": 7.33,
+  "text": "It’s not that simple. By the end of this lesson, you’ll know what really moved that hand, and how messages race around your body.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-unit-0": {
+  "seconds": 7.45,
+  "text": "You’ve learned that bones hold you up, and that muscles pull on them. But a muscle doesn’t pull by itself. Something has to tell it when.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-unit-1": {
+  "seconds": 10.49,
+  "text": "That’s what this unit is about. It’s a bonus unit. Schools in England usually teach it to older students, aged about fourteen to sixteen. So you’re getting an early start.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-journey-0": {
+  "seconds": 4.35,
+  "text": "Here’s the plan: six lessons on your brain and nerves. This is the first.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-title-0": {
+  "seconds": 3.14,
+  "text": "Today’s question: how does your brain talk to your body?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-today-0": {
+  "seconds": 12.1,
+  "text": "Today, you’ll name the main parts of your nervous system, and follow a message from your skin to a muscle. You’ll say what a neuron is, and explain what a reflex is. And you’ll spot two famous brain myths.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ch1-0": {
+  "seconds": 5.04,
+  "text": "Chapter one. Meet the system that carries your body’s messages: your nervous system.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-job-0": {
+  "seconds": 5.66,
+  "text": "Your nervous system has one big job. It lets you sense changes, and respond to them quickly.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-job-1": {
+  "seconds": 5.77,
+  "text": "Those changes can be outside your body, like a loud bang. Or inside, like getting too hot.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-parts-0": {
+  "seconds": 4.43,
+  "text": "Here it is, shown in gold. At the top is your brain, safe inside your skull.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-parts-1": {
+  "seconds": 6.14,
+  "text": "Running down from it, inside your backbone, is your spinal cord. It’s like a main road for messages.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-parts-2": {
+  "seconds": 3.48,
+  "text": "And spreading out from there, all over your body, are your nerves.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-parts-3": {
+  "seconds": 7.44,
+  "text": "Your brain and spinal cord together have their own name: the central nervous system. It’s where messages get sorted out and answered.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-parts-0": {
+  "seconds": 2.87,
+  "text": "Quick check. Which two make up the central nervous system?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-parts-1": {
+  "seconds": 1.32,
+  "text": "Shout your answer now!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-parts-2": {
+  "seconds": 1.93,
+  "text": "Your brain and your spinal cord.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-parts-3": {
+  "seconds": 1.96,
+  "text": "Nerves connect them to the rest of you.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ch2-0": {
+  "seconds": 4.23,
+  "text": "Chapter two. Let’s follow one message, all the way around your body.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-0": {
+  "seconds": 5.83,
+  "text": "Say someone taps your hand. That tap is a change. Scientists call a change like this a stimulus.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-1": {
+  "seconds": 3.25,
+  "text": "In your skin, special cells called receptors notice it.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-2": {
+  "seconds": 5.32,
+  "text": "They set off a message. It races along a nerve to your spinal cord, and up to your brain.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-3": {
+  "seconds": 5.26,
+  "text": "Your brain works out what happened, and what to do. Maybe you decide to look, or to tap back.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-4": {
+  "seconds": 4.96,
+  "text": "A new message races back out, along a different nerve cell, to a muscle in your arm.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-5": {
+  "seconds": 3.18,
+  "text": "The muscle pulls, and your arm moves. That’s the response.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-signal-6": {
+  "seconds": 6.53,
+  "text": "So the route goes like this. Stimulus. Receptor. Nerve. Central nervous system. Nerve. Then muscle.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-try-0": {
+  "seconds": 5.29,
+  "text": "Try it now. Sit still and listen. When you hear me say the word now, clap once. Get ready.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-try-1": {
+  "seconds": 0.7,
+  "text": "Now!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-try-2": {
+  "seconds": 11.62,
+  "text": "It felt instant, but a whole journey just happened. The sound reached your ears, and a message went in to your brain. Your brain understood the word. And messages went out to the muscles in your arms.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-inside-0": {
+  "seconds": 8.7,
+  "text": "It works for changes inside you too, and you don’t have to think about them. When you get too hot, your body responds by sweating, to cool you down.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-stim-0": {
+  "seconds": 4.3,
+  "text": "Your turn. Someone calls your name, and you turn your head. What’s the stimulus?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-stim-1": {
+  "seconds": 0.97,
+  "text": "Shout it out!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-stim-2": {
+  "seconds": 3.24,
+  "text": "The sound of your name. That’s the change that starts it all.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-stim-3": {
+  "seconds": 2.02,
+  "text": "And turning your head is the response.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ch3-0": {
+  "seconds": 4.49,
+  "text": "Chapter three. What’s actually carrying these messages? A special kind of cell.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-neuron-0": {
+  "seconds": 7.45,
+  "text": "This is a nerve cell, also called a neuron. Your nerves are made of the long parts of lots of these cells, bundled together.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-neuron-1": {
+  "seconds": 3.99,
+  "text": "The middle part is called the cell body. It keeps the whole cell alive.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-neuron-2": {
+  "seconds": 6.18,
+  "text": "This long thin wire is the axon. The message runs along it as a tiny electrical signal.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-neuron-3": {
+  "seconds": 9.02,
+  "text": "At the far end, the message passes to the next cell. Neurons have a tiny gap between them, and in the next lesson we’ll see how a message crosses it.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-count-0": {
+  "seconds": 7.54,
+  "text": "How many neurons are in your brain? Scientists carefully counted them in four adult brains, and got about eighty-six billion.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-count-1": {
+  "seconds": 4.12,
+  "text": "That’s about ten for every person on Earth, all packed inside one head.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-race-0": {
+  "seconds": 11.24,
+  "text": "And how fast are the messages? Let’s race. In this lane is Usain Bolt. In two thousand and nine, he set a world record: a hundred meters in nine point five eight seconds.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-race-1": {
+  "seconds": 7.04,
+  "text": "In the other lane is a signal in one of your fastest nerves. These can travel over a hundred meters in a single second.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-race-2": {
+  "seconds": 6.81,
+  "text": "Not every nerve is that fast. Some signals go at about walking speed. But that’s why you can respond so quickly.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ch4-0": {
+  "seconds": 4.81,
+  "text": "Chapter four. Back to our hot finger. It’s time to find out what moved that hand.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-reflex-0": {
+  "seconds": 5.47,
+  "text": "Here’s a tricky one. You touch something hot, and pull away fast. Where does the message get answered?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-reflex-1": {
+  "seconds": 1.11,
+  "text": "Shout your answer!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-reflex-2": {
+  "seconds": 3.16,
+  "text": "In your spinal cord! It doesn’t need your brain to decide.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-guess-reflex-3": {
+  "seconds": 1.65,
+  "text": "That’s the route in this picture.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-arc-0": {
+  "seconds": 6.61,
+  "text": "This fast move is called a reflex. Follow the blue line. A message goes from the finger to the spinal cord.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-arc-1": {
+  "seconds": 5.08,
+  "text": "There, it’s passed straight on, and the red line carries a new message back to the arm muscle.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-arc-2": {
+  "seconds": 5.53,
+  "text": "The muscle pulls, and the hand jumps away. Scientists call this short route a reflex arc.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-why-0": {
+  "seconds": 6.64,
+  "text": "Reflexes are fast, and you don’t choose them. That’s useful, because when something could hurt you, every moment counts.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-why-1": {
+  "seconds": 8.97,
+  "text": "Your brain isn’t left out for long. A message goes up to it as well. So you find out what happened, and you feel the pain, just after your hand has moved.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-knee-0": {
+  "seconds": 9.08,
+  "text": "Have you ever seen a doctor tap someone’s knee with a little hammer, and the leg kicks by itself? That’s another reflex. The doctor is checking that the route works.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-knee-1": {
+  "seconds": 7.7,
+  "text": "Reflexes don’t mean your brain is powerless, though. It can sometimes override them. Think of holding still while you get an injection.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ch5-0": {
+  "seconds": 6.11,
+  "text": "Chapter five. Now you know how it works, let’s bust two things that lots of people believe about the brain.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-myth10-0": {
+  "seconds": 5.19,
+  "text": "Myth number one. You only use ten percent of your brain. You may have heard this in films.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-myth10-1": {
+  "seconds": 8.09,
+  "text": "It’s wrong. As one brain scientist, Nick Spitzer, puts it: we use all of our brain. Brain scans show activity all over it.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-energy-0": {
+  "seconds": 5.07,
+  "text": "Here’s another clue. In an adult, the brain is only about two percent of the body’s weight.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-energy-1": {
+  "seconds": 6.9,
+  "text": "But it uses about twenty percent of the body’s energy. Your body wouldn’t spend all that on a part that mostly did nothing.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-sides-0": {
+  "seconds": 5.56,
+  "text": "Myth number two. People are either left-brained and logical, or right-brained and creative.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-sides-1": {
+  "seconds": 8.35,
+  "text": "Different parts of your brain do have different jobs, as you can see here. And some jobs lean to one side. Language tends to be on the left.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-sides-2": {
+  "seconds": 8.81,
+  "text": "But when researchers studied brain scans of one thousand and eleven people, they found no sign that a person uses one whole side more than the other.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-sides-3": {
+  "seconds": 4.3,
+  "text": "So you can be logical and creative. You’re using your whole brain either way.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-bonus-0": {
+  "seconds": 3.45,
+  "text": "Bonus! This isn’t in the test. Why can’t you tickle yourself?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-tickle-0": {
+  "seconds": 3.94,
+  "text": "Try it. Tickle the palm of your own hand. Not much happens, does it?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-tickle-1": {
+  "seconds": 6.55,
+  "text": "Scientists tested this in a brain scanner. People said the same touch felt less tickly when they did it themselves.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-tickle-2": {
+  "seconds": 7.24,
+  "text": "They think a part at the back of your brain, called the cerebellum, predicts what your own move will feel like. So there’s no surprise.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-answer-0": {
+  "seconds": 6.91,
+  "text": "So, who moved your hand off that hot thing? A fast route through your spinal cord. Your brain found out just after.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-recap-0": {
+  "seconds": 16.23,
+  "text": "Here’s what we learned. Your nervous system is your brain, spinal cord and nerves. Messages go from a stimulus, along nerves, to a response. Neurons carry them as electrical signals. A reflex is fast and not chosen. And you use all of your brain.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-next-0": {
+  "seconds": 6.65,
+  "text": "Next time, we’ll zoom right in on a neuron, and see how a message jumps across the gap. Now, show what you know.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-protect-0": {
+  "seconds": 7.65,
+  "text": "Remember the jobs of your skeleton? One of them is protection. Your skull guards your brain, and your backbone guards your spinal cord.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-protect-1": {
+  "seconds": 8.58,
+  "text": "And here’s a word to clear up. The nervous system has nothing to do with feeling nervous before a test. Here, nervous just means made of nerves.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-senses-0": {
+  "seconds": 11.72,
+  "text": "Receptors aren’t only in your skin. Some are single cells, like those. Others are packed together in sense organs. Your eyes have receptors for light. Your ears have receptors for sound.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-senses-1": {
+  "seconds": 5.73,
+  "text": "Different senses, but the same start. A receptor notices a change, and a message sets off.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ball-0": {
+  "seconds": 7.08,
+  "text": "Let’s follow a harder one. A friend throws you a ball. The stimulus is the light from that moving ball, reaching your eyes.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ball-1": {
+  "seconds": 4.63,
+  "text": "Receptors in your eyes notice it, and messages race along nerves to your brain.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ball-2": {
+  "seconds": 3.71,
+  "text": "Your brain works out where the ball is going, and decides to catch it.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-ball-3": {
+  "seconds": 8.62,
+  "text": "Messages race out, down your spinal cord and along your nerves, to the muscles in your arm and hand. Your fingers close. Caught! That’s the response.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-0": {
+  "seconds": 6.55,
+  "text": "Let’s test that. Reflex, or choice? Your finger touches a hot pan, and your hand jumps away. Shout it out!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-1": {
+  "seconds": 1.78,
+  "text": "Reflex. You didn’t choose it.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-2": {
+  "seconds": 4.71,
+  "text": "Next. You look at the menu, and pick a sandwich for lunch. Reflex, or choice?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-3": {
+  "seconds": 4.5,
+  "text": "Choice. That message went all the way to your brain, and your brain took its time.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-4": {
+  "seconds": 4.97,
+  "text": "Last one. A friend throws a ball, and you catch it. It’s quick, so is it a reflex?",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-choice-5": {
+  "seconds": 7.63,
+  "text": "No. It’s fast, but your brain worked out where the ball was going. Fast doesn’t always mean reflex. What matters is the route.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "cc-last-0": {
+  "seconds": 7.79,
+  "text": "Last time: Colombia. It’s in the top left of South America. It has six regions. And the higher you climb, the colder it gets.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-last-1": {
+  "seconds": 3.16,
+  "text": "Shout it out: name one of Colombia’s six regions.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-last-2": {
+  "seconds": 7.78,
+  "text": "The Caribbean, the Pacific, the Andes, the Oh-ree-noh-kee-ah, the Amazon, or the islands. If you missed that lesson, that’s fine.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-last-3": {
+  "seconds": 2.58,
+  "text": "Today, we find out why higher means colder.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-today-0": {
+  "seconds": 7.35,
+  "text": "Today, you’ll be able to explain why mountains are colder, say what grows on each floor, and explain why the pahramo matters.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-today-1": {
+  "seconds": 6.5,
+  "text": "Why does it matter? Near the Equator, height decides how people dress, what they farm, and where cities get their water.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-after-video-air-0": {
+  "seconds": 4.22,
+  "text": "So high air is colder because it’s thin, and far from the warm ground.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-after-video-coffee-0": {
+  "seconds": 4.22,
+  "text": "Coffee grows best on the mild floor: not too hot, and not too cold.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-after-video-paramo-0": {
+  "seconds": 3.89,
+  "text": "So the paramo works like a sponge, and gives water to a whole city.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-answer-0": {
+  "seconds": 7.68,
+  "text": "Remember the start? A mountain top is closer to the Sun, but colder. The air up there is thin, and far from the warm ground.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-next-0": {
+  "seconds": 3.58,
+  "text": "Next lesson, we’ll meet the people who live on all these floors.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "ne-known-0": {
+  "seconds": 4.53,
+  "text": "Last unit, in How Do Your Muscles Work?, your muscles pulled on your bones to move you.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-known-1": {
+  "seconds": 2.85,
+  "text": "But who tells your muscles when to pull? Shout it out!",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-known-2": {
+  "seconds": 4.18,
+  "text": "Your brain, through your nerves. If you haven’t watched that lesson, that’s fine.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-video-nerves-0": {
+  "seconds": 6.46,
+  "text": "Here’s a short film from TED-Ed about how nerves work. Watch how a message travels along neurons.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-after-nerves-0": {
+  "seconds": 5.15,
+  "text": "So a message travels along neurons, from one to the next, until it reaches a muscle.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-video-reflex-0": {
+  "seconds": 3.66,
+  "text": "Here’s another way to see it. Watch where the message turns around.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-after-reflex-0": {
+  "seconds": 6.13,
+  "text": "It turns around in the spinal cord, before it reaches your brain. That’s why a reflex is so fast.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-video-myth-0": {
+  "seconds": 5.25,
+  "text": "TED-Ed made a short film about this myth. Listen for how the two sides really work.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-after-myth-0": {
+  "seconds": 5.84,
+  "text": "Both sides work together, all the time. Nobody is only left-brained, or only right-brained.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "em-known-0": {
+  "seconds": 5.65,
+  "text": "You already know a lot about feelings. Everyone has felt happy, surprised, nervous and cross.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-known-1": {
+  "seconds": 4.6,
+  "text": "Shout it out: name a feeling. Any feeling at all. You don’t have to say how you feel.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-known-2": {
+  "seconds": 2.9,
+  "text": "Good. Today, we find out what feelings are for.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-video-feel-0": {
+  "seconds": 6.16,
+  "text": "Here’s a short film from a children’s hospital in Canada. Listen for why feelings are worth noticing.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-after-feel-0": {
+  "seconds": 3.39,
+  "text": "Feelings are messages. Noticing them is the first step.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-video-stress-0": {
+  "seconds": 5.58,
+  "text": "Here’s what happens in your body when you feel scared or stressed. Watch what your body gets ready to do.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-after-stress-0": {
+  "seconds": 5.61,
+  "text": "Your heart speeds up, and your muscles get ready. That’s one reason you feel feelings in your body.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "co-after-video-regions-0": {
+  "seconds": 3.34,
+  "text": "Did you spot them? Six regions, all in one country.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-after-video-wild-0": {
+  "seconds": 3.52,
+  "text": "Did you see an animal you didn’t know? Colombia is full of them.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-answer-0": {
+  "seconds": 7.09,
+  "text": "Remember the start? Rainforest, desert, mountains and two coasts. Colombia is all of them, in six regions.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-known-0": {
+  "seconds": 6.23,
+  "text": "You may already know a little about Colombia. Its main language is Spanish, and you already understand Spanish.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-known-1": {
+  "seconds": 2.86,
+  "text": "Shout it out: which continent is Colombia on?",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-known-2": {
+  "seconds": 4.23,
+  "text": "South America! If you didn’t know, that’s fine. That’s what today is for.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-next-0": {
+  "seconds": 4.95,
+  "text": "Next lesson: why is it cold near the Equator? We’ll climb from the sea to the snow.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-today-0": {
+  "seconds": 6.55,
+  "text": "Today, you’ll be able to find Colombia on a map, name its six regions, and explain why higher means colder.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-today-1": {
+  "seconds": 4.57,
+  "text": "Why does it matter? You’ll see how one country can feel like many different places.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-unit-0": {
+  "seconds": 6.86,
+  "text": "This is a new series: Colombia, in eight lessons. We’ll visit its regions, its mountains, its people and its food.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-unit-1": {
+  "seconds": 4.93,
+  "text": "And you’ll learn how geography works anywhere: maps, climate, and how people live.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "mu-after-video-1-0": {
+  "seconds": 4.22,
+  "text": "So your heart and stomach muscles work all day and night, without you telling them.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-after-video-2-0": {
+  "seconds": 4.91,
+  "text": "So after hard exercise, muscles repair themselves, and slowly get stronger.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-answer-0": {
+  "seconds": 6.99,
+  "text": "Remember the start? Muscles you have never flexed are working right now: your heart, and the muscles moving your food along.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-last-0": {
+  "seconds": 6.06,
+  "text": "Last time: your skeleton. Two hundred and six bones. Joints let you move. And bones are alive.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-last-1": {
+  "seconds": 3.36,
+  "text": "Quick question. Shout it out: how many bones do you have?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-last-2": {
+  "seconds": 3.31,
+  "text": "Two hundred and six! If you missed that lesson, that’s fine.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-last-3": {
+  "seconds": 3.76,
+  "text": "But bones can’t move by themselves. Today: what moves them.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-next-0": {
+  "seconds": 5.23,
+  "text": "Next lesson, a puzzle. If a muscle can only get shorter, how do you straighten your arm again?",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-today-0": {
+  "seconds": 7.09,
+  "text": "Today, you’ll be able to say what a muscle is made of, explain how a muscle moves a bone, and name the three kinds of muscle.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-today-1": {
+  "seconds": 4.69,
+  "text": "Why does it matter? Every step, every breath and every heartbeat uses muscles.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "sk-known-0": {
+  "seconds": 4.6,
+  "text": "You already know something about today. Press your fingers on your arm, or on your knee.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-known-1": {
+  "seconds": 3.34,
+  "text": "Feel something hard under the skin? Shout it out: what is it?",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-known-2": {
+  "seconds": 5.52,
+  "text": "A bone! Even if you’ve never thought about your bones before, that’s fine. You’ve used them all your life.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-unit-0": {
+  "seconds": 4.44,
+  "text": "This is a new unit: the human skeleton and muscles. It has four lessons.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-unit-1": {
+  "seconds": 4.12,
+  "text": "First your bones, then your muscles, then how they work together to move you.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-today-0": {
+  "seconds": 7.4,
+  "text": "Today, you’ll be able to say how many bones you have, name five jobs your bones do, and explain how a broken bone heals.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-today-1": {
+  "seconds": 5.68,
+  "text": "Why does it matter? Every time you stand, run or fall over, your skeleton is working for you.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-after-video-1-0": {
+  "seconds": 3.67,
+  "text": "So your skeleton holds you up, keeps you safe, and helps you move.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-after-video-2-0": {
+  "seconds": 3.79,
+  "text": "So a broken bone can mend itself, if it’s held still while it heals.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-answer-0": {
+  "seconds": 7.65,
+  "text": "Remember the start? Something hard and alive is holding you up right now. It’s your skeleton: two hundred and six living bones.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-next-0": {
+  "seconds": 4.88,
+  "text": "Next lesson: muscles. Your bones can’t move on their own. So what moves them?",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-next-1": {
+  "seconds": 1.59,
+  "text": "But first, take the test.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sp-known-0": {
+  "seconds": 5.19,
+  "text": "You already know some Spanish, maybe a lot. You’ve heard it in songs, in films, or at home.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-known-1": {
+  "seconds": 2.34,
+  "text": "Shout it out: say a Spanish word you know.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-known-2": {
+  "seconds": 4,
+  "text": "Great. If you couldn’t think of one, that’s fine. You’ll have plenty by the end.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sk-greet-0": {
+  "seconds": 5.96,
+  "text": "Hello, and welcome to Science! This is Lesson 1 of a new unit: the human skeleton and muscles.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "sk-greet-1": {
+  "seconds": 8.46,
+  "text": "Today, we’re finding out what your skeleton does, and how your bones keep you standing, moving and alive. You use them every second of the day.",
+  "voice": "af_heart",
+  "ep": "skeleton"
+ },
+ "mu-greet-0": {
+  "seconds": 5.77,
+  "text": "Hello again, and welcome back to Science. This is Lesson 2 of the human skeleton and muscles.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "mu-greet-1": {
+  "seconds": 9.23,
+  "text": "Today, we’re finding out how your muscles move your bones, and the three kinds of muscle working inside you right now. It’s how you walk, breathe and even blink.",
+  "voice": "af_heart",
+  "ep": "muscles"
+ },
+ "co-greet-0": {
+  "seconds": 5.21,
+  "text": "Hello, and welcome to Geography! This is Lesson 1 of our series on Colombia.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "co-greet-1": {
+  "seconds": 10.39,
+  "text": "Today, we’re exploring Colombia: where it is, its six very different regions, and why higher means colder. Geography helps you understand any place you’ll ever visit.",
+  "voice": "af_heart",
+  "ep": "colombia"
+ },
+ "cc-greet-0": {
+  "seconds": 5.66,
+  "text": "Hello again, and welcome back to Geography. This is Lesson 2 of our series on Colombia.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "cc-greet-1": {
+  "seconds": 11.34,
+  "text": "Today, we’re finding out why it can be cold right next to the Equator, and how height changes what people wear, eat and grow. It explains how snow and beaches can be in the same country.",
+  "voice": "af_heart",
+  "ep": "colombia-climate"
+ },
+ "em-greet-0": {
+  "seconds": 4.08,
+  "text": "Hello, and welcome to your first lesson in Emotional Intelligence!",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "em-greet-1": {
+  "seconds": 8.36,
+  "text": "Today, we’re finding out what feelings are for, and how to name them exactly. Knowing your feelings helps with friends, family and hard days.",
+  "voice": "af_heart",
+  "ep": "emotions-1"
+ },
+ "ne-greet-0": {
+  "seconds": 5.83,
+  "text": "Hello, and welcome back to Science! This is Lesson 1 of a bonus unit: your brain and nerves.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "ne-greet-1": {
+  "seconds": 8.61,
+  "text": "Today, we’re finding out how messages race between your brain and your body. It’s what lets you catch a ball, or pull your hand away from something hot.",
+  "voice": "af_heart",
+  "ep": "neuro-1"
+ },
+ "sp-greet-0": {
+  "seconds": 3.93,
+  "text": "Hello, everyone, and welcome to your very first Spanish lesson!",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "sp-greet-1": {
+  "seconds": 9.52,
+  "text": "Today, you’ll learn to say hello and goodbye, and to say where you are. Spanish is spoken in many countries around the world, so these words go a long way.",
+  "voice": "af_heart",
+  "ep": "spanish-1"
+ },
+ "skeleton-wh-es-skeleton": {
+  "seconds": 0.96,
+  "text": "{cb:dora s3 0.9 es-419: el esqueleto}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-bone": {
+  "seconds": 1.3,
+  "text": "{cb:dora s3 0.9 es-419: el hueso}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-skull": {
+  "seconds": 0.86,
+  "text": "{cb:dora s3 0.9 es-419: el cráneo}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-ribs": {
+  "seconds": 1.07,
+  "text": "{cb:dora s3 0.9 es-419: las costillas}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-spine": {
+  "seconds": 1.42,
+  "text": "{cb:dora s3 0.9 es-419: la columna vertebral}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-joint": {
+  "seconds": 2.13,
+  "text": "{cb:dora s3 0.9 es-419: la articulación}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-muscle": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el músculo}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-support": {
+  "seconds": 0.9,
+  "text": "{cb:dora s3 0.9 es-419: sostener}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-protect": {
+  "seconds": 0.88,
+  "text": "{cb:dora s3 0.9 es-419: proteger}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-movement": {
+  "seconds": 1.99,
+  "text": "{cb:dora s3 0.9 es-419: el movimiento}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-bone-marrow": {
+  "seconds": 1.58,
+  "text": "{cb:dora s3 0.9 es-419: la médula ósea}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-red-blood-cells": {
+  "seconds": 1.43,
+  "text": "{cb:dora s3 0.9 es-419: los glóbulos rojos}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-blood-cells": {
+  "seconds": 1.63,
+  "text": "{ef_dora s3 0.9 es-419: las células de la sangre}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-femur": {
+  "seconds": 1.08,
+  "text": "{cb:dora s3 0.9 es-419: el fémur}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-stapes": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: el estribo}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-jaw": {
+  "seconds": 1.47,
+  "text": "{cb:dora s3 0.9 es-419: la mandíbula}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-shoulder-blade": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: el omóplato}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-organs": {
+  "seconds": 1.39,
+  "text": "{cb:dora s3 0.9 es-419: los órganos}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-brain": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: el cerebro}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-heart": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el corazón}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-lungs": {
+  "seconds": 1.2,
+  "text": "{cb:dora s3 0.9 es-419: los pulmones}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-calcium": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: el calcio}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-cartilage": {
+  "seconds": 1.06,
+  "text": "{cb:dora s3 0.9 es-419: el cartílago}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-pelvis": {
+  "seconds": 1.78,
+  "text": "{cb:dora s3 0.9 es-419: la pelvis}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-heal": {
+  "seconds": 0.84,
+  "text": "{cb:dora s3 0.9 es-419: sanar}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "skeleton-wh-es-broken-bone": {
+  "seconds": 1.13,
+  "text": "{cb:dora s3 0.9 es-419: el hueso roto}",
+  "voice": "cb:dora",
+  "ep": "skeleton"
+ },
+ "muscles-wh-es-muscle": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el músculo}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-muscle-cell": {
+  "seconds": 1.59,
+  "text": "{cb:dora s3 0.9 es-419: la célula muscular}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-cell": {
+  "seconds": 1.08,
+  "text": "{cb:dora s3 0.9 es-419: la célula}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-bone": {
+  "seconds": 1.3,
+  "text": "{cb:dora s3 0.9 es-419: el hueso}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-joint": {
+  "seconds": 2.13,
+  "text": "{cb:dora s3 0.9 es-419: la articulación}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-tendon": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el tendón}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-contract": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: contraerse}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-relax": {
+  "seconds": 1.16,
+  "text": "{cb:dora s3 0.9 es-419: relajarse}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-pull": {
+  "seconds": 0.75,
+  "text": "{cb:dora s3 0.9 es-419: tirar}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-shorter": {
+  "seconds": 1.12,
+  "text": "{cb:dora s3 0.9 es-419: más corto}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-energy": {
+  "seconds": 1.47,
+  "text": "{cb:dora s3 0.9 es-419: la energía}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-food": {
+  "seconds": 0.88,
+  "text": "{cb:dora s3 0.9 es-419: la comida}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-oxygen": {
+  "seconds": 0.99,
+  "text": "{cb:dora s3 0.9 es-419: el oxígeno}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-heart": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el corazón}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-stomach": {
+  "seconds": 1.9,
+  "text": "{cb:dora s3 0.9 es-419: el estómago}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-skeletal-muscle": {
+  "seconds": 1.44,
+  "text": "{cb:dora s3 0.9 es-419: el músculo esquelético}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-cardiac-muscle": {
+  "seconds": 1.46,
+  "text": "{cb:dora s3 0.9 es-419: el músculo cardíaco}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-smooth-muscle": {
+  "seconds": 1.25,
+  "text": "{cb:dora s3 0.9 es-419: el músculo liso}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-biceps": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: el bíceps}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-triceps": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: el tríceps}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-exercise": {
+  "seconds": 1.11,
+  "text": "{cb:dora s3 0.9 es-419: el ejercicio}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-breathe": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: respirar}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "muscles-wh-es-strong": {
+  "seconds": 0.75,
+  "text": "{cb:dora s3 0.9 es-419: fuerte}",
+  "voice": "cb:dora",
+  "ep": "muscles"
+ },
+ "colombia-wh-es-country": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el país}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-region": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: la región}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-mountain": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: la montaña}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-coast": {
+  "seconds": 0.82,
+  "text": "{cb:dora s3 0.9 es-419: la costa}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-rainforest": {
+  "seconds": 1.48,
+  "text": "{cb:dora s3 0.9 es-419: la selva tropical}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-desert": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: el desierto}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-city": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: la ciudad}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-capital": {
+  "seconds": 1.39,
+  "text": "{cb:dora s3 0.9 es-419: la capital}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-equator": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el ecuador}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-caribbean": {
+  "seconds": 0.87,
+  "text": "{cb:dora s3 0.9 es-419: el Caribe}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-pacific": {
+  "seconds": 1.43,
+  "text": "{cb:dora s3 0.9 es-419: el Pacífico}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-andes": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: los Andes}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-amazon": {
+  "seconds": 1,
+  "text": "{cb:dora s3 0.9 es-419: la Amazonía}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-orinoqu-a": {
+  "seconds": 1.91,
+  "text": "{cb:dora s3 0.9 es-419: la Orinoquía}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-island": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: la isla}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-river": {
+  "seconds": 0.92,
+  "text": "{cb:dora s3 0.9 es-419: el río}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-plains": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: los llanos}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-coffee": {
+  "seconds": 0.92,
+  "text": "{cb:dora s3 0.9 es-419: el café}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-south-america": {
+  "seconds": 1.07,
+  "text": "{cb:dora s3 0.9 es-419: Sudamérica}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-language": {
+  "seconds": 0.91,
+  "text": "{cb:dora s3 0.9 es-419: el idioma}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-map": {
+  "seconds": 0.85,
+  "text": "{cb:dora s3 0.9 es-419: el mapa}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-wh-es-meters": {
+  "seconds": 0.87,
+  "text": "{cb:dora s3 0.9 es-419: los metros}",
+  "voice": "cb:dora",
+  "ep": "colombia"
+ },
+ "colombia-climate-wh-es-cold": {
+  "seconds": 0.68,
+  "text": "{cb:dora s3 0.9 es-419: frío}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-colder": {
+  "seconds": 1.07,
+  "text": "{cb:dora s3 0.9 es-419: más frío}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-warm": {
+  "seconds": 0.76,
+  "text": "{cb:dora s3 0.9 es-419: cálido}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-mild": {
+  "seconds": 0.91,
+  "text": "{cb:dora s3 0.9 es-419: templado}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-degrees": {
+  "seconds": 1.02,
+  "text": "{cb:dora s3 0.9 es-419: los grados}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-temperature": {
+  "seconds": 1.19,
+  "text": "{cb:dora s3 0.9 es-419: la temperatura}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-meters": {
+  "seconds": 0.87,
+  "text": "{cb:dora s3 0.9 es-419: los metros}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-kilometers": {
+  "seconds": 1.25,
+  "text": "{cb:dora s3 0.9 es-419: los kilómetros}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-thermal-floor": {
+  "seconds": 2.13,
+  "text": "{cb:dora s3 0.9 es-419: el piso térmico}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-p-ramo": {
+  "seconds": 0.92,
+  "text": "{cb:dora s3 0.9 es-419: el páramo}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-snow": {
+  "seconds": 0.85,
+  "text": "{cb:dora s3 0.9 es-419: la nieve}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-ice": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el hielo}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-glacier": {
+  "seconds": 1.14,
+  "text": "{cb:dora s3 0.9 es-419: el glaciar}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-water": {
+  "seconds": 0.79,
+  "text": "{cb:dora s3 0.9 es-419: el agua}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-mountain": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: la montaña}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-climb": {
+  "seconds": 0.77,
+  "text": "{cb:dora s3 0.9 es-419: subir}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-high": {
+  "seconds": 0.79,
+  "text": "{cb:dora s3 0.9 es-419: alto}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-air": {
+  "seconds": 1.29,
+  "text": "{cb:dora s3 0.9 es-419: el aire}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-ground": {
+  "seconds": 1.05,
+  "text": "{cb:dora s3 0.9 es-419: el suelo}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-farm": {
+  "seconds": 0.99,
+  "text": "{cb:dora s3 0.9 es-419: la finca}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-coffee": {
+  "seconds": 0.92,
+  "text": "{cb:dora s3 0.9 es-419: el café}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-equator": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el ecuador}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "colombia-climate-wh-es-warming": {
+  "seconds": 1.26,
+  "text": "{cb:dora s3 0.9 es-419: el calentamiento}",
+  "voice": "cb:dora",
+  "ep": "colombia-climate"
+ },
+ "emotions-1-wh-es-feeling": {
+  "seconds": 1.62,
+  "text": "{cb:dora s3 0.9 es-419: el sentimiento}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-emotion": {
+  "seconds": 1.11,
+  "text": "{cb:dora s3 0.9 es-419: la emoción}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-emotional-intelligence": {
+  "seconds": 1.37,
+  "text": "{cb:dora s3 0.9 es-419: la inteligencia emocional}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-fear": {
+  "seconds": 0.88,
+  "text": "{cb:dora s3 0.9 es-419: el miedo}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-anger": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: el enojo}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-sadness": {
+  "seconds": 0.99,
+  "text": "{cb:dora s3 0.9 es-419: la tristeza}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-joy": {
+  "seconds": 1.03,
+  "text": "{cb:dora s3 0.9 es-419: la alegría}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-happy": {
+  "seconds": 0.87,
+  "text": "{cb:dora s3 0.9 es-419: feliz}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-scared": {
+  "seconds": 1.02,
+  "text": "{cb:dora s3 0.9 es-419: asustado}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-angry": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: enojado}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-nervous": {
+  "seconds": 1.09,
+  "text": "{cb:dora s3 0.9 es-419: nervioso}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-furious": {
+  "seconds": 1.38,
+  "text": "{cb:dora s3 0.9 es-419: furioso}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-worried": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: preocupado}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-calm": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: tranquilo}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-surprise": {
+  "seconds": 1.07,
+  "text": "{cb:dora s3 0.9 es-419: la sorpresa}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-disgust": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: el asco}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-body": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: el cuerpo}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-heart": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: el corazón}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-breathe": {
+  "seconds": 0.93,
+  "text": "{cb:dora s3 0.9 es-419: respirar}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-notice": {
+  "seconds": 0.88,
+  "text": "{cb:dora s3 0.9 es-419: notar}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-choice": {
+  "seconds": 1.05,
+  "text": "{cb:dora s3 0.9 es-419: la elección}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-choose": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: elegir}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "emotions-1-wh-es-friends": {
+  "seconds": 0.76,
+  "text": "{cb:dora s3 0.9 es-419: el amigo}",
+  "voice": "cb:dora",
+  "ep": "emotions-1"
+ },
+ "neuro-1-wh-es-brain": {
+  "seconds": 1.01,
+  "text": "{cb:dora s3 0.9 es-419: el cerebro}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-nerve": {
+  "seconds": 1.03,
+  "text": "{cb:dora s3 0.9 es-419: el nervio}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-nervous-system": {
+  "seconds": 1.28,
+  "text": "{cb:dora s3 0.9 es-419: el sistema nervioso}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-spinal-cord": {
+  "seconds": 1.27,
+  "text": "{cb:dora s3 0.9 es-419: la médula espinal}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-neuron": {
+  "seconds": 1.17,
+  "text": "{cb:dora s3 0.9 es-419: la neurona}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-cell": {
+  "seconds": 1.08,
+  "text": "{cb:dora s3 0.9 es-419: la célula}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-message": {
+  "seconds": 1.03,
+  "text": "{cb:dora s3 0.9 es-419: el mensaje}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-signal": {
+  "seconds": 1.05,
+  "text": "{cb:dora s3 0.9 es-419: la señal}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-electrical": {
+  "seconds": 1.03,
+  "text": "{cb:dora s3 0.9 es-419: eléctrico}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-reflex": {
+  "seconds": 1,
+  "text": "{cb:dora s3 0.9 es-419: el reflejo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-stimulus": {
+  "seconds": 1,
+  "text": "{cb:dora s3 0.9 es-419: el estímulo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-response": {
+  "seconds": 1.13,
+  "text": "{cb:dora s3 0.9 es-419: la respuesta}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-receptor": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el receptor}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-muscle": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: el músculo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-skin": {
+  "seconds": 0.8,
+  "text": "{cb:dora s3 0.9 es-419: la piel}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-pain": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: el dolor}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-hand": {
+  "seconds": 0.98,
+  "text": "{cb:dora s3 0.9 es-419: la mano}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-finger": {
+  "seconds": 0.84,
+  "text": "{cb:dora s3 0.9 es-419: el dedo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-eye": {
+  "seconds": 0.8,
+  "text": "{cb:dora s3 0.9 es-419: el ojo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-sense": {
+  "seconds": 1.04,
+  "text": "{cb:dora s3 0.9 es-419: el sentido}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-body": {
+  "seconds": 0.97,
+  "text": "{cb:dora s3 0.9 es-419: el cuerpo}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-fast": {
+  "seconds": 0.95,
+  "text": "{cb:dora s3 0.9 es-419: rápido}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ },
+ "neuro-1-wh-es-myth": {
+  "seconds": 0.94,
+  "text": "{cb:dora s3 0.9 es-419: el mito}",
+  "voice": "cb:dora",
+  "ep": "neuro-1"
+ }
+}

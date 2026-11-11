@@ -1,0 +1,757 @@
+{
+  "plate-front": {
+    "file": "plate-front.jpg",
+    "title": "Thomson plate 01 - male skeleton, front view.webp",
+    "author": "Henry Frowde; engraver was Arthur Thomson",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Thomson_plate_01_-_male_skeleton,_front_view.webp"
+  },
+  "hand-xray": {
+    "file": "hand-xray.jpg",
+    "title": "814 Radiograph of Hand.jpg",
+    "author": "OpenStax College",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:814_Radiograph_of_Hand.jpg"
+  },
+  "knee-xray": {
+    "file": "knee-xray.jpg",
+    "title": "X-ray of a normal knee by lateral projection.jpg",
+    "author": "Mikael Häggström, M.D. Author info - Reusing images- Conflicts of interest: None Mikael Häggström, M.D.",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:X-ray_of_a_normal_knee_by_lateral_projection.jpg"
+  },
+  "whale": {
+    "file": "whale.jpg",
+    "title": "Blue whale skeleton at the Central Hall of the Natural History Museum 2026-09-03 (1).jpg",
+    "author": "Andy Li",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blue_whale_skeleton_at_the_Central_Hall_of_the_Natural_History_Museum_2026-09-03_(1).jpg"
+  },
+  "giraffe": {
+    "file": "giraffe.jpg",
+    "title": "Skeleton of a giraffe, National Museum of Bosnia and Herzegovina.jpg",
+    "author": "Bdx",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Skeleton_of_a_giraffe,_National_Museum_of_Bosnia_and_Herzegovina.jpg"
+  },
+  "skull": {
+    "file": "skull.jpg",
+    "title": "Human skull;Oral anaesthesia (1914).jpg",
+    "author": "Internet Archive Book Images",
+    "license": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:Human_skull;Oral_anaesthesia_(1914).jpg"
+  },
+  "long-bone": {
+    "file": "long-bone.jpg",
+    "title": "603 Anatomy of a Long Bone.jpg",
+    "author": "OpenStax Anatomy and Physiology",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:603_Anatomy_of_a_Long_Bone.jpg"
+  },
+  "femur-plate": {
+    "file": "femur-plate.png",
+    "title": "Gray244.png",
+    "author": "Henry Vandyke Carter",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Gray244.png"
+  },
+  "bone-1900": {
+    "file": "bone-1900.jpg",
+    "title": "Anatomy, physiology and hygiene (1900) (14775861451).jpg",
+    "author": "Internet Archive Book Images",
+    "license": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:Anatomy,_physiology_and_hygiene_(1900)_(14775861451).jpg"
+  },
+  "skeleton": {
+    "file": "skeleton.jpg",
+    "title": "Human-Skeleton.jpg",
+    "author": "Sklmsta",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Human-Skeleton.jpg"
+  },
+  "muscle-plate": {
+    "file": "muscle-plate.jpg",
+    "title": "1105 Anterior View of Muscles High-Res.png",
+    "author": "OpenStax",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:1105_Anterior_View_of_Muscles_High-Res.png"
+  },
+  "muscle-skeletal": {
+    "file": "muscle-skeletal.jpg",
+    "title": "414 Skeletal Smooth Cardiac.jpg (cropped: skeletal panel)",
+    "author": "OpenStax College",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:414_Skeletal_Smooth_Cardiac.jpg"
+  },
+  "muscle-smooth": {
+    "file": "muscle-smooth.jpg",
+    "title": "414 Skeletal Smooth Cardiac.jpg (cropped: smooth panel)",
+    "author": "OpenStax College",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:414_Skeletal_Smooth_Cardiac.jpg"
+  },
+  "muscle-cardiac": {
+    "file": "muscle-cardiac.jpg",
+    "title": "414 Skeletal Smooth Cardiac.jpg (cropped: cardiac panel)",
+    "author": "OpenStax College",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:414_Skeletal_Smooth_Cardiac.jpg"
+  },
+  "muscle-cover": {
+    "file": "muscle-cover.jpg",
+    "title": "1105 Anterior View of Muscles High-Res.png (cropped)",
+    "author": "OpenStax",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:1105_Anterior_View_of_Muscles_High-Res.png"
+  },
+  "muscle-kinds": {
+    "file": "muscle-kinds.jpg",
+    "title": "414 Skeletal Smooth Cardiac.jpg (panels with labels added)",
+    "author": "OpenStax College",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:414_Skeletal_Smooth_Cardiac.jpg"
+  },
+  "muscle-cells": {
+    "file": "muscle-cells.jpg",
+    "title": "414 Skeletal Smooth Cardiac.jpg (cropped: skeletal panel), with a label added",
+    "author": "OpenStax College",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:414_Skeletal_Smooth_Cardiac.jpg"
+  },
+  "knee-chapter": {
+    "file": "knee-chapter.jpg",
+    "title": "X-ray of a normal knee by lateral projection.jpg (cropped)",
+    "author": "Mikael Häggström, M.D. Author info - Reusing images- Conflicts of interest: None Mikael Häggström, M.D.",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:X-ray_of_a_normal_knee_by_lateral_projection.jpg"
+  },
+  "colombia-cocora": {
+    "file": "colombia-cocora.jpg",
+    "title": "Valle de Cocora, Colombia 03.jpg",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Valle_de_Cocora,_Colombia_03.jpg"
+  },
+  "colombia-cartagena": {
+    "file": "colombia-cartagena.jpg",
+    "title": "Sunset-cartagena-tower-dewired.jpg",
+    "author": "Igvir Ramirez",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sunset-cartagena-tower-dewired.jpg"
+  },
+  "colombia-guajira": {
+    "file": "colombia-guajira.jpg",
+    "title": "Taroa Dunes in Alta Guajira near Punta Gallinas 2023.jpg",
+    "author": "Oscar Costero",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Taroa_Dunes_in_Alta_Guajira_near_Punta_Gallinas_2023.jpg"
+  },
+  "colombia-bogota": {
+    "file": "colombia-bogota.jpg",
+    "title": "Cerros orientales Bogota.jpg",
+    "author": "Elviper",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Cerros_orientales_Bogota.jpg"
+  },
+  "colombia-amazon": {
+    "file": "colombia-amazon.jpg",
+    "title": "Cascada - Reserva Yaigojé Apaporis.jpg",
+    "author": "Jucatili25",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cascada_-_Reserva_Yaigoj%C3%A9_Apaporis.jpg"
+  },
+  "colombia-sanandres": {
+    "file": "colombia-sanandres.jpg",
+    "title": "Uninhabited island Cayo Bolivar.jpg",
+    "author": "...some guy",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Uninhabited_island_Cayo_Bolivar.jpg"
+  },
+  "colombia-cano": {
+    "file": "colombia-cano.jpg",
+    "title": "Canno Cristales-20180822-131651.jpg",
+    "author": "Xatly2",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Canno_Cristales-20180822-131651.jpg"
+  },
+  "colombia-paramo": {
+    "file": "colombia-paramo.jpg",
+    "title": "WLE2026 CO - Frailejones (Espeletia grandiflora) en flor, Páramo de Guerrero (88).jpg",
+    "author": "Jedidiahhorne",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:WLE2026_CO_-_Frailejones_(Espeletia_grandiflora)_en_flor,_P%C3%A1ramo_de_Guerrero_(88).jpg"
+  },
+  "colombia-south-america": {
+    "file": "colombia-south-america.jpg",
+    "title": "Colombia in South America (-mini map -rivers).svg",
+    "author": "TUBS",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Colombia_in_South_America_(-mini_map_-rivers).svg"
+  },
+  "colombia-bird": {
+    "file": "colombia-bird.jpg",
+    "title": "Andean cock-of-the-rock (Rupicola peruvianus sanguinolentus) male Antioquia 2.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Andean_cock-of-the-rock_(Rupicola_peruvianus_sanguinolentus)_male_Antioquia_2.jpg"
+  },
+  "colombia-pacific": {
+    "file": "colombia-pacific.jpg",
+    "title": "Ensenada de Utría - Mangroven.jpg",
+    "author": "Philipp Weigell",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ensenada_de_Utr%C3%ADa_-_Mangroven.jpg"
+  },
+  "colombia-andes": {
+    "file": "colombia-andes.jpg",
+    "title": "Cafe Quimbaya 2005-08-27.jpg",
+    "author": "",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Cafe_Quimbaya_2005-08-27.jpg"
+  },
+  "colombia-llanos": {
+    "file": "colombia-llanos.jpg",
+    "title": "Llanos3.jpg",
+    "author": "Haroldarmitage",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Llanos3.jpg"
+  },
+  "colombia-peak": {
+    "file": "colombia-peak.jpg",
+    "title": "Sierra Nevada del Cocuy (Boyacá, Colombia).jpg",
+    "author": "Valeriecortesv",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sierra_Nevada_del_Cocuy_(Boyac%C3%A1,_Colombia).jpg"
+  },
+  "colombia-regions-map": {
+    "file": "colombia-regions-map.jpg",
+    "title": "Mapa de Colombia (regiones naturales)-nn.svg, simplified and relabeled by us",
+    "author": "Milenioscuro and others",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mapa_de_Colombia_(regiones_naturales)-nn.svg"
+  },
+  "colombia-tolima": {
+    "file": "colombia-tolima.jpg",
+    "title": "Nevado del tolima y sus frailejones.jpg",
+    "author": "Cesar21694",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nevado_del_tolima_y_sus_frailejones.jpg"
+  },
+  "colombia-beach": {
+    "file": "colombia-beach.jpg",
+    "title": "116 Tayrona Colombia Beach.JPG",
+    "author": "David Shankbone",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:116_Tayrona_Colombia_Beach.JPG"
+  },
+  "colombia-sun": {
+    "file": "colombia-sun.jpg",
+    "title": "The Sun by the Atmospheric Imaging Assembly of NASA's Solar Dynamics Observatory - 20100819.jpg",
+    "author": "NASA/SDO (AIA)",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg"
+  },
+  "colombia-banana": {
+    "file": "colombia-banana.jpg",
+    "title": "Colbanana05.jpg, cropped by us",
+    "author": "Louise Wolff (darina)",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Colbanana05.jpg"
+  },
+  "colombia-cane": {
+    "file": "colombia-cane.jpg",
+    "title": "Cana de azucar valle del cauca.jpg",
+    "author": "Andres Garzon",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cana_de_azucar_valle_del_cauca.jpg"
+  },
+  "colombia-cacao": {
+    "file": "colombia-cacao.jpg",
+    "title": "Planta de cacao Colombia.jpg, cropped by us",
+    "author": "Anmajeur8",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Planta_de_cacao_Colombia.jpg"
+  },
+  "colombia-medellin": {
+    "file": "colombia-medellin.jpg",
+    "title": "Valley of Medellín- skyline.jpg",
+    "author": "User: (WT-shared) CONOCER at wts wikivoyage",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Valley_of_Medell%C3%ADn-_skyline.jpg"
+  },
+  "colombia-potato": {
+    "file": "colombia-potato.jpg",
+    "title": "Lake Tota papa.JPG",
+    "author": "Petruss",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lake_Tota_papa.JPG"
+  },
+  "colombia-market": {
+    "file": "colombia-market.jpg",
+    "title": "Market in Bogotá.jpg",
+    "author": "Mussi Katz",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Market_in_Bogot%C3%A1.jpg"
+  },
+  "colombia-ruana": {
+    "file": "colombia-ruana.jpg",
+    "title": "Campesino boyacense camino a casa.jpg, cropped by us",
+    "author": "Bernardo David David",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Campesino_boyacense_camino_a_casa.jpg"
+  },
+  "colombia-vueltiao": {
+    "file": "colombia-vueltiao.jpg",
+    "title": "Sombrero vueltiao.jpg",
+    "author": "Jdvillalobos",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sombrero_vueltiao.jpg"
+  },
+  "colombia-ajiaco": {
+    "file": "colombia-ajiaco.jpg",
+    "title": "Ajiaco in Bogotá.jpg",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ajiaco_in_Bogot%C3%A1.jpg"
+  },
+  "colombia-girardot": {
+    "file": "colombia-girardot.jpg",
+    "title": "Rio Magdalena, Girardot Colombia. - panoramio.jpg",
+    "author": "Jimmy Gómez N",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Magdalena,_Girardot_Colombia._-_panoramio.jpg"
+  },
+  "colombia-fusa": {
+    "file": "colombia-fusa.jpg",
+    "title": "Nevado del Tolima visto desde Fusagasugá.jpg",
+    "author": "Natlycu",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nevado_del_Tolima_visto_desde_Fusagasug%C3%A1.jpg"
+  },
+  "colombia-sierra": {
+    "file": "colombia-sierra.jpg",
+    "title": "Amanecer con vistas al Pico Cristóbal Colón und Pico Simón Bolívar en la Sierra Nevada de Santa Marta, Departamento de Magdalena, Colombia.jpg, cropped by us",
+    "author": "Mottenpriesterin",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amanecer_con_vistas_al_Pico_Crist%C3%B3bal_Col%C3%B3n_und_Pico_Sim%C3%B3n_Bol%C3%ADvar_en_la_Sierra_Nevada_de_Santa_Marta,_Departamento_de_Magdalena,_Colombia.jpg"
+  },
+  "colombia-pico": {
+    "file": "colombia-pico.jpg",
+    "title": "Pico Cristobal Colon.jpg",
+    "author": "Sylvain Perret (published under CC BY-SA-3.0)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pico_Cristobal_Colon.jpg"
+  },
+  "colombia-sierra-people": {
+    "file": "colombia-sierra-people.jpg",
+    "title": "Teaching the Children about Mother Earth.jpg, cropped by us",
+    "author": "Colombiaamazinglandscapes",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Teaching_the_Children_about_Mother_Earth.jpg"
+  },
+  "colombia-monks": {
+    "file": "colombia-monks.jpg",
+    "title": "Frailejones del nevado del Ruiz.jpg",
+    "author": "The GEGM",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Frailejones_del_nevado_del_Ruiz.jpg"
+  },
+  "colombia-coat": {
+    "file": "colombia-coat.jpg",
+    "title": "Guardianes del kumanday.jpg",
+    "author": "Biodiego88",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Guardianes_del_kumanday.jpg"
+  },
+  "colombia-wool": {
+    "file": "colombia-wool.jpg",
+    "title": "WLE2026 CO - Roseta de frailejón en floración (96).jpg, cropped by us",
+    "author": "Jedidiahhorne",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:WLE2026_CO_-_Roseta_de_frailej%C3%B3n_en_floraci%C3%B3n_(96).jpg"
+  },
+  "colombia-sumapaz": {
+    "file": "colombia-sumapaz.jpg",
+    "title": "Parque Nacional Natural Sumapaz, Panoramica lago y frailejones.jpg",
+    "author": "Danielfjio",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Parque_Nacional_Natural_Sumapaz,_Panoramica_lago_y_frailejones.jpg"
+  },
+  "colombia-bog": {
+    "file": "colombia-bog.jpg",
+    "title": "Turberas y zonas de recarga hídrica en Sumapaz.jpg",
+    "author": "Johan Andrés Toro",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Turberas_y_zonas_de_recarga_h%C3%ADdrica_en_Sumapaz.jpg"
+  },
+  "colombia-chingaza": {
+    "file": "colombia-chingaza.jpg",
+    "title": "LAGUNA DE CHINGAZA 1.jpg",
+    "author": "David Ricardo Rodriguez Parra",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:LAGUNA_DE_CHINGAZA_1.jpg"
+  },
+  "colombia-bernal": {
+    "file": "colombia-bernal.jpg",
+    "title": "Egan Bernal Arrivée 21e étape Tour France 2019 Paris 1.jpg",
+    "author": "Chabe01",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Egan_Bernal_Arriv%C3%A9e_21e_%C3%A9tape_Tour_France_2019_Paris_1.jpg"
+  },
+  "colombia-ruiz-map": {
+    "file": "colombia-ruiz-map.jpg",
+    "title": "Dinámica glaciar Nevado del Ruiz.jpg",
+    "author": "Marhernandezgu96",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Din%C3%A1mica_glaciar_Nevado_del_Ruiz.jpg"
+  },
+  "spanish-casa": {
+    "file": "spanish-casa.jpg",
+    "title": "Guatapé 24.jpg",
+    "author": "Gabriel Illescas",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Guatap%C3%A9_24.jpg"
+  },
+  "spanish-cama": {
+    "file": "spanish-cama.jpg",
+    "title": "Bed in hotel room 3.jpg",
+    "author": "Kurt Kaiser",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bed_in_hotel_room_3.jpg"
+  },
+  "spanish-planta": {
+    "file": "spanish-planta.jpg",
+    "title": "Houseplant Calathea orbifolia.jpg",
+    "author": "Supsoph",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Houseplant_Calathea_orbifolia.jpg"
+  },
+  "spanish-chichen": {
+    "file": "spanish-chichen.jpg",
+    "title": "Chichen-Itza-Castillo-Seen-From-East.JPG",
+    "author": "Bjørn Christian Tørrissen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chichen-Itza-Castillo-Seen-From-East.JPG"
+  },
+  "spanish-machu": {
+    "file": "spanish-machu.jpg",
+    "title": "Machu Picchu, Perú, 2015-07-30, DD 47.JPG",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_47.JPG"
+  },
+  "spanish-madrid": {
+    "file": "spanish-madrid.jpg",
+    "title": "Plaza Mayor de Madrid - 01.jpg",
+    "author": "Carlos Delgado",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Madrid_-_01.jpg"
+  },
+  "spanish-london": {
+    "file": "spanish-london.jpg",
+    "title": "Palace of Westminster, London - Feb 2007.jpg",
+    "author": "Diliff",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster,_London_-_Feb_2007.jpg"
+  },
+  "spanish-zocalo": {
+    "file": "spanish-zocalo.jpg",
+    "title": "Plaza de la Constitucion Ciudad de Mexico City.jpg",
+    "author": "Flickr user schlaeger",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Plaza_de_la_Constitucion_Ciudad_de_Mexico_City.jpg"
+  },
+  "spanish-wave": {
+    "file": "spanish-wave.jpg",
+    "title": "Waves in sea.jpg",
+    "author": "Saral Shots",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Waves_in_sea.jpg"
+  },
+  "spanish-booths": {
+    "file": "spanish-booths.jpg",
+    "title": "Interpreters (01113764) (9840785866).jpg",
+    "author": "Dean Calma / IAEA",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Interpreters_(01113764)_(9840785866).jpg"
+  },
+  "spanish-map": {
+    "file": "spanish-map.jpg",
+    "title": "Map of the Hispanophone World.svg",
+    "author": "DavaoDude",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Map_of_the_Hispanophone_World.svg"
+  },
+  "spanish-cover": {
+    "file": "spanish-cover.jpg",
+    "title": "Made for this lesson: map (CC0), waving hand from Fluent Emoji (MIT)",
+    "author": "Home School TV; map by DavaoDude",
+    "license": "CC0 and MIT",
+    "page": "https://commons.wikimedia.org/wiki/File:Map_of_the_Hispanophone_World.svg"
+  },
+  "spanish-card": {
+    "file": "spanish-card.jpg",
+    "title": "Made for this lesson: map (CC0), waving hand from Fluent Emoji (MIT)",
+    "author": "Home School TV; map by DavaoDude",
+    "license": "CC0 and MIT",
+    "page": "https://commons.wikimedia.org/wiki/File:Map_of_the_Hispanophone_World.svg"
+  },
+  "spanish-hello": {
+    "file": "spanish-hello.jpg",
+    "title": "Made for this lesson: waving hand from Fluent Emoji (MIT)",
+    "author": "Home School TV",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "spanish-esta": {
+    "file": "spanish-esta.jpg",
+    "title": "Made for this lesson: simplified map of Colombia with a marker and the sentence Bogotá está en Colombia",
+    "author": "Home School TV; map from Wikimedia Commons, Mapa de Colombia (regiones naturales)-nn.svg",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mapa_de_Colombia_(regiones_naturales)-nn.svg"
+  },
+  "spanish-estoy": {
+    "file": "spanish-estoy.jpg",
+    "title": "Made for this lesson: Plaza de la Constitucion photo (CC BY-SA 2.0), person from Fluent Emoji (MIT), speech bubble added",
+    "author": "Flickr user schlaeger; icon by Microsoft; changes by Home School TV",
+    "license": "CC BY-SA 2.0 and MIT",
+    "page": "https://commons.wikimedia.org/wiki/File:Plaza_de_la_Constitucion_Ciudad_de_Mexico_City.jpg"
+  },
+  "spanish-interpreter": {
+    "file": "spanish-interpreter.jpg",
+    "title": "Made for this lesson: speaking head from Fluent Emoji (MIT)",
+    "author": "Home School TV",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "spanish-papa": {
+    "file": "spanish-papa.jpg",
+    "title": "Made for this lesson: two parts of the map of the Spanish-speaking world (CC0)",
+    "author": "Home School TV; map by DavaoDude",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Map_of_the_Hispanophone_World.svg"
+  },
+  "emotions-cover": {
+    "file": "emotions-cover.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "emotions-card": {
+    "file": "emotions-card.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-ch1": {
+    "file": "em-ch1.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-ch3": {
+    "file": "em-ch3.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-ch4": {
+    "file": "em-ch4.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-ch5": {
+    "file": "em-ch5.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-ch6": {
+    "file": "em-ch6.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-bonus": {
+    "file": "em-bonus.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-happy": {
+    "file": "em-face-happy.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-sad": {
+    "file": "em-face-sad.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-angry": {
+    "file": "em-face-angry.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-scared": {
+    "file": "em-face-scared.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-surprised": {
+    "file": "em-face-surprised.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-face-nervous": {
+    "file": "em-face-nervous.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-outline": {
+    "file": "em-outline.jpg",
+    "title": "Made for this lesson: body outline from this project",
+    "author": "Home School TV",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-brain": {
+    "file": "em-brain.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-article": {
+    "file": "em-article.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "em-choose": {
+    "file": "em-choose.jpg",
+    "title": "Made for this lesson from Fluent Emoji 3D icons (MIT)",
+    "author": "Home School TV; icons by Microsoft",
+    "license": "MIT",
+    "page": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "neuro-neuron": {
+    "file": "neuro-neuron.jpg",
+    "title": "Blausen 0657 MultipolarNeuron.png",
+    "author": "BruceBlaus",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blausen_0657_MultipolarNeuron.png"
+  },
+  "neuro-brain": {
+    "file": "neuro-brain.jpg",
+    "title": "Blausen 0102 Brain Motor&Sensory.png (title cropped)",
+    "author": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blausen_0102_Brain_Motor%26Sensory.png"
+  },
+  "neuro-stem": {
+    "file": "neuro-stem.jpg",
+    "title": "Blausen 0114 BrainstemAnatomy.png",
+    "author": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blausen_0114_BrainstemAnatomy.png"
+  },
+  "neuro-reflex": {
+    "file": "neuro-reflex.jpg",
+    "title": "Imgnotraçat arc reflex eng.svg",
+    "author": "MartaAguayo",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Imgnotra%C3%A7at_arc_reflex_eng.svg"
+  },
+  "neuro-body": {
+    "file": "neuro-body.jpg",
+    "title": "TE-Nervous system diagram.svg (labels removed, colors changed for a dark background)",
+    "author": "Wikimedia Commons uploader's own work, see the page. Labels removed and colors changed for this lesson",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:TE-Nervous_system_diagram.svg"
+  },
+  "neuro-cover": {
+    "file": "neuro-cover.jpg",
+    "title": "TE-Nervous system diagram.svg (labels removed, colors changed for a dark background)",
+    "author": "Wikimedia Commons uploader's own work, see the page. Labels removed and colors changed for this lesson",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:TE-Nervous_system_diagram.svg"
+  },
+  "neuro-plate": {
+    "file": "neuro-plate.jpg",
+    "title": "TE-Nervous system diagram.svg (labels removed)",
+    "author": "Wikimedia Commons uploader's own work, see the page. Labels removed for this lesson",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:TE-Nervous_system_diagram.svg"
+  },
+  "colombia-cover": {
+    "file": "colombia-cover.jpg",
+    "title": "Colombia's six regions, as six strips (collage)",
+    "author": "Collage of six credited photos",
+    "license": "CC BY-SA 4.0",
+    "page": "",
+    "parts": [
+      "colombia-beach",
+      "colombia-pacific",
+      "colombia-andes",
+      "colombia-llanos",
+      "colombia-amazon",
+      "colombia-sanandres"
+    ],
+    "note": "Made for this project from six photos listed under parts, each with its own entry here: colombia-beach (David Shankbone, CC BY-SA 3.0), colombia-pacific (Philipp Weigell, CC BY 3.0), colombia-andes (unknown author, CC BY 2.5), colombia-llanos (Haroldarmitage, CC BY-SA 3.0), colombia-amazon (Jucatili25, CC BY-SA 4.0), colombia-sanandres (...some guy, CC BY 2.0). Share-alike, because some of the photos are."
+  },
+  "muscle-fuel": {
+    "file": "muscle-fuel.jpg",
+    "title": "Sugar and oxygen reach a muscle cell (diagram)",
+    "author": "Home School TV",
+    "license": "Own drawing",
+    "page": "",
+    "note": "Drawn for this project: simple shapes and text, no outside source"
+  },
+  "muscle-myths": {
+    "file": "muscle-myths.jpg",
+    "title": "Two muscle myths, crossed out (diagram)",
+    "author": "Home School TV",
+    "license": "Own drawing",
+    "page": "",
+    "note": "Drawn for this project: simple shapes and text, no outside source"
+  },
+  "muscle-shorter": {
+    "file": "muscle-shorter.jpg",
+    "title": "A muscle cell, relaxed and contracted (diagram)",
+    "author": "Home School TV",
+    "license": "Own drawing",
+    "page": "",
+    "note": "Drawn for this project: simple shapes and text, no outside source"
+  },
+  "muscle-stronger": {
+    "file": "muscle-stronger.jpg",
+    "title": "A muscle cell after weeks of exercise (diagram)",
+    "author": "Home School TV",
+    "license": "Own drawing",
+    "page": "",
+    "note": "Drawn for this project: simple shapes and text, no outside source"
+  }
+}

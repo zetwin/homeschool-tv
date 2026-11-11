@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Round 3 B: Shelf</title>
+<link rel="stylesheet" href="../base.css"><script src="../data.js"></script>
+<style>
+/* B, Shelf: one big banner for the lesson on now, then today's lessons as a shelf of picture cards, like a video app. */
+.shelf { display: flex; flex: 1; flex-direction: column; gap: 1em; min-height: 0; padding: .6em 1.2em 1em; }
+.banner { display: grid; flex: 1.5; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); min-height: 0; overflow: hidden; background: var(--surface); border: 1.5px solid var(--line); border-radius: 28px; }
+.banner div { display: flex; flex-direction: column; justify-content: center; gap: .35em; padding: 1em 1.5em; }
+.banner small { color: var(--mute); font-size: .9em; font-weight: 700; }
+.banner h2 { font: 800 2.1em/1.05 var(--display); letter-spacing: -.02em; }
+.banner p { color: var(--mute); }
+.banner .play { align-self: flex-start; margin-top: .4em; }
+.banner img { width: 100%; height: 100%; object-fit: cover; }
+.row { display: grid; flex: 1; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8em; min-height: 0; }
+.poster { display: flex; flex-direction: column; min-height: 0; overflow: hidden; padding: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 20px; text-align: left; }
+.poster figure { position: relative; flex: 1; min-height: 3em; }
+.poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.poster figcaption { position: absolute; left: .5em; top: .5em; display: inline-flex; align-items: center; gap: .3em; padding: .1em .55em; background: #FFFFFF; border-radius: 999px; font-size: .9em; font-weight: 700; }
+.poster figcaption .ic { width: .9em; height: .9em; color: #0E7A43; stroke-width: 3; }
+.poster.done figure { opacity: .55; }
+.poster div { display: grid; gap: .1em; padding: .5em .8em .7em; }
+.poster b { font-size: 1em; line-height: 1.2; }
+.poster small { color: var(--mute); font-size: .9em; }
+@media (orientation: portrait) { .banner { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; } .banner img { order: -1; } .row { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); } .poster figure { min-height: 0; } }
+@media (max-width: 600px) { .shelf { flex: none; } .banner, .row { flex: none; } .banner img { height: 30vh; } .row { grid-auto-rows: auto; } .poster figure { flex: none; height: 7em; } .banner h2 { font-size: 1.8em; } }
+</style></head><body>
+<p class="note">Version B: Shelf. An example day with real lessons</p>
+<script>
+const now = R3.lessons.find((l) => l.state === 'now'), rest = R3.lessons.filter((l) => l !== now), m = R3.missed[0];
+const tagOf = (l) => (l.state === 'done' ? `${R3.icon.check}Watched` : l.time);
+const poster = (l, tag, cls = '') => `<button class="poster ${cls}"><figure><img src="${R3.img(l.img)}" alt=""><figcaption>${tag}</figcaption></figure><div><b>${l.title}</b><small>${l.subject}</small></div></button>`;
+document.body.insertAdjacentHTML('beforeend', `${R3.top()}
+<main class="shelf">
+  <section class="banner"><div><small>On now, ${now.time}</small><h2>${now.title}</h2><p>${now.subject}</p><button class="play">${R3.icon.play}Play on the TV</button></div><img src="${R3.img(now.img)}" alt=""></section>
+  <section class="row" aria-label="Today’s other lessons">${rest.map((l) => poster(l, tagOf(l), l.state === 'done' ? 'done' : '')).join('')}${poster(m, 'Missed')}</section>
+</main>${R3.places()}`);
+</script></body></html>

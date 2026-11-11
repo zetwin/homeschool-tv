@@ -1,0 +1,27 @@
+/* Spanish word help for Neuroscience, lesson 1. Each pair: the English word as said in the lesson (forms split by |), then the Spanish.
+   Written by Claude on 2026-11-07, in neutral Latin American Spanish. A fluent speaker should read it; parents never have to. See docs/product/LANGUAGES.md. */
+((window.KEYWORDS ??= {}).es ??= {})['neuro-1'] = [
+  ['brain', 'el cerebro'],
+  ['nerve|nerves', 'el nervio'],
+  ['nervous system', 'el sistema nervioso'],
+  ['spinal cord', 'la médula espinal'],
+  ['neuron|neurons', 'la neurona'],
+  ['cell|cells', 'la célula'],
+  ['message|messages', 'el mensaje'],
+  ['signal|signals', 'la señal'],
+  ['electrical|electric', 'eléctrico'],
+  ['reflex|reflexes', 'el reflejo'],
+  ['stimulus', 'el estímulo'],
+  ['response', 'la respuesta'],
+  ['receptor|receptors', 'el receptor'],
+  ['muscle|muscles', 'el músculo'],
+  ['skin', 'la piel'],
+  ['pain', 'el dolor'],
+  ['hand', 'la mano'],
+  ['finger', 'el dedo'],
+  ['eye|eyes', 'el ojo'],
+  ['sense|senses', 'el sentido'],
+  ['body', 'el cuerpo'],
+  ['fast', 'rápido'],
+  ['myth', 'el mito'],
+];

@@ -1,0 +1,574 @@
+<title>Home School Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Literata:opsz,wght@7..72,400;7..72,600&family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap">
+<style>
+/* Layout concept: a neutral prototype bar on top; below it the same school wearing three worlds.
+   Each look commits to one visual world (a book, a sea chart, a kids' TV channel), so each sets its own colors. */
+:root {
+  --frame: #1B2026; --frame-2: #2C333B; --frame-fg: #F1F3F5; --frame-dim: #B4BDC7;
+  --bg: #EEF2F6; --surface: #FBFCFD; --ink: #12306B; --muted: #475A7E; --accent: #12306B; --accent-fg: #FBFCFD;
+  --hi: #FFD23F; --hi-fg: #12306B; --line: #C6D2E3; --bone: #FDFDF6; --bone-line: #12306B; --bone-hi: #FFD23F;
+  --good: #116B45; --bad: #B3261E; --good-bg: #DDF3E7; --bad-bg: #FBE4E1;
+  --display: 'Young Serif', Georgia, serif; --body: 'Literata', Georgia, serif; --radius: 4px;
+}
+[data-look="map"] {
+  --bg: #0C2A35; --surface: #143B49; --ink: #EAFBF5; --muted: #A9D3CB; --accent: #FF8A65; --accent-fg: #0C2A35;
+  --hi: #7BE0C3; --hi-fg: #0C2A35; --line: #2F6170; --bone: #F5F1E2; --bone-line: #0C2A35; --bone-hi: #FF8A65;
+  --good: #7BE0C3; --bad: #FFB4A2; --good-bg: #17505A; --bad-bg: #57323A;
+  --display: 'Fredoka', Verdana, sans-serif; --body: 'Nunito', Verdana, sans-serif; --radius: 22px; color-scheme: dark;
+}
+[data-look="channel"] {
+  --bg: #F5F4FA; --surface: #FFFFFF; --ink: #17131F; --muted: #575166; --accent: #D42A20; --accent-fg: #FFFFFF;
+  --hi: #FFC400; --hi-fg: #17131F; --line: #DAD6E4; --bone: #FFFFFF; --bone-line: #17131F; --bone-hi: #FFC400;
+  --good: #0F6B4A; --bad: #B3261E; --good-bg: #DBF3E8; --bad-bg: #FBE4E1;
+  --display: 'Bricolage Grotesque', Arial, sans-serif; --body: 'DM Sans', Arial, sans-serif; --radius: 14px;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; transition: background .2s; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--frame); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; font-weight: 600; }
+[data-look="book"] h1, [data-look="book"] h2, [data-look="book"] h3 { font-weight: 400; }
+[data-look="channel"] h1, [data-look="channel"] h2, [data-look="channel"] h3 { font-weight: 800; letter-spacing: -.02em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--hi); outline-offset: 2px; }
+
+/* Prototype bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--frame); color: var(--frame-fg);
+  font: 500 14px/1.2 'DM Sans', Arial, sans-serif; padding-block: 10px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; }
+.bar b { font-weight: 700; margin-right: auto; }
+.seg { display: flex; align-items: center; gap: 8px; }
+.seg > span { color: var(--frame-dim); }
+.seg div { display: flex; background: var(--frame-2); border-radius: 9px; padding: 3px; flex-wrap: wrap; }
+.seg button { background: none; border: 0; color: var(--frame-fg); padding: 7px 11px; border-radius: 7px; min-height: 34px; }
+.seg button[aria-pressed="true"] { background: var(--frame-fg); color: var(--frame); font-weight: 700; }
+.wrap { max-width: 1240px; margin-inline: auto; padding-block: 26px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Shared */
+.btn { background: var(--accent); color: var(--accent-fg); border: 0; border-radius: var(--radius); padding: 12px 22px; font-weight: 700; min-height: 46px; }
+.btn.alt { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--line); }
+.btn:disabled { opacity: .35; cursor: default; }
+.eyebrow { color: var(--muted); font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.today { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.today h1 { font-size: clamp(30px, 4.6vw, 48px); }
+.chip { display: inline-block; background: var(--hi); color: var(--hi-fg); font-weight: 700; padding: 4px 11px; border-radius: 99px; font-size: 14px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--frame); color: var(--frame-fg);
+  padding: 12px 18px; border-radius: 10px; font: 500 15px 'DM Sans', Arial, sans-serif; z-index: 20; max-width: calc(100% - 32px); }
+
+/* Skeleton */
+.skel { width: 100%; max-height: 560px; display: block; }
+.skel .o { fill: none; stroke: var(--bone-line); stroke-linecap: round; stroke-linejoin: round; }
+.skel .b { fill: none; stroke: var(--bone); stroke-linecap: round; stroke-linejoin: round; transition: stroke .15s; }
+.skel .fo { fill: var(--bone); stroke: var(--bone-line); stroke-width: 2.4; transition: fill .15s; }
+.skel .dark { fill: var(--bone-line); }
+.skel .hit { fill: none; stroke: transparent; stroke-linecap: round; }
+.skel g[data-bone] { cursor: pointer; }
+.skel g[data-bone]:hover .b, .skel g.hl .b { stroke: var(--bone-hi); }
+.skel g[data-bone]:hover .fo, .skel g.hl .fo { fill: var(--bone-hi); }
+.skel g.right .b { stroke: #38C983; } .skel g.right .fo { fill: #38C983; }
+.skel g.wrong .b { stroke: #F0705F; } .skel g.wrong .fo { fill: #F0705F; }
+.boneTip { text-align: center; font-weight: 700; min-height: 26px; font-size: 15px; color: var(--muted); }
+
+/* Book: home */
+.shelfWrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 28px; align-items: start; }
+.shelf { display: grid; gap: 22px; background: var(--surface); border: 1px solid var(--line); padding: 20px 20px 24px; min-width: 0; }
+.shelfRow { display: flex; align-items: flex-end; gap: 22px; overflow-x: auto; border-bottom: 12px solid var(--ink); padding-top: 8px; }
+.groupLabel { font-size: 14px; font-weight: 600; color: var(--muted); margin: 0 0 8px; white-space: nowrap; }
+.group { display: flex; flex-direction: column; flex: var(--n) 0 auto; }
+.spines { display: flex; align-items: flex-end; gap: 3px; }
+.spine { writing-mode: vertical-rl; transform: rotate(180deg); border: 0; flex: 1 0 50px; padding: 12px 6px; text-align: left; font-family: var(--display); font-size: 17px; line-height: 1.1;
+  color: #fff; border-radius: 3px; transition: translate .15s; white-space: nowrap; }
+.spine:hover { translate: 0 -8px; }
+.spine.open { color: #12306B; background: #FFD23F !important; font-weight: 700; box-shadow: 0 0 0 2px #12306B; }
+.cover { background: var(--ink); color: #FBFCFD; padding: 26px; display: flex; flex-direction: column; gap: 14px; border-radius: 3px 10px 10px 3px; border-left: 12px solid #0A1F4A; }
+.cover h2 { font-size: 40px; color: #FFD23F; }
+.cover .eyebrow { color: #C9D6EE; }
+.cover .skel { max-height: 230px; --bone-line: #FBFCFD; --bone: #12306B; }
+.cover .btn { background: #FFD23F; color: #12306B; }
+
+/* Map: home */
+.subjects { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.subjects button { border: 2px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 99px; padding: 8px 16px; font-weight: 700; min-height: 42px; }
+.subjects button.on { background: var(--hi); color: var(--hi-fg); border-color: var(--hi); }
+.sea { position: relative; aspect-ratio: 16 / 6.2; border-radius: 28px; overflow: hidden; background-color: #0F3644;
+  background-image: radial-gradient(circle at 20% 30%, #17505E 0, transparent 34%), radial-gradient(circle at 80% 75%, #17505E 0, transparent 38%), repeating-linear-gradient(0deg, transparent 0 31px, rgba(255,255,255,.035) 31px 32px), repeating-linear-gradient(90deg, transparent 0 31px, rgba(255,255,255,.035) 31px 32px); }
+.sea svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sea .trail { fill: none; stroke: #F5F1E2; stroke-width: 3; stroke-dasharray: 2 11; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.sea .tall { display: none; }
+.stop { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; width: clamp(84px, 13vw, 140px); aspect-ratio: 1.15; border: 0; padding: 6px;
+  border-radius: 58% 42% 52% 48% / 46% 56% 44% 54%; background: #3E8F6F; color: #fff; font-family: var(--display); font-weight: 600; font-size: clamp(13px, 1.5vw, 17px); line-height: 1.05; display: grid; place-items: center; box-shadow: 0 7px 0 #0A2029; }
+.stop small { display: block; font: 700 11px var(--body); opacity: .9; margin-top: 2px; }
+.stop.open { background: #FF8A65; color: #0C2A35; outline: 4px solid #F5F1E2; outline-offset: 3px; }
+.stop.locked { background: #467A6C; color: #F3FBF8; }
+.stop:nth-of-type(even) { border-radius: 44% 56% 48% 52% / 58% 42% 58% 42%; }
+.mapFoot { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.mapFoot > div { background: var(--surface); border-radius: var(--radius); padding: 14px 18px; flex: 1 1 200px; min-width: 0; }
+.mapFoot strong { font-family: var(--display); font-size: 26px; display: block; }
+
+/* Channel: home */
+.hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); background: #17131F; color: #fff; border-radius: 22px; overflow: hidden; margin-bottom: 26px; }
+.hero .txt { padding: clamp(22px, 4vw, 46px); display: flex; flex-direction: column; gap: 16px; align-items: flex-start; justify-content: center; }
+.hero h2 { font-size: clamp(38px, 6vw, 74px); line-height: .98; }
+.hero p { color: #D8D4E4; }
+.hero .eyebrow { color: #FFC400; }
+.hero .pic { background: #FFC400; padding: 18px; display: grid; place-items: center; }
+.hero .skel { max-height: 330px; --bone: #fff; --bone-hi: #fff; --bone-line: #17131F; }
+.row { margin-bottom: 24px; }
+.row h3 { font-size: 24px; margin-bottom: 10px; }
+.posters { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
+.poster { flex: 0 0 186px; aspect-ratio: 4 / 3; border: 0; border-radius: var(--radius); padding: 14px; color: #fff; text-align: left; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1.05; letter-spacing: -.01em; transition: translate .15s; }
+.poster:hover { translate: 0 -4px; }
+.poster small { font: 600 13px var(--body); letter-spacing: 0; opacity: .95; }
+
+/* Lesson */
+.lesson { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--surface); }
+.lesson .page { padding: clamp(22px, 3.4vw, 44px); display: flex; flex-direction: column; gap: 16px; min-width: 0; min-height: 480px; }
+.lesson .page.fig { display: grid; align-content: center; gap: 6px; justify-items: center; }
+.lesson .skel { max-height: 410px; }
+.lesson h2 { font-size: clamp(30px, 4vw, 46px); }
+.lesson ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.fact { background: var(--hi); color: var(--hi-fg); padding: 12px 16px; font-weight: 600; border-radius: var(--radius); }
+.try { border: 2px dashed var(--line); padding: 12px 16px; border-radius: var(--radius); }
+.spacer { flex: 1; }
+.lessonNav { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+.lessonNav .grow { flex: 1 1 120px; display: flex; gap: 6px; align-items: center; min-width: 120px; }
+.dot { flex: 1; height: 8px; background: var(--line); border: 0; border-radius: 9px; padding: 0; }
+.dot.on { background: var(--accent); }
+[data-look="book"] .lesson { box-shadow: 0 2px 0 var(--line), 0 18px 40px -22px #12306B; border: 1px solid var(--line); }
+[data-look="book"] .lesson .page:first-child { border-right: 1px solid var(--line); box-shadow: inset -30px 0 30px -30px rgba(18,48,107,.3); }
+[data-look="book"] .folio { font-size: 14px; color: var(--muted); }
+[data-look="map"] .lesson { border-radius: 26px; overflow: hidden; }
+[data-look="map"] .lesson .page.fig { background: #0F3644; }
+[data-look="map"] .dot { height: 14px; flex: 0 0 14px; border-radius: 50%; }
+[data-look="channel"] .lesson { background: #17131F; color: #fff; border-radius: 18px; overflow: hidden; }
+[data-look="channel"] .lesson .page { --ink: #fff; }
+[data-look="channel"] .lesson .page.fig { background: #FFC400; --bone-hi: #FFFFFF; --bone: #FFE27A; }
+[data-look="channel"] .lesson .boneTip { color: #17131F; }
+[data-look="channel"] .lesson .try { border-color: #6C6680; }
+.caption { background: #000; color: #fff; padding: 8px 14px; border-radius: 6px; font-size: 16px; }
+
+/* Test */
+.test { max-width: 900px; margin-inline: auto; background: var(--surface); border-radius: var(--radius); padding: clamp(20px, 4vw, 44px); border: 1px solid var(--line); }
+.progress { height: 8px; background: var(--line); border-radius: 9px; overflow: hidden; margin-block: 8px 20px; }
+.progress i { display: block; height: 100%; background: var(--accent); }
+.test h2 { font-size: clamp(26px, 3.4vw, 38px); margin-bottom: 18px; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.opt { background: transparent; border: 2px solid var(--line); border-radius: var(--radius); padding: 14px 16px; text-align: left; font-weight: 600; min-height: 54px; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt.right { background: var(--good-bg); border-color: var(--good); color: var(--ink); }
+.opt.wrong { background: var(--bad-bg); border-color: var(--bad); color: var(--ink); }
+.test .skel { max-height: 430px; }
+.typeRow { display: flex; gap: 10px; flex-wrap: wrap; }
+.typeRow input { flex: 1 1 200px; min-width: 0; font: inherit; padding: 12px 14px; border: 2px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--ink); }
+.feedback { margin-top: 16px; padding: 12px 16px; border-radius: var(--radius); font-weight: 600; }
+.feedback.ok { background: var(--good-bg); color: var(--ink); }
+.feedback.no { background: var(--bad-bg); color: var(--ink); }
+.testFoot { display: flex; justify-content: flex-end; margin-top: 18px; }
+.bigScore { font-family: var(--display); font-size: clamp(70px, 12vw, 130px); line-height: 1; }
+.review { display: grid; gap: 6px; margin-block: 18px; }
+.review div { padding: 8px 12px; border-radius: 8px; font-size: 15px; }
+.review .y { background: var(--good-bg); } .review .n { background: var(--bad-bg); }
+.nextDates { display: flex; gap: 8px; flex-wrap: wrap; margin-block: 8px 20px; }
+
+/* Parents */
+.panels { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; min-width: 0; }
+.panel h2 { font-size: 26px; margin-bottom: 12px; }
+.tableWrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 15px; }
+th { color: var(--muted); font-size: 13px; }
+.bars { display: flex; gap: 3px; align-items: flex-end; height: 34px; }
+.bars i { width: 12px; background: var(--accent); border-radius: 2px 2px 0 0; display: block; }
+.status { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.status.due { background: var(--hi); color: var(--hi-fg); }
+.status.done { background: var(--good-bg); color: var(--ink); }
+.status.none { box-shadow: inset 0 0 0 1.5px var(--line); }
+.week { display: grid; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.week li { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 10px; padding-block: 6px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.week b { color: var(--muted); }
+.note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+.create { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.create textarea { width: 100%; height: 470px; font: 14.5px/1.5 ui-monospace, Menlo, Consolas, monospace; background: transparent; color: var(--ink); border: 2px solid var(--line); border-radius: var(--radius); padding: 14px; resize: vertical; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 18px; padding: 0; list-style: none; counter-reset: s; }
+.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; font-size: 15px; }
+.steps li::before { content: counter(s) ". "; font-weight: 800; }
+.previewCard { background: var(--bg); padding: 20px; border-radius: var(--radius); display: grid; gap: 10px; }
+.previewCard h3 { font-size: 28px; }
+
+@media (max-width: 820px) {
+  .shelfWrap, .lesson, .hero, .create, .panels { grid-template-columns: minmax(0, 1fr); }
+  .lesson .page { min-height: 0; }
+  [data-look="book"] .lesson .page:first-child { border-right: 0; border-bottom: 1px solid var(--line); box-shadow: none; }
+  .lesson .skel { max-height: 330px; }
+  .sea { aspect-ratio: 4 / 5.4; }
+  .sea .wide { display: none; } .sea .tall { display: inline; }
+  .stop { left: var(--mx); top: var(--my); width: 104px; font-size: 14px; }
+  .bar b { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="bar" class="bar"></div>
+<main id="app" class="wrap"></main>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+const LOOKS = { book: 'Book', map: 'Map', channel: 'Channel' };
+const PEOPLE = ['Kid 1', 'Kid 2', 'Kid 3', 'Parent'];
+
+const SUBJECTS = [
+  { name: 'Human Body', color: '#12306B', topics: ['The Skeleton', 'Muscles & Joints', 'Heart & Blood', 'Lungs', 'Digestion', 'Brain & Nerves'] },
+  { name: 'Maths', color: '#0F766E', topics: ['Fractions', 'Ratios', 'Geometry'] },
+  { name: 'History', color: '#9A3412', topics: ['Ancient Egypt', 'The Silk Road'] },
+  { name: 'Geography', color: '#4D7C0F', topics: ['Rivers', 'Volcanoes'] },
+  { name: 'English', color: '#7E22CE', topics: ['Story Writing', 'Grammar'] },
+  { name: 'Life Skills', color: '#BE123C', topics: ['Money Basics', 'Cooking'] },
+];
+
+const PAGES = [
+  { title: 'Your body has a frame', hl: ['all'],
+    body: ['An adult skeleton has 206 bones. Without it, you would collapse like a tent with no poles.', 'Babies are born with about 270 to 300 bones. Many of them join together as you grow.'],
+    fact: 'At your age, some of your bones are still joining up.' },
+  { title: 'Five jobs bones do', hl: ['skull', 'ribs', 'femur'],
+    list: ['Hold you up', 'Protect your organs', 'Let you move, working with muscles', 'Make blood cells', 'Store minerals such as calcium'],
+    fact: 'Remember it as: support, protect, move, make, store.' },
+  { title: 'Armour for your organs', hl: ['skull', 'ribs', 'spine'],
+    list: ['Skull: protects your brain', 'Ribs: protect your heart and lungs', 'Spine: protects your spinal cord'],
+    fact: 'You have 12 pairs of ribs. That is 24 ribs.' },
+  { title: 'Longest, smallest, most', hl: ['femur', 'hand', 'foot'],
+    body: ['The femur, your thigh bone, is the longest bone in your body.', 'The smallest is the stapes. It sits inside your ear and is about 3 mm long.'],
+    fact: 'More than half of your bones are in your hands and feet: 106 of 206.' },
+  { title: 'Bones are alive', hl: ['femur', 'humerus'],
+    body: ['Bones have blood vessels and nerves, and they can repair themselves after a break.', 'Soft marrow inside many bones makes your blood cells.'],
+    tryIt: 'Try it: put a clean chicken bone in a jar of vinegar for a few days, then gently bend it. What did the vinegar remove?' },
+  { title: 'Joints let you move', hl: ['patella', 'humerus', 'pelvis'],
+    list: ['Hinge joints open and close like a door: elbow, knee', 'Ball-and-socket joints move in many directions: shoulder, hip', 'Fixed joints do not move: the skull'],
+    fact: 'Next: 8 quick questions.' },
+];
+
+const QUESTIONS = [
+  { type: 'tap', q: 'Tap the longest bone in the body.', a: 'femur', why: 'The femur is your thigh bone. It is the longest bone you have.' },
+  { type: 'mcq', q: 'How many bones does an adult have?', o: ['106', '206', '270', '300'], a: '206', why: 'Adults have 206. Babies start with more, and many join together.' },
+  { type: 'tap', q: 'Tap the bones that protect your heart and lungs.', a: 'ribs', why: 'Your ribs form a cage around your heart and lungs.' },
+  { type: 'mcq', q: 'Which of these is NOT a job of bones?', o: ['Make blood cells', 'Protect organs', 'Digest food', 'Store minerals'], a: 'Digest food', why: 'Digesting food is the job of the digestive system.' },
+  { type: 'mcq', q: 'What kind of joint is in your shoulder?', o: ['Hinge', 'Ball and socket', 'Fixed'], a: 'Ball and socket', why: 'Ball-and-socket joints let your arm move in many directions.' },
+  { type: 'text', q: 'What soft tissue inside bones makes blood cells?', a: 'marrow', why: 'Bone marrow makes your blood cells.' },
+  { type: 'mcq', q: 'True or false: babies have fewer bones than adults.', o: ['True', 'False'], a: 'False', why: 'Babies have more bones. Many join together as they grow.' },
+  { type: 'mcq', q: 'Where is the smallest bone in your body?', o: ['Little toe', 'Nose', 'Ear', 'Little finger'], a: 'Ear', why: 'The stapes is inside your ear.' },
+];
+
+const BONE_NAMES = { skull: 'Skull', jaw: 'Jaw (mandible)', clavicle: 'Collarbone (clavicle)', ribs: 'Ribs', spine: 'Spine', humerus: 'Upper arm (humerus)', forearm: 'Forearm (radius and ulna)', hand: 'Hand', pelvis: 'Pelvis', femur: 'Thigh bone (femur)', patella: 'Kneecap (patella)', shin: 'Lower leg (tibia and fibula)', foot: 'Foot' };
+
+const EXAMPLE_SCORES = { 'Kid 1': [5, 6, 7], 'Kid 2': [4, 6], 'Kid 3': [] };
+const EXAMPLE_NOTES = { 'Kid 1': ['due', 'Tomorrow', 'Joint types'], 'Kid 2': ['due', 'Today', 'Bone marrow, ribs'], 'Kid 3': ['none', 'Not started', 'No test yet'] };
+
+const SAMPLE_FILE = `# Muscles pull bones
+Muscles can only pull. They work in pairs.
+When your biceps pulls, your triceps relaxes.
+! Feel it: hold your upper arm and bend your elbow.
+
+# Tendons connect them
+Tendons join muscles to bones.
+! Your Achilles tendon is the strongest one.
+
+Q: Muscles work in...
+- singles
+* pairs
+- threes
+
+Q: What joins a muscle to a bone?
+* tendon
+- marrow
+- rib`;
+
+const S = { look: 'book', who: 'Kid 1', view: 'home', page: 0, playing: false, test: null, draft: SAMPLE_FILE, attempts: load() };
+
+function load() { try { return JSON.parse(localStorage.getItem('hs-attempts')) || {}; } catch (e) { return {}; } }
+function save() { try { localStorage.setItem('hs-attempts', JSON.stringify(S.attempts)); } catch (e) {} }
+
+/* Skeleton drawing: long bones are a thick outline stroke with a thinner bone stroke on top. */
+function L(d, w) { return `<path class="hit" d="${d}" stroke-width="${w + 12}"/><path class="o" d="${d}" stroke-width="${w + 3}"/><path class="b" d="${d}" stroke-width="${w}"/>`; }
+function line(a, b, c, d, w) { return L(`M${a} ${b}L${c} ${d}`, w); }
+function knob(x, y, r) { return `<circle class="fo" cx="${x}" cy="${y}" r="${r}"/>`; }
+function side() {
+  const ribW = [30, 40, 46, 48, 48, 44, 38];
+  const ribs = ribW.map((w, i) => { const y = 118 + i * 20; return L(`M118 ${y}C${118 - w * .6} ${y - 8} ${118 - w} ${y + 2} ${120 - w} ${y + 14}`, 5); }).join('');
+  const fingers = [[35, 342], [42, 350], [50, 349], [57, 340]].map(([x, y]) => line(45, 310, x, y, 3)).join('') + line(52, 304, 66, 326, 3);
+  const toes = [[66, 628], [74, 633], [83, 635], [92, 634], [100, 630]].map(([x, y]) => line(87, 602, x, y, 3)).join('');
+  return `<g data-bone="clavicle">${L('M114 110Q94 102 72 112', 6)}</g>
+  <g data-bone="ribs">${ribs}</g>
+  <g data-bone="humerus">${line(68, 120, 54, 206, 9)}${knob(69, 118, 9)}${knob(54, 208, 7)}</g>
+  <g data-bone="forearm">${line(50, 216, 40, 294, 5)}${line(58, 216, 50, 294, 5)}</g>
+  <g data-bone="hand">${knob(45, 304, 8)}${fingers}</g>
+  <g data-bone="femur">${line(95, 342, 88, 448, 11)}${knob(96, 338, 9)}</g>
+  <g data-bone="patella">${knob(88, 460, 9)}</g>
+  <g data-bone="shin">${line(85, 476, 84, 584, 8)}${line(98, 478, 96, 582, 4)}</g>
+  <g data-bone="foot">${knob(88, 596, 8)}${toes}</g>`;
+}
+function skeleton(hl = [], cls = {}) {
+  let spine = '';
+  for (let i = 0; i < 18; i++) spine += `<rect class="fo" x="113" y="${94 + i * 11}" width="14" height="9" rx="3"/>`;
+  const svg = `<svg class="skel" viewBox="0 0 240 645" role="img" aria-label="Front view of a human skeleton. Tap a bone to name it.">
+    <g data-bone="spine">${spine}</g>
+    <g>${side()}</g><g transform="translate(240 0) scale(-1 1)">${side()}</g>
+    <g data-bone="ribs">${line(120, 118, 120, 182, 9)}</g>
+    <g data-bone="pelvis"><path class="fo" d="M120 296C96 282 72 288 76 316C79 336 104 342 120 334C136 342 161 336 164 316C168 288 144 282 120 296Z"/><ellipse class="dark" cx="100" cy="324" rx="7" ry="6"/><ellipse class="dark" cx="140" cy="324" rx="7" ry="6"/></g>
+    <g data-bone="jaw"><path class="fo" d="M99 62Q102 90 120 91Q138 90 141 62Q130 72 120 72Q110 72 99 62Z"/></g>
+    <g data-bone="skull"><ellipse class="fo" cx="120" cy="42" rx="31" ry="35"/><ellipse class="dark" cx="108" cy="42" rx="7.5" ry="8.5"/><ellipse class="dark" cx="132" cy="42" rx="7.5" ry="8.5"/><path class="dark" d="M120 52L115 62H125Z"/></g>
+  </svg>`;
+  return svg.replace(/<g data-bone="(\w+)"/g, (m, b) => {
+    const c = [(hl.includes(b) || hl.includes('all')) ? 'hl' : '', cls[b] || ''].join(' ').trim();
+    return `<g data-bone="${b}"${c ? ` class="${c}"` : ''}`;
+  });
+}
+
+/* Kid home screens */
+function kidGreeting() {
+  const due = S.who === 'Kid 3' ? 'Start: The Skeleton' : 'Today: Skeleton re-test, 3 minutes';
+  return `<div class="today"><div><p class="eyebrow">${S.who}</p><h1>${S.look === 'map' ? 'Where to next?' : S.look === 'book' ? 'Pick a book' : 'What’s on today'}</h1></div>
+    <span class="chip">${due}</span></div>`;
+}
+function homeBook() {
+  const heights = [190, 215, 175, 205, 185, 212, 195];
+  let n = 0;
+  const group = s => `<div class="group" style="--n:${s.topics.length}"><p class="groupLabel">${s.name}</p><div class="spines">${s.topics.map(t => {
+    const open = t === 'The Skeleton';
+    return `<button class="spine${open ? ' open' : ''}" style="height:${heights[n++ % 7]}px;background:${s.color}" data-act="${open ? 'lesson' : 'soon'}">${t}</button>`;
+  }).join('')}</div></div>`;
+  const row = list => `<div class="shelfRow">${list.map(group).join('')}</div>`;
+  return kidGreeting() + `<div class="shelfWrap">
+    <div class="shelf">${row(SUBJECTS.slice(0, 2))}${row(SUBJECTS.slice(2))}</div>
+    <div class="cover"><p class="eyebrow">Human Body · Book 1</p><h2>The Skeleton</h2>${skeleton(['all'])}<p>6 pages, a 3-minute read aloud, and 8 test questions.</p>
+    <button class="btn" data-act="lesson">Open the book</button></div></div>`;
+}
+function homeMap() {
+  const stops = SUBJECTS[0].topics.map((t, i) => [t, i ? 'locked' : 'open']);
+  const wide = [[10, 68], [27, 30], [45, 68], [62, 30], [78, 68], [91, 30]];
+  const tall = [[26, 11], [72, 25], [28, 41], [72, 57], [28, 73], [70, 89]];
+  const path = pts => pts.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join('');
+  return kidGreeting() + `<div class="subjects">${SUBJECTS.map((s, i) => `<button class="${i ? '' : 'on'}" data-act="${i ? 'soon' : 'noop'}">${s.name}</button>`).join('')}</div>
+    <div class="sea"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trail wide" d="${path(wide)}"/><path class="trail tall" d="${path(tall)}"/></svg>
+    ${stops.map((s, i) => `<button class="stop ${s[1]}" style="--x:${wide[i][0]}%;--y:${wide[i][1]}%;--mx:${tall[i][0]}%;--my:${tall[i][1]}%" data-act="${i ? 'soon' : 'lesson'}"><span>${s[0]}<small>${i ? 'Locked' : 'Start here'}</small></span></button>`).join('')}</div>
+    <div class="mapFoot"><div><strong>0 of 6</strong>stops on this route</div><div><strong>7 of 8</strong>needed to open the next stop</div><div><strong>3 re-tests</strong>keep a stop on your map</div></div>`;
+}
+function homeChannel() {
+  const row = (title, list) => `<section class="row"><h3>${title}</h3><div class="posters">${list}</div></section>`;
+  const poster = (t, c, sub, fg) => `<button class="poster" style="background:${c}${fg ? ';color:' + fg : ''}" data-act="${t === 'The Skeleton' ? 'lesson' : 'soon'}">${t}<small>${sub}</small></button>`;
+  return `<div class="hero"><div class="txt"><p class="eyebrow">${S.who} · Up next</p><h2>The Skeleton</h2><p>206 bones, 5 jobs, and one bone you can bend at home. Watch for 3 minutes, then take the test.</p>
+    <button class="btn" data-act="lesson">Play lesson</button></div><div class="pic">${skeleton(['all'])}</div></div>`
+    + row('Human Body', SUBJECTS[0].topics.map((t, i) => poster(t, ['#D42A20', '#0F766E', '#7E22CE', '#1D4ED8', '#9A3412', '#17131F'][i], i ? 'Coming soon' : '3 min · 8 questions')).join(''))
+    + row('More subjects', SUBJECTS.slice(1).map((s, i) => poster(s.name, s.color, s.topics.length + ' topics')).join(''));
+}
+
+/* Lesson */
+function lessonView() {
+  const p = PAGES[S.page], last = S.page === PAGES.length - 1, ch = S.look === 'channel';
+  const content = `<h2>${p.title}</h2>
+    ${(p.body || []).map(t => `<p>${t}</p>`).join('')}
+    ${p.list ? `<ul>${p.list.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
+    ${p.fact ? `<p class="fact">${p.fact}</p>` : ''}${p.tryIt ? `<p class="try">${p.tryIt}</p>` : ''}`;
+  return `<p class="eyebrow" style="margin-bottom:12px">The Skeleton · ${S.look === 'book' ? 'Page' : S.look === 'map' ? 'Stop' : 'Part'} ${S.page + 1} of ${PAGES.length}</p>
+    <article class="lesson"><div class="page">${content}<div class="spacer"></div>${S.look === 'book' ? `<p class="folio">Page ${S.page + 1}</p>` : ''}</div>
+    <div class="page fig">${skeleton(p.hl)}<p class="boneTip" id="boneTip">Tap any bone to see its name</p></div></article>
+    <div class="lessonNav"><button class="btn alt" data-act="prev" ${S.page ? '' : 'disabled'}>Back</button>
+    <button class="btn alt" data-act="listen">${S.playing ? 'Stop voice' : ch ? 'Play with voice' : 'Read it to me'}</button>
+    <div class="grow">${PAGES.map((_, i) => `<button class="dot${i <= S.page ? ' on' : ''}" data-act="goto" data-i="${i}" aria-label="Go to part ${i + 1}"></button>`).join('')}</div>
+    ${last ? '<button class="btn" data-act="startTest">Take the test</button>' : '<button class="btn" data-act="next">Next</button>'}</div>
+    ${S.voiceNote ? `<p class="note">${S.voiceNote}</p>` : ''}`;
+}
+
+/* Test */
+function startTest() {
+  const rest = QUESTIONS.slice(1).map(q => [Math.random(), q]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  S.test = { qs: [QUESTIONS[0], ...rest], i: 0, score: 0, answered: null, log: [] };
+}
+function testView() {
+  const t = S.test, q = t.qs[t.i], a = t.answered;
+  let body = '';
+  if (q.type === 'mcq') {
+    body = `<div class="opts">${q.o.map(o => {
+      const c = a ? (o === q.a ? 'right' : o === a.value ? 'wrong' : '') : '';
+      return `<button class="opt ${c}" data-act="answer" data-v="${o}" ${a ? 'disabled' : ''}>${o}</button>`;
+    }).join('')}</div>`;
+  } else if (q.type === 'tap') {
+    const cls = a ? { [q.a]: 'right', ...(a.correct ? {} : { [a.value]: 'wrong' }) } : {};
+    body = skeleton([], cls);
+  } else {
+    body = `<form class="typeRow" id="typed"><input id="typedAnswer" aria-label="Your answer" placeholder="Type your answer" autocomplete="off" ${a ? 'disabled value="' + a.value.replace(/"/g, '') + '"' : ''}><button class="btn" ${a ? 'disabled' : ''}>Check</button></form>`;
+  }
+  return `<div class="test"><p class="eyebrow">The Skeleton test · ${S.who} · Question ${t.i + 1} of ${t.qs.length}</p>
+    <div class="progress"><i style="width:${(t.i + (a ? 1 : 0)) / t.qs.length * 100}%"></i></div>
+    <h2>${q.q}</h2>${body}
+    ${a ? `<p class="feedback ${a.correct ? 'ok' : 'no'}">${a.correct ? 'Correct.' : 'Not this time.'} ${q.why}</p>
+    <div class="testFoot"><button class="btn" data-act="nextQ">${t.i === t.qs.length - 1 ? 'See my score' : 'Next question'}</button></div>` : ''}</div>`;
+}
+function answer(value) {
+  const t = S.test, q = t.qs[t.i];
+  if (t.answered) return;
+  const correct = q.type === 'text' ? value.trim().toLowerCase().includes(q.a) : value === q.a;
+  t.answered = { value, correct };
+  if (correct) t.score++;
+  t.log.push({ q: q.q, correct });
+  render();
+}
+function resultView() {
+  const t = S.test, n = t.qs.length;
+  const msg = t.score === n ? 'Full marks.' : t.score >= 6 ? 'Strong result. The re-tests will lock it in.' : 'Good start. Read the pages again, then try tomorrow.';
+  return `<div class="test"><p class="eyebrow">${S.who} · The Skeleton</p><div class="bigScore">${t.score}/${n}</div><h2>${msg}</h2>
+    <p class="eyebrow">Short re-tests booked</p><div class="nextDates"><span class="chip">Tomorrow</span><span class="chip">In 7 days</span><span class="chip">In 30 days</span></div>
+    <div class="review">${t.log.map(l => `<div class="${l.correct ? 'y' : 'n'}">${l.correct ? 'Right: ' : 'Review: '}${l.q}</div>`).join('')}</div>
+    <div class="lessonNav"><button class="btn alt" data-act="startTest">Try again</button><button class="btn alt" data-act="lesson">Read again</button><button class="btn" data-act="seeScores">See family scores</button></div></div>`;
+}
+
+/* Parent views */
+function scoresView() {
+  const rows = ['Kid 1', 'Kid 2', 'Kid 3'].map(k => {
+    const real = S.attempts[k] || [];
+    const all = [...EXAMPLE_SCORES[k], ...real];
+    const last = all.length ? all[all.length - 1] + '/8' : 'None';
+    const [st, when, weak] = EXAMPLE_NOTES[k];
+    const status = real.length ? ['due', 'Tomorrow'] : [st, when];
+    return `<tr><td><b>${k}</b></td><td>${last}${real.length ? ' <span class="note">(this device)</span>' : ''}</td>
+      <td><div class="bars" aria-label="Scores: ${all.join(', ') || 'none'}">${all.map(v => `<i style="height:${v / 8 * 100}%"></i>`).join('')}</div></td>
+      <td><span class="status ${status[0]}">${status[1]}</span></td><td>${weak}</td></tr>`;
+  }).join('');
+  return parentTabs() + `<div class="panels"><section class="panel" style="grid-column:1/-1"><h2>The Skeleton: family scores</h2><div class="tableWrap"><table><tr><th>Who</th><th>Latest</th><th>Progress</th><th>Next re-test</th><th>Needs work</th></tr>${rows}</table></div>
+      <p class="note">Example scores. Tests you take in this prototype are added to the row and stay on this device only. The real site would save them for the whole family.</p></section>
+    <section class="panel"><h2>This week</h2><ul class="week"><li><b>Mon</b><span>New lesson: Muscles & Joints</span></li><li><b>Tue</b><span>Skeleton re-test, then arm model build</span></li><li><b>Wed</b><span>Test: Muscles & Joints</span></li><li><b>Thu</b><span>Each kid teaches one idea to the others</span></li><li><b>Fri</b><span>Weekly mixed quiz, 10 questions</span></li></ul><p class="note">Example timetable.</p></section>
+    <section class="panel"><h2>What to do next</h2><ul class="week"><li><b>1</b><span>Kid 2 needs a short talk about bone marrow</span></li><li><b>2</b><span>Kid 3 has not started the Skeleton test</span></li><li><b>3</b><span>Review the draft of Muscles & Joints</span></li></ul><p class="note">The site writes this list from the scores. These are examples.</p></section></div>`;
+}
+function parentTabs() {
+  return `<div class="today"><div><p class="eyebrow">Parent</p><h1>${S.view === 'create' ? 'Add a lesson' : 'How everyone is doing'}</h1></div>
+    <div class="lessonNav" style="margin:0"><button class="btn ${S.view === 'create' ? 'alt' : ''}" data-act="seeScores">Scores</button><button class="btn ${S.view === 'create' ? '' : 'alt'}" data-act="create">Add a lesson</button></div></div>`;
+}
+function parseDraft(text) {
+  const pages = [], qs = [];
+  let cur = null, q = null;
+  text.split('\n').forEach(raw => {
+    const l = raw.trim();
+    if (l.startsWith('# ')) { cur = { title: l.slice(2), lines: [], fact: '' }; pages.push(cur); q = null; }
+    else if (l.startsWith('Q:')) { q = { q: l.slice(2).trim(), o: [] }; qs.push(q); cur = null; }
+    else if (q && /^[-*] /.test(l)) q.o.push({ t: l.slice(2), right: l[0] === '*' });
+    else if (cur && l.startsWith('! ')) cur.fact = l.slice(2);
+    else if (cur && l) cur.lines.push(l);
+  });
+  return { pages, qs };
+}
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function previewHTML() {
+  const d = parseDraft(S.draft), p = d.pages[0], q = d.qs[0];
+  return `<span class="chip">${d.pages.length} ${d.pages.length === 1 ? 'page' : 'pages'} · ${d.qs.length} ${d.qs.length === 1 ? 'question' : 'questions'}</span>
+    ${p ? `<div class="previewCard"><h3>${esc(p.title)}</h3>${p.lines.map(l => `<p>${esc(l)}</p>`).join('')}${p.fact ? `<p class="fact">${esc(p.fact)}</p>` : ''}</div>` : '<p class="note">Start a page with # and a title.</p>'}
+    ${q ? `<div class="previewCard"><b>${esc(q.q)}</b>${q.o.map(o => `<div class="opt ${o.right ? 'right' : ''}">${esc(o.t)}</div>`).join('')}</div>` : '<p class="note">Start a question with Q: and mark the right answer with *.</p>'}`;
+}
+function createView() {
+  return parentTabs() + `<ol class="steps"><li>Ask Claude for a draft, or type it yourself</li><li>Read it and fix anything you would say differently</li><li>Press Publish. Kids see it on their shelf, map or channel</li></ol>
+    <div class="create"><section class="panel"><h2>Lesson text</h2><textarea id="draft" aria-label="Lesson text" spellcheck="false">${esc(S.draft)}</textarea>
+    <p class="note"># starts a page. ! makes a highlight box. Q: starts a question. * marks the right answer.</p></section>
+    <section class="panel"><h2>What kids will see</h2><div id="preview" style="display:grid;gap:12px">${previewHTML()}</div>
+    <div class="lessonNav"><button class="btn" data-act="publish">Publish lesson</button></div></section></div>`;
+}
+
+/* Voice: the browser's built-in voice stands in for recorded narration. */
+function stopVoice() { try { speechSynthesis.cancel(); } catch (e) {} clearTimeout(S.timer); S.playing = false; }
+function pageText(p) { return [p.title, ...(p.body || []), ...(p.list || []), p.fact || '', p.tryIt || ''].join('. '); }
+function playPage() {
+  const after = () => {
+    if (!S.playing) return;
+    if (S.look === 'channel' && S.page < PAGES.length - 1) { S.page++; render(); playPage(); }
+    else { S.playing = false; render(); }
+  };
+  if (!('speechSynthesis' in window)) {
+    S.voiceNote = 'This browser has no built-in voice. The real lessons would use recorded audio files.';
+    S.timer = setTimeout(after, 7000); return;
+  }
+  try {
+    const u = new SpeechSynthesisUtterance(pageText(PAGES[S.page]));
+    u.rate = .98; u.onend = after;
+    u.onerror = () => { if (S.playing) { S.playing = false; S.voiceNote = 'The voice could not play here. The real lessons would use recorded audio files.'; render(); } };
+    speechSynthesis.speak(u);
+  } catch (e) { S.playing = false; }
+}
+
+/* Rendering and events */
+function bar() {
+  const seg = (label, opts, cur, act) => `<div class="seg"><span>${label}</span><div>${opts.map(([v, t]) => `<button aria-pressed="${v === cur}" data-act="${act}" data-v="${v}">${t}</button>`).join('')}</div></div>`;
+  return `<b>Home School prototype</b>${seg('Look', Object.entries(LOOKS), S.look, 'look')}${seg('View as', PEOPLE.map(p => [p, p]), S.who, 'who')}`;
+}
+function render() {
+  document.documentElement.dataset.look = S.look;
+  document.getElementById('bar').innerHTML = bar();
+  const views = { lesson: lessonView, test: testView, result: resultView, scores: scoresView, create: createView };
+  const homes = { book: homeBook, map: homeMap, channel: homeChannel };
+  const backable = ['lesson', 'test', 'result'].includes(S.view);
+  const app = document.getElementById('app');
+  app.innerHTML = (backable ? '<p style="margin:0 0 12px"><button class="btn alt" data-act="home" style="min-height:38px;padding:6px 14px">Back to home</button></p>' : '') + (S.view === 'home' ? homes[S.look]() : views[S.view]());
+}
+function toast(text) {
+  const t = document.getElementById('toast');
+  t.textContent = text; t.hidden = false;
+  clearTimeout(toast.timer); toast.timer = setTimeout(() => { t.hidden = true; }, 3000);
+}
+function go(view) { stopVoice(); S.voiceNote = ''; S.view = view; render(); window.scrollTo(0, 0); }
+
+document.addEventListener('click', ev => {
+  const bone = ev.target.closest('g[data-bone]');
+  if (bone && !ev.target.closest('[data-act]')) {
+    if (S.view === 'test' && S.test.qs[S.test.i].type === 'tap') { answer(bone.dataset.bone); return; }
+    const tip = document.getElementById('boneTip');
+    if (tip) tip.textContent = BONE_NAMES[bone.dataset.bone];
+    return;
+  }
+  const el = ev.target.closest('[data-act]');
+  if (!el) return;
+  const act = el.dataset.act, v = el.dataset.v;
+  if (act === 'look') { stopVoice(); S.look = v; render(); }
+  else if (act === 'who') { S.who = v; go(v === 'Parent' ? 'scores' : (['scores', 'create'].includes(S.view) ? 'home' : S.view === 'test' || S.view === 'result' ? 'home' : S.view)); }
+  else if (act === 'home') go('home');
+  else if (act === 'lesson') { S.page = 0; if (S.who === 'Parent') S.who = 'Kid 1'; go('lesson'); }
+  else if (act === 'next') { stopVoice(); S.page++; render(); }
+  else if (act === 'prev') { stopVoice(); S.page--; render(); }
+  else if (act === 'goto') { stopVoice(); S.page = +el.dataset.i; render(); }
+  else if (act === 'listen') { if (S.playing) { stopVoice(); render(); } else { S.playing = true; render(); playPage(); } }
+  else if (act === 'startTest') { startTest(); go('test'); }
+  else if (act === 'answer') answer(v);
+  else if (act === 'nextQ') {
+    const t = S.test;
+    if (t.i === t.qs.length - 1) { (S.attempts[S.who] = S.attempts[S.who] || []).push(t.score); save(); go('result'); }
+    else { t.i++; t.answered = null; render(); window.scrollTo(0, 0); }
+  }
+  else if (act === 'seeScores') { S.who = 'Parent'; go('scores'); }
+  else if (act === 'create') go('create');
+  else if (act === 'publish') toast('Prototype only: nothing was published.');
+  else if (act === 'soon') toast('Only The Skeleton is built in this prototype.');
+});
+document.addEventListener('submit', ev => {
+  if (ev.target.id !== 'typed') return;
+  ev.preventDefault();
+  const value = document.getElementById('typedAnswer').value;
+  if (value.trim()) answer(value);
+});
+document.addEventListener('input', ev => {
+  if (ev.target.id !== 'draft') return;
+  S.draft = ev.target.value;
+  document.getElementById('preview').innerHTML = previewHTML();
+});
+
+/* Links such as #map-lesson or #parents open a specific look and screen. */
+(function boot() {
+  const parts = location.hash.slice(1).split('-');
+  parts.forEach(p => {
+    if (LOOKS[p]) S.look = p;
+    else if (p === 'lesson') { S.view = 'lesson'; }
+    else if (p === 'test') { startTest(); S.view = 'test'; }
+    else if (p === 'parents') { S.who = 'Parent'; S.view = 'scores'; }
+    else if (p === 'create') { S.who = 'Parent'; S.view = 'create'; }
+  });
+  render();
+})();
+</script>

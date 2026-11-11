@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Materials: categories, gallery, page</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,800&display=swap">
+<link rel="stylesheet" href="../lab.css">
+<link rel="stylesheet" href="../split.css">
+<style>
+/* F. Three steps, as the owner asked on 2026-11-10: "full list like from C. and if ill open category it should be a list gallery
+   of materials. when im clicking on material it should open it on the right side the others should be on the left."
+   1 Categories: equal, modest cards across the screen; This week is one of them.
+   2 A category: its materials as a gallery across the whole screen, page pictures with names.
+   3 A material: the page on the right, the category's other materials in a list on the left. Back: gallery, then categories. */
+.cats3 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1em; padding-top: .5em; }
+.ccard { display: grid; grid-template-rows: 5.6em auto; overflow: hidden; padding: 0; border: 1.5px solid var(--line); border-radius: 20px; background: var(--surface); text-align: left; }
+.ccard:hover { border-color: var(--mute); }
+.ccard img { width: 100%; height: 100%; object-fit: cover; }
+.ccard .art { position: relative; overflow: hidden; background: var(--surface2); }
+.ccard .art .page { position: absolute; top: 14%; left: 50%; height: 150%; transform: translateX(-50%) rotate(-3deg); box-shadow: 0 0 0 1px var(--line), 0 8px 18px -8px #17131F40; }
+.ccard .art .ic { position: absolute; inset: 0; margin: auto; width: 3em; height: 3em; color: var(--ink); }
+.ccard .txt { display: grid; gap: .05em; padding: .55em .85em .7em; line-height: 1.25; }
+.ccard .txt b { font-weight: 400; }
+.gTop { display: flex; flex-wrap: wrap; align-items: center; gap: .6em 1em; margin: .3em 0 .9em; }
+.gTop h2 { margin-right: auto; font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5em, 1fr)); gap: 1.4em 1.4em; }
+.gitem { display: grid; grid-template-columns: minmax(0, 1fr); gap: .45em; align-content: start; padding: 0; border: 0; background: none; text-align: left; line-height: 1.25; }
+.gitem .page { transition: transform .15s ease-out; }
+.gitem:hover .page { transform: translateY(-3px); }
+.gGroup { margin-bottom: 1.5em; }
+.gHead { display: flex; align-items: center; gap: .8em; margin-bottom: .7em; }
+.gHead img { width: 3em; height: 3em; object-fit: cover; border-radius: 10px; }
+.gHead span { display: grid; line-height: 1.25; }
+.gHead .ic { width: 2em; height: 2em; color: var(--mute); }
+.packLine { display: flex; flex-wrap: wrap; align-items: center; gap: .6em 1em; }
+/* Step 3 reuses the split view of D and E, with Back to the gallery in the list */
+@media (max-width: 1000px) { .cats3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 800px) {
+  .cats3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ccard { grid-template-rows: 5.6em auto; border-radius: 16px; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1em 12px; }
+  .gTop .btn.fill { flex: 1 1 100%; }
+  .ccard .quiet, .gitem .quiet, .gTop .quiet { font-size: var(--fs); }
+  /* On a phone the open page has its own labelled Back, so the header's small one would be a second way to the same place */
+  .app:has(.split) .head .back { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="../../assets/colombia-map.js"></script>
+<script src="../data.js"></script>
+<script src="../thumbs.js"></script>
+<script src="../chrome.js"></script>
+<script>
+(function () {
+  const { kids, WEEK, byId, sheetsOf, IMG } = window.MAT, { icon, head, nav, page, esc, names, STATUS, sheets, SEND, EACH } = window.UI;
+  /* The categories, as in C, all the same size. This week is one more, the same size. Photos only where a lesson matches. */
+  const CATS = [
+    { id: 'week', name: 'This week', say: WEEK.dates, icon: 'week' },
+    { id: 'science', name: 'Science', pic: IMG('skeleton.jpg'), items: ['mu-sheet', 'sk-label', 'mu-cross', 'mu-code', 'ne-comic', 'fm-exp'] },
+    { id: 'geography', name: 'Geography', pic: IMG('colombia-paramo.jpg'), items: ['co-map', 'co-floors'] },
+    { id: 'spanish', name: 'Spanish', pic: IMG('spanish-cover.jpg'), items: ['sp-cards', 'sp-write'] },
+    { id: 'feelings', name: 'Emotions', pic: IMG('emotions-cover.jpg'), items: ['em-sort', 'fe-check'] },
+    { id: 'maths', name: 'Maths', art: 'maths', items: ['ma-daily', 'lf-money'] },
+    { id: 'english', name: 'English', art: 'handwriting', items: ['rd-log', 'en-hand'] },
+    { id: 'games', name: 'Chess and logic', art: 'chess', items: ['ch-mate', 'lg-pets'] },
+    { id: 'makers', name: 'Make and explore', art: 'experiment', items: ['mk-cabbage', 'mk-art', 'mk-nature'] },
+    { id: 'forms', name: 'Charts and forms', art: 'habits', items: ['fm-week', 'fm-habits', 'fm-exp', 'aw-cert'] },
+    { id: 'exams', name: 'Exam papers', art: 'exam', items: ['ex-unit'], parentOnly: true },
+  ];
+  /* This week's gallery: each lesson with its materials, then the pages for the whole week */
+  const LESSONS = [
+    { title: 'How Do Your Muscles Work?', sub: 'Science, lesson 2', pic: IMG('muscle-cover.jpg'), items: ['mu-sheet', 'mu-cross', 'mu-code'] },
+    { title: 'Colombia: One Country, Six Regions', sub: 'Geography, lesson 1', pic: IMG('colombia-cover.jpg'), items: ['co-map', 'co-floors'] },
+    { title: '¡Hola! Your First Words in Spanish', sub: 'Spanish, lesson 1', pic: IMG('spanish-cover.jpg'), items: ['sp-cards'] },
+  ];
+  const WHOLE = ['fm-week', 'fm-habits', 'ma-daily'];
+  const itemsOf = (c) => (c.id === 'week' ? [...LESSONS.flatMap((l) => l.items), ...WHOLE] : c.items);
+  const S = { step: 'cats', cat: null, open: null, galleryY: 0 };
+  const time = (i) => (i.mins ? `${i.mins} min` : 'any time');
+  const forLine = () => `<p class="who"><span class="quiet">For</span>${esc(names(kids))}<button class="link">Change</button></p>`;
+
+  /* Step 1: the categories */
+  const card = (c) => { const n = c.id === 'week' ? itemsOf(c).length : c.items.length;
+    return `<button class="ccard" data-cat="${c.id}">${c.pic ? `<img src="${c.pic}" alt="">` : `<span class="art">${c.icon ? icon(c.icon) : page(c.art)}</span>`}<span class="txt"><b>${esc(c.name)}</b><span class="quiet">${c.id === 'week' ? `${esc(c.say)}, ${n} pages` : c.parentOnly ? 'Parents only' : `${n} pages`}</span></span></button>`; };
+  const cats = () => `${head('Materials')}<main class="main"><div class="cats3">${CATS.map(card).join('')}</div></main>`;
+
+  /* Step 2: one category as a gallery across the whole screen */
+  const gitem = (id) => { const i = byId(id); return `<button class="gitem" data-open="${id}">${page(i.kind)}<span>${esc(i.title)}</span><span class="quiet">${i.parentOnly ? 'Parents only' : i.perKid ? EACH() : `${sheets(i.pages)}, ${time(i)}`}</span></button>`; };
+  function gallery() {
+    const c = CATS.find((x) => x.id === S.cat);
+    if (c.id === 'week') {
+      const total = sheetsOf(WEEK.items, kids.length);
+      return `${head('This week', 'Materials')}<main class="main" id="gal"><div class="gTop"><h2>${esc(WEEK.dates)}</h2><div class="packLine"><span class="quiet">This week’s pack: ${WEEK.items.length} pages, ${total} sheets of paper</span><button class="btn fill">${icon('print')}Print the pack</button></div></div>
+        ${LESSONS.map((l) => `<section class="gGroup"><div class="gHead"><img src="${l.pic}" alt=""><span><b>${esc(l.title)}</b><span class="quiet">${esc(l.sub)}</span></span></div><div class="gallery">${l.items.map(gitem).join('')}</div></section>`).join('')}
+        <section class="gGroup"><div class="gHead">${icon('week')}<span><b>For the whole week</b><span class="quiet">One for each child</span></span></div><div class="gallery">${WHOLE.map(gitem).join('')}</div></section></main>`;
+    }
+    return `${head(esc(c.name), 'Materials')}<main class="main" id="gal"><div class="gTop"><h2>${esc(c.name)}</h2><span class="quiet">${c.parentOnly ? 'Only parents can see these. Children never get them early.' : `${c.items.length} pages. Tap one to see it.`}</span></div><div class="gallery">${c.items.map(gitem).join('')}</div></main>`;
+  }
+
+  /* Step 3: the page on the right; the category's other materials in a list on the left */
+  const row = (id) => { const i = byId(id); return `<button class="row" data-open="${id}" aria-current="${id === S.open}">${page(i.kind)}<span>${esc(i.title)}<span class="quiet">${i.perKid ? EACH() : `${sheets(i.pages)}, ${time(i)}`}</span></span></button>`; };
+  function readHtml() {
+    const c = CATS.find((x) => x.id === S.cat), order = itemsOf(c), i = byId(S.open), n = order.indexOf(S.open), inWeek = WEEK.items.includes(i.id);
+    const who = i.parentOnly ? `<p>${icon('lock')} Only parents can see this.</p>` : forLine();
+    const add = i.parentOnly ? '' : inWeek ? `<span class="inPack">${icon('check')}In this week’s pack</span>` : '<button class="link">Add to this week’s pack</button>';
+    return `<button class="btn backList" data-back>${icon('back')}${esc(c.name)}</button><div class="doc"><div class="docHead"><p class="quiet">${esc(i.from)}</p><h3>${esc(i.title)}</h3><p>${esc(i.what)}</p></div>${page(i.kind)}<div class="info">
+        <p class="quiet">${i.perKid ? EACH() : sheets(i.pages)}, ${time(i)}</p>${who}
+        <div class="acts"><button class="btn fill">${icon('print')}Print</button>${i.both && !i.parentOnly ? `<button class="btn">${icon('tablet')}${SEND()}</button>` : ''}</div>${add}<p class="quiet">${STATUS[i.status]}</p></div></div>
+      <div class="steps"><button class="btn prev" data-step="-1" ${n > 0 ? '' : 'disabled'}>${icon('back')}Previous</button><span class="quiet">${n + 1} of ${order.length}</span><button class="btn" data-step="1" ${n < order.length - 1 ? '' : 'disabled'}>Next${icon('next')}</button></div>`;
+  }
+  function reader() {
+    const c = CATS.find((x) => x.id === S.cat);
+    return `${head(esc(c.name), c.id === 'week' ? 'All of this week' : `All ${c.name}`)}<main class="split reading" id="split"><nav class="list" id="list" aria-label="${esc(c.name)}"><div class="rows" style="padding-top:.4em">${itemsOf(c).map(row).join('')}</div></nav><section class="read" id="read">${readHtml()}</section></main>`;
+  }
+
+  /* Drawing. Moving between pages in step 3 changes only the right side, so the list keeps its place. */
+  function draw() {
+    const html = S.step === 'cats' ? cats() : S.step === 'gallery' ? gallery() : reader();
+    document.getElementById('app').innerHTML = `${html}${nav()}`;
+    if (S.step === 'gallery') document.getElementById('gal').scrollTop = S.galleryY;
+    if (S.step === 'read') document.querySelector('#list [aria-current="true"]')?.scrollIntoView({ block: 'nearest' });
+    document.querySelector(S.step === 'read' ? '#read [data-back]:not([hidden])' : '[data-back]')?.focus({ preventScroll: true });
+  }
+  function open(id) {
+    S.open = id;
+    if (S.step === 'read') { document.getElementById('read').innerHTML = readHtml(); document.querySelectorAll('#list [data-open]').forEach((b) => b.setAttribute('aria-current', String(b.dataset.open === id))); return; }
+    S.galleryY = document.getElementById('gal')?.scrollTop || 0; S.step = 'read'; draw();
+  }
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-cat],[data-open],[data-back],[data-step]'); if (!t) return;
+    if (t.dataset.cat) { S.cat = t.dataset.cat; S.step = 'gallery'; S.galleryY = 0; draw(); }
+    else if (t.dataset.open) open(t.dataset.open);
+    else if (t.dataset.step) { const order = itemsOf(CATS.find((x) => x.id === S.cat)), n = order.indexOf(S.open) + +t.dataset.step; if (order[n]) open(order[n]); }
+    else { S.step = S.step === 'read' ? 'gallery' : 'cats'; draw(); }
+  });
+  /* Review links: #gallery (Science), #week (This week), #open (a page) */
+  const h = location.hash.slice(1);
+  if (h === 'gallery') { S.cat = 'science'; S.step = 'gallery'; }
+  if (h === 'week') { S.cat = 'week'; S.step = 'gallery'; }
+  if (h === 'open') { S.cat = 'science'; S.step = 'read'; S.open = 'mu-cross'; }
+  draw();
+})();
+</script>
+</body>
+</html>

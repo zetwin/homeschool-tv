@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote Test</title>
+<style>
+  body { margin: 0; min-height: 100vh; padding: 5vh 5vw; box-sizing: border-box; background: #17131F; color: #FBFAFF; font: 500 clamp(18px, 1.6vw, 30px)/1.35 system-ui, sans-serif; }
+  h1 { margin: 0 0 .2em; font-size: clamp(30px, 3.4vw, 64px); }
+  p { margin: 0 0 1em; color: #CFC9DD; }
+  ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17em), 1fr)); gap: .5em; margin: 0 0 1em; padding: 0; list-style: none; }
+  li { padding: .5em .8em; background: #2C2440; border-radius: 10px; }
+  li.ok { background: #14733F; }
+  li.ok::before { content: '✓ '; }
+  #last { padding: .7em 1em; background: #000; border-radius: 10px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<h1>Remote test</h1>
+<p>Press each button on your TV remote. Each button turns green when the lesson understands it. Tell Claude about any that stay grey, along with the numbers shown at the bottom. On a laptop, the play/pause key stays grey here because the computer keeps it for itself, and that's fine. Test it by starting a real lesson and pressing the key.</p>
+<ul id="list"></ul>
+<div id="last" aria-live="polite">No button pressed yet</div>
+<script>
+const NEEDS = [
+  ['OK', (e) => e.key === 'Enter' || e.keyCode === 13],
+  ['Up', (e) => e.key === 'ArrowUp'],
+  ['Down', (e) => e.key === 'ArrowDown'],
+  ['Left', (e) => e.key === 'ArrowLeft'],
+  ['Right', (e) => e.key === 'ArrowRight'],
+  ['Back', (e) => ['Escape', 'Backspace', 'GoBack', 'BrowserBack'].includes(e.key) || [461, 10009, 4].includes(e.keyCode)],
+  ['Play or pause (if your remote has it)', (e) => ['MediaPlayPause', 'MediaPlay', 'MediaPause', 'Pause', 'Play'].includes(e.key) || [415, 19, 10252, 179].includes(e.keyCode)],
+];
+const list = document.getElementById('list'), last = document.getElementById('last');
+list.innerHTML = NEEDS.map(([name]) => `<li>${name}</li>`).join('');
+document.addEventListener('keydown', (e) => {
+  e.preventDefault();
+  NEEDS.forEach(([, test], i) => { if (test(e)) list.children[i].classList.add('ok'); });
+  last.textContent = `Last button: name "${e.key}", number ${e.keyCode}`;
+});
+/* On some TVs Back acts as the browser's back button instead of sending a key. */
+history.pushState({}, '');
+addEventListener('popstate', () => { list.children[5].classList.add('ok'); last.textContent = 'Last button: Back, handled as the browser back button'; history.pushState({}, ''); });
+</script>
+</body>
+</html>

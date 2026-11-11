@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Direction 09. Learns from iMessage and WhatsApp: the school writes to the parent.
+   The day is a short conversation; messages that need the parent carry reply buttons.
+   Lexend was drawn to make reading easier, with open letters and plain figures. */
+:root {
+  --paper: #FFFFFF;
+  --side: #F2F2F7;
+  --ink: #000000;
+  --grey: #5E5E64;
+  --hair: #DADADF;
+  --in: #E9E9EB;
+  --out: #0A62D0;
+  --out-ink: #FFFFFF;
+  --link: #0A58C2;
+  --pin: #EEF4FD;
+  font-size: 18px;
+}
+html.t2 { font-size: 19.5px; }
+html.t3 { font-size: 21px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: 'Lexend', system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.3; -webkit-font-smoothing: antialiased; }
+button, a { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; text-align: left; }
+:focus-visible { outline: 3px solid var(--out); outline-offset: 2px; }
+svg.i { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+#pad { height: 100vh; display: grid; grid-template-columns: 330px 1fr; overflow: hidden; }
+#pad[hidden], #admin[hidden] { display: none; }
+
+/* ---------- Conversation list ---------- */
+.list { background: var(--side); border-right: 1px solid var(--hair); display: flex; flex-direction: column; min-height: 0; }
+.list-top { display: flex; align-items: center; gap: 8px; padding: 16px 16px 0; }
+.list-top .sp { flex: 1; }
+.icon-btn { min-width: 48px; height: 48px; padding: 0 12px; border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: var(--link); font-weight: 700; text-decoration: none; }
+.icon-btn:active { background: rgba(0, 0, 0, .06); }
+.list h1 { margin: 6px 20px 2px; font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em; }
+.list .date { margin: 0 20px 12px; color: var(--grey); }
+.chats { list-style: none; margin: 0; padding: 0 8px; }
+.chat { width: 100%; display: grid; grid-template-columns: 56px 1fr; gap: 12px; padding: 10px 12px; border-radius: 14px; min-height: 84px; align-items: start; }
+.chat[aria-current=true] { background: var(--out); color: #fff; }
+.chat[aria-current=true] .prev, .chat[aria-current=true] time { color: #E6EEFB; }
+.chat .top { display: flex; align-items: baseline; gap: 8px; }
+.chat b { font-weight: 700; flex: 1; }
+.chat time { color: var(--grey); font-size: 1rem; }
+.chat .prev { color: var(--grey); font-size: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; }
+.avwrap { position: relative; display: block; }
+.avwrap .badge { position: absolute; top: -4px; right: -6px; box-shadow: 0 0 0 2.5px var(--side); }
+.chat .short { display: none; }
+.badge { min-width: 26px; height: 26px; padding: 0 8px; border-radius: 13px; background: var(--out); color: #fff; font-size: 1rem; font-weight: 700; display: inline-grid; place-items: center; }
+.chat[aria-current=true] .badge { background: #fff; color: var(--out); }
+.av { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font-size: 1.6rem; background: var(--c, #8E8E93); flex: none; color: #fff; }
+.av.school { background: linear-gradient(160deg, #3A7BE0, #0A3E8C); }
+.av.school svg { width: 28px; height: 28px; }
+.av.sm { width: 36px; height: 36px; font-size: 1.15rem; }
+.av.sm svg { width: 20px; height: 20px; }
+
+/* ---------- The thread ---------- */
+.thread { display: grid; grid-template-rows: auto auto 1fr auto; min-height: 0; min-width: 0; }
+.head { display: flex; align-items: center; gap: 12px; padding: 10px 18px; border-bottom: 1px solid var(--hair); min-height: 72px; background: rgba(255, 255, 255, .96); }
+.head .who { flex: 1; min-width: 0; }
+.head .who b { display: block; font-size: 1.1rem; }
+.head .who span { color: var(--grey); font-size: 1rem; }
+.head .back { display: none; }
+.pinbar { display: flex; align-items: center; gap: 14px; padding: 10px 18px; background: var(--pin); border-bottom: 1px solid #D6E2F5; }
+.pinbar .rule { width: 4px; align-self: stretch; border-radius: 2px; background: var(--out); }
+.pinbar .txt { flex: 1; min-width: 0; }
+.pinbar .txt b { color: var(--link); }
+.pinbar .txt div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cta { min-height: 48px; padding: 0 20px; border-radius: 24px; background: var(--out); color: #fff; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; flex: none; }
+.cta:active { transform: scale(.97); }
+.msgs { overflow-y: auto; padding: 8px 22px 10px; display: flex; flex-direction: column; min-height: 0; }
+.msgs::before { content: ''; flex: 1; }
+.stamp { text-align: center; color: var(--grey); font-size: 1rem; margin: 6px 0 4px; }
+.stamp b { color: var(--ink); font-weight: 700; }
+.b { max-width: 74%; padding: 10px 15px; border-radius: 20px; margin-top: 3px; position: relative; animation: rise .32s cubic-bezier(.2, .8, .2, 1) both; }
+.b.in { background: var(--in); align-self: flex-start; }
+.b.out { background: var(--out); color: var(--out-ink); align-self: flex-end; }
+.b.tail.in { border-bottom-left-radius: 6px; }
+.b.tail.out { border-bottom-right-radius: 6px; }
+.b.first { margin-top: 12px; }
+.b b { font-weight: 700; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.98); } }
+.qr { display: flex; gap: 8px; margin: 6px 0 0; flex-wrap: wrap; animation: rise .32s .05s cubic-bezier(.2, .8, .2, 1) both; }
+.qr button { min-height: 44px; padding: 0 18px; border-radius: 22px; box-shadow: inset 0 0 0 1.5px var(--out); color: var(--link); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; background: #fff; }
+.qr button:active { background: var(--pin); }
+.qr .star { width: 46px; padding: 0; justify-content: center; color: #8A8A90; box-shadow: inset 0 0 0 1.5px var(--hair); }
+.qr .star svg { width: 26px; height: 26px; }
+.qr .star.on { color: #B86E00; box-shadow: inset 0 0 0 1.5px #E8B04A; }
+.qr .star.on svg { fill: currentColor; }
+.qr .ask { color: var(--grey); align-self: center; margin-right: 4px; }
+.compose { display: flex; align-items: center; gap: 10px; padding: 10px 16px 14px; border-top: 1px solid var(--hair); }
+.compose input { flex: 1; min-height: 50px; border-radius: 25px; border: 1.5px solid var(--hair); padding: 0 18px; font: inherit; color: var(--ink); background: #fff; }
+.compose input::placeholder { color: #6E6E73; }
+.send { width: 50px; height: 50px; border-radius: 50%; background: var(--out); color: #fff; display: grid; place-items: center; }
+.send:disabled { background: #B9B9BE; }
+.hbtn { min-height: 46px; padding: 0 14px; border-radius: 23px; display: inline-flex; align-items: center; gap: 8px; color: var(--link); font-weight: 700; }
+.hbtn:active { background: rgba(0, 0, 0, .05); }
+.typing { align-self: flex-start; background: var(--in); border-radius: 20px; padding: 14px 16px; display: flex; gap: 5px; margin-top: 8px; }
+.typing i { width: 9px; height: 9px; border-radius: 50%; background: #8A8A90; animation: blink 1s infinite; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes blink { 50% { opacity: .3; } }
+
+/* ---------- Sheets ---------- */
+.veil { position: fixed; inset: 0; background: rgba(0, 0, 0, .32); display: grid; place-items: center; z-index: 50; opacity: 0; transition: opacity .2s; }
+.veil.in { opacity: 1; }
+.sheet { width: min(580px, calc(100vw - 40px)); max-height: calc(100vh - 60px); overflow: auto; background: #fff; border-radius: 22px; padding: 0 0 20px; transform: translateY(30px); transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+.veil.in .sheet { transform: none; }
+.sheet header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--hair); margin-bottom: 14px; }
+.sheet header h3 { margin: 0; font-size: 1.1rem; text-align: center; }
+.sheet header .r { justify-self: end; }
+.sheet .in-pad { padding: 0 22px; }
+.sheet p { color: var(--grey); margin: 0 0 14px; }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.seg button { min-height: 48px; padding: 0 16px 0 6px; border-radius: 24px; background: var(--side); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.seg button.plain { padding: 0 16px; }
+.seg button[aria-pressed=true] { background: var(--out); color: #fff; }
+.stepper { display: flex; align-items: center; gap: 18px; margin: 4px 0 8px; }
+.stepper button { width: 60px; height: 60px; border-radius: 50%; background: var(--side); font-size: 1.7rem; font-weight: 700; text-align: center; }
+.stepper output { font-size: 2.6rem; font-weight: 700; min-width: 70px; text-align: center; }
+.stepper span { color: var(--grey); }
+.field { width: 100%; min-height: 96px; border-radius: 14px; border: 1.5px solid var(--hair); padding: 12px 14px; font: inherit; resize: none; margin-bottom: 14px; }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 8px 0; border-bottom: 1px solid var(--hair); }
+.rows li:last-child { border-bottom: 0; }
+.rows li > div { flex: 1; min-width: 0; }
+.rows li span { color: var(--grey); }
+.rows .t { width: 56px; font-weight: 700; color: var(--grey); }
+.faces { display: flex; gap: 4px; }
+.faces .av { width: 30px; height: 30px; font-size: 1rem; }
+.faces .av.later { background: var(--side); filter: grayscale(1); opacity: .75; }
+.faces .av.missed { background: #fff; box-shadow: inset 0 0 0 2px #B42318; }
+.faces .av.now { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--c); }
+.mini { min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--side); color: var(--link); font-weight: 700; }
+.toast { position: fixed; left: 50%; top: 18px; transform: translate(-50%, -20px); opacity: 0; background: #1C1C1E; color: #fff; padding: 14px 22px; border-radius: 22px; font-weight: 700; transition: .25s; z-index: 60; }
+.toast.in { opacity: 1; transform: translate(-50%, 0); }
+.pop { position: fixed; z-index: 55; background: #fff; border-radius: 16px; box-shadow: 0 16px 50px rgba(0, 0, 0, .22); overflow: hidden; min-width: 230px; }
+.pop button { width: 100%; min-height: 52px; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--hair); }
+.pop button:last-child { border-bottom: 0; }
+.pop button[aria-pressed=true] { color: var(--link); font-weight: 700; }
+
+/* ---------- Admin: one grouped page, like iOS Settings ---------- */
+#admin { min-height: 100vh; background: var(--side); }
+#admin .bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; padding: 10px 12px; background: rgba(242, 242, 247, .94); border-bottom: 1px solid var(--hair); }
+#admin .wrap { max-width: 720px; margin: 0 auto; padding: 12px 24px 60px; }
+#admin h1 { font-size: 2.2rem; margin: 10px 0 18px; }
+.me { display: flex; align-items: center; gap: 16px; background: #fff; border-radius: 14px; padding: 14px 18px; margin-bottom: 28px; }
+.me .av { width: 64px; height: 64px; background: linear-gradient(160deg, #A1A1A8, #6E6E75); font-weight: 700; font-size: 1.5rem; }
+.me b { font-size: 1.3rem; display: block; }
+.me span { color: var(--grey); }
+.gt { color: var(--grey); margin: 0 0 6px 18px; }
+.group { background: #fff; border-radius: 14px; margin-bottom: 28px; overflow: hidden; }
+.group > div { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 18px; border-bottom: 1px solid var(--hair); }
+.group > div:last-child { border-bottom: 0; }
+.group > div > span:first-child:not(.av), .group > div > .av + span { flex: 1; }
+.group .v { color: var(--grey); }
+.group .mini { background: transparent; }
+
+/* ---------- Upright iPad: list becomes pinned faces on top ---------- */
+@media (max-aspect-ratio: 1/1) {
+  #pad { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .list { border-right: 0; border-bottom: 1px solid var(--hair); }
+  .list-top { padding: 12px 14px 0; }
+  .list h1 { margin: -44px 20px 0; font-size: 1.7rem; pointer-events: none; }
+  .list .date { display: none; }
+  .chats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 10px 12px; gap: 6px; }
+  .chat { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 10px 6px; min-height: 0; gap: 6px; }
+  .chat .top { justify-content: center; }
+  .chat .top b { flex: none; }
+  .chat time { display: none; }
+  .chat .prev { display: none; }
+  .chat .short { display: block; color: var(--grey); font-size: 1rem; }
+  .chat[aria-current=true] .short { color: #E6EEFB; }
+  .chat .av { width: 62px; height: 62px; font-size: 1.9rem; }
+  .chat .av.school svg { width: 32px; height: 32px; }
+  .b { max-width: 80%; }
+  .pinbar .txt div { white-space: normal; }
+}
+html.t2 .pinbar .txt div, html.t3 .pinbar .txt div { white-space: normal; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="pad"></div>
+<div id="admin" hidden></div>
+<script src="../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const I = {
+  tv: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  gear: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  play: '<path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  text: '<path d="M4 19l5-14 5 14M5.8 14h6.4M15 19l3-8 3 8M15.9 16.5h4.2"/>',
+  cal: '<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 3v3M16 3v3"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  book: '<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5zM4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/>',
+};
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+const nowIdx = P.classes.findIndex((c) => c.now);
+const nowC = P.classes[nowIdx], nextC = P.classes[nowIdx + 1];
+const kidBy = (n) => P.kids.find((k) => k.name === n);
+const kidAv = (k, cls = '', st = '') => `<span class="av ${cls} ${st}" style="--c:${k.color}" aria-hidden="true">${k.face}</span>`;
+const schoolAv = (cls = '') => `<span class="av school ${cls}" aria-hidden="true">${ic('tv')}</span>`;
+const names = (arr) => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+let current = 'school';   // which conversation is open
+const handled = new Set(); // reply rows already answered
+
+/* ---------- What the school says today, built from the data ---------- */
+function schoolThread() {
+  const maths = P.classes[0], eng = P.classes[1];
+  const marked = P.kids.map((k, i) => maths.marks[i] ? `${k.name} got ${maths.marks[i]}` : null).filter(Boolean);
+  const noMark = P.kids.filter((k, i) => maths.state[i] === 'done' && !maths.marks[i]).map((k) => k.name);
+  const missed = P.kids.filter((k, i) => eng.state[i] === 'missed').map((k) => k.name);
+  const today = P.scores.filter((s) => s.when === 'Today');
+  const exam = P.needsYou[0], late = P.needsYou[1], rate = P.needsYou[2];
+  return [
+    { stamp: `<b>Today</b> 08:45`, opener: true },
+    { text: `Good morning. ${P.classes.length} classes today: ${names(P.classes.map((c) => c.subject))}.`, first: true, tail: true, opener: true },
+    { stamp: `<b>Today</b> 10:50` },
+    { text: `${maths.subject} and ${eng.subject} are done. In ${maths.subject}, ${names(marked)}.`, first: true },
+    { text: `${names(noMark)} has no ${maths.subject} mark yet, and ${names(missed)} missed ${eng.subject}.`, tail: true,
+      qr: [{ label: `Give ${noMark[0]} a mark`, act: 'mark', i: 0, k: P.kids.findIndex((k) => k.name === noMark[0]) }, { label: `Set work for ${missed[0]}`, act: 'homework', i: 1, k: P.kids.findIndex((k) => k.name === missed[0]) }], id: 'q1' },
+    { text: `${today[0].what.split(',')[0]} test: ${today.map((s) => `${s.kid} ${s.score}`).join(', ')}.`, first: true, tail: true },
+    { text: `Leo’s 3 answers in the ${exam.detail.split(': ')[1].split(',')[0]} exam need marking.`, first: true, tail: true, qr: [{ label: exam.action, act: 'need', n: 0 }], id: 'q2' },
+    { text: `${late.what}: ${late.detail.split(': ')[1]}.`, first: true, tail: true, qr: [{ label: 'Remind Leo', act: 'need', n: 1 }], id: 'q3' },
+    { text: `All three watched the Muscles lesson. How was it?`, first: true, tail: true, stars: true, id: 'q4' },
+  ];
+}
+function kidThread(ki) {
+  const k = P.kids[ki];
+  const st = P.classes.map((c) => c.state[ki]);
+  const done = P.classes.filter((c, i) => st[i] === 'done').map((c, i) => c.subject + (c.marks && c.marks[P.classes.indexOf(c)] ? '' : ''));
+  const doneWithMarks = P.classes.map((c, i) => st[i] === 'done' ? (c.marks && c.marks[ki] ? `${c.subject} (mark ${c.marks[ki]})` : c.subject) : null).filter(Boolean);
+  const missed = P.classes.filter((c, i) => st[i] === 'missed').map((c) => c.subject);
+  const sc = P.scores.filter((s) => s.kid === k.name);
+  const nowLine = st[nowIdx] === 'now' ? `${k.name} is watching ${nowC.subject} now.` : st[nowIdx] === 'done' ? `${k.name} has finished ${nowC.subject}.` : '';
+  const m = [
+    { stamp: `<b>Today</b> ${P.now}` },
+    { text: `${k.done} of ${k.of} classes done: ${names(doneWithMarks)}.`, first: true },
+  ];
+  if (missed.length) m.push({ text: `${k.name} missed ${names(missed)}.` });
+  if (nowLine) m.push({ text: nowLine });
+  m.push({ text: sc.length ? `Latest score: ${sc[0].what}, ${sc[0].score}. Average mark: ${k.average}.` : `Average mark: ${k.average}.` });
+  m.push({ text: k.homework ? `${k.homework} homework to do${k.late ? `, ${k.late} late` : ''}.` : 'No homework waiting.', tail: true,
+    qr: [{ label: `Give ${k.name} a mark`, act: 'mark', i: 0, k: ki }, { label: 'Set homework', act: 'homework', i: nowIdx, k: ki }], id: 'k' + ki });
+  return m;
+}
+const extra = { school: [] }; // messages added by the parent in this visit
+
+/* ---------- Render ---------- */
+function bubbleHTML(m) {
+  if (m.stamp) return `<div class="stamp"${m.opener ? ' data-opener' : ''}>${m.stamp}</div>`;
+  if (m.typing) return `<div class="typing" aria-label="Typing"><i></i><i></i><i></i></div>`;
+  const cls = ['b', m.out ? 'out' : 'in', m.tail || m.out ? 'tail' : '', m.first ? 'first' : ''].join(' ');
+  let qr = '';
+  if (m.qr && !handled.has(m.id)) qr = `<div class="qr">${m.qr.map((q) => `<button data-act="${q.act}" data-i="${q.i ?? ''}" data-k="${q.k ?? ''}" data-n="${q.n ?? ''}" data-q="${m.id}">${esc(q.label)}</button>`).join('')}</div>`;
+  if (m.stars && !handled.has(m.id)) qr = `<div class="qr"><span class="ask">Your stars</span>${[1, 2, 3, 4, 5].map((s) => `<button class="star" data-act="star" data-s="${s}" data-q="${m.id}" aria-label="${s} stars">${ic('star')}</button>`).join('')}</div>`;
+  return `<div class="${cls}"${m.opener ? ' data-opener' : ''}>${m.html || esc(m.text)}</div>${qr}`;
+}
+function previews() {
+  const s = schoolThread();
+  return [
+    { id: 'school', name: 'Home School TV', av: schoolAv(), time: P.now, prev: s[s.length - 1].text, short: 'Today’s news', badge: P.needsYou.length - [...handled].filter((h) => ['q2', 'q3', 'q4'].includes(h)).length },
+    ...P.kids.map((k, ki) => {
+      const st = P.classes.map((c) => c.state[ki]);
+      const bits = [st[nowIdx] === 'now' ? `Watching ${nowC.subject} now` : `${nowC.subject} done`];
+      if (st.includes('missed')) bits.push(`missed ${P.classes[st.indexOf('missed')].subject}`);
+      if (k.late) bits.push(`${k.late} homework late`);
+      const sc = P.scores.find((x) => x.kid === k.name && x.when === 'Today');
+      if (sc && st[nowIdx] === 'done') bits.splice(1, 0, `test ${sc.score}`);
+      return { id: 'k' + ki, name: k.name, av: kidAv(k), time: P.now, prev: bits.join(', ') + '.', short: `${k.done} of ${k.of} done` };
+    }),
+  ];
+}
+function renderPad() {
+  const pv = previews();
+  const isKid = current !== 'school';
+  const k = isKid ? P.kids[+current.slice(1)] : null;
+  const msgs = (isKid ? kidThread(+current.slice(1)) : schoolThread()).concat(extra[current] || []);
+  const watching = P.kids.filter((x, i) => nowC.state[i] === 'now').map((x) => x.name);
+  $('#pad').innerHTML = `
+  <aside class="list">
+    <div class="list-top"><span class="sp"></span>
+      <button class="icon-btn" data-act="text" aria-label="Text size">${ic('text')}</button>
+      <a class="icon-btn" href="#admin">${ic('gear')}Admin</a>
+    </div>
+    <h1>Home School</h1>
+    <p class="date">${esc(P.today)}</p>
+    <ul class="chats">${pv.map((c) => `<li><button class="chat" data-chat="${c.id}" aria-current="${c.id === current}">
+      <span class="avwrap">${c.av}${c.badge ? `<span class="badge" aria-label="${c.badge} need you">${c.badge}</span>` : ''}</span>
+      <span><span class="top"><b>${esc(c.name)}</b><time>${c.time}</time></span><span class="prev">${esc(c.prev)}</span><span class="short">${esc(c.short)}</span></span>
+    </button></li>`).join('')}</ul>
+  </aside>
+  <section class="thread">
+    <header class="head">
+      ${isKid ? kidAv(k, 'sm') : schoolAv('sm')}
+      <div class="who"><b>${isKid ? esc(k.name) : 'Home School TV'}</b><span>${isKid ? `${esc(k.year)}, ${k.done} of ${k.of} done today` : esc(P.today)}</span></div>
+      <button class="hbtn" data-act="day">${ic('cal')}Today</button>
+      <button class="hbtn" data-act="scores">${ic('chart')}Scores</button>
+      <button class="hbtn" data-act="program">${ic('book')}Program</button>
+    </header>
+    <div class="pinbar">
+      <span class="rule"></span>
+      <div class="txt"><div><b>${esc(nowC.subject)} is on now</b>, until ${nextC.time}. Next is ${esc(nextC.subject)}.</div><div>${esc(nowC.title)}. ${names(watching)} ${watching.length > 1 ? 'are' : 'is'} watching.</div></div>
+      <button class="cta" data-act="play">${ic('play')}Play on the TV</button>
+    </div>
+    <div class="msgs" aria-live="polite">${msgs.map(bubbleHTML).join('')}</div>
+    <form class="compose" autocomplete="off">
+      <input name="note" placeholder="Write to us: an idea or a problem with the app" aria-label="Send feedback">
+      <button class="send" aria-label="Send" disabled>${ic('up')}</button>
+    </form>
+  </section>`;
+  const box = $('.msgs');
+  if (box.scrollHeight > box.clientHeight + 1) box.querySelectorAll('[data-opener]').forEach((n) => n.remove());
+  box.scrollTop = box.scrollHeight;
+  const f = $('.compose'), inp = f.note, send = f.querySelector('.send');
+  inp.addEventListener('input', () => { send.disabled = !inp.value.trim(); });
+  f.addEventListener('submit', (e) => { e.preventDefault(); const v = inp.value.trim(); if (!v) return; say(v, 'Thank you. We read every note, and we’ll reply here.'); });
+}
+function say(outText, reply) {
+  (extra[current] = extra[current] || []).push({ out: true, text: outText, first: true });
+  renderPad();
+  const box = $('.msgs');
+  box.insertAdjacentHTML('beforeend', bubbleHTML({ typing: true })); box.scrollTop = box.scrollHeight;
+  setTimeout(() => { extra[current].push({ text: reply, first: true, tail: true }); renderPad(); }, 700);
+}
+
+/* ---------- Sheets ---------- */
+function sheet(title, body, actLabel, onAct) {
+  closeAll();
+  const v = document.createElement('div'); v.className = 'veil';
+  v.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><button class="hbtn" data-x>Cancel</button><h3>${esc(title)}</h3>${actLabel ? `<button class="hbtn r" data-ok>${esc(actLabel)}</button>` : '<span></span>'}</header><div class="in-pad">${body}</div></div>`;
+  document.body.append(v); requestAnimationFrame(() => v.classList.add('in'));
+  v.addEventListener('click', (e) => { if (e.target === v || e.target.closest('[data-x]')) v.remove(); if (e.target.closest('[data-ok]')) { onAct && onAct(v); v.remove(); } });
+  v.querySelectorAll('.seg').forEach((g) => g.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); }));
+  return v;
+}
+function closeAll() { document.querySelectorAll('.veil, .pop').forEach((n) => n.remove()); }
+function toast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.append(t); requestAnimationFrame(() => t.classList.add('in')); setTimeout(() => { t.classList.remove('in'); setTimeout(() => t.remove(), 300); }, 2200); }
+function markSheet(i, ki, q) {
+  const c = P.classes[i]; let val = 10;
+  const v = sheet('Give a mark', `<p>${esc(c.subject)}: ${esc(c.title)}</p><div class="seg">${P.kids.map((k, x) => c.state[x] !== 'later' ? `<button aria-pressed="${x === ki}" data-k="${x}">${kidAv(k, 'sm')}${esc(k.name)}</button>` : '').join('')}</div>
+    <div class="stepper"><button data-d="-1" aria-label="Lower">−</button><output>${val}</output><button data-d="1" aria-label="Higher">+</button><span>out of 12</span></div>`, 'Save', (v) => {
+      const k = P.kids[+v.querySelector('.seg [aria-pressed=true]').dataset.k];
+      if (q) handled.add(q);
+      say(`${k.name}: ${val} of 12 for ${c.subject}.`, `Saved. ${k.name} will see the mark in the diary.`);
+    });
+  v.querySelectorAll('[data-d]').forEach((b) => b.addEventListener('click', () => { val = Math.min(12, Math.max(0, val + +b.dataset.d)); v.querySelector('output').textContent = val; }));
+}
+function homeworkSheet(i, ki, q) {
+  const c = P.classes[i];
+  const v = sheet('Set homework', `<p>${esc(c.subject)}: ${esc(c.title)}</p><div class="seg">${P.kids.map((k, x) => `<button aria-pressed="${x === ki}" data-k="${x}">${kidAv(k, 'sm')}${esc(k.name)}</button>`).join('')}</div>
+    <textarea class="field" placeholder="What to do, for example: read pages 16 to 18"></textarea>
+    <div class="seg"><button class="plain" aria-pressed="true">Due tomorrow</button><button class="plain" aria-pressed="false">Due Friday</button></div>`, 'Set', (v) => {
+      const k = P.kids[+(v.querySelector('.seg [aria-pressed=true]') || { dataset: { k: 0 } }).dataset.k];
+      if (q) handled.add(q);
+      say(`Homework for ${k.name}: ${c.subject}.`, `Set. ${k.name} will see it on ${k.name === 'Leo' ? 'his' : 'her'} screen.`);
+    });
+}
+function markingSheet(q) {
+  const item = P.needsYou[0];
+  sheet('Leo’s answers', `<p>${esc(item.detail)}</p><ul class="rows">${[1, 2, 3].map((a) => `<li><div><b>Answer ${a}</b><br><span>Tap to read what Leo wrote</span></div><div class="seg" style="margin:0"><button class="plain" aria-pressed="false">Right</button><button class="plain" aria-pressed="false">Not yet</button></div></li>`).join('')}</ul>`, 'Done', () => {
+    handled.add(q); say('I’ve marked Leo’s answers.', 'Thank you. Leo’s exam result is ready for him to see.');
+  });
+}
+function daySheet() {
+  sheet('Today', `<p>${esc(P.today)}. ${nowIdx} of ${P.classes.length} classes done.</p><ul class="rows">${P.classes.map((c, i) => `<li><span class="t">${c.time}</span><div><b>${esc(c.subject)}</b><br><span>${esc(c.title)}</span><div class="faces" style="margin-top:6px">${P.kids.map((k, x) => kidAv(k, '', c.state[x])).join('')}</div></div>
+    ${i <= nowIdx ? `<button class="mini" data-act="mark" data-i="${i}" data-k="${Math.max(0, c.state.findIndex((s) => s !== 'later'))}">Mark</button>` : ''}<button class="mini" data-act="homework" data-i="${i}" data-k="0">Homework</button></li>`).join('')}</ul>`);
+}
+function scoresSheet() {
+  sheet('Scores', `<p>Averages: ${P.kids.map((k) => `${k.name} ${k.average}`).join(', ')}.</p><ul class="rows">${P.scores.map((s) => `<li>${kidAv(kidBy(s.kid), 'sm')}<div><b>${esc(s.kid)}: ${esc(s.score)}</b><br><span>${esc(s.what)}</span></div><span>${esc(s.when)}</span></li>`).join('')}</ul>`);
+}
+function programSheet() {
+  sheet('Program', `<p>${P.program.subjects} subjects, following ${esc(P.admin.plan)}. ${P.program.readyLessons} video lessons are ready.</p><ul class="rows"><li><div><b>We are here</b><br><span>${esc(P.program.where)}</span></div><button class="mini" data-act="fullprogram">Open</button></li></ul>`);
+}
+function textPop(btn) {
+  closeAll();
+  const r = btn.getBoundingClientRect(); const p = document.createElement('div'); p.className = 'pop';
+  const cur = ['t2', 't3'].find((c) => document.documentElement.classList.contains(c)) || '';
+  p.innerHTML = [['', 'Large', 1], ['t2', 'Larger', 1.15], ['t3', 'Largest', 1.3]].map(([c, n, z]) => `<button data-t="${c}" aria-pressed="${c === cur}">${n}<span style="font-size:${z}em">Aa</span></button>`).join('');
+  p.style.top = r.bottom + 8 + 'px'; p.style.left = Math.max(10, r.left - 120) + 'px'; document.body.append(p);
+  p.addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (!b) return; document.documentElement.classList.remove('t2', 't3'); b.dataset.t && document.documentElement.classList.add(b.dataset.t); p.remove(); });
+}
+
+document.addEventListener('click', (e) => {
+  const chat = e.target.closest('[data-chat]');
+  if (chat) { current = chat.dataset.chat; renderPad(); return; }
+  const b = e.target.closest('[data-act]');
+  if (!b) { if (!e.target.closest('.pop')) document.querySelectorAll('.pop').forEach((n) => n.remove()); return; }
+  e.stopPropagation();
+  const a = b.dataset.act, q = b.dataset.q, i = +b.dataset.i, k = b.dataset.k === '' ? 0 : +b.dataset.k;
+  if (a === 'play') toast(`Playing ${nowC.subject} on the TV`);
+  if (a === 'mark') markSheet(i, k, q);
+  if (a === 'homework') homeworkSheet(i, k, q);
+  if (a === 'need') { const n = +b.dataset.n; if (n === 0) markingSheet(q); else { handled.add(q); say('Please remind Leo.', 'Done. Leo will see a reminder on his screen.'); } }
+  if (a === 'star') { const s = +b.dataset.s; b.parentElement.querySelectorAll('.star').forEach((x) => x.classList.toggle('on', +x.dataset.s <= s)); setTimeout(() => { handled.add(q); say('★'.repeat(s) + '☆'.repeat(5 - s), 'Thanks. Your stars sit beside the children’s.'); }, 350); }
+  if (a === 'day') daySheet();
+  if (a === 'scores') scoresSheet();
+  if (a === 'program') programSheet();
+  if (a === 'fullprogram') toast('The full program opens as its own page');
+  if (a === 'text') textPop(b);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+
+/* ---------- Admin ---------- */
+const A = P.admin;
+const row = (k, v, act) => `<div><span>${esc(k)}</span>${v ? `<span class="v">${esc(v)}</span>` : ''}${act ? `<button class="mini">${esc(act)}</button>` : ''}</div>`;
+function renderAdmin() {
+  $('#admin').innerHTML = `<div class="bar"><a class="icon-btn" href="#">${ic('back')}Back to messages</a></div>
+  <div class="wrap"><h1>Admin</h1>
+    <div class="me"><span class="av">${A.account.name[0]}</span><div><b>${esc(A.account.name)}</b><span>${esc(A.sections[0])}: username ${esc(A.account.username)}</span></div></div>
+    <p class="gt">${esc(A.sections[0])}</p><div class="group">${row('Password', '', 'Change')}${row('Text size', A.account.textSize, 'Change')}${row('Sign out', '', 'Sign out')}</div>
+    <p class="gt">${esc(A.sections[1])}</p><div class="group">${P.parents.map((p) => row(p.name + (p.you ? ' (you)' : ''), p.you ? 'Owner' : 'Parent')).join('')}${P.kids.map((k) => `<div>${kidAv(k, 'sm')}<span>${esc(k.name)}</span><span class="v">${esc(k.year)}</span><button class="mini">Edit</button></div>`).join('')}${row('Invite a parent', '', 'Invite')}</div>
+    <p class="gt">${esc(A.sections[2])}</p><div class="group">${row('Follows', A.plan)}${row(A.wordHelp.split(': ')[0], cap(A.wordHelp.split(': ')[1]), 'Change')}${row('Subjects', String(P.program.subjects))}</div>
+    <p class="gt">${esc(A.sections[3])}</p><div class="group">${row('Your plan', A.billing)}${row('Children on the plan', String(P.kids.length))}</div>
+    <p class="gt">${esc(A.sections[4])}</p><div class="group">${row('Exam PIN', A.examPin, 'Change')}${row('Send feedback', '', 'Write')}</div>
+  </div>`;
+}
+function route() {
+  closeAll();
+  const admin = location.hash.startsWith('#admin');
+  $('#pad').hidden = admin; $('#admin').hidden = !admin;
+  document.body.style.overflow = admin ? 'auto' : 'hidden';
+  admin ? renderAdmin() : renderPad();
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>

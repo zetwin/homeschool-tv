@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magazine front (The Guardian and NYT on iPad)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF; --ink:#1C1C1A; --grey:#5A5853; --rule:#1C1C1A; --hair:#D6D3CC;
+  --live:#C40000; --link:#0A3570; --wash:#F3F2EE;
+  --serif:Newsreader,Georgia,serif; --sans:"Libre Franklin",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+html[data-size="large"]{font-size:18.5px}
+html[data-size="xl"]{font-size:20px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.4;height:100vh;overflow:hidden}
+body.isAdmin{height:auto;min-height:100vh;overflow:auto}
+button,a,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+
+/* ---------- front page ---------- */
+.front{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr);padding:0 40px}
+.mast{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:4px solid var(--rule)}
+.mast .name{font-family:var(--serif);font-weight:700;font-size:2.05rem;letter-spacing:-.02em;line-height:1}
+.mast .name i{font-weight:400}
+.mast .date{font-size:1rem;color:var(--grey);margin-top:4px}
+.mast nav{display:flex;align-items:center;gap:6px}
+.navBtn{min-height:48px;min-width:48px;padding:0 14px;display:flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;border-radius:4px}
+.navBtn:hover{background:var(--wash)}
+.navBtn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.navBtn .aa{font-family:var(--serif);font-size:1.35rem;font-weight:600;line-height:1}
+
+.paper{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 350px;grid-template-areas:"lead lead photo" "needs rest kids";grid-template-rows:auto 1fr;column-gap:0;min-height:0;padding-top:18px}
+.lead{grid-area:lead;padding:0 32px 18px 0;border-bottom:1px solid var(--hair)}
+.photo{grid-area:photo;border-bottom:1px solid var(--hair);padding-bottom:14px}
+.c-needs{grid-area:needs}.c-rest{grid-area:rest}.c-kids{grid-area:kids}
+.kicker{font-weight:700;color:var(--live);display:flex;align-items:center;gap:10px;font-size:1.05rem}
+.kicker .pulse{width:11px;height:11px;border-radius:50%;background:var(--live);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.kicker span.sub{color:var(--ink);font-weight:600}
+h1.hl{font-family:var(--serif);font-weight:600;font-size:3rem;line-height:1.02;letter-spacing:-.018em;margin:10px 0 14px;font-variation-settings:"opsz" 72;text-wrap:balance}
+.stand{font-family:var(--serif);font-size:1.32rem;line-height:1.42;color:#3A3935;max-width:36em;text-wrap:pretty}
+.acts{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{min-height:56px;padding:0 24px;border-radius:3px;font-weight:700;font-size:1.08rem;display:inline-flex;align-items:center;gap:12px}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.ink svg{width:20px;height:20px;fill:#fff}
+.btn.ink.on{background:var(--live)}
+.btn.line{box-shadow:inset 0 0 0 2px var(--ink)}
+figure.photo img{width:100%;height:250px;object-fit:cover;object-position:50% 8%;display:block;background:#4A5A66}
+figure.photo figcaption{font-size:1rem;color:var(--grey);padding-top:8px;line-height:1.35}
+figure.photo figcaption b{color:var(--ink);font-weight:600}
+.col{padding:16px 24px 0;min-width:0}
+.c-needs{padding-left:0}
+.c-kids{padding-right:0}
+.c-rest,.c-kids{border-left:1px solid var(--hair)}
+.col h2{font-family:var(--sans);font-weight:800;font-size:1.05rem;padding-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.col h2 small{font-weight:600;color:var(--grey);font-size:1rem}
+.story{display:block;width:100%;padding:8px 0 10px;border-top:1px solid var(--hair);min-height:48px}
+.story:first-of-type{border-top:2px solid var(--ink)}
+.story h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;line-height:1.15}
+.story p{color:var(--grey);margin-top:3px;line-height:1.35}
+.story .go{color:var(--link);font-weight:700}
+.story.urgent h3{color:var(--ink)}
+.story.urgent h3::before{content:"";display:inline-block;width:10px;height:10px;background:var(--live);border-radius:50%;margin-right:9px;vertical-align:.12em}
+.tt{list-style:none;border-top:2px solid var(--ink)}
+.tt li{border-bottom:1px solid var(--hair)}
+.tt button{display:grid;grid-template-columns:3.6rem 1fr;gap:12px;width:100%;padding:9px 0;min-height:48px;align-items:baseline}
+.tt .t{font-variant-numeric:tabular-nums;color:var(--grey);font-weight:600}
+.tt b{font-family:var(--serif);font-size:1.2rem;font-weight:600}
+.tt .note{display:block;color:var(--grey);font-size:1rem}
+.tt li.past b{color:var(--grey);font-weight:500}
+.tt li.cur .t{color:var(--live)}
+.more{display:inline-flex;align-items:center;min-height:48px;color:var(--link);font-weight:700}
+.kid{display:grid;align-content:start;grid-template-columns:44px 1fr;grid-template-areas:"f h" "f p";column-gap:12px;row-gap:2px;width:100%;padding:9px 0 10px;border-top:1px solid var(--hair);min-height:48px;align-items:start}
+.kid:first-of-type{border-top:2px solid var(--ink)}
+.kid .f{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.35rem;background:var(--wash);box-shadow:inset 0 0 0 3px var(--kc)}
+.kid .f{grid-area:f}.kid h3{grid-area:h;align-self:center;font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.15}
+.kid h3 small{font-family:var(--sans);font-size:1rem;color:var(--grey);font-weight:500;margin-left:6px}
+.kid p{grid-area:p;color:var(--grey);line-height:1.35}
+.kid .late{color:var(--live);font-weight:700}
+
+.index{display:flex;align-items:center;gap:0;border-top:4px solid var(--rule);padding:4px 0 8px;flex-wrap:nowrap}
+.index button{min-height:52px;padding:0 20px;font-weight:600;border-left:1px solid var(--hair)}
+.index button:first-child{padding-left:0;border-left:0;flex:1;text-align:left;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.index button{white-space:nowrap}
+.index button:first-child b{font-weight:700}
+.index button:first-child span{color:var(--grey);font-weight:500}
+.index button.l{color:var(--link);font-weight:700}
+
+/* ---------- article page (layer 2) ---------- */
+.page{position:fixed;inset:0;background:var(--paper);overflow:auto;transform:translateX(100%);transition:transform .38s cubic-bezier(.2,.8,.2,1);z-index:4;visibility:hidden}
+.page.show{transform:none;visibility:visible}
+.pageTop{position:sticky;top:0;background:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:10px 40px;border-bottom:1px solid var(--hair);z-index:1}
+.back{min-height:52px;display:flex;align-items:center;gap:6px;font-weight:700;color:var(--link);text-decoration:none}
+.back svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.2}
+.art{max-width:760px;margin:0 auto;padding:30px 40px 60px}
+.art .kick{font-weight:700;color:var(--grey)}
+.art h1{font-family:var(--serif);font-size:2.9rem;line-height:1.05;font-weight:600;letter-spacing:-.015em;margin:8px 0 14px;text-wrap:balance}
+.art .stand{margin-bottom:22px}
+.art h2{font-weight:800;font-size:1.05rem;border-top:2px solid var(--ink);padding-top:10px;margin:28px 0 6px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl td,.tbl th{padding:12px 8px 12px 0;border-bottom:1px solid var(--hair);text-align:left;vertical-align:baseline}
+.tbl th{font-weight:700;color:var(--grey);font-size:1rem}
+.tbl td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td b{font-family:var(--serif);font-size:1.2rem;font-weight:600}
+.tbl .miss{color:var(--live);font-weight:700}
+.tbl button{color:var(--link);font-weight:700;min-height:44px}
+.qa{padding:16px 0;border-bottom:1px solid var(--hair)}
+.qa h3{font-family:var(--serif);font-size:1.4rem;font-weight:600;line-height:1.2}
+.qa blockquote{font-family:var(--serif);font-style:italic;font-size:1.25rem;border-left:3px solid var(--ink);padding:4px 0 4px 16px;margin:12px 0}
+.qa p{color:var(--grey)}
+.marks{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.marks button{min-width:52px;height:52px;border-radius:3px;box-shadow:inset 0 0 0 2px var(--hair);text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.marks button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+
+/* ---------- class sheet (centred, iPad style) ---------- */
+.scrim{position:fixed;inset:0;background:rgba(28,28,26,.42);opacity:0;pointer-events:none;transition:opacity .25s;z-index:5}
+.dlg{position:fixed;left:50%;top:50%;width:min(720px,calc(100vw - 48px));max-height:calc(100vh - 48px);overflow:auto;background:var(--paper);transform:translate(-50%,-46%);opacity:0;pointer-events:none;transition:opacity .25s,transform .3s;z-index:6;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.dlgOpen .scrim{opacity:1;pointer-events:auto}
+.dlgOpen .dlg{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.dHead{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;border-bottom:1px solid var(--hair)}
+.dHead h2{font-family:var(--serif);font-size:1.5rem;font-weight:600}
+.dHead button{min-height:48px;padding:0 10px;font-weight:700;color:var(--link)}
+.dBody{padding:6px 24px 24px}
+.dBody .row{padding:12px 0;border-bottom:1px solid var(--hair)}
+.dlg .marks{gap:6px}.dlg .marks button{min-width:46px;height:48px}
+.dBody .row b{font-family:var(--serif);font-size:1.25rem;font-weight:600}
+.dBody .row small{color:var(--grey);font-size:1rem;margin-left:8px}
+label.fld{display:block;margin-top:16px;font-weight:700}
+label.fld input,label.fld textarea{display:block;width:100%;margin-top:8px;min-height:54px;border:2px solid var(--hair);border-radius:3px;padding:12px 14px;font-weight:400}
+label.fld textarea{min-height:150px;resize:none;font-family:var(--serif);font-size:1.2rem}
+
+.pop{position:fixed;top:64px;right:150px;background:var(--paper);box-shadow:0 0 0 1px var(--hair),0 18px 50px rgba(0,0,0,.18);padding:6px;width:240px;display:none;z-index:7;border-radius:4px}
+.pop.show{display:block}
+.pop button{display:flex;justify-content:space-between;width:100%;min-height:52px;padding:0 14px;align-items:center;font-family:var(--serif)}
+.pop button[aria-pressed="true"]{background:var(--wash);font-weight:600}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,180%);visibility:hidden;background:var(--ink);color:#fff;padding:14px 22px;font-weight:600;transition:transform .3s;z-index:9;border-radius:3px}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+
+/* ---------- admin: a contents page ---------- */
+#admin{display:none}
+.isAdmin #admin{display:block}
+.isAdmin .front,.isAdmin .page{display:none}
+.aMast{display:flex;align-items:center;justify-content:space-between;padding:10px 40px;border-bottom:4px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:2}
+.aMast .name{font-family:var(--serif);font-size:1.6rem;font-weight:700}
+.aGrid{display:grid;grid-template-columns:280px 1fr;gap:48px;padding:28px 40px 80px;max-width:1180px}
+.aIdx{position:sticky;top:96px;align-self:start}
+.aIdx h1{font-family:var(--serif);font-size:3rem;font-weight:600;letter-spacing:-.02em;line-height:1}
+.aIdx p{color:var(--grey);margin:10px 0 16px}
+.aIdx ol{list-style:none;counter-reset:a}
+.aIdx a{display:flex;align-items:center;min-height:50px;border-top:1px solid var(--hair);text-decoration:none;font-family:var(--serif);font-size:1.25rem;font-weight:500}
+.aSec{padding-bottom:26px}
+.aSec h2{font-family:var(--serif);font-size:2rem;font-weight:600;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:6px;scroll-margin-top:100px}
+.aSec dl{display:grid;grid-template-columns:minmax(160px,.7fr) 1fr;}
+.aSec dt,.aSec dd{padding:13px 0;border-bottom:1px solid var(--hair)}
+.aSec dt{font-weight:700;display:flex;align-items:center;gap:8px}
+.aSec dd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.aSec dd button{color:var(--link);font-weight:700;min-height:44px}
+.aSec .fine{color:var(--grey);margin-top:10px}
+
+@media (orientation:portrait){
+  .paper{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"photo photo" "lead lead" "needs rest" "kids kids";grid-template-rows:auto auto auto 1fr}
+  .photo{border-bottom:0;padding-bottom:12px}
+  figure.photo img{object-position:50% 14%}
+  .lead{padding-right:0}
+  h1.hl{font-size:3.1rem;margin:6px 0 10px}
+  .c-kids{border-left:0;padding:14px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;align-content:start}
+  .c-kids h2{grid-column:1/-1;border-top:4px solid var(--rule);padding-top:10px}
+  .c-kids .kid{border-top:2px solid var(--ink);grid-template-areas:"f h" "p p";row-gap:6px}
+  figure.photo img{height:130px;object-position:50% 9%}
+  .story{padding:6px 0 8px}
+  .index button{min-height:46px}
+  .acts{margin-top:16px}
+  .index{flex-wrap:wrap}
+  .index button:first-child{flex-basis:100%;border-bottom:1px solid var(--hair)}
+  .index button:nth-child(2){padding-left:0;border-left:0}
+  .c-rest{padding-right:0}
+  .aGrid{grid-template-columns:1fr;gap:20px}
+  .aIdx{position:static}
+}
+/* bigger text: fewer pictures, nothing cut */
+html[data-size="large"] figure.photo img{height:180px}
+.moreNeeds{display:none}
+html[data-size="large"] .story.extra,html[data-size="xl"] .story.extra,html[data-size="large"] .kid .sc,html[data-size="xl"] .kid .sc{display:none}
+html[data-size="large"] .moreNeeds,html[data-size="xl"] .moreNeeds{display:inline-flex}
+html[data-size="large"] .tt li.past{display:none}
+@media (orientation:landscape){html[data-size="xl"] .paper{grid-template-areas:"lead lead lead" "needs rest kids"}html[data-size="xl"] .photo{display:none}}
+html[data-size="large"] h1.hl,html[data-size="xl"] h1.hl{font-size:52px}
+html[data-size="xl"] .stand{font-size:1.2rem}
+html[data-size="xl"] .acts{margin-top:14px}
+html[data-size="xl"] .kid h3 small{display:none}
+html[data-size="xl"] .tt li.past{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="front" id="front"></div>
+<section class="page" id="page" aria-live="polite"></section>
+<div class="scrim" id="scrim"></div>
+<section class="dlg" id="dlg" role="dialog" aria-modal="true"></section>
+<div class="pop" id="pop" role="menu" aria-label="Text size"></div>
+<div class="toast" id="toast" role="status"></div>
+<div id="admin"></div>
+
+<script src="../data.js"></script>
+<script>
+(() => {
+const P = window.PAD, $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const GEAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+const BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+const nowI = P.classes.findIndex((c) => c.now), now = P.classes[nowI], next = P.classes[nowI + 1];
+const today = P.scores.filter((s) => s.when === 'Today');
+const best = [...today].sort((a, b) => parseInt(b.score) - parseInt(a.score))[0];
+const kidAt = (name) => P.kids.findIndex((k) => k.name === name);
+const watching = P.kids.filter((k, i) => now.state[i] === 'now').map((k) => k.name);
+const STATE = { done: 'Done', now: 'Watching now', missed: 'Missed', later: 'Later today' };
+const words = ['no', 'one', 'two', 'three', 'four', 'five'];
+let playing = false;
+
+function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 2400); }
+
+function renderFront() {
+  const topic = best.what.split(',')[0].toLowerCase();
+  const missed = P.classes.flatMap((c) => c.state.map((s, i) => s === 'missed' ? `${P.kids[i].name} missed ${c.subject}` : null)).filter(Boolean);
+  const kidLine = (k, i) => {
+    const sc = P.scores.find((s) => s.kid === k.name);
+    const hw = k.late ? `<span class="late">${k.late} homework late</span>` : k.homework ? `${k.homework} homework` : 'no homework';
+    return `${k.done} of ${k.of} done, ${hw}.${sc ? `<span class="sc"><br>${esc(sc.what.replace(', lesson test', ' test').replace(', re-test', ' re-test'))}: ${esc(sc.score)}</span>` : ''}`;
+  };
+  $('#front').innerHTML = `
+  <header class="mast">
+    <div><div class="name">Home School <i>today</i></div><div class="date">${esc(P.today)}, ${esc(P.now)}</div></div>
+    <nav><button class="navBtn" id="aa" aria-label="Text size" aria-haspopup="true"><span class="aa">Aa</span> Text size</button><a class="navBtn" href="#admin">${GEAR} Admin</a></nav>
+  </header>
+  <main class="paper">
+    <section class="lead">
+      <p class="kicker"><span class="pulse" aria-hidden="true"></span>Live <span class="sub">${esc(now.subject)}, ${esc(now.time)} to ${esc(next.time)}</span></p>
+      <h1 class="hl">${esc(now.subject)} is on, and ${esc(best.kid)} aced the ${esc(topic)} test</h1>
+      <p class="stand">${watching.join(' and ')} are watching <em>${esc(now.title)}</em> now. ${esc(best.kid)} finished early with ${esc(best.score)}. ${words[P.needsYou.length][0].toUpperCase() + words[P.needsYou.length].slice(1)} small jobs are waiting for you.</p>
+      <div class="acts"><button class="btn ink ${playing ? 'on' : ''}" id="play">${playing ? 'Playing on the TV. Stop' : `${PLAY}Play on the TV`}</button><button class="btn line" data-class="${nowI}">Give a mark or homework</button></div>
+    </section>
+    <figure class="photo"><img src="../../assets/img/skeleton.jpg" alt="A human skeleton, from the skull down to the hips"><figcaption><b>Today’s lesson:</b> the 206 bones that hold you up. Photo: Sklmsta, CC0</figcaption></figure>
+    <section class="col c-needs"><h2>Needs you <small>${P.needsYou.length}</small></h2>
+      ${P.needsYou.map((n, i) => `<button class="story ${i < 2 ? 'urgent' : ''} ${i > 1 ? 'extra' : ''}" data-need="${i}"><h3>${esc(n.what)}</h3><p>${esc(n.detail)}. <span class="go">${esc(n.action)}</span></p></button>`).join('')}
+      <button class="more moreNeeds" data-page="needs">All ${P.needsYou.length} jobs</button>
+    </section>
+    <section class="col c-rest"><h2>The rest of the day</h2>
+      <ul class="tt">${P.classes.map((c, ci) => ci <= nowI ? '' : `<li class="${c.now ? 'cur' : ''}"><button data-class="${ci}"><span class="t">${esc(c.time)}</span><span><b>${esc(c.subject)}</b><span class="note">${esc(c.title)}</span></span></button></li>`).join('')}
+        <li class="past"><button data-page="day"><span class="t">Earlier</span><span><b>Maths and English</b><span class="note">${missed.length ? esc(missed.join('. ')) + '.' : 'All done.'}</span></span></button></li></ul>
+    </section>
+    <section class="col c-kids"><h2>The children</h2>
+      ${P.kids.map((k, i) => `<button class="kid" data-kid="${i}"><span class="f" style="--kc:${k.color}">${k.face}</span><h3>${esc(k.name)}<small>${esc(k.year)}</small></h3><p>${kidLine(k, i)}</p></button>`).join('')}
+    </section>
+  </main>
+  <footer class="index">
+    <button data-page="program"><b>In the program:</b> <span>${esc(P.program.where)}</span></button>
+    <button class="l" data-page="day">All 5 classes</button>
+    <button class="l" data-page="scores">All scores</button>
+    <button class="l" data-page="feedback">Send feedback</button>
+  </footer>`;
+}
+
+/* ---------- article pages ---------- */
+function marksCell(c, i) { const s = c.state[i], m = c.marks?.[i]; return s === 'missed' ? '<span class="miss">Missed</span>' : s === 'done' && m ? `${m} of 12` : STATE[s]; }
+const pages = {
+  day: () => ({ kick: P.today, h: 'The whole day, class by class', stand: `${P.kids.reduce((n, k) => n + k.done, 0)} of ${P.kids.reduce((n, k) => n + k.of, 0)} classes are done across the three children. Tap a class to give a mark or set homework.`,
+    body: `<table class="tbl"><thead><tr><th>Time</th><th>Class</th>${P.kids.map((k) => `<th>${k.face} ${esc(k.name)}</th>`).join('')}<th></th></tr></thead><tbody>${P.classes.map((c, ci) => `<tr><td class="n">${esc(c.time)}</td><td><b>${esc(c.subject)}</b><br><span style="color:var(--grey)">${esc(c.title)}</span></td>${P.kids.map((k, i) => `<td>${marksCell(c, i)}</td>`).join('')}<td><button data-class="${ci}">Mark</button></td></tr>`).join('')}</tbody></table>` }),
+  needs: () => ({ kick: 'Needs you', h: `${P.needsYou.length} small jobs`, stand: 'Most urgent first.',
+    body: `<table class="tbl"><tbody>${P.needsYou.map((n, i) => `<tr><td><b>${esc(n.what)}</b><br><span style="color:var(--grey)">${esc(n.detail)}</span></td><td><button data-need="${i}">${esc(n.action)}</button></td></tr>`).join('')}</tbody></table>` }),
+  scores: () => ({ kick: 'Scores', h: 'The latest results', stand: 'Every test and re-test, newest first. The full gradebook keeps every mark by date.',
+    body: `<table class="tbl"><thead><tr><th>Child</th><th>What</th><th>When</th><th>Score</th></tr></thead><tbody>${P.scores.map((s) => `<tr><td><b>${esc(s.kid)}</b></td><td>${esc(s.what)}</td><td>${esc(s.when)}</td><td class="n"><b>${esc(s.score)}</b></td></tr>`).join('')}</tbody></table>` }),
+  program: () => ({ kick: 'The program', h: P.program.where, stand: `${P.program.subjects} subjects follow England’s National Curriculum. ${P.program.readyLessons} TV lessons are ready to play.`,
+    body: `<div class="acts"><button class="btn ink" data-sent="The program document would open here">Open the full program</button></div>` }),
+  feedback: () => ({ kick: 'Letters', h: 'Tell us an idea or a problem', stand: 'It goes to Admin, Feedback and checks. Nothing leaves your home.',
+    body: `<label class="fld">Your message<textarea></textarea></label><div class="acts"><button class="btn ink" data-sent>Send</button></div>` }),
+  mark: () => ({ kick: 'Needs you', h: 'Mark Leo’s written answers', stand: 'Unit exam: Skeleton and muscles. Three answers, with the mark scheme under each one.',
+    body: [['Why is spongy bone useful?', 2, 'It makes the bone lighter but it is still strong.', '1 mark: keeps bone light. 1 mark: still strong.'],
+      ['Why is there cartilage at the ends of bones in a joint?', 2, 'So the bones don’t rub together.', '1 mark: reduces friction, or stops bones rubbing. 1 mark: cushions or absorbs shock.'],
+      ['Explain how the biceps and triceps bend and straighten your arm.', 4, 'The biceps pulls to bend the arm and the triceps pulls to straighten it.', '1: biceps contracts to bend. 1: triceps relaxes then. 1: triceps contracts to straighten. 1: biceps relaxes then.']]
+      .map(([q, m, a, s]) => `<div class="qa"><h3>${esc(q)}</h3><blockquote>${esc(a)}</blockquote><p>Mark scheme: ${esc(s)}</p><div class="marks" role="group" aria-label="Marks">${Array.from({ length: m + 1 }, (_, i) => `<button aria-pressed="false" data-chip>${i}</button>`).join('')}</div></div>`).join('') + '<div class="acts"><button class="btn ink" data-sent="Marks saved for Leo">Save the marks</button></div>' }),
+};
+function kidPage(i) {
+  const k = P.kids[i], sc = P.scores.filter((s) => s.kid === k.name);
+  return { kick: `${k.name}, ${k.year}`, h: `${k.done} of ${k.of} classes done today`, stand: `Average ${k.average}. ${k.homework ? `${k.homework} homework${k.late ? `, and ${k.late} is late` : ''}.` : 'No homework waiting.'}`,
+    body: `<h2>Today</h2><table class="tbl"><tbody>${P.classes.map((c, ci) => `<tr><td class="n">${esc(c.time)}</td><td><b>${esc(c.subject)}</b></td><td>${marksCell(c, i)}</td><td><button data-class="${ci}">Mark</button></td></tr>`).join('')}</tbody></table>
+      ${sc.length ? `<h2>Latest scores</h2><table class="tbl"><tbody>${sc.map((s) => `<tr><td>${esc(s.what)}</td><td>${esc(s.when)}</td><td class="n"><b>${esc(s.score)}</b></td></tr>`).join('')}</tbody></table>` : ''}
+      ${k.late ? `<h2>Homework</h2><table class="tbl"><tbody><tr><td><b>English</b></td><td>Read pages 12 to 15, due Friday</td><td><span class="miss">Late</span></td><td><button data-sent="${esc(k.name)} will see a reminder">Remind</button></td></tr></tbody></table>` : ''}` };
+}
+function openPage(p) {
+  $('#page').innerHTML = `<div class="pageTop"><button class="back" data-close-page>${BACK}Front page</button><a class="navBtn" href="#admin">${GEAR} Admin</a></div>
+    <article class="art"><p class="kick">${esc(p.kick)}</p><h1>${esc(p.h)}</h1><p class="stand">${esc(p.stand)}</p>${p.body}</article>`;
+  $('#page').scrollTop = 0; $('#page').classList.add('show'); setTimeout(() => $('#page .back').focus(), 60);
+}
+
+/* ---------- class sheet ---------- */
+function openClass(ci) {
+  const c = P.classes[ci];
+  $('#dlg').innerHTML = `<div class="dHead"><button data-close>Cancel</button><h2>${esc(c.subject)}, ${esc(c.time)}</h2><button data-close data-sent="Marks and homework saved">Done</button></div>
+    <div class="dBody">${P.kids.map((k, i) => `<div class="row"><b>${k.face} ${esc(k.name)}</b><small>${c.state[i] === 'missed' ? 'Missed' : STATE[c.state[i]]}</small>
+      <div class="marks" role="group" aria-label="Mark for ${esc(k.name)}, out of 12">${Array.from({ length: 12 }, (_, m) => `<button aria-pressed="${String(c.marks?.[i] === String(m + 1))}" data-chip>${m + 1}</button>`).join('')}</div></div>`).join('')}
+    <label class="fld">Homework for this class<input placeholder="For example: read pages 16 to 18" autocomplete="off"></label></div>`;
+  document.body.classList.add('dlgOpen');
+}
+const closeDlg = () => document.body.classList.remove('dlgOpen');
+
+/* ---------- admin ---------- */
+function renderAdmin() {
+  const A = P.admin, ids = ['account', 'family', 'plan', 'billing', 'feedback'];
+  const sec = (i, rows, fine = '') => `<section class="aSec" id="a-${ids[i]}"><h2>${esc(A.sections[i])}</h2><dl>${rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>${fine ? `<p class="fine">${fine}</p>` : ''}</section>`;
+  $('#admin').innerHTML = `<header class="aMast"><a class="back" href="#">${BACK}Back to the front page</a><span class="name">Admin</span></header>
+  <div class="aGrid"><nav class="aIdx" aria-label="Admin sections"><h1>Admin</h1><p>The account, the family and the plan. Teaching stays on the front page.</p><ol>${A.sections.map((s, i) => `<li><a href="#admin" data-jump="a-${ids[i]}">${esc(s)}</a></li>`).join('')}</ol></nav>
+  <div>
+    ${sec(0, [['Name', esc(A.account.name)], ['Username', esc(A.account.username)], ['Text size', esc(A.account.textSize)], ['Password', '<span>Set</span><button>Change</button>']])}
+    ${sec(1, [...P.parents.map((p) => [esc(p.name), p.you ? 'You' : 'Parent']), ...P.kids.map((k) => [`${k.face} ${esc(k.name)}`, `<span>${esc(k.year)}</span><button>Login</button>`]), ['Someone new', '<span></span><button>Add a parent or child</button>']], 'Children sign in on their own device. They don’t need an email address.')}
+    ${sec(2, [['Program', esc(A.plan)], ['Word help', 'Spanish key words, off'], ['Exam PIN', `<span>${esc(A.examPin)}</span><button>Change</button>`]])}
+    ${sec(3, [['Your plan', esc(A.billing)], ['Payment', 'Nothing is charged, and no card is asked for']])}
+    ${sec(4, [['Ideas and problems', '<span>Nothing yet</span><button data-page-admin>Write one</button>'], ['The last 7 days', 'No problems']], 'Nothing here leaves your home.')}
+  </div></div>`;
+}
+
+/* ---------- text size ---------- */
+const SIZES = [['std', 'Standard', 1], ['large', 'Large', 1.1], ['xl', 'Extra large', 1.2]];
+function renderPop() { const cur = document.documentElement.dataset.size || 'std'; $('#pop').innerHTML = SIZES.map(([k, t, f]) => `<button aria-pressed="${k === cur}" data-size="${k}" style="font-size:${f * 1.1}rem">${t}${k === cur ? ' <span aria-hidden="true">✓</span>' : ''}</button>`).join(''); }
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('button, a');
+  if (!t || !t.closest('#pop')) { if (t?.id !== 'aa') $('#pop').classList.remove('show'); }
+  if (!t) return;
+  if (t.id === 'aa') { renderPop(); $('#pop').classList.toggle('show'); return; }
+  if (t.dataset.size) { document.documentElement.dataset.size = t.dataset.size; $('#pop').classList.remove('show'); return; }
+  if (t.id === 'play') { playing = !playing; renderFront(); toast(playing ? 'Science is playing on the TV' : 'Stopped on the TV'); return; }
+  if (t.dataset.chip !== undefined) { t.parentElement.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false')); t.setAttribute('aria-pressed', 'true'); return; }
+  if (t.dataset.class !== undefined) return openClass(+t.dataset.class);
+  if (t.dataset.need !== undefined) { const i = +t.dataset.need; if (i === 0) openPage(pages.mark()); else if (i === 1) openPage(kidPage(1)); else toast('Rating opens here'); return; }
+  if (t.dataset.kid !== undefined) return openPage(kidPage(+t.dataset.kid));
+  if (t.dataset.page) return openPage(pages[t.dataset.page]());
+  if (t.hasAttribute('data-close-page')) { $('#page').classList.remove('show'); return; }
+  if (t.hasAttribute('data-close')) { closeDlg(); if (t.dataset.sent) toast(t.dataset.sent); return; }
+  if (t.dataset.sent !== undefined) { toast(t.dataset.sent || 'Sent. Thank you'); if (!t.dataset.sent) $('#page').classList.remove('show'); return; }
+  if (t.dataset.jump) { e.preventDefault(); document.getElementById(t.dataset.jump).scrollIntoView({ behavior: 'smooth' }); return; }
+  if (t.hasAttribute('data-page-admin')) { location.hash = ''; setTimeout(() => openPage(pages.feedback()), 30); }
+});
+$('#scrim').addEventListener('click', closeDlg);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeDlg(); $('#page').classList.remove('show'); $('#pop').classList.remove('show'); } });
+
+function route() {
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('isAdmin', admin);
+  if (admin) { closeDlg(); $('#page').classList.remove('show'); renderAdmin(); window.scrollTo(0, 0); }
+}
+window.addEventListener('hashchange', route);
+renderFront(); route();
+})();
+</script>
+</body>
+</html>

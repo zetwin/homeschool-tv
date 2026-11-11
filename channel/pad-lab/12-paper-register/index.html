@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper register: the day as a school register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f8f2; --card:#fffffb; --rule:#cfdcea; --grid:#a9bccf; --margin:#e3a0a0;
+  --ink:#23272f; --ink2:#4c525d; --red:#b3261e; --blue:#1f3f8f; --hl:rgba(255,226,92,.55);
+  --spine:#23443a; --spine2:#1a352d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:18px}
+html.t2{font-size:20px} html.t3{font-size:22px}
+body{font-family:'Alegreya Sans',system-ui,sans-serif;color:var(--ink);background:var(--spine2);height:100vh;overflow:hidden;line-height:1.3;-webkit-font-smoothing:antialiased}
+body.admin-on{overflow:auto;height:auto;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+svg{display:block}
+.hand{font-family:Kalam,cursive}
+
+/* the book */
+.book{display:flex;height:100vh}
+body.admin-on .book{min-height:100vh;height:auto}
+.spine{width:34px;flex:none;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px),
+  repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px),var(--spine);
+  position:relative;box-shadow:inset -6px 0 10px rgba(0,0,0,.35)}
+.spine::after{content:'';position:absolute;top:0;bottom:0;right:9px;border-right:2px dashed rgba(240,230,200,.45)}
+.page{flex:1;min-width:0;position:relative;background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+  linear-gradient(90deg,rgba(0,0,0,.07),transparent 26px);
+  box-shadow:inset 0 0 60px rgba(120,110,80,.08)}
+#pad{display:flex;flex-direction:column;height:100vh;padding:20px 36px 18px 44px}
+
+/* head */
+.head{display:flex;align-items:flex-start;gap:14px;min-height:72px}
+.date{font-family:Kalam,cursive;font-weight:700;font-size:2.35rem;line-height:1;color:var(--blue);transform:rotate(-1deg);transform-origin:left;margin-top:6px}
+.date small{display:block;font-family:'Alegreya Sans';font-weight:500;font-size:1rem;color:var(--ink2);transform:rotate(1deg);margin-top:8px}
+.tools{margin-left:auto;display:flex;align-items:flex-start;gap:10px}
+.tbtn{min-height:48px;min-width:48px;padding:0 14px;border:1.5px solid var(--grid);border-radius:6px;font-weight:700;display:inline-flex;align-items:center;gap:8px;background:var(--card)}
+.tbtn:hover{border-color:var(--ink2)}
+.ribbon{margin-top:-20px;width:84px;min-height:104px;background:var(--red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:700;padding-bottom:16px;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 84%,0 100%);box-shadow:0 2px 0 rgba(0,0,0,.1)}
+.ribbon:hover{background:#9a1f18}
+
+/* register */
+.reg{margin-top:10px;position:relative}
+.reg table{border-collapse:collapse;width:100%;table-layout:fixed}
+.reg th,.reg td{border:1px solid var(--grid);height:62px;vertical-align:middle;padding:0}
+.reg thead th{font-weight:500;height:auto;padding:6px 10px 8px;text-align:left;vertical-align:bottom;border-top:2px solid var(--ink)}
+.reg thead th .tm{display:block;color:var(--ink2);font-variant-numeric:tabular-nums}
+.reg thead th .sb{display:block;font-weight:800;font-size:1.12rem}
+.reg thead th.cls{cursor:pointer}
+.reg thead th.cls:hover{background:rgba(31,63,143,.05)}
+.reg th.name{border-left:0;text-align:left;padding-left:2px}
+.reg tbody th{text-align:left;font-weight:700;font-size:1.15rem;padding-left:2px;border-left:0}
+.reg tbody th .f{font-size:24px;margin-right:8px;vertical-align:-3px}
+.reg tbody th .y{font-weight:400;color:var(--ink2);font-size:1rem;margin-left:6px}
+.reg tbody tr:last-child th,.reg tbody tr:last-child td{border-bottom:2px solid var(--ink)}
+.reg td.c{cursor:pointer;position:relative}
+.reg td.c:hover{background:rgba(31,63,143,.05)}
+.reg td.c button{width:100%;height:100%;min-height:60px;display:flex;align-items:center;justify-content:center;gap:4px}
+.reg .sum{border-left-width:1px;text-align:center}
+.reg .sum.first{border-left:3px double var(--ink)}
+.reg thead th.sum{text-align:center;color:var(--ink);font-weight:700}
+.reg td.sum{font-family:Kalam,cursive;font-weight:700;font-size:1.45rem;color:var(--blue)}
+.reg td.sum .late{color:var(--red);font-size:1.1rem;display:block;line-height:1;margin-top:-4px}
+.nowcol{background:var(--hl)!important}
+.reg thead th.nowcol{background:linear-gradient(var(--hl),var(--hl))!important}
+.reg .nowtag{display:inline-block;font-family:Kalam,cursive;font-weight:700;color:var(--red);font-size:1.05rem;transform:rotate(-3deg);margin-left:4px}
+.mk{font-family:Kalam,cursive;font-weight:700;color:var(--red);font-size:1.75rem;line-height:1;transform:rotate(-4deg);display:inline-block}
+.watch{font-family:Kalam,cursive;color:var(--blue);font-size:1.15rem;font-weight:700;transform:rotate(-2deg)}
+.miss{font-family:Kalam,cursive;color:var(--red);font-size:1.2rem;font-weight:700;position:relative;padding:0 6px}
+.miss::before{content:'';position:absolute;inset:-6px -4px;border:2px solid var(--red);border-radius:50% 46% 52% 44%;transform:rotate(-6deg);opacity:.85}
+.tick path{fill:none;stroke:var(--red);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.playrow td{border:0;height:auto;padding-top:10px}
+.play{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;background:var(--ink);color:#fff;border-radius:6px;font-weight:800;font-size:1.06rem}
+.play:hover{background:#000}
+
+/* notes, on ruled paper */
+.notes{flex:1;min-height:0;margin-top:14px;display:grid;grid-template-columns:1.2fr 1fr;gap:0 40px;align-content:start;
+  background-image:repeating-linear-gradient(180deg,transparent 0 35px,var(--rule) 35px 36px);position:relative}
+.notes::before{content:'';position:absolute;top:0;bottom:0;left:-14px;border-left:1.5px solid var(--margin);box-shadow:-4px 0 0 -2.5px var(--margin)}
+.notes h2{font-weight:800;font-size:1.2rem;height:36px;line-height:34px;display:flex;align-items:baseline;gap:10px}
+.notes h2 .c{font-weight:500;color:var(--ink2);font-size:1rem}
+.n2{display:flex;flex-direction:column}
+.n2 section + section{margin-top:36px}
+.todo{display:flex;align-items:center;gap:10px;height:72px;cursor:pointer}
+.todo .box{width:44px;height:44px;flex:none;display:grid;place-items:center;margin-left:-6px}
+.todo .box svg path.sq{fill:var(--card);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.todo .box svg path.tk{fill:none;stroke:var(--red);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:60;stroke-dashoffset:60;transition:stroke-dashoffset .35s ease-out}
+.todo.done .box svg path.tk{stroke-dashoffset:0}
+.todo .w{flex:1;min-width:0;position:relative}
+.todo .w b,.todo .w span{display:block;line-height:36px;height:36px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.todo .w b{font-weight:700}
+.todo .w span{color:var(--ink2)}
+.todo .tt{font-style:normal;position:relative;display:inline-block}
+.todo .strike{position:absolute;left:-4px;top:17px;width:0;height:3px;background:var(--red);border-radius:2px;transform:rotate(-1deg);transition:width .4s .25s ease-out;opacity:.85}
+.todo.done .strike{width:calc(100% + 8px)}
+.todo.done .w b,.todo.done .w span{color:#6b717b}
+.act{min-height:44px;padding:0 14px;border:1.5px solid var(--ink);border-radius:6px;font-weight:700;background:var(--card);white-space:nowrap}
+.act:hover{background:#fff}
+.line{display:flex;align-items:baseline;gap:10px;height:36px;line-height:34px}
+.line .who{font-weight:700;min-width:40px}
+.line .what{color:var(--ink2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line .sc{font-family:Kalam,cursive;font-weight:700;color:var(--red);font-size:1.3rem;line-height:1}
+.line .late{color:var(--red);font-weight:700}
+.lnk{display:inline-flex;align-items:center;min-height:44px;margin:-4px 14px -4px 0;padding:0 4px;font-weight:700;color:var(--blue);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.where{color:var(--ink);line-height:36px}
+
+/* index card */
+.veil{position:fixed;inset:0;z-index:40;display:none;background:rgba(30,35,30,.18)}
+.veil.on{display:block}
+.card{position:fixed;z-index:41;width:440px;max-width:calc(100vw - 32px);display:none;background:var(--card);
+  background-image:repeating-linear-gradient(180deg,transparent 0 51px,#d7e3ef 51px 52px);background-position:0 98px;
+  border-radius:3px;box-shadow:0 1px 1px rgba(0,0,0,.08),0 14px 34px rgba(40,40,30,.26);padding:18px 22px 20px}
+.card::before{content:'';position:absolute;left:0;right:0;top:80px;border-top:2px solid #e39a9a}
+.card.on{display:block;animation:deal .26s cubic-bezier(.2,1.1,.4,1)}
+@keyframes deal{from{opacity:0;transform:translateY(14px) rotate(-1.5deg)}to{opacity:1;transform:rotate(-.4deg)}}
+.card.on{transform:rotate(-.4deg)}
+.card h3{font-weight:800;font-size:1.35rem;height:30px;padding-right:44px}
+.card .sub{color:var(--ink2);height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .x{position:absolute;right:6px;top:6px;width:48px;height:48px;display:grid;place-items:center}
+.card .body{margin-top:24px}
+.card .ln{display:flex;align-items:center;gap:10px;min-height:52px}
+.card .ln .g{flex:1}
+.card .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.nums{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px}
+.nums button{min-height:52px;border:1.5px solid var(--grid);border-radius:4px;background:#fff;text-align:center;font-family:Kalam,cursive;font-weight:700;font-size:1.5rem;color:var(--red)}
+.nums button.on{border-color:var(--red);box-shadow:inset 0 0 0 2px var(--red)}
+.card label{display:block;font-weight:700;margin-top:10px}
+.card input{width:100%;min-height:48px;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:Kalam,cursive;font-size:1.3rem;color:var(--blue);padding:0 4px}
+.card input:focus{outline:none;border-bottom-color:var(--blue)}
+.chips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.chips button{min-height:44px;padding:0 14px;border:1.5px solid var(--grid);border-radius:4px;background:#fff;font-weight:700}
+.chips button.on{border-color:var(--blue);color:var(--blue);box-shadow:inset 0 0 0 1.5px var(--blue)}
+.btn{min-height:48px;padding:0 18px;border-radius:6px;font-weight:800;background:var(--ink);color:#fff;display:inline-flex;align-items:center;gap:8px}
+.btn.sec{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,200%);background:var(--card);border:1.5px solid var(--ink);border-radius:4px;padding:10px 20px;font-family:Kalam,cursive;font-weight:700;font-size:1.25rem;color:var(--blue);transition:transform .3s;z-index:60;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.toast.on{transform:translate(-50%,0) rotate(-1deg)}
+
+/* admin: the register's front pages */
+#admin{display:none;padding:22px 40px 64px 44px;min-height:100vh}
+body.admin-on #pad{display:none}
+body.admin-on #admin{display:block}
+.backb{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 10px;border:1.5px solid var(--ink);border-radius:6px;font-weight:800;background:var(--card)}
+.backb:hover{background:#fff}
+.belongs{margin:26px 0 8px;max-width:760px}
+.belongs .p{font-weight:500;color:var(--ink2);font-size:1.06rem}
+.belongs .n{font-family:Kalam,cursive;font-weight:700;color:var(--blue);font-size:2.6rem;line-height:1.1;border-bottom:1.5px solid var(--ink);padding:0 6px 2px;transform:rotate(-1deg);display:inline-block;min-width:280px}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 48px;max-width:1040px;margin-top:20px}
+.form{padding-top:10px}
+.form h2{font-weight:800;font-size:1.3rem;border-bottom:2px solid var(--ink);padding-bottom:4px}
+.form .f{display:flex;align-items:baseline;gap:12px;min-height:50px;border-bottom:1px solid var(--rule);padding-top:12px}
+.form .f > span:first-child{color:var(--ink2);min-width:150px}
+.form .f .v{font-family:Kalam,cursive;font-weight:700;color:var(--blue);font-size:1.3rem;flex:1}
+.form .f button{margin-left:auto;min-height:44px;padding:0 6px;font-weight:700;color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.form .note{color:var(--ink2);margin-top:8px;max-width:52ch}
+
+/* upright */
+@media (max-aspect-ratio:1/1){
+  .spine{width:22px}
+  .spine::after{right:6px}
+  #pad{padding:22px 26px 22px 34px}
+  .notes{grid-template-columns:1fr}
+  .n2{display:grid;grid-template-columns:1.1fr 1fr;column-gap:32px;margin-top:36px}
+  .n2 .mb{grid-row:span 2}
+  .n2 section + section{margin-top:0}
+  .n2 section:nth-child(3){margin-top:36px}
+  .admin-grid{grid-template-columns:1fr}
+  #admin{padding:22px 28px 64px 34px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="book">
+  <div class="spine" aria-hidden="true"></div>
+  <div class="page">
+    <div id="pad"></div>
+    <div id="admin"></div>
+  </div>
+</div>
+<div class="veil" id="veil"></div>
+<div class="card" id="card" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes;
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const kidIdx = (t) => K.findIndex((k) => t.includes(k.name));
+// a hand-drawn tick, a little different each time so it looks written
+const tick = (seed = 0) => { const w = [0, 1.5, -1, .8, -1.6][seed % 5]; return `<svg class="tick" width="34" height="30" viewBox="0 0 34 30" aria-label="done"><path d="M4 ${16 + w} C7 18, 10 22, 12 ${25 + w / 2} C16 16, 22 ${8 + w}, 30 ${3 - w / 2}"/></svg>`; };
+const I = {
+  gear: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+  play: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>',
+  x: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  box: '<svg width="34" height="34" viewBox="0 0 34 34"><path class="sq" d="M5 6.5 L28.5 5 L29 28.6 L5.6 29.2 Z"/><path class="tk" d="M9 17 C12 19, 14 23, 16 26 C20 16, 25 9, 33 2"/></svg>',
+};
+const portrait = () => matchMedia('(max-aspect-ratio:1/1)').matches;
+
+function cell(c, ci, j) {
+  const s = c.state[j], m = c.marks && c.marks[j];
+  let inner = '';
+  if (s === 'done') inner = tick(ci + j) + (m ? `<span class="mk">${m}</span>` : '');
+  else if (s === 'now') inner = '<span class="watch">watching</span>';
+  else if (s === 'missed') inner = '<span class="miss">missed</span>';
+  const label = `${K[j].name}, ${c.subject}: ${s}${m ? ', mark ' + m : ''}`;
+  return `<td class="c${c.now ? ' nowcol' : ''}"><button data-cell="${ci},${j}" aria-label="${esc(label)}">${inner}</button></td>`;
+}
+function renderPad() {
+  const ni = C.findIndex((c) => c.now);
+  const up = portrait(), nameW = up ? 132 : 170;
+  const span = up ? C.length - ni + 1 : 2;
+  $('#pad').innerHTML = `
+  <div class="head">
+    <div class="date">${P.today}<small>Register for Ana, Leo and Mia. It is ${P.now}.</small></div>
+    <div class="tools"><button class="tbtn" data-open="size" aria-label="Text size">Aa</button>
+      <a class="ribbon" href="#admin" aria-label="Admin: account, family and plan">${I.gear}<span>Admin</span></a></div>
+  </div>
+  <div class="reg"><table>
+    <colgroup><col style="width:${nameW}px">${C.map(() => '<col>').join('')}<col style="width:84px">${up ? '' : '<col style="width:112px"><col style="width:96px">'}</colgroup>
+    <thead><tr><th class="name"></th>
+      ${C.map((c, i) => `<th class="cls${c.now ? ' nowcol' : ''}" data-cls="${i}" tabindex="0" role="button"><span class="tm">${c.time}${c.now ? '<span class="nowtag">now</span>' : ''}</span><span class="sb">${esc(c.subject)}</span></th>`).join('')}
+      <th class="sum first">Done</th>${up ? '' : '<th class="sum">Homework</th><th class="sum">Average</th>'}</tr></thead>
+    <tbody>${K.map((k, j) => `<tr><th scope="row"><span class="f" aria-hidden="true">${k.face}</span>${k.name}<span class="y">${k.year.replace('Year ', 'Y')}</span></th>
+      ${C.map((c, ci) => cell(c, ci, j)).join('')}
+      <td class="sum first">${k.done}/${k.of}</td>
+      ${up ? '' : `<td class="sum">${k.homework || '–'}${k.late ? `<span class="late">${k.late} late</span>` : ''}</td>
+      <td class="sum">${k.average.replace(' of ', '/')}</td>`}</tr>`).join('')}
+      <tr class="playrow"><td style="border:0"></td>${C.map((c, i) => i === ni ? `<td colspan="${span}" style="border:0"><button class="play" data-play>${I.play}Play ${esc(c.subject)} on the TV</button></td>` : (i > ni && i < ni + span ? '' : '<td style="border:0"></td>')).join('')}${up ? '' : '<td colspan="3" style="border:0"></td>'}</tr>
+    </tbody></table></div>
+  <div class="notes">
+    <section class="n1"><h2>Needs you<span class="c">${P.needsYou.length} things</span></h2>
+      ${P.needsYou.map((n, i) => `<div class="todo" data-todo="${i}"><button class="box" data-tick="${i}" aria-label="Tick off: ${esc(n.what)}">${I.box}</button>
+        <div class="w"><b><em class="tt">${esc(n.what)}<i class="strike"></i></em></b><span>${esc(n.detail)}</span></div><button class="act" data-need="${i}">${esc(n.action)}</button></div>`).join('')}
+    </section>
+    <div class="n2">
+    <section class="mb"><h2>Marks book</h2>
+      ${P.scores.map((s) => `<div class="line"><span class="who">${s.kid}</span><span class="what">${esc(s.what.replace(', lesson test', ' test'))}, ${s.when.toLowerCase()}</span><span class="sc">${s.score.replace(' of ', '/')}</span></div>`).join('')}
+      ${up ? `<div class="line"><span class="what">Averages: ${K.map((k) => `${k.name} <span class="sc" style="font-size:1.15rem">${k.average.replace(' of ', '/')}</span>`).join(', ')}</span></div>` : ''}
+      <button class="lnk" data-open="scores">All scores</button>
+    </section>
+    ${up ? `<section><h2>Homework</h2>${K.map((k) => `<div class="line"><span class="who">${k.name}</span><span class="what">${k.homework ? k.homework + ' to do' : 'Nothing set'}${k.late ? `, <span class="late">${k.late} late</span>` : ''}</span></div>`).join('')}</section>` : ''}
+    <section><h2>Where we are</h2>
+      <p class="where">${esc(P.program.where)}.</p>
+      <button class="lnk" data-open="program">Full program</button><button class="lnk" data-open="feedback">Send feedback</button>
+    </section>
+    </div>
+  </div>`;
+}
+
+/* index cards */
+let ctx = {};
+function openCard(html, anchor) {
+  const c = $('#card');
+  c.innerHTML = `<button class="x" data-close aria-label="Close">${I.x}</button>` + html;
+  c.classList.add('on'); $('#veil').classList.add('on');
+  const r = anchor ? anchor.getBoundingClientRect() : { left: innerWidth / 2, right: innerWidth / 2, top: innerHeight / 3, bottom: innerHeight / 3 };
+  const w = c.offsetWidth, h = c.offsetHeight;
+  let left = Math.min(innerWidth - w - 16, Math.max(16, (r.left + r.right) / 2 - w / 2));
+  let top = r.bottom + 10; if (top + h > innerHeight - 12) top = Math.max(12, r.top - h - 10);
+  c.style.left = left + 'px'; c.style.top = top + 'px';
+}
+const closeCard = () => { $('#card').classList.remove('on'); $('#veil').classList.remove('on'); };
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2600); }
+const word = { done: 'Done', now: 'Watching now', later: 'Later today', missed: 'Missed' };
+
+function cellCard(ci, j, anchor) {
+  const c = C[ci], k = K[j], s = c.state[j], m = c.marks && c.marks[j];
+  ctx = { ci, j, anchor };
+  openCard(`<h3>${k.face} ${k.name}, ${esc(c.subject)}</h3><p class="sub">${esc(c.title)}</p>
+    <div class="body"><div class="ln"><span class="g">${word[s]}${m ? '. Mark' : ''}</span>${m ? `<span class="mk">${m}</span>` : ''}</div>
+    <div class="acts">${s === 'done' ? `<button class="btn" data-mark>${m ? 'Change the mark' : 'Give a mark'}</button>` : ''}${c.lesson && s === 'now' ? `<button class="btn" data-play>${I.play}Play on the TV</button>` : ''}<button class="btn sec" data-hw>Set homework</button></div></div>`, anchor);
+}
+function classCard(ci, anchor) {
+  const c = C[ci]; ctx = { ci, j: -1, anchor };
+  openCard(`<h3>${esc(c.subject)}, ${c.time}</h3><p class="sub">${esc(c.title)}</p>
+    <div class="body">${K.map((k, j) => `<div class="ln"><span class="g">${k.face} ${k.name}</span><span>${word[c.state[j]]}${c.marks && c.marks[j] ? `, mark <span class="mk" style="font-size:1.3rem">${c.marks[j]}</span>` : ''}</span></div>`).join('')}
+    <div class="acts">${c.lesson ? `<button class="btn" data-play>${I.play}Play on the TV</button>` : ''}<button class="btn sec" data-hw>Set homework for all</button></div></div>`, anchor);
+}
+function markCard() {
+  const { ci, j, anchor } = ctx, c = C[ci], cur = c.marks && c.marks[j];
+  openCard(`<h3>Mark for ${K[j].name}</h3><p class="sub">${esc(c.subject)}: ${esc(c.title)}. Out of 12</p>
+    <div class="body"><div class="nums">${Array.from({ length: 12 }, (_, n) => `<button data-m="${n + 1}" class="${cur == n + 1 ? 'on' : ''}">${n + 1}</button>`).join('')}</div>
+    <div class="acts"><button class="btn" data-savemark>Write it in</button><button class="btn sec" data-close>Cancel</button></div></div>`, anchor);
+}
+function hwCard() {
+  const { ci, j, anchor } = ctx, who = j < 0 ? 'everyone' : K[j].name;
+  openCard(`<h3>Homework for ${who}</h3><p class="sub">${esc(C[ci].subject)}: ${esc(C[ci].title)}</p>
+    <div class="body"><label for="hwt">What to do</label><input id="hwt" placeholder="read pages 16 to 18">
+    <label>Due</label><div class="chips"><button class="on">Tomorrow</button><button>Wednesday</button><button>Friday</button></div>
+    <div class="acts"><button class="btn" data-savehw="${who}">Set homework</button><button class="btn sec" data-close>Cancel</button></div></div>`, anchor);
+}
+function infoCard(kind, anchor) {
+  if (kind === 'scores') openCard(`<h3>All scores</h3><p class="sub">Newest first, then each child’s average</p><div class="body">
+    ${P.scores.map((s) => `<div class="ln"><span class="g">${K[kidIdx(s.kid)].face} ${s.kid}, ${esc(s.what)}, ${s.when.toLowerCase()}</span><span class="mk" style="font-size:1.4rem">${s.score.replace(' of ', '/')}</span></div>`).join('')}
+    ${K.map((k) => `<div class="ln"><span class="g">${k.name}’s average</span><span class="mk" style="font-size:1.4rem;color:var(--blue)">${k.average.replace(' of ', '/')}</span></div>`).join('')}</div>`, anchor);
+  if (kind === 'program') openCard(`<h3>Full program</h3><p class="sub">${esc(P.admin.plan)}</p><div class="body">
+    <div class="ln"><span class="g">Subjects</span><b>${P.program.subjects}</b></div><div class="ln"><span class="g">Video lessons ready</span><b>${P.program.readyLessons}</b></div>
+    <div class="ln"><span class="g">${esc(P.program.where)}</span></div></div>`, anchor);
+  if (kind === 'size') openCard(`<h3>Text size</h3><p class="sub">Bigger writing, same register</p><div class="body"><div class="chips">
+    ${['Normal', 'Large', 'Largest'].map((n, i) => `<button data-size="${i + 1}" style="font-size:${18 + i * 2}px" class="${(document.documentElement.className || 't1') === 't' + (i + 1) ? 'on' : ''}">${n}</button>`).join('')}</div></div>`, anchor);
+  if (kind === 'feedback') openCard(`<h3>Send feedback</h3><p class="sub">Tell us what works and what doesn’t</p><div class="body">
+    <label for="fb">Your note</label><input id="fb" placeholder="write here"><div class="acts"><button class="btn" data-sendfb>Send</button><button class="btn sec" data-close>Cancel</button></div></div>`, anchor);
+}
+function needCard(i, anchor) {
+  const n = P.needsYou[i]; ctx = { need: i };
+  openCard(`<h3>${esc(n.what)}</h3><p class="sub">${esc(n.detail)}</p><div class="body"><div class="acts"><button class="btn" data-needgo="${i}">${esc(n.action)}</button><button class="btn sec" data-close>Later</button></div></div>`, anchor);
+}
+
+document.addEventListener('click', (e) => {
+  const t = (s) => e.target.closest(s);
+  if (e.target.id === 'veil' || t('[data-close]')) return closeCard();
+  if (t('[data-play]')) { closeCard(); return toast('Playing Science on the TV'); }
+  const cl = t('[data-cell]'); if (cl) { const [ci, j] = cl.dataset.cell.split(',').map(Number); return cellCard(ci, j, cl); }
+  const th = t('[data-cls]'); if (th) return classCard(+th.dataset.cls, th);
+  if (t('[data-mark]')) return markCard();
+  if (t('[data-hw]')) return hwCard();
+  const m = t('[data-m]'); if (m) { m.parentNode.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b === m)); return; }
+  const ch = t('.chips button:not([data-size])'); if (ch) { ch.parentNode.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b === ch)); return; }
+  const sz = t('[data-size]'); if (sz) { document.documentElement.className = sz.dataset.size === '1' ? '' : 't' + sz.dataset.size; sz.parentNode.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b === sz)); return; }
+  if (t('[data-savemark]')) { const on = $('.nums .on'); if (!on) return; const { ci, j } = ctx; C[ci].marks = C[ci].marks || ['', '', '']; C[ci].marks[j] = on.dataset.m; closeCard(); renderPad(); return toast(`Mark ${on.dataset.m} written in for ${K[j].name}`); }
+  const sh = t('[data-savehw]'); if (sh) { closeCard(); return toast('Homework set for ' + sh.dataset.savehw); }
+  if (t('[data-sendfb]')) { closeCard(); return toast('Thank you. Your note is sent.'); }
+  const ng = t('[data-needgo]'); if (ng) { closeCard(); return toast(['Opening Leo’s 3 answers', 'Reminder sent to Leo', 'Opening the rating'][+ng.dataset.needgo]); }
+  const nd = t('[data-need]'); if (nd) return needCard(+nd.dataset.need, nd);
+  const tk = t('[data-tick]'); if (tk) { tk.closest('.todo').classList.toggle('done'); return; }
+  const op = t('[data-open]'); if (op) return infoCard(op.dataset.open, op);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCard(); if (e.key === 'Enter' && e.target.matches('[data-cls]')) e.target.click(); });
+
+/* admin: the front pages of the register */
+const A = P.admin;
+function renderAdmin() {
+  const f = (l, v, act) => `<div class="f"><span>${l}</span><span class="v">${v}</span>${act ? `<button>${act}</button>` : ''}</div>`;
+  $('#admin').innerHTML = `<a class="backb" href="#">${I.back}Back to today’s register</a>
+    <div class="belongs"><div class="p">This register belongs to</div><div class="n">${A.account.name}</div></div>
+    <div class="admin-grid">
+      <section class="form"><h2>${A.sections[0]}</h2>${f('Name', A.account.name, 'Change')}${f('Username', A.account.username)}${f('Password', '••••••', 'Change')}${f('Text size', A.account.textSize, 'Change')}${f('', '', 'Sign out')}</section>
+      <section class="form"><h2>${A.sections[1]}</h2>${P.parents.map((p) => f(p.you ? 'Parent (you)' : 'Parent', p.name)).join('')}${K.map((k) => f(k.year, `${k.face} ${k.name}`)).join('')}${f('', '', 'Invite a parent')}
+        <p class="note">Children sign in inside your account, with no email.</p></section>
+      <section class="form"><h2>${A.sections[2]}</h2>${f('Follows', A.plan, 'Change')}${f('Word help', A.wordHelp.replace('Spanish key words: ', 'Spanish, '), 'Change')}
+        <p class="note">The program follows this curriculum. It is not approved by anyone.</p></section>
+      <section class="form"><h2>${A.sections[3]}</h2>${f('Plan', A.billing)}${f('Children', K.length)}</section>
+      <section class="form"><h2>${A.sections[4]}</h2>${f('Exam PIN', A.examPin, 'Change')}${f('Feedback', '', 'Send feedback')}</section>
+    </div>`;
+}
+$('#admin').addEventListener('click', (e) => { const b = e.target.closest('.f button'); if (b && b.textContent === 'Send feedback') infoCard('feedback', b); });
+
+function route() {
+  closeCard();
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('admin-on', admin);
+  if (admin) { renderAdmin(); scrollTo(0, 0); } else renderPad();
+}
+addEventListener('hashchange', route); route();
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (location.hash !== '#admin') renderPad(); }, 150); });
+</script>
+</body>
+</html>

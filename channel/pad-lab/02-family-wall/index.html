@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family wall: one big column per child, like a kitchen calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wall: #2a2420; --wall-2: #3a322c; --on-wall: #fff8ef; --on-wall-2: #e0d3c4;
+  --card: #fffdf9; --ink: #2a2420; --muted: #5e544b; --rule: #ece4da;
+  --sun: #ffc94a; --sun-ink: #2a2420; --late: #b42318;
+  --round: 'Fredoka', 'Lexend', system-ui, sans-serif;
+  font-size: 18px;
+}
+:root[data-size="large"] { font-size: 19.5px; }
+:root[data-size="xl"] { font-size: 21px; }
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { font-family: 'Lexend', system-ui, sans-serif; background: var(--wall); color: var(--ink); line-height: 1.3; overflow: hidden; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, a:focus-visible, textarea:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+svg.i { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+.wall { height: 100vh; display: grid; grid-template-rows: auto auto 1fr; gap: 14px; padding: 16px 20px 20px; }
+
+/* top: clock, date, buttons */
+.top { display: flex; align-items: center; gap: 18px; color: var(--on-wall); }
+.clock { font-family: var(--round); font-weight: 600; font-size: 3rem; line-height: 1; letter-spacing: -0.01em; }
+.dt { display: grid; gap: 2px; }
+.dt b { font-family: var(--round); font-weight: 600; font-size: 1.45rem; }
+.dt span { color: var(--on-wall-2); }
+.dt button { text-align: left; color: var(--on-wall-2); text-decoration: underline; text-decoration-color: rgba(224,211,196,.45); text-underline-offset: 4px; min-height: 30px; }
+.top .sp { flex: 1; }
+.nb { display: grid; justify-items: center; gap: 2px; min-width: 76px; padding: 0 4px; color: var(--on-wall); text-decoration: none; }
+.nb .c { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--wall-2); transition: background .15s; }
+.nb:hover .c { background: #4a4038; }
+.nb .t { font-size: .95rem; color: var(--on-wall-2); white-space: nowrap; }
+.nb.admin .c { background: var(--on-wall); color: var(--wall); }
+
+/* needs-you banner */
+.banner { display: grid; grid-template-columns: auto repeat(3, 1fr); align-items: stretch; gap: 0; background: var(--sun); color: var(--sun-ink); border-radius: 22px; overflow: hidden; }
+.banner .lead { display: flex; align-items: center; gap: 10px; padding: 0 22px; font-family: var(--round); font-weight: 600; font-size: 1.4rem; white-space: nowrap; }
+.banner .lead .n { width: 38px; height: 38px; border-radius: 50%; background: var(--sun-ink); color: var(--sun); display: grid; place-items: center; font-size: 1.15rem; }
+.bi { display: flex; align-items: center; gap: 12px; padding: 12px 14px 12px 18px; border-left: 2px solid rgba(42,36,32,.14); text-align: left; }
+.bi .w { flex: 1; font-weight: 600; line-height: 1.25; }
+.bi .a { flex: none; height: 48px; padding: 0 18px; border-radius: 24px; background: var(--sun-ink); color: #fff; font-weight: 600; display: grid; place-items: center; }
+
+/* three columns */
+.kids { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; min-height: 0; }
+.kids { grid-template-rows: auto 1fr auto; }
+.kid { background: var(--card); border-radius: 28px; display: grid; grid-row: span 3; grid-template-rows: subgrid; overflow: hidden; min-height: 0; }
+.kh { display: flex; align-items: center; gap: 16px; padding: 18px 20px 14px; text-align: left; }
+.ring { position: relative; width: 96px; height: 96px; flex: none; }
+.ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 8; }
+.ring .bg { stroke: var(--k-soft); }
+.ring .fg { stroke: var(--k); stroke-linecap: round; transition: stroke-dashoffset .6s cubic-bezier(.3,.8,.3,1); }
+.ring .f { position: absolute; inset: 12px; border-radius: 50%; background: var(--k-soft); display: grid; place-items: center; font-size: 42px; }
+.kh .nm { font-family: var(--round); font-weight: 600; font-size: 2.3rem; line-height: 1; color: var(--k-ink); }
+.kh .pg { margin-top: 6px; font-size: 1.05rem; }
+.kh .pg b { font-family: var(--round); font-weight: 600; font-size: 1.25rem; }
+
+.list { display: grid; grid-auto-rows: 1fr; padding: 0 12px; min-height: 0; }
+.cl { display: flex; align-items: center; gap: 14px; padding: 4px 8px; border-top: 2px solid var(--rule); min-height: 60px; }
+.tick { width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center; box-shadow: inset 0 0 0 3px var(--k-line); color: #fff; transition: background .2s, box-shadow .2s, transform .12s; }
+.tick:active { transform: scale(.9); }
+.tick svg { width: 28px; height: 28px; stroke-width: 3; opacity: 0; }
+.cl.done .tick { background: var(--k); box-shadow: none; }
+.cl.done .tick svg { opacity: 1; }
+.cl.now .tick { background: var(--k-soft); box-shadow: inset 0 0 0 3px var(--k); color: var(--k-ink); }
+.cl.now .tick svg { opacity: 1; stroke-width: 0; fill: currentColor; }
+.cl.missed .tick { box-shadow: inset 0 0 0 3px #b9aea2; background: repeating-linear-gradient(135deg, #f1ebe3 0 5px, #e6ddd2 5px 10px); }
+.cl .body { flex: 1; min-width: 0; text-align: left; min-height: 52px; display: grid; align-content: center; }
+.cl .s { font-weight: 600; font-size: 1.1rem; line-height: 1.2; }
+.cl .m { color: var(--muted); line-height: 1.25; }
+.cl.now { background: var(--k-soft); border-radius: 18px; border-top-color: transparent; }
+.cl.now + .cl { border-top-color: transparent; }
+.cl.now .m { color: var(--k-ink); font-weight: 600; }
+.cl.missed .m { color: var(--late); font-weight: 600; }
+.cl .mk { font-family: var(--round); font-weight: 600; font-size: 1.7rem; color: var(--k-ink); min-width: 34px; text-align: right; }
+.cl .tt { display: none; }
+
+.kf { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--rule); text-align: left; }
+.kf > div { padding: 12px 20px 14px; }
+.kf > div + div { border-left: 2px solid var(--rule); }
+.kf .l { color: var(--muted); }
+.kf .v { font-family: var(--round); font-weight: 600; font-size: 1.3rem; line-height: 1.2; }
+.kf .v.late { color: var(--late); }
+.kf .v small { font-family: 'Lexend', sans-serif; font-weight: 400; font-size: 1rem; color: var(--muted); display: block; }
+
+/* sheet */
+.scrim { position: fixed; inset: 0; background: rgba(20, 15, 10, .55); z-index: 20; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; z-index: 21; left: 50%; bottom: 0; width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 60px); background: var(--card); border-radius: 30px 30px 0 0; transform: translate(-50%, 104%); transition: transform .38s cubic-bezier(.2,.85,.25,1); display: flex; flex-direction: column; }
+.sheet.on { transform: translate(-50%, 0); }
+.sheet .grab { width: 60px; height: 6px; border-radius: 3px; background: #d8cdbf; margin: 10px auto 0; }
+.sheet header { display: flex; align-items: center; gap: 16px; padding: 12px 18px 12px 26px; }
+.sheet header .f { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-size: 34px; background: var(--k-soft); flex: none; }
+.sheet header h3 { font-family: var(--round); font-weight: 600; font-size: 1.8rem; line-height: 1.1; flex: 1; }
+.sheet header p { color: var(--muted); margin-top: 2px; }
+.x { width: 52px; height: 52px; border-radius: 50%; background: #f2ebe2; display: grid; place-items: center; flex: none; }
+.sheet .body { padding: 6px 26px 28px; overflow: auto; display: grid; gap: 16px; }
+.big { height: 60px; border-radius: 30px; padding: 0 26px; font-weight: 600; font-size: 1.08rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.big.dark { background: var(--ink); color: #fff; }
+.big.tv { background: var(--k, var(--ink)); color: #fff; }
+.big.light { background: #f2ebe2; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.marks { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.marks button { height: 56px; border-radius: 16px; background: #f2ebe2; font-family: var(--round); font-weight: 600; font-size: 1.35rem; }
+.marks button[aria-pressed="true"] { background: var(--k, var(--ink)); color: #fff; }
+.lbl { font-weight: 600; font-size: 1.1rem; }
+textarea { width: 100%; min-height: 96px; font: inherit; padding: 14px 16px; border-radius: 18px; border: 2px solid var(--rule); resize: none; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.facts div { background: #f6f0e8; border-radius: 18px; padding: 14px 16px; }
+.facts .l { color: var(--muted); }
+.facts .v { font-family: var(--round); font-weight: 600; font-size: 1.5rem; }
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl td, .tbl th { padding: 14px 8px; text-align: left; border-bottom: 2px solid var(--rule); }
+.tbl th { color: var(--muted); font-weight: 500; }
+.ans { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 2px solid var(--rule); }
+.ans b { flex: 1; }
+.ans .seg { display: flex; gap: 6px; }
+.ans .seg button { height: 52px; padding: 0 16px; border-radius: 26px; background: #f2ebe2; font-weight: 600; }
+.ans .seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.stars { display: flex; gap: 10px; }
+.stars button { width: 64px; height: 64px; border-radius: 50%; background: #f2ebe2; display: grid; place-items: center; }
+.stars svg { width: 36px; height: 36px; fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.stars button.on { background: var(--sun); }
+.stars button.on svg { fill: var(--ink); }
+.sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.sizes button { height: 110px; border-radius: 22px; background: #f2ebe2; display: grid; place-items: center; align-content: center; gap: 4px; font-weight: 600; }
+.sizes button span { font-family: var(--round); font-weight: 600; }
+.sizes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+.toast { position: fixed; z-index: 40; left: 50%; top: 24px; transform: translate(-50%, -20px); background: var(--sun); color: var(--sun-ink); padding: 14px 24px; border-radius: 28px; font-weight: 600; opacity: 0; transition: opacity .2s, transform .3s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* Admin: its own page */
+.adm { display: none; height: 100vh; overflow: auto; background: var(--wall); color: var(--on-wall); }
+body.is-admin .wall { display: none; }
+body.is-admin .adm { display: block; }
+.adm .bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 18px; padding: 16px 24px; background: var(--wall); }
+.adm .back { height: 56px; padding: 0 24px 0 14px; border-radius: 28px; background: var(--on-wall); color: var(--wall); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.adm h1 { font-family: var(--round); font-weight: 600; font-size: 2.2rem; }
+.adm .wrap { display: grid; grid-template-columns: 250px 1fr; gap: 24px; padding: 8px 24px 60px; align-items: start; }
+.adm .jump { position: sticky; top: 92px; display: grid; gap: 8px; }
+.adm .jump button { min-height: 52px; border-radius: 26px; padding: 0 20px; text-align: left; color: var(--on-wall-2); font-weight: 500; }
+.adm .jump button.on { background: var(--wall-2); color: var(--on-wall); }
+.adm .panels { display: grid; gap: 18px; }
+.panel { background: var(--card); color: var(--ink); border-radius: 28px; padding: 22px 26px 18px; scroll-margin-top: 96px; }
+.panel h2 { font-family: var(--round); font-weight: 600; font-size: 1.7rem; margin-bottom: 8px; }
+.panel .r { display: flex; align-items: center; gap: 14px; min-height: 60px; border-top: 2px solid var(--rule); }
+.panel .r:first-of-type { border-top: 0; }
+.panel .r .k { flex: 1; color: var(--muted); }
+.panel .r .v { font-weight: 600; text-align: right; }
+.panel .r button.v { height: 48px; padding: 0 20px; border-radius: 24px; background: #f2ebe2; }
+.panel .r .f { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-size: 26px; background: var(--k-soft); }
+.panel .r .k b { color: var(--ink); }
+.panel p { color: var(--muted); padding: 8px 0 4px; }
+
+/* upright */
+@media (orientation: portrait) {
+  .wall { grid-template-rows: auto auto 1fr; }
+  .top { flex-wrap: wrap; row-gap: 10px; }
+  .dt .where { display: none; }
+  .banner { grid-template-columns: repeat(3, 1fr); }
+  .banner .lead { grid-column: 1 / -1; padding: 12px 20px 2px; }
+  .bi { flex-direction: column; align-items: flex-start; border-left: 0; padding: 8px 16px 16px; gap: 10px; }
+  .bi + .bi { border-left: 2px solid rgba(42,36,32,.14); }
+  .bi .w { flex: none; min-height: 2.5em; }
+  .kh { flex-direction: column; text-align: center; gap: 10px; padding: 22px 12px 14px; }
+  .cl { gap: 12px; padding: 4px 4px; }
+  .top { gap: 8px; }
+  .clock { margin-right: 8px; }
+  .dt b { max-width: 7.2em; line-height: 1.15; }
+  .nb { min-width: 72px; }
+  .tick { width: 48px; height: 48px; }
+  .list { padding: 0 8px; }
+  .cl .mk { min-width: 0; }
+  .kf { grid-template-columns: 1fr; }
+  .kf > div + div { border-left: 0; border-top: 2px solid var(--rule); }
+  .kf > div { padding: 10px 18px 12px; }
+  .top .wherebar { display: flex; }
+  .ring { width: 104px; height: 104px; }
+  .ring .f { font-size: 46px; }
+  .adm .wrap { grid-template-columns: 1fr; }
+  .adm .jump { position: static; display: flex; flex-wrap: wrap; gap: 6px; }
+}
+.wherebar { display: none; width: 100%; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border-radius: 24px; background: var(--wall-2); color: var(--on-wall); text-align: left; }
+.wherebar span { color: var(--on-wall-2); }
+/* bigger text: smaller faces and one line per footer, so every class still fits */
+:root[data-size="large"] .ring, :root[data-size="xl"] .ring { width: 80px; height: 80px; }
+:root[data-size="large"] .ring .f, :root[data-size="xl"] .ring .f { font-size: 34px; inset: 10px; }
+:root[data-size="xl"] .kf .v small:not([style]) { display: none; }
+:root[data-size="xl"] .nb .t { font-size: 17.5px; }
+:root[data-size="xl"] .top { gap: 12px; }
+:root[data-size="xl"] .kh { padding-top: 12px; padding-bottom: 8px; }
+:root[data-size="large"] .cl, :root[data-size="xl"] .cl { min-height: 54px; padding-top: 2px; padding-bottom: 2px; }
+:root[data-size="large"] .tick, :root[data-size="xl"] .tick { width: 46px; height: 46px; }
+@media (orientation: portrait) {
+  :root[data-size="large"] .kh, :root[data-size="xl"] .kh { gap: 4px; padding: 12px 8px 8px; }
+  :root[data-size="large"] .top .wherebar, :root[data-size="xl"] .top .wherebar { display: none; }
+  :root[data-size="large"] .kf > div, :root[data-size="xl"] .kf > div { padding: 8px 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wall">
+  <header class="top">
+    <span class="clock" id="clock"></span>
+    <div class="dt"><b id="date"></b><button class="where" data-open="program" id="where"></button></div>
+    <span class="sp"></span>
+    <button class="nb" data-open="program"><span class="c"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></span><span class="t">Program</span></button>
+    <button class="nb" data-open="scores"><span class="c"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></span><span class="t">Scores</span></button>
+    <button class="nb" data-open="size"><span class="c"><svg class="i" viewBox="0 0 24 24"><path d="M3 19l5-13 5 13M4.8 14.5h6.4M14 19l3.5-9 3.5 9M15.2 16h4.6"/></svg></span><span class="t">Text size</span></button>
+    <button class="nb" data-open="feedback"><span class="c"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span class="t">Feedback</span></button>
+    <a class="nb admin" href="#admin" id="toAdmin"><span class="c"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><span class="t">Admin</span></a>
+    <button class="wherebar" data-open="program" id="where2"></button>
+  </header>
+  <section class="banner" id="banner" aria-label="Needs you"></section>
+  <main class="kids" id="kids"></main>
+</div>
+
+<div class="adm" id="adm">
+  <div class="bar"><button class="back" id="back"><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Back to the wall</button><h1>Admin</h1></div>
+  <div class="wrap"><nav class="jump" id="jump"></nav><div class="panels" id="panels"></div></div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s) => document.querySelector(s);
+const SOFT = { '#D42A20': '#fde8e5', '#0F766E': '#dcf2ee', '#1D4ED8': '#e3eafd' };
+const LINE = { '#D42A20': '#efb1ab', '#0F766E': '#9fd2ca', '#1D4ED8': '#adc0f3' };
+const INK = { '#D42A20': '#a3211a', '#0F766E': '#0b5a53', '#1D4ED8': '#1a43b8' };
+const kv = (k) => `--k:${k.color};--k-soft:${SOFT[k.color]};--k-line:${LINE[k.color]};--k-ink:${INK[k.color]}`;
+const ic = {
+  check: '<svg class="i" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+  play: '<svg class="i" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
+  x: '<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  tv: '<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>',
+  star: '<svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>',
+};
+const LEN = 45;
+const m2 = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const f2 = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+const toast = (t) => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 2400); };
+const state = P.kids.map((_, ki) => P.classes.map((c) => c.state[ki]));
+
+$('#clock').textContent = P.now;
+$('#date').textContent = P.today;
+$('#where').textContent = `Now in the program: ${P.program.where}`;
+$('#where2').innerHTML = `<span>Now in the program</span> ${P.program.where}`;
+
+$('#banner').innerHTML = `<div class="lead"><span class="n">${P.needsYou.length}</span>Needs you</div>` +
+  P.needsYou.map((n, i) => `<div class="bi"><span class="w">${n.what}</span><button class="a" data-need="${i}">${n.action}</button></div>`).join('');
+
+function ring(k, ki) {
+  const done = state[ki].filter((s) => s === 'done').length, r = 44, C = 2 * Math.PI * r;
+  return `<span class="ring"><svg viewBox="0 0 96 96" width="100%" height="100%"><circle class="bg" cx="48" cy="48" r="${r}"/><circle class="fg" cx="48" cy="48" r="${r}" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - done / k.of)}"/></svg><span class="f" aria-hidden="true">${k.face}</span></span>`;
+}
+const STATUS = { done: 'Done', now: 'Watching now', later: '', missed: 'Missed' };
+function renderKids() {
+  $('#kids').innerHTML = P.kids.map((k, ki) => {
+    const done = state[ki].filter((s) => s === 'done').length;
+    const last = P.scores.find((s) => s.kid === k.name);
+    const hw = k.homework ? `${k.homework} to do${k.late ? `<small style="color:var(--late);font-weight:600">${k.late} late</small>` : ''}` : 'None';
+    return `<article class="kid" style="${kv(k)}">
+      <button class="kh" data-kid="${ki}">${ring(k, ki)}<span><span class="nm">${k.name}</span><div class="pg"><b>${done} of ${k.of}</b> classes done</div></span></button>
+      <div class="list">${P.classes.map((c, ci) => {
+        const s = state[ki][ci], mk = (c.marks || [])[ki];
+        const meta = s === 'later' ? c.time : STATUS[s];
+        return `<div class="cl ${s}"><button class="tick" data-tick="${ki}-${ci}" aria-label="${c.subject}: ${s === 'done' ? 'done, tap to undo' : 'mark as done'}">${s === 'now' && c.lesson ? ic.play : ic.check}</button>
+          <button class="body" data-cls="${ki}-${ci}"><span class="s">${c.subject}</span><span class="tt">${c.title}</span><span class="m">${meta}</span></button>${mk ? `<span class="mk">${mk}</span>` : ''}</div>`;
+      }).join('')}</div>
+      <button class="kf" data-kid="${ki}"><div><div class="l">Latest score</div><div class="v">${last ? last.score : 'None yet'}<small>${last ? last.what.replace(', lesson test', ' test') : ''}</small></div></div>
+        <div><div class="l">Homework</div><div class="v${k.late ? '' : ''}">${hw}</div></div></button>
+    </article>`;
+  }).join('');
+}
+renderKids();
+
+/* sheet */
+const sheet = $('#sheet'), scrim = $('#scrim');
+function close() { sheet.classList.remove('on'); scrim.classList.remove('on'); }
+scrim.onclick = close; document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+function open(head, body, k) {
+  sheet.style.cssText = k ? kv(k) : '';
+  sheet.innerHTML = `<div class="grab"></div><header>${head}<button class="x" data-x aria-label="Close">${ic.x}</button></header><div class="body">${body}</div>`;
+  requestAnimationFrame(() => { sheet.classList.add('on'); scrim.classList.add('on'); });
+  sheet.querySelectorAll('[data-x]').forEach((b) => b.onclick = close);
+  sheet.querySelectorAll('[data-done]').forEach((b) => b.onclick = () => { close(); toast(b.dataset.done); });
+  sheet.querySelectorAll('.marks button, .seg button').forEach((b) => b.onclick = () => b.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)));
+  sheet.querySelectorAll('[data-star]').forEach((b) => b.onclick = () => sheet.querySelectorAll('[data-star]').forEach((x) => x.classList.toggle('on', +x.dataset.star <= +b.dataset.star)));
+  sheet.querySelectorAll('[data-size]').forEach((b) => b.onclick = () => { document.documentElement.dataset.size = b.dataset.size; sheet.querySelectorAll('[data-size]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+  sheet.querySelectorAll('[data-hw]').forEach((b) => b.onclick = () => { b.replaceWith(Object.assign(document.createElement('textarea'), { placeholder: 'What to do, and by when?' })); });
+}
+const head = (title, sub, face) => `${face ? `<span class="f" aria-hidden="true">${face}</span>` : ''}<div style="flex:1"><h3>${title}</h3>${sub ? `<p>${sub}</p>` : ''}</div>`;
+
+function openClass(ki, ci) {
+  const k = P.kids[ki], c = P.classes[ci], s = state[ki][ci], mk = (c.marks || [])[ki], st = m2(c.time);
+  open(head(`${k.name}: ${c.subject}`, `${c.title}<br>${f2(st)} to ${f2(st + LEN)}${STATUS[s] ? `, ${STATUS[s].toLowerCase()}` : ''}`, k.face),
+    `${c.lesson ? `<button class="big tv" data-done="${c.subject} is playing on the TV">${ic.tv} Play this lesson on the TV</button>` : ''}
+     <div class="lbl">Give a mark, out of 12</div>
+     <div class="marks">${Array.from({ length: 12 }, (_, i) => `<button aria-pressed="${String(i + 1) === mk}">${i + 1}</button>`).join('')}</div>
+     <div class="lbl">Homework</div>
+     <button class="big light" data-hw>Set homework for ${k.name}</button>
+     <div class="row2"><button class="big light" data-x>Cancel</button><button class="big dark" data-done="Saved for ${k.name}">Save</button></div>`, k);
+}
+function openKid(ki) {
+  const k = P.kids[ki], last = P.scores.filter((s) => s.kid === k.name);
+  open(head(k.name, k.year, k.face), `<div class="facts"><div><div class="l">Today</div><div class="v">${state[ki].filter((s) => s === 'done').length} of ${k.of}</div></div><div><div class="l">Average</div><div class="v">${k.average}</div></div><div><div class="l">Homework</div><div class="v">${k.homework}${k.late ? `, <span style="color:var(--late)">${k.late} late</span>` : ''}</div></div></div>
+    <table class="tbl"><tr><th>Recent test</th><th>Score</th><th>When</th></tr>${last.map((s) => `<tr><td>${s.what}</td><td><b>${s.score}</b></td><td>${s.when}</td></tr>`).join('')}</table>`, k);
+}
+function openNeed(i) {
+  const n = P.needsYou[i], leo = P.kids[1];
+  if (i === 0) open(head(n.what, n.detail, leo.face), `${[1, 2, 3].map((q) => `<div class="ans"><b>Answer ${q} of 3</b><div class="seg"><button aria-pressed="false">Right</button><button aria-pressed="false">Partly</button><button aria-pressed="false">Wrong</button></div></div>`).join('')}<div class="row2"><button class="big light" data-x>Later</button><button class="big dark" data-done="Leo's marks saved">Save marks</button></div>`, leo);
+  if (i === 1) open(head(n.what, n.detail, leo.face), `<p>Leo will see the reminder on his own screen when he signs in.</p><div class="row2"><button class="big light" data-x>Cancel</button><button class="big dark" data-done="Reminder sent to Leo">Send reminder</button></div>`, leo);
+  if (i === 2) open(head(n.what, n.detail), `<div class="lbl">How good was it?</div><div class="stars">${[1, 2, 3, 4, 5].map((s) => `<button data-star="${s}" aria-label="${s} stars">${ic.star}</button>`).join('')}</div><div class="row2"><button class="big light" data-x>Cancel</button><button class="big dark" data-done="Thanks, rating saved">Save rating</button></div>`);
+}
+function openPage(kind) {
+  if (kind === 'scores') open(head('Scores'), `<div class="facts">${P.kids.map((k) => `<div style="${kv(k)};background:var(--k-soft)"><div class="l">${k.face} ${k.name}, average</div><div class="v">${k.average}</div></div>`).join('')}</div><table class="tbl"><tr><th>Child</th><th>Test</th><th>Score</th><th>When</th></tr>${P.scores.map((s) => `<tr><td><b>${s.kid}</b></td><td>${s.what}</td><td><b>${s.score}</b></td><td>${s.when}</td></tr>`).join('')}</table>`);
+  if (kind === 'program') open(head('Program', `${P.admin.plan}, ${P.program.subjects} subjects`), `<div class="facts" style="grid-template-columns:2fr 1fr"><div><div class="l">Where you are</div><div class="v" style="font-size:1.3rem">${P.program.where}</div></div><div><div class="l">Video lessons ready</div><div class="v">${P.program.readyLessons}</div></div></div><table class="tbl"><tr><th>Time</th><th>Today</th></tr>${P.classes.map((c) => `<tr><td>${c.time}</td><td><b>${c.subject}</b>: ${c.title}</td></tr>`).join('')}</table>`);
+  if (kind === 'feedback') open(head('Send feedback', 'Tell us what works and what doesn’t'), `<textarea placeholder="Your note"></textarea><div class="row2"><button class="big light" data-x>Cancel</button><button class="big dark" data-done="Thanks, feedback sent">Send</button></div>`);
+  if (kind === 'size') { const cur = document.documentElement.dataset.size || 'standard'; open(head('Text size'), `<div class="sizes">${[['standard', 'Standard', 22], ['large', 'Large', 28], ['xl', 'Extra large', 34]].map(([v, n, px]) => `<button data-size="${v}" aria-pressed="${cur === v}"><span style="font-size:${px}px">Aa</span>${n}</button>`).join('')}</div>`); }
+}
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-tick]');
+  if (t) { const [ki, ci] = t.dataset.tick.split('-').map(Number); const s = state[ki][ci]; if (s === 'now' && P.classes[ci].lesson) return openClass(ki, ci); state[ki][ci] = s === 'done' ? (P.classes[ci].state[ki] === 'done' ? 'later' : P.classes[ci].state[ki]) : 'done'; renderKids(); return toast(state[ki][ci] === 'done' ? `${P.kids[ki].name}: ${P.classes[ci].subject} done` : 'Tick removed'); }
+  const b = e.target.closest('[data-cls]'); if (b) { const [ki, ci] = b.dataset.cls.split('-').map(Number); return openClass(ki, ci); }
+  const kd = e.target.closest('[data-kid]'); if (kd) return openKid(+kd.dataset.kid);
+  const n = e.target.closest('[data-need]'); if (n) return openNeed(+n.dataset.need);
+  const o = e.target.closest('[data-open]'); if (o) return openPage(o.dataset.open);
+});
+
+/* Admin */
+const A = P.admin;
+const r = (k, v, btn) => `<div class="r"><span class="k">${k}</span>${btn ? `<button class="v">${v}</button>` : `<span class="v">${v}</span>`}</div>`;
+const PANELS = [
+  () => `${r('Name', A.account.name)}${r('Username', A.account.username)}${r('Password', 'Change', 1)}${r('Text size', A.account.textSize)}<p>The whole family signs in with this one account.</p>${r('Leave this pad', 'Sign out', 1)}`,
+  () => `${P.parents.map((p) => r(`<b>${p.name}</b>${p.you ? ' (you)' : ''}`, p.you ? 'Owner' : 'Parent')).join('')}${P.kids.map((k) => `<div class="r" style="${kv(k)}"><span class="f">${k.face}</span><span class="k"><b>${k.name}</b>, ${k.year}</span><button class="v">Edit</button></div>`).join('')}${r('Someone new', 'Add a child or parent', 1)}<p>Children sign in inside your account. They never need an email.</p>`,
+  () => `${r('Program', A.plan)}${r('Subjects', P.program.subjects)}${r('Word help', A.wordHelp)}${r('Exam PIN', A.examPin)}`,
+  () => `${r('Your plan', A.billing)}${r('Children on the plan', P.kids.length)}<p>The trial needs no payment.</p>`,
+  () => `${r('Tell us something', 'Write a note', 1)}${r('Check the TV and the voice', 'Run check', 1)}`,
+];
+$('#jump').innerHTML = A.sections.map((s, i) => `<button data-j="${i}" class="${i ? '' : 'on'}">${s}</button>`).join('');
+$('#panels').innerHTML = A.sections.map((s, i) => `<section class="panel" id="p${i}"><h2>${s}</h2>${PANELS[i]()}</section>`).join('');
+$('#jump').onclick = (e) => { const b = e.target.closest('[data-j]'); if (!b) return; document.querySelectorAll('.jump button').forEach((x) => x.classList.toggle('on', x === b)); $('#p' + b.dataset.j).scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+$('#toAdmin').addEventListener('click', (e) => { e.preventDefault(); history.pushState({ fromPad: true }, '', '#admin'); route(); });
+$('#back').onclick = () => { if (history.state && history.state.fromPad) history.back(); else location.hash = ''; };
+function route() { close(); const a = location.hash === '#admin'; document.body.classList.toggle('is-admin', a); if (a) $('#adm').scrollTop = 0; }
+addEventListener('hashchange', route); addEventListener('popstate', route); route();
+</script>
+</body>
+</html>

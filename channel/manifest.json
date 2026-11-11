@@ -1,0 +1,16 @@
+{
+ "name": "Home School",
+ "short_name": "Home School",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#0B0910",
+ "theme_color": "#17131F",
+ "icons": [
+  {
+   "src": "assets/app-icon.png",
+   "sizes": "640x640",
+   "type": "image/png"
+  }
+ ]
+}

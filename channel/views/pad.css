@@ -1,0 +1,106 @@
+/* The parent pad, Today as "Stage" (owner, 2026-11-10: picked "A Stage" in /pad-lab/round3/).
+   The pad's one job: play today's lesson on the TV. Very little, very big.
+   1 main: the lesson on now (or next, or to catch up) as a large photo card with a huge title and the one red Play.
+   2 a few more lessons as picture cards on the right; tap one to play it.
+   3 four big buttons at the bottom (icon and word): Children, Print, The week, Admin. Header tools are icons only (owner).
+   Large, for parents who need it: body 21 px on an iPad, 18 px on a phone; taps 56 px. */
+.pz.lkC { --bg: #F6F5F9; --surface: #FFFFFF; --surface2: #F0EEF5; --ink: #17131F; --mute: #57516A; --line: #DDD9E6; --acc: #D42A20; --accInk: #FFFFFF; --ok: #0E7A43; --focus: #2457D6;
+  --bar: #FFFFFF; --barInk: #17131F; --barMute: #57516A; --barTool: transparent; --barSel: #17131F; --selBg: #ECE8F6; --selIc: #17131F; --selInk: #17131F; --hero: #FFFFFF; --heroInk: #17131F; --heroMute: #57516A; --heroTag: #57516A; }
+body .padRoot.pz.lkC { --fs: clamp(18px, max(min(1.8vw, 2.6vh), min(2.55vw, 1.8vh)), 30px); --font: 'DM Sans', -apple-system, system-ui, sans-serif; --dfont: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; }
+
+/* Header: the day, and two round icon tools */
+.stHead { display: flex; align-items: center; gap: .6em; padding: .7em 1.2em .3em; }
+.pz.lkC .stHead h1 { margin: 0 auto 0 0; font: 800 1.5em/1.1 var(--dfont); letter-spacing: -.01em; }
+.stHead h1 small { margin-left: .5em; color: var(--mute); font: 400 .6em var(--font); letter-spacing: 0; }
+.stTool { display: grid; place-items: center; flex: none; width: 2.9em; height: 2.9em; padding: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 50%; color: var(--ink); }
+.stTool:hover { border-color: var(--mute); }
+.stTool b { font: 700 1em var(--font); } .stTool .ic { width: 1.3em; height: 1.3em; }
+
+/* The stage: the big lesson, and the cards beside it */
+.stMain { display: grid; flex: 1; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 1em; min-height: 0; padding: .6em 1.2em 1em; }
+.stMain.solo { grid-template-columns: minmax(0, 1fr); }
+.stHero { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 0; overflow: hidden; border-radius: 28px; background: #17131F; color: #FFFFFF; }
+.stHero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stHero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000000F2 0, #000000D9 42%, #00000066 62%, #0000 80%); }
+.stHero.none::after { display: none; }
+.stHeroText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: .45em; padding: 1.5em; }
+.stTag { padding: .2em .75em; background: #FFFFFF; border-radius: 999px; color: var(--ink); font-size: .9em; font-weight: 700; }
+.pz.lkC .stHero h2 { margin: 0; color: #FFFFFF; font: 800 2.4em/1.05 var(--dfont); letter-spacing: -.02em; }
+.stHero p { color: #FFFFFF; font-size: 1em; }
+.stPlay { display: inline-flex; align-items: center; gap: .55em; min-height: 3.2em; margin-top: .45em; padding: 0 1.7em 0 1.4em; background: var(--acc); border: 0; border-radius: 999px; color: var(--accInk); font: 700 1em var(--font); }
+.stPlay .ic { width: 1em; height: 1em; fill: currentColor; stroke: none; }
+.stPlay:hover { background: #B8221A; }
+.stSide { display: flex; flex-direction: column; gap: .7em; min-height: 0; }
+.pz.lkC .stSide h2 { margin: 0; color: var(--mute); font: 400 1em/1.2 var(--font); }
+.stCard { display: grid; flex: 1 1 0; grid-template-columns: 40% minmax(0, 1fr); min-height: 0; max-height: 11em; overflow: hidden; padding: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 20px; color: var(--ink); text-align: left; }
+.stCard:hover { border-color: var(--mute); }
+.stCard figure { position: relative; min-height: 0; margin: 0; background: var(--surface2); }
+.stCard figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stCard figure span { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 2.6em; height: 2.6em; margin: -1.3em 0 0 -1.3em; background: #FFFFFFEE; border-radius: 50%; color: var(--acc); box-shadow: 0 4px 14px #0004; }
+.stCard figure .ic { width: 1em; height: 1em; margin-left: .15em; fill: currentColor; stroke: none; }
+.stCardText { display: flex; flex-direction: column; justify-content: center; gap: .2em; min-width: 0; padding: .6em .9em; }
+.stCardText small { color: var(--mute); font-size: 1em; }
+.stCardText b { font-size: 1em; line-height: 1.2; }
+
+/* The bottom bar: the same five buttons on every parent page (owner: "Yes, these five"). Icon beside the word; the current place marked. */
+.pz.lkC .pzNav { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .6em; padding: .55em 1.2em max(.8em, env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); }
+.pz.lkC .pzNav button { flex-direction: row; gap: .5em; min-width: 0; min-height: 3.1em; padding: 0 .4em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; color: var(--ink); font: 400 1em var(--font); }
+.pz.lkC .pzNav button:hover { border-color: var(--mute); }
+.pz.lkC .pzNav .ic { padding: 0; width: 1.25em; height: 1.25em; background: none !important; color: var(--mute) !important; }
+body .pz.lkC .pzNav .long { display: inline; font-size: 1em; white-space: nowrap; } body .pz.lkC .pzNav .short { display: none; }
+.pz.lkC .pzNav [aria-current="page"] { background: var(--selBg); border-color: var(--ink); }
+.pz.lkC .pzNav [aria-current="page"] .ic { color: var(--ink) !important; }
+/* A page's own way to the page under it (The week → Timetable, Children → Test results) */
+.pgActions { display: flex; justify-content: flex-end; margin-bottom: .8em; }
+.pgAction { display: inline-flex; align-items: center; gap: .5em; min-height: 2.8em; padding: 0 1.1em 0 .9em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; color: var(--ink); font: 400 1em var(--font); }
+.pgAction:hover { border-color: var(--mute); } .pgAction .ic { color: var(--mute); }
+.kpBoxHead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5em; }
+.pz.lkC .pgHead .tools { gap: .5em; }
+
+/* Prototype chrome: a thin strip above the pad, quiet, never over a button */
+body:has(#screensNote) .padRoot.lkC { padding-top: 58px; }
+body:has(.lkC) #screensNote { top: 6px; left: 12px; right: auto; bottom: auto; transform: none; padding-block: 0; background: #FFFFFF; color: #57516A; box-shadow: 0 0 0 1px #DCD8E6; font-weight: 400; font-size: max(18px, calc(clamp(18px, max(min(1.8vw, 2.6vh), min(2.55vw, 1.8vh)), 30px) * .9)); }
+body:has(.lkC) #screensNote button { min-height: 44px; background: none; color: #17131F; font-weight: 400; font-size: inherit; text-decoration: underline; }
+body:has(.lkC) #screensPill { position: fixed; top: 6px; right: 12px; bottom: auto; left: auto; background: #FFFFFF; color: #57516A; box-shadow: 0 0 0 1px #DCD8E6; font-weight: 400; font-size: max(18px, calc(clamp(18px, max(min(1.8vw, 2.6vh), min(2.55vw, 1.8vh)), 30px) * .9)); }
+
+/* Upright iPad: the big lesson on top, the cards in a row under it */
+@media (orientation: portrait) and (min-width: 521px) {
+  .stMain { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1.5fr) auto; }
+  .stSide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto minmax(0, 1fr); } .stSide h2 { grid-column: 1 / -1; }
+  .stCard { grid-template-columns: minmax(0, 1fr); grid-template-rows: 9em auto; max-height: none; }
+}
+/* Phone: the same order, and the page scrolls */
+@media (max-width: 520px) {
+  body:has(#screensNote) .padRoot.lkC { padding-top: 62px; }
+  body:has(.lkC) #screensNote, body:has(.lkC) #screensPill { font-size: 16px; }
+  body:has(.lkC) #screensNote { left: 8px; right: 112px; gap: 6px; padding-left: 10px; line-height: 1.2; }
+  body:has(.lkC) #screensNote button { flex: none; padding: 0 10px; white-space: nowrap; }
+  body:has(.lkC) #screensPill { right: 8px; padding-inline: .7em; }
+  .stHead { padding: .5em 12px .2em; } .stHead h1 small { display: block; margin: .15em 0 0; }
+  .stMain { display: flex; flex-direction: column; overflow-y: auto; padding: .5em 12px .8em; }
+  /* The big card leaves room for the first card under it, so the next heading is never alone above the buttons */
+  .stHero { flex: none; min-height: 48vh; } body[data-ptext] .stHero { min-height: 42vh; } .pz.lkC .stHero h2 { font-size: 1.9em; } .stHeroText { padding: 1.1em; }
+  .stSide { flex: none; } .stCard { flex: none; min-height: 6.5em; }
+  /* Five on one row: icon above a short word, 16 px or more, taps 56 px or taller */
+  .pz.lkC .pzNav { gap: 4px; padding-inline: 6px; } .pz.lkC .pzNav button { flex-direction: column; gap: .1em; min-height: 3.5em; padding: .2em 0; border-radius: 14px; }
+  body .pz.lkC .pzNav .long { display: none; } body .pz.lkC .pzNav .short { display: inline; font-size: max(16px, .85em); letter-spacing: -.01em; white-space: nowrap; }
+}
+/* Extra-large text: the title steps down a little, and two cards instead of three */
+body[data-ptext] .pz.lkC .stHero h2 { font-size: 1.9em; }
+body[data-ptext] .stHeroText { padding: 1.1em; gap: .35em; }
+body[data-ptext] .stCard { max-height: none; grid-template-columns: 26% minmax(0, 1fr); } body[data-ptext] .stCardText small { display: none; }
+@media (orientation: portrait) and (min-width: 521px) {
+  body[data-ptext] .stMain { overflow-y: auto; grid-template-rows: minmax(0, 42vh) auto; }
+  body[data-ptext] .stSide { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; }
+  body[data-ptext] .stCard { grid-template-columns: 38% minmax(0, 1fr); grid-template-rows: none; min-height: 7em; }
+}
+/* Extra-large text: the bar keeps all five on one row, icon above the word */
+body[data-ptext] .pz.lkC .pzNav button { flex-direction: column; gap: .1em; min-height: 3em; padding-block: .2em; } body[data-ptext] .pz.lkC .pzNav .ic { width: 1em; height: 1em; }
+@media (orientation: portrait) { body[data-ptext] .pz.lkC .pzNav .long { display: none; } body[data-ptext] .pz.lkC .pzNav .short { display: inline; } }
+@media (max-width: 520px) { body[data-ptext] .pz.lkC .pzNav .short { font-size: 16px; } body[data-ptext] .pz.lkC .pzNav .ic { width: 22px; height: 22px; } }
+
+/* Strong contrast */
+body[data-pcontrast] .pz.lkC { --mute: #000000; --line: #000000; --acc: #B00000; --bg: #FFFFFF; }
+body[data-pcontrast] .pz.lkC .stCard, body[data-pcontrast] .pz.lkC .pzNav button, body[data-pcontrast] .pz.lkC .stTool, body[data-pcontrast] .pz.lkC .pgAction { border: 2px solid #000000; }
+body[data-pcontrast] .pz.lkC .pzNav [aria-current="page"] { background: #FFFFFF; box-shadow: inset 0 0 0 3px #000000; font-weight: 700; }
+body[data-pcontrast] .stHero::after { background: linear-gradient(0deg, #000000 0, #000000E6 45%, #0000 78%); }

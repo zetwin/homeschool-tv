@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Round 3 C: Stack</title>
+<link rel="stylesheet" href="../base.css"><script src="../data.js"></script>
+<style>
+/* C, Stack: today's lessons one under another, each a wide card with its picture and its own Play. The one on now is the biggest. */
+.stack { display: flex; flex: 1; flex-direction: column; gap: .7em; min-height: 0; padding: .6em 1.2em 1em; }
+.lesson { display: flex; flex: 1; align-items: center; gap: 1.1em; min-height: 0; padding: .55em 1em .55em .55em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 22px; }
+.lesson img { flex: none; align-self: stretch; width: 7.5em; border-radius: 15px; object-fit: cover; }
+.lesson div { display: grid; flex: 1; gap: .15em; min-width: 0; }
+.lesson small { color: var(--mute); font-size: .9em; }
+.lesson b { font: 700 1.25em/1.15 var(--body); }
+.lesson .again { display: inline-flex; align-items: center; gap: .5em; min-height: 2.9em; padding: 0 1.3em 0 1.1em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; font-weight: 700; }
+.lesson .again .ic { width: .95em; height: .95em; }
+.lesson.now { flex: 1.9; border: 2.5px solid var(--ink); }
+.lesson.now img { width: 12em; }
+.lesson.now small { color: var(--ink); font-weight: 700; }
+.lesson.now b { font: 800 2em/1.05 var(--display); letter-spacing: -.015em; }
+.lesson.done img { opacity: .5; } .lesson.done b { color: var(--mute); font-weight: 400; }
+.watched { display: inline-flex; align-items: center; gap: .3em; color: #0E7A43; font-weight: 700; } .watched .ic { stroke-width: 3; }
+.lesson.missed { border-style: dashed; }
+@media (max-width: 600px) { .lesson img { width: 4.5em; } .lesson.now { flex-wrap: wrap; } .lesson.now img { width: 100%; height: 7em; } .lesson .again span { display: none; } }
+</style></head><body>
+<p class="note">Version C: Stack. An example day with real lessons</p>
+<script>
+const m = R3.missed[0];
+const row = (l) => {
+  if (l.state === 'now') return `<article class="lesson now"><img src="${R3.img(l.img)}" alt=""><div><small>On now, ${l.time}. ${l.subject}</small><b>${l.title}</b></div><button class="play">${R3.icon.play}Play on the TV</button></article>`;
+  if (l.state === 'done') return `<article class="lesson done"><img src="${R3.img(l.img)}" alt=""><div><small>${l.time}. ${l.subject}</small><b>${l.title}</b><span class="watched">${R3.icon.check}Watched</span></div><button class="again">${R3.icon.play}<span>Play again</span></button></article>`;
+  return `<article class="lesson"><img src="${R3.img(l.img)}" alt=""><div><small>${l.time}. ${l.subject}</small><b>${l.title}</b></div><button class="again">${R3.icon.play}<span>Play</span></button></article>`;
+};
+document.body.insertAdjacentHTML('beforeend', `${R3.top()}
+<main class="stack">${R3.lessons.map(row).join('')}<article class="lesson missed"><img src="${R3.img(m.img)}" alt=""><div><small>${m.who}. ${m.subject}</small><b>${m.title}</b></div><button class="again">${R3.icon.play}<span>Play</span></button></article></main>${R3.places()}`);
+</script></body></html>

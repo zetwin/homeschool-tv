@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family wall with what's on now: a big TV card on top, a column per child below</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* The Family wall in daylight, with one question answered first: what is on the TV now.
+   The dark card on top is the TV; the three columns under it are the children, ticked through the day. */
+:root {
+  --page: #E6E9EC; --card: #FFFFFF; --ink: #1D2127; --muted: #545B66; --rule: #E7EAEE; --chip: #EEF0F3;
+  --tv: #1F242C; --tv-2: #2D333D; --on-tv: #FFFFFF; --on-tv-2: #C9CFD8;
+  --sun: #FFC94A; --late: #B42318;
+  --round: 'Fredoka', 'Lexend', system-ui, sans-serif;
+  font-size: 18px;
+}
+:root[data-size="large"] { font-size: 20px; }
+* { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { font-family: 'Lexend', system-ui, sans-serif; background: var(--page); color: var(--ink); line-height: 1.3; overflow: hidden; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #2457D6; outline-offset: 3px; }
+svg.i { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+.pad { height: 100vh; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 16px; padding: 16px 20px 20px; }
+
+.top { display: flex; align-items: center; gap: 12px; }
+.top h1 { font-family: var(--round); font-weight: 500; font-size: 1.55rem; }
+.top h1 span { color: var(--muted); }
+.sp { flex: 1; }
+.mark-badge { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 20px 0 8px; border-radius: 26px; background: var(--card); color: var(--ink); font-weight: 600; white-space: nowrap; box-shadow: inset 0 0 0 2px #D5DAE0; }
+.mark-badge .n { width: 38px; height: 38px; border-radius: 50%; background: var(--late); color: #fff; display: grid; place-items: center; font-family: var(--round); font-size: 1.2rem; }
+.tools { display: flex; gap: 6px; }
+.tool { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--card); color: var(--ink); text-decoration: none; }
+.tool.aa { font-family: var(--round); font-weight: 600; font-size: 1.2rem; }
+
+/* the TV card */
+.tvc { background: var(--tv); color: var(--on-tv); border-radius: 30px; display: grid; grid-template-columns: minmax(0, 1.25fr) auto minmax(250px, .8fr); align-items: center; gap: 28px; padding: 22px 24px 22px 32px; position: relative; overflow: hidden; }
+.tvc::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 120% at 0% 0%, rgba(255, 201, 74, .12), transparent 60%); pointer-events: none; }
+.what { position: relative; display: grid; gap: 4px; padding: 6px 0; border-radius: 18px; }
+.live { display: inline-flex; align-items: center; gap: 10px; color: var(--sun); font-weight: 600; }
+.live i { width: 12px; height: 12px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 5px rgba(255, 201, 74, .22); }
+.what .sub { font-family: var(--round); font-weight: 600; font-size: 3.4rem; line-height: 1; display: flex; align-items: center; gap: 10px; }
+.what .sub svg { width: 34px; height: 34px; color: var(--on-tv-2); }
+.what .ttl { font-size: 1.15rem; color: var(--on-tv); }
+.what .tm { color: var(--on-tv-2); }
+.watch { position: relative; display: flex; gap: 10px; }
+.wk { display: grid; justify-items: center; gap: 6px; width: 92px; }
+.wk .f { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-size: 32px; background: var(--k-soft); box-shadow: 0 0 0 4px var(--k-ring); }
+.wk.done .f { box-shadow: 0 0 0 4px var(--tv-2); }
+.wk b { font-weight: 600; }
+.wk span { color: var(--on-tv-2); }
+.go { position: relative; display: grid; gap: 10px; }
+.play { min-height: 72px; border-radius: 36px; background: var(--sun); color: var(--ink); font-weight: 600; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.play svg { width: 26px; height: 26px; fill: currentColor; stroke: none; }
+.play.on { background: #fff; }
+.next { min-height: 52px; border-radius: 26px; background: var(--tv-2); color: var(--on-tv); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.next span { color: var(--on-tv-2); }
+
+/* columns */
+.kids { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto minmax(0, 1fr) auto; gap: 16px; min-height: 0; }
+.kid { background: var(--card); border-radius: 26px; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; overflow: hidden; min-height: 0; }
+.kh { display: flex; align-items: center; gap: 14px; padding: 14px 18px 12px; background: var(--k-soft); }
+.kh .f { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 30px; background: #fff; flex: none; }
+.kh .nm { font-family: var(--round); font-weight: 600; font-size: 1.9rem; line-height: 1; color: var(--k-ink); flex: 1; }
+.kh .pg { font-family: var(--round); font-weight: 600; font-size: 1.5rem; color: var(--k-ink); white-space: nowrap; }
+.kh .pg small { font-size: 1.05rem; font-weight: 500; }
+.list { display: grid; grid-template-rows: repeat(5, minmax(0, 1fr)); padding: 4px 12px; min-height: 0; }
+.cl { display: flex; align-items: center; min-height: 0; border-top: 2px solid var(--rule); }
+.cl:first-child { border-top: 0; }
+.tick { width: 58px; height: 100%; min-height: 48px; flex: none; display: grid; place-items: center; }
+.tick i { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; box-shadow: inset 0 0 0 3px var(--k-line); color: #fff; transition: background .2s, transform .12s; }
+.tick:active i { transform: scale(.88); }
+.tick svg { width: 24px; height: 24px; stroke-width: 3; opacity: 0; }
+.cl.done .tick i { background: var(--k); box-shadow: none; }
+.cl.done .tick svg { opacity: 1; }
+.cl.now .tick i { box-shadow: inset 0 0 0 3px var(--k); color: var(--k); }
+.cl.now .tick svg { opacity: 1; width: 22px; height: 22px; stroke-width: 2.2; }
+.cl.missed .tick i { box-shadow: inset 0 0 0 3px #9AA1AB; background: repeating-linear-gradient(135deg, #F1F3F5 0 5px, #DDE1E6 5px 10px); }
+.cl .body { flex: 1; min-width: 0; align-self: stretch; display: flex; align-items: center; gap: 8px; padding: 0 6px 0 2px; }
+.cl .s { flex: 1; min-width: 0; font-weight: 500; font-size: 1.12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cl.later .s { color: var(--muted); font-weight: 400; }
+.cl .tag { flex: none; font-weight: 600; }
+.cl.now .tag { color: var(--k-ink); }
+.cl.now { background: var(--k-soft); border-radius: 16px; border-top-color: transparent; }
+.cl.now + .cl { border-top-color: transparent; }
+.cl.now .tick i { background: #fff; }
+.cl.missed .tag { color: var(--late); }
+.cl .mk { flex: none; font-family: var(--round); font-weight: 600; font-size: 1.5rem; color: var(--k-ink); }
+.kf { display: flex; border-top: 2px solid var(--rule); }
+.kf button { flex: 1; display: grid; grid-template-columns: auto auto 1fr; align-items: center; column-gap: 8px; padding: 10px 18px 12px; min-height: 64px; align-content: center; }
+.kf .l { grid-column: 1 / -1; }
+.kf button + button { border-left: 2px solid var(--rule); }
+.kf .l { color: var(--muted); }
+.kf .v { font-family: var(--round); font-weight: 600; font-size: 1.4rem; }
+.late-pill { font-size: 1rem; font-weight: 600; background: var(--late); color: #fff; border-radius: 12px; padding: 2px 10px; align-self: center; }
+
+/* sheet */
+.scrim { position: fixed; inset: 0; background: rgba(15, 20, 28, .5); z-index: 20; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; z-index: 21; left: 50%; bottom: 0; width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 48px); background: var(--card); border-radius: 30px 30px 0 0; transform: translate(-50%, 104%); transition: transform .38s cubic-bezier(.2,.85,.25,1); display: flex; flex-direction: column; visibility: hidden; }
+.sheet.on { transform: translate(-50%, 0); visibility: visible; }
+.sheet .grab { width: 60px; height: 6px; border-radius: 3px; background: #D0D5DC; margin: 10px auto 0; flex: none; }
+.sheet header { display: flex; align-items: center; gap: 16px; padding: 10px 18px 12px 26px; flex: none; }
+.sheet header .f { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; font-size: 32px; background: var(--k-soft, var(--chip)); flex: none; }
+.sheet header h3 { font-family: var(--round); font-weight: 600; font-size: 1.8rem; line-height: 1.1; }
+.sheet header p { color: var(--muted); margin-top: 3px; }
+.x { width: 52px; height: 52px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; flex: none; margin-left: auto; }
+.sheet .body { padding: 4px 26px 28px; overflow: auto; display: grid; gap: 14px; }
+.big { min-height: 60px; border-radius: 30px; padding: 0 26px; font-weight: 600; font-size: 1.08rem; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+.big.dark { background: var(--ink); color: #fff; }
+.big.tv { background: var(--sun); color: var(--ink); }
+.big.light { background: var(--chip); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lbl { font-family: var(--round); font-weight: 600; font-size: 1.25rem; margin-top: 6px; }
+.who { border-top: 2px solid var(--rule); }
+.who:first-of-type { border-top: 0; }
+.who .line { display: flex; align-items: center; gap: 14px; min-height: 64px; }
+.who .fc { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 24px; background: var(--k-soft); flex: none; }
+.who b { font-weight: 600; font-size: 1.1rem; }
+.who .st { color: var(--muted); }
+.who .st.missed { color: var(--late); font-weight: 600; }
+.who .mkv { margin-left: auto; font-family: var(--round); font-weight: 600; font-size: 1.6rem; color: var(--k-ink); }
+.who .open-mark { margin-left: auto; min-height: 48px; padding: 0 18px; border-radius: 24px; background: var(--chip); font-weight: 600; }
+.who .mkv + .open-mark { margin-left: 0; }
+.marks { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; padding: 0 0 14px 60px; }
+.marks button { height: 52px; border-radius: 16px; background: var(--chip); font-family: var(--round); font-weight: 600; font-size: 1.3rem; text-align: center; }
+.marks button[aria-pressed="true"] { background: var(--k); color: #fff; }
+.hw { display: grid; gap: 12px; padding: 16px; border-radius: 22px; background: #F4F6F8; }
+textarea { width: 100%; min-height: 84px; font: inherit; padding: 14px 16px; border-radius: 18px; border: 2px solid #D5DAE0; background: #fff; resize: none; }
+.for { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.for span { color: var(--muted); margin-right: 4px; }
+.for button { min-height: 48px; padding: 0 18px; border-radius: 24px; background: #fff; box-shadow: inset 0 0 0 2px #D5DAE0; font-weight: 600; }
+.for button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: none; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.facts > div { background: #F2F4F6; border-radius: 20px; padding: 14px 16px; }
+.facts .l { color: var(--muted); }
+.facts .v { font-family: var(--round); font-weight: 600; font-size: 1.6rem; }
+.rows .r { display: flex; align-items: center; gap: 12px; min-height: 58px; border-top: 2px solid var(--rule); }
+.rows .r:first-child { border-top: 0; }
+.rows .r .k { flex: 1; }
+.rows .r .k small { display: block; color: var(--muted); font-size: 1rem; }
+.rows .r b { font-family: var(--round); font-weight: 600; font-size: 1.35rem; }
+.small-btn { min-height: 48px; padding: 0 18px; border-radius: 24px; background: var(--ink); color: #fff; font-weight: 600; }
+.qa { padding: 12px 0; border-top: 2px solid var(--rule); display: grid; gap: 8px; }
+.qa:first-child { border-top: 0; }
+.qa h4 { font-weight: 600; font-size: 1.08rem; }
+.qa blockquote { margin: 0; padding: 10px 14px; border-radius: 14px; background: #F2F4F6; }
+.qa p { color: var(--muted); }
+.pts { display: flex; gap: 8px; }
+.pts button { width: 56px; height: 52px; border-radius: 16px; background: var(--chip); font-family: var(--round); font-weight: 600; font-size: 1.3rem; text-align: center; }
+.pts button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.stars { display: flex; gap: 8px; }
+.stars button { width: 56px; height: 56px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; }
+.stars svg { width: 30px; height: 30px; fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.stars button.on { background: var(--sun); }
+.stars button.on svg { fill: var(--ink); }
+.sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sizes button { height: 110px; border-radius: 22px; background: var(--chip); display: grid; place-items: center; align-content: center; gap: 4px; font-weight: 600; text-align: center; }
+.sizes button span { font-family: var(--round); font-weight: 600; }
+.sizes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.toast { position: fixed; z-index: 40; left: 50%; top: 22px; transform: translate(-50%, -20px); background: var(--ink); color: #fff; padding: 14px 24px; border-radius: 28px; font-weight: 600; opacity: 0; transition: opacity .2s, transform .3s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* Admin: its own page */
+.adm { display: none; height: 100vh; overflow: auto; background: var(--page); }
+body.is-admin .pad { display: none; }
+body.is-admin .adm { display: block; }
+.adm .bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 18px; padding: 16px 24px; background: var(--page); }
+.adm .back { min-height: 56px; padding: 0 24px 0 14px; border-radius: 28px; background: var(--tv); color: #fff; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.adm h1 { font-family: var(--round); font-weight: 600; font-size: 2.2rem; }
+.adm .grid { columns: 2; column-gap: 16px; padding: 8px 24px 60px; }
+.adm .grid .panel { break-inside: avoid; margin-bottom: 16px; }
+.panel { background: var(--card); border-radius: 26px; padding: 20px 24px 16px; }
+.panel h2 { font-family: var(--round); font-weight: 600; font-size: 1.6rem; margin-bottom: 6px; }
+.panel .r { display: flex; align-items: center; gap: 14px; min-height: 58px; border-top: 2px solid var(--rule); }
+.panel .r:first-of-type { border-top: 0; }
+.panel .r .k { flex: 1; color: var(--muted); }
+.panel .r .k b { color: var(--ink); }
+.panel .r .v { font-weight: 600; text-align: right; }
+.panel .r button.v { min-height: 48px; padding: 0 20px; border-radius: 24px; background: var(--chip); }
+.panel .r .f { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 24px; background: var(--k-soft); }
+.panel p { color: var(--muted); padding: 8px 0 4px; }
+
+@media (orientation: portrait) {
+  .pad { padding: 16px 16px 18px; gap: 14px; }
+  .top { flex-wrap: wrap; row-gap: 12px; }
+  .top .sp { display: none; }
+  .tools { margin-left: auto; }
+  .mark-badge { order: 5; }
+  .tvc { grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 18px 20px; padding: 24px 26px; }
+  .what { grid-column: 1; }
+  .watch { grid-column: 2; grid-row: 1; align-self: center; }
+  .go { grid-column: 1 / -1; grid-template-columns: 1.4fr 1fr; }
+  .kh { flex-direction: column; text-align: center; gap: 6px; padding: 16px 10px 14px; }
+  .kh .nm { flex: none; }
+  .kh .f { width: 64px; height: 64px; font-size: 34px; }
+  .list { padding: 4px 8px; }
+  .tick { width: 52px; }
+  .kf { flex-direction: column; }
+  .kf button + button { border-left: 0; border-top: 2px solid var(--rule); }
+  .kf button { padding: 10px 16px; }
+  .adm .grid { columns: 1; }
+  .marks { padding-left: 0; }
+}
+:root[data-size="large"] .wk { width: 84px; }
+:root[data-size="large"] .what .sub { font-size: 3rem; }
+@media (orientation: landscape) { :root[data-size="large"] .tvc { padding-top: 18px; padding-bottom: 18px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="pad">
+  <header class="top">
+    <h1 id="day"></h1>
+    <span class="sp"></span>
+    <button class="mark-badge" id="markBadge"><span class="n">3</span>answers to mark</button>
+    <nav class="tools" aria-label="Tools">
+      <button class="tool" data-open="scores" aria-label="Scores" title="Scores"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></button>
+      <button class="tool" data-open="program" aria-label="Program" title="Program"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></button>
+      <button class="tool aa" data-open="size" aria-label="Text size" title="Text size">Aa</button>
+      <button class="tool" data-open="feedback" aria-label="Send feedback" title="Send feedback"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+      <a class="tool" href="#admin" id="toAdmin" aria-label="Admin" title="Admin"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a>
+    </nav>
+  </header>
+  <section class="tvc" id="now" aria-label="On the TV now"></section>
+  <main class="kids" id="kids"></main>
+</div>
+
+<div class="adm" id="adm">
+  <div class="bar"><button class="back" id="back"><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Back</button><h1>Admin</h1></div>
+  <div class="grid" id="panels"></div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s) => document.querySelector(s);
+const SOFT = { '#D42A20': '#FDE8E5', '#0F766E': '#DCF2EE', '#1D4ED8': '#E3EAFD' };
+const LINE = { '#D42A20': '#EFB1AB', '#0F766E': '#9FD2CA', '#1D4ED8': '#ADC0F3' };
+const INK = { '#D42A20': '#A3211A', '#0F766E': '#0B5A53', '#1D4ED8': '#1A43B8' };
+const RING = { '#D42A20': '#F07B72', '#0F766E': '#3FB8AA', '#1D4ED8': '#7C9BF2' };
+const kv = (k) => `--k:${k.color};--k-soft:${SOFT[k.color]};--k-line:${LINE[k.color]};--k-ink:${INK[k.color]};--k-ring:${RING[k.color]}`;
+const ic = {
+  check: '<svg class="i" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+  tvs: '<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>',
+  play: '<svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></svg>',
+  x: '<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  plus: '<svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  chev: '<svg class="i" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>',
+  star: '<svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>',
+};
+const LEN = 45;
+const m2 = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const f2 = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+const toast = (t) => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 2400); };
+const state = P.kids.map((_, ki) => P.classes.map((c) => c.state[ki]));
+const marks = P.kids.map((_, ki) => P.classes.map((c) => (c.marks || [])[ki] || ''));
+const doneOf = (ki) => state[ki].filter((s) => s === 'done').length;
+const nowI = P.classes.findIndex((c) => c.now), NOW = P.classes[nowI], NEXT = P.classes[nowI + 1];
+const ST = { done: 'Done', now: 'Watching', missed: 'Missed', later: 'Later' };
+const TAG = { now: 'Now', missed: 'Missed' };
+let playing = false;
+
+$('#day').innerHTML = `${P.today} <span>${P.now}</span>`;
+
+function renderNow() {
+  const st = m2(NOW.time);
+  $('#now').innerHTML = `<button class="what" data-cls="${nowI}" aria-label="${NOW.subject}: open the class">
+      <span class="live"><i></i>On now</span>
+      <span class="sub">${NOW.subject}${ic.chev}</span>
+      <span class="ttl">${NOW.title}</span>
+      <span class="tm">${f2(st)} to ${f2(st + LEN)}</span></button>
+    <div class="watch">${P.kids.map((k, ki) => `<div class="wk ${state[ki][nowI]}" style="${kv(k)}"><span class="f" aria-hidden="true">${k.face}</span><b>${k.name}</b><span>${ST[state[ki][nowI]]}</span></div>`).join('')}</div>
+    <div class="go"><button class="play ${playing ? 'on' : ''}" id="play">${playing ? 'Playing on the TV' : `${ic.play} Play on the TV`}</button>
+      <button class="next" data-cls="${nowI + 1}"><span>Next</span> ${NEXT.subject}, ${NEXT.time}</button></div>`;
+}
+function renderKids() {
+  $('#kids').innerHTML = P.kids.map((k, ki) => `<article class="kid" style="${kv(k)}">
+    <button class="kh" data-kid="${ki}" aria-label="${k.name}: open"><span class="f" aria-hidden="true">${k.face}</span><span class="nm">${k.name}</span><span class="pg">${doneOf(ki)}<small> of ${k.of}</small></span></button>
+    <div class="list">${P.classes.map((c, ci) => {
+      const s = state[ki][ci], mk = marks[ki][ci];
+      return `<div class="cl ${s}"><button class="tick" data-tick="${ki}-${ci}" aria-label="${c.subject}: ${s === 'done' ? 'done, tap to undo' : 'tick as done'}"><i>${s === 'now' ? ic.tvs : ic.check}</i></button>
+        <button class="body" data-cls="${ci}" data-k="${ki}"><span class="s">${c.subject}</span>${TAG[s] ? `<span class="tag">${TAG[s]}</span>` : ''}${mk ? `<span class="mk">${mk}</span>` : ''}</button></div>`;
+    }).join('')}</div>
+    <div class="kf"><button data-kid="${ki}"><span class="l">Average</span><span class="v">${k.average.replace(' of ', '/')}</span></button>
+      <button data-kid="${ki}"><span class="l">Homework</span><span class="v">${k.homework}</span>${k.late ? `<span class="late-pill">${k.late} late</span>` : ''}</button></div>
+  </article>`).join('');
+}
+renderNow(); renderKids();
+
+const sheet = $('#sheet'), scrim = $('#scrim');
+function close() { sheet.classList.remove('on'); scrim.classList.remove('on'); }
+scrim.onclick = close; document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+function open(head, body, k) {
+  sheet.style.cssText = k ? kv(k) : '';
+  sheet.innerHTML = `<div class="grab"></div><header>${head}<button class="x" data-x aria-label="Close">${ic.x}</button></header><div class="body">${body}</div>`;
+  requestAnimationFrame(() => { sheet.classList.add('on'); scrim.classList.add('on'); });
+}
+const head = (title, sub, face) => `${face ? `<span class="f" aria-hidden="true">${face}</span>` : ''}<div><h3>${title}</h3>${sub ? `<p>${sub}</p>` : ''}</div>`;
+
+function openClass(ci, first) {
+  const c = P.classes[ci], st = m2(c.time);
+  const order = P.kids.map((k, i) => i); if (first !== undefined && !isNaN(first)) { order.splice(order.indexOf(first), 1); order.unshift(first); }
+  open(head(c.subject, `${c.title}<br>${f2(st)} to ${f2(st + LEN)}`),
+    `${c.lesson ? `<button class="big tv" data-play>${ic.tvs} Play on the TV</button>` : ''}
+     <div>${order.map((ki) => { const k = P.kids[ki], s = state[ki][ci], mk = marks[ki][ci];
+       return `<div class="who" style="${kv(k)}"><div class="line"><span class="fc" aria-hidden="true">${k.face}</span><span><b>${k.name}</b><br><span class="st ${s}">${ST[s]}</span></span>
+         ${mk ? `<span class="mkv">${mk}</span>` : ''}<button class="open-mark" data-mk aria-expanded="false">${mk ? 'Change' : 'Mark'}</button></div>
+         <div class="marks" hidden data-row="${ki}-${ci}">${Array.from({ length: 12 }, (_, i) => `<button aria-pressed="${String(i + 1) === mk}" data-m="${i + 1}">${i + 1}</button>`).join('')}</div></div>`; }).join('')}</div>
+     <button class="big light" data-addhw>${ic.plus} Add homework</button>
+     <div class="hw" hidden><textarea placeholder="What to do"></textarea>
+       <div class="for" role="group" aria-label="For"><span>For</span><button aria-pressed="true" data-for="all">Everyone</button>${P.kids.map((k, i) => `<button aria-pressed="false" data-for="${i}">${k.name}</button>`).join('')}</div>
+       <button class="big dark" data-savehw>Save homework</button></div>`);
+}
+function openKid(ki) {
+  const k = P.kids[ki], last = P.scores.filter((s) => s.kid === k.name);
+  open(head(k.name, k.year, k.face), `<div class="facts"><div><div class="l">Today</div><div class="v">${doneOf(ki)} of ${k.of}</div></div><div><div class="l">Average</div><div class="v">${k.average.replace(' of ', '/')}</div></div><div><div class="l">Homework</div><div class="v">${k.homework}</div></div></div>
+    <div class="rows">${k.late ? `<div class="r"><span class="k"><b style="color:var(--late)">1 late</b><small>English: read pages 12 to 15</small></span><button class="small-btn" data-done="Leo will see a reminder">Remind</button></div>` : ''}
+    ${last.map((s) => `<div class="r"><span class="k">${s.what}<small>${s.when}</small></span><b>${s.score.replace(' of ', '/')}</b></div>`).join('')}</div>`, k);
+}
+const MARK = [['Why is spongy bone useful?', 2, 'It makes the bone lighter but it is still strong.', '1 mark: keeps bone light. 1 mark: still strong.'],
+  ['Why is there cartilage at the ends of bones in a joint?', 2, 'So the bones don’t rub together.', '1 mark: stops bones rubbing. 1 mark: cushions or absorbs shock.'],
+  ['Explain how the biceps and triceps bend and straighten your arm.', 4, 'The biceps pulls to bend the arm and the triceps pulls to straighten it.', '1 each: biceps contracts to bend, triceps relaxes, triceps contracts to straighten, biceps relaxes.']];
+function openAnswers() {
+  const leo = P.kids[1];
+  open(head('Leo’s answers', 'Unit exam: Skeleton and muscles', leo.face), `${MARK.map(([q, m, a, s]) => `<div class="qa"><h4>${q}</h4><blockquote>${a}</blockquote><p>${s}</p><div class="pts">${Array.from({ length: m + 1 }, (_, i) => `<button aria-pressed="false" data-pt>${i}</button>`).join('')}</div></div>`).join('')}
+    <div class="row2"><button class="big light" data-x>Later</button><button class="big dark" data-done="Leo’s marks saved">Save marks</button></div>`, leo);
+}
+function openPage(kind) {
+  if (kind === 'scores') open(head('Scores'), `<div class="facts">${P.kids.map((k) => `<div style="${kv(k)};background:var(--k-soft)"><div class="l" style="color:var(--k-ink)">${k.face} ${k.name}</div><div class="v">${k.average.replace(' of ', '/')}</div></div>`).join('')}</div>
+    <div class="rows">${P.scores.map((s) => `<div class="r"><span class="k"><b style="font-family:Lexend;font-size:1.05rem">${s.kid}</b> ${s.what}<small>${s.when}</small></span><b>${s.score.replace(' of ', '/')}</b></div>`).join('')}</div>
+    <div class="lbl">Rate the Muscles lesson</div><div class="stars">${[1, 2, 3, 4, 5].map((s) => `<button data-star="${s}" aria-label="${s} stars">${ic.star}</button>`).join('')}</div>`);
+  if (kind === 'program') open(head('Program', P.admin.plan), `<div class="facts" style="grid-template-columns:2fr 1fr 1fr"><div><div class="l">Now</div><div class="v" style="font-size:1.2rem;line-height:1.25">${P.program.where}</div></div><div><div class="l">Subjects</div><div class="v">${P.program.subjects}</div></div><div><div class="l">TV lessons</div><div class="v">${P.program.readyLessons}</div></div></div><button class="big dark" data-done="The full program opens here">Open the full program</button>`);
+  if (kind === 'feedback') open(head('Send feedback'), `<textarea placeholder="An idea or a problem"></textarea><div class="row2"><button class="big light" data-x>Cancel</button><button class="big dark" data-done="Thanks, feedback sent">Send</button></div>`);
+  if (kind === 'size') { const cur = document.documentElement.dataset.size || 'standard'; open(head('Text size'), `<div class="sizes">${[['standard', 'Standard', 22], ['large', 'Large', 30]].map(([v, n, px]) => `<button data-size="${v}" aria-pressed="${cur === v}"><span style="font-size:${px}px">Aa</span>${n}</button>`).join('')}</div>`); }
+}
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('button, a'); if (!t) return;
+  const d = t.dataset;
+  if (t.id === 'play' || d.play !== undefined) { playing = !playing; renderNow(); if (d.play !== undefined) close(); return toast(playing ? `${NOW.subject} is playing on the TV` : 'Stopped on the TV'); }
+  if (d.tick) { const [ki, ci] = d.tick.split('-').map(Number); const s = state[ki][ci]; const orig = P.classes[ci].state[ki]; state[ki][ci] = s === 'done' ? (orig === 'done' ? 'later' : orig) : 'done'; renderKids(); renderNow(); return toast(state[ki][ci] === 'done' ? `${P.kids[ki].name}: ${P.classes[ci].subject} done` : 'Tick removed'); }
+  if (d.cls !== undefined) return openClass(+d.cls, d.k === undefined ? undefined : +d.k);
+  if (d.kid !== undefined) return openKid(+d.kid);
+  if (d.open) return openPage(d.open);
+  if (t.id === 'markBadge') return openAnswers();
+  if (d.x !== undefined) return close();
+  if (d.done) { close(); return toast(d.done); }
+  if (d.mk !== undefined) { const row = t.closest('.who').querySelector('.marks'); row.hidden = !row.hidden; t.setAttribute('aria-expanded', String(!row.hidden)); return; }
+  if (d.m) { const [ki, ci] = t.parentNode.dataset.row.split('-').map(Number); marks[ki][ci] = d.m; t.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === t))); renderKids(); const w = t.closest('.who'); let v = w.querySelector('.mkv'); if (!v) { v = document.createElement('span'); v.className = 'mkv'; w.querySelector('.open-mark').before(v); } v.textContent = d.m; w.querySelector('.open-mark').textContent = 'Change'; t.parentNode.hidden = true; return toast(`${P.kids[ki].name}: ${d.m} for ${P.classes[ci].subject}`); }
+  if (d.addhw !== undefined) { t.hidden = true; const h = sheet.querySelector('.hw'); h.hidden = false; h.querySelector('textarea').focus(); return; }
+  if (d.for) { t.parentNode.querySelectorAll('[data-for]').forEach((x) => x.setAttribute('aria-pressed', String(x === t))); return; }
+  if (d.savehw !== undefined) { const f = sheet.querySelector('[data-for][aria-pressed="true"]').dataset.for; close(); return toast(f === 'all' ? 'Homework set for everyone' : `Homework set for ${P.kids[f].name}`); }
+  if (d.pt !== undefined) { t.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === t))); return; }
+  if (d.star) { sheet.querySelectorAll('[data-star]').forEach((x) => x.classList.toggle('on', +x.dataset.star <= +d.star)); return toast('Thanks, rating saved'); }
+  if (d.size) { document.documentElement.dataset.size = d.size; sheet.querySelectorAll('[data-size]').forEach((x) => x.setAttribute('aria-pressed', String(x === t))); return; }
+});
+
+/* Admin: a full page of five panels */
+const A = P.admin;
+const r = (k, v, btn) => `<div class="r"><span class="k">${k}</span>${btn ? `<button class="v">${v}</button>` : `<span class="v">${v}</span>`}</div>`;
+const PANELS = [
+  () => `${r('Name', A.account.name)}${r('Username', A.account.username)}${r('Password', 'Change', 1)}${r('Text size', A.account.textSize)}${r('Leave this pad', 'Sign out', 1)}`,
+  () => `${P.parents.map((p) => r(`<b>${p.name}</b>${p.you ? ' (you)' : ''}`, p.you ? 'Owner' : 'Parent')).join('')}${P.kids.map((k) => `<div class="r" style="${kv(k)}"><span class="f">${k.face}</span><span class="k"><b>${k.name}</b>, ${k.year}</span><button class="v">Edit</button></div>`).join('')}${r('Someone new', 'Add', 1)}<p>Children sign in inside your account, with no email.</p>`,
+  () => `${r('Program', A.plan)}${r('Subjects', P.program.subjects)}${r('Word help', A.wordHelp)}${r('Exam PIN', A.examPin)}`,
+  () => `${r('Your plan', A.billing)}${r('Children on the plan', P.kids.length)}<p>The trial needs no payment.</p>`,
+  () => `${r('Tell us something', 'Write a note', 1)}${r('Check the TV and the voice', 'Run check', 1)}`,
+];
+$('#panels').innerHTML = A.sections.map((s, i) => `<section class="panel"><h2>${s}</h2>${PANELS[i]()}</section>`).join('');
+$('#toAdmin').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); history.pushState({ fromPad: true }, '', '#admin'); route(); });
+$('#back').onclick = () => { if (history.state && history.state.fromPad) history.back(); else location.hash = ''; };
+function route() { close(); const a = location.hash === '#admin'; document.body.classList.toggle('is-admin', a); if (a) $('#adm').scrollTop = 0; }
+addEventListener('hashchange', route); addEventListener('popstate', route); route();
+</script>
+</body>
+</html>

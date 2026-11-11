@@ -1,0 +1,26 @@
+/* Spanish word help for Colombia, lesson 1. Each pair: the English word as said in the lesson (forms split by |), then the Spanish.
+   Written by Claude on 2026-11-07, in neutral Latin American Spanish. A fluent speaker should read it; parents never have to. See docs/product/LANGUAGES.md. */
+((window.KEYWORDS ??= {}).es ??= {})['colombia'] = [
+  ['country', 'el país'],
+  ['region|regions', 'la región'],
+  ['mountain|mountains', 'la montaña'],
+  ['coast|coasts', 'la costa'],
+  ['rainforest', 'la selva tropical'],
+  ['desert', 'el desierto'],
+  ['city|cities', 'la ciudad'],
+  ['capital', 'la capital'],
+  ['equator', 'el ecuador'],
+  ['caribbean', 'el Caribe'],
+  ['pacific', 'el Pacífico'],
+  ['andes|andean', 'los Andes'],
+  ['amazon', 'la Amazonía'],
+  ['orinoquía', 'la Orinoquía'],
+  ['island|islands', 'la isla'],
+  ['river|rivers', 'el río'],
+  ['plains', 'los llanos'],
+  ['coffee', 'el café'],
+  ['south america', 'Sudamérica'],
+  ['language', 'el idioma'],
+  ['map', 'el mapa'],
+  ['meters', 'los metros'],
+];

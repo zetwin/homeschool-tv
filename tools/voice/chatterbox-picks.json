@@ -1,0 +1,1640 @@
+{
+ "0f37fe01c200e64a": {
+  "text": "Casa.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.84,
+  "heard": "Casa.",
+  "value": 1,
+  "verified": true
+ },
+ "d1dd4470fb651a87": {
+  "text": "Cama.",
+  "voice": "cb:dora",
+  "seed": 3001,
+  "seconds": 0.72,
+  "heard": "Cama.",
+  "value": 1,
+  "verified": true
+ },
+ "dde874818353c593": {
+  "text": "nada.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 0.76,
+  "heard": "nada",
+  "value": 1,
+  "verified": true
+ },
+ "b25ac71b02f408f2": {
+  "text": "Mapa.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.8,
+  "heard": "Mapa.",
+  "value": 1,
+  "verified": true
+ },
+ "6e13094ba005e508": {
+  "text": "¡hola!",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "Hola.",
+  "value": 1,
+  "verified": true
+ },
+ "d9855b72e4067aaf": {
+  "text": "a.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.76,
+  "heard": "Ah.",
+  "value": 1,
+  "verified": true
+ },
+ "9319539837ad00c0": {
+  "text": "alto.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 0.92,
+  "heard": "Alto.",
+  "value": 1,
+  "verified": true
+ },
+ "744dcb40eae3c2ce": {
+  "text": "dos.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "¡Dos!",
+  "value": 1,
+  "verified": true
+ },
+ "13d8ea09e1fb9278": {
+  "text": "planta.",
+  "voice": "cb:dora",
+  "seed": 6001,
+  "seconds": 0.92,
+  "heard": "Planta",
+  "value": 1,
+  "verified": true
+ },
+ "5e5f4dc78d2f808d": {
+  "text": "animal.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.16,
+  "heard": "Animal",
+  "value": 1,
+  "verified": true
+ },
+ "554a63286e61b99d": {
+  "text": "mayo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "Mayo.",
+  "value": 1,
+  "verified": true
+ },
+ "0d1e4a0cb5ea6a6d": {
+  "text": "Panamá.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 0.84,
+  "heard": "Panama.",
+  "value": 1,
+  "verified": true
+ },
+ "7a5995cd8128fce2": {
+  "text": "Caracas.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 0.92,
+  "heard": "Caracas.",
+  "value": 1,
+  "verified": true
+ },
+ "c92f6c2033b72084": {
+  "text": "Colombia.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.04,
+  "heard": "Colombia.",
+  "value": 1,
+  "verified": true
+ },
+ "7916aa0b15532602": {
+  "text": "Bogotá.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "Bogotá.",
+  "value": 1,
+  "verified": true
+ },
+ "0edea3958367d990": {
+  "text": "México.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1,
+  "heard": "México.",
+  "value": 1,
+  "verified": true
+ },
+ "52c0b18a93d0990c": {
+  "text": "España.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.96,
+  "heard": "España.",
+  "value": 1,
+  "verified": true
+ },
+ "1113bfac8d945575": {
+  "text": "mañana.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.88,
+  "heard": "mañana.",
+  "value": 1,
+  "verified": true
+ },
+ "1324402024f72290": {
+  "text": "Estar.",
+  "voice": "cb:dora",
+  "seed": 3000,
+  "seconds": 0.92,
+  "heard": "Estar.",
+  "value": 1,
+  "verified": true
+ },
+ "01c916622c48bad2": {
+  "text": "Madrid está en España.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.72,
+  "heard": "Madrid está en España.",
+  "value": 1,
+  "verified": true
+ },
+ "2083f4ae66a7f5f4": {
+  "text": "Está.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "Está.",
+  "value": 1,
+  "verified": true
+ },
+ "4fab9749032fcd22": {
+  "text": "Bogotá está en Colombia.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.72,
+  "heard": "Bogotá está en Colombia.",
+  "value": 1,
+  "verified": true
+ },
+ "738eaf094e1643a4": {
+  "text": "Londres.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1,
+  "heard": "Londres",
+  "value": 1,
+  "verified": true
+ },
+ "a64896df4a69483f": {
+  "text": "Inglaterra.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.12,
+  "heard": "Inglaterra.",
+  "value": 1,
+  "verified": true
+ },
+ "8cc5c484cc489e62": {
+  "text": "Londres está en Inglaterra.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 3.04,
+  "heard": "Londres está en Inglaterra.",
+  "value": 1,
+  "verified": true
+ },
+ "e3a63b8541da0eb1": {
+  "text": "dónde.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "¿Dónde?",
+  "value": 1,
+  "verified": true
+ },
+ "10adaf33171fa298": {
+  "text": "¿Dónde está?",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1,
+  "heard": "¿Dónde está?",
+  "value": 1,
+  "verified": true
+ },
+ "26dbca291ccc9598": {
+  "text": "¿Dónde está Machu Picchu?",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.6,
+  "heard": "¿Dónde está Machu Picchu?",
+  "value": 1,
+  "verified": true
+ },
+ "9a650866bd551e6d": {
+  "text": "Está en Perú.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.16,
+  "heard": "Está en Perú.",
+  "value": 1,
+  "verified": true
+ },
+ "50de94e457a303cb": {
+  "text": "¿Dónde está Sofía?",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "¿Dónde está Sofia?",
+  "value": 1,
+  "verified": true
+ },
+ "8ac62e9a6aa2afbc": {
+  "text": "Está en Cartagena.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.44,
+  "heard": "Está en Cartagena.",
+  "value": 1,
+  "verified": true
+ },
+ "f32335de623656b7": {
+  "text": "Estoy.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "Estoy.",
+  "value": 1,
+  "verified": true
+ },
+ "b2b66e2a31e881b0": {
+  "text": "Estoy en México.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.36,
+  "heard": "Estoy en México.",
+  "value": 1,
+  "verified": true
+ },
+ "13ea3c3b1926ed64": {
+  "text": "Estoy en Colombia.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.4,
+  "heard": "Estoy en Colombia.",
+  "value": 1,
+  "verified": true
+ },
+ "f54811ce47a9a7d2": {
+  "text": "Está en Bogotá.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.56,
+  "heard": "Esta en Bogotá.",
+  "value": 1,
+  "verified": true
+ },
+ "b9198fe2916a4a3f": {
+  "text": "Estoy en Bogotá.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.36,
+  "heard": "Estoy en Bogotá.",
+  "value": 1,
+  "verified": true
+ },
+ "609e6eb370158fc6": {
+  "text": "Estoy en Chichén Itzá.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.48,
+  "heard": "Estoy en Chichen Itza.",
+  "value": 1,
+  "verified": true
+ },
+ "2d89605393ed92a1": {
+  "text": "Está en Madrid.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.48,
+  "heard": "Está en Madrid.",
+  "value": 1,
+  "verified": true
+ },
+ "16ce67a018ee223c": {
+  "text": "Está en México.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.44,
+  "heard": "Está en México.",
+  "value": 1,
+  "verified": true
+ },
+ "aaf46fb4a3337108": {
+  "text": "Hola.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.88,
+  "heard": "Hola.",
+  "value": 1,
+  "verified": true
+ },
+ "f3a01760c0f87a55": {
+  "text": "Hasta luego.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.04,
+  "heard": "Hasta luego.",
+  "value": 1,
+  "verified": true
+ },
+ "1fae586bc8f2efbf": {
+  "text": "hasta.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.8,
+  "heard": "Hasta.",
+  "value": 1,
+  "verified": true
+ },
+ "a9924e3e4cbbcbdb": {
+  "text": "luego.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "Luego.",
+  "value": 1,
+  "verified": true
+ },
+ "990fdb3a65c736a2": {
+  "text": "chao.",
+  "voice": "cb:dora",
+  "seed": 7001,
+  "seconds": 0.88,
+  "heard": "Chau.",
+  "value": 1,
+  "verified": true
+ },
+ "ee3c3427cfc6f85e": {
+  "text": "¡Hola, Mateo! Estoy en Bogotá.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 2.36,
+  "heard": "Hola Mateo, estoy en Bogotá.",
+  "value": 1,
+  "verified": true
+ },
+ "e50e5830877e04e7": {
+  "text": "¡Hola, Ana! Estoy en México.",
+  "voice": "cb:alex",
+  "seed": 2000,
+  "seconds": 3.2,
+  "heard": "Hola Ana, estoy en México.",
+  "value": 1,
+  "verified": true
+ },
+ "a3ef4438dc19fd5e": {
+  "text": "Está en Cartagena.",
+  "voice": "cb:alex",
+  "seed": 1001,
+  "seconds": 1.44,
+  "heard": "Está en Cartagena.",
+  "value": 1,
+  "verified": true
+ },
+ "6a628279dc002a1b": {
+  "text": "¡Hasta luego, Mateo!",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 2.12,
+  "heard": "Hasta luego, Mateo.",
+  "value": 1,
+  "verified": true
+ },
+ "4f3d04776cd69d65": {
+  "text": "¡Hasta luego, Ana!",
+  "voice": "cb:alex",
+  "seed": 1000,
+  "seconds": 2.12,
+  "heard": "Hasta luego Ana.",
+  "value": 1,
+  "verified": true
+ },
+ "5994da411d32a85f": {
+  "text": "¡Hola! Estoy en México. ¡Hasta luego!",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 2.12,
+  "heard": "Hola, estoy en México. Hasta luego.",
+  "value": 1,
+  "verified": true
+ },
+ "6dbc192237e6202a": {
+  "text": "¡Hola! Leo está en Inglaterra. ¡Hasta luego!",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 3.12,
+  "heard": "Hola, Leo está en Inglaterra, hasta luego.",
+  "value": 1,
+  "verified": true
+ },
+ "ff75566d198f974a": {
+  "text": "¡Hola! Ana está en Colombia. ¡Chao!",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 3.36,
+  "heard": "Hola, Ana está en Colombia. Chao.",
+  "value": 1,
+  "verified": true
+ },
+ "5b07b1547d0e3279": {
+  "text": "papa.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 0.8,
+  "heard": "Papá.",
+  "value": 1,
+  "verified": true
+ },
+ "a34b33ea4cc08440": {
+  "text": "patata.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.8,
+  "heard": "Patata.",
+  "value": 1,
+  "verified": true
+ },
+ "7b46a8b8b6be6dcf": {
+  "text": "ola.",
+  "voice": "cb:dora",
+  "seed": 6001,
+  "seconds": 0.76,
+  "heard": "Hola.",
+  "value": 1,
+  "verified": true
+ },
+ "b893509149b4d5eb": {
+  "text": "¡hasta luego!",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.36,
+  "heard": "Hasta luego.",
+  "value": 1,
+  "verified": true
+ },
+ "402d72b1be279d59": {
+  "text": "¿Dónde estás?",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.96,
+  "heard": "¿Dónde estás?",
+  "value": 1,
+  "verified": true
+ },
+ "102343080a55ae5b": {
+  "text": "En.",
+  "voice": "cb:dora",
+  "seed": 7000,
+  "seconds": 0.84,
+  "heard": "En",
+  "value": 1,
+  "verified": true
+ },
+ "ecff7753404b184b": {
+  "text": "el esqueleto.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.04,
+  "heard": "El esqueleto.",
+  "value": 1,
+  "verified": true
+ },
+ "58cb2a89ce2df848": {
+  "text": "el hueso.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.2,
+  "heard": "El hueso.",
+  "value": 1,
+  "verified": true
+ },
+ "23912bff03a77417": {
+  "text": "el cráneo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.16,
+  "heard": "El cráneo.",
+  "value": 1,
+  "verified": true
+ },
+ "4652072b9e0fff22": {
+  "text": "las costillas.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.16,
+  "heard": "Las costillas.",
+  "value": 1,
+  "verified": true
+ },
+ "b7a058be81de23d9": {
+  "text": "la columna vertebral.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.72,
+  "heard": "La columna vertebral.",
+  "value": 1,
+  "verified": true
+ },
+ "4cd0d15669397002": {
+  "text": "la articulación.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 2.04,
+  "heard": "La articulación.",
+  "value": 1,
+  "verified": true
+ },
+ "b493432134b61c4d": {
+  "text": "el músculo.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.08,
+  "heard": "El musculo",
+  "value": 1,
+  "verified": true
+ },
+ "0b5db78d534a611f": {
+  "text": "sostener.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.2,
+  "heard": "Sostener.",
+  "value": 1,
+  "verified": true
+ },
+ "9d38c12619202a86": {
+  "text": "proteger.",
+  "voice": "cb:dora",
+  "seed": 3000,
+  "seconds": 1,
+  "heard": "Proteger.",
+  "value": 1,
+  "verified": true
+ },
+ "6fd63271250ed800": {
+  "text": "el movimiento.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.88,
+  "heard": "El Movimiento",
+  "value": 1,
+  "verified": true
+ },
+ "c2176f732ff036a5": {
+  "text": "la médula ósea.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.48,
+  "heard": "La Médula Osea.",
+  "value": 1,
+  "verified": true
+ },
+ "6acf15c9c0455739": {
+  "text": "los glóbulos rojos.",
+  "voice": "cb:dora",
+  "seed": 6001,
+  "seconds": 1.64,
+  "heard": "Los Lola Rajas",
+  "value": 0.33,
+  "verified": false
+ },
+ "20e609eb2bdc2219": {
+  "text": "el fémur.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.16,
+  "heard": "El Femur",
+  "value": 1,
+  "verified": true
+ },
+ "b7beefe70b161844": {
+  "text": "el estribo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1,
+  "heard": "el estribo",
+  "value": 1,
+  "verified": true
+ },
+ "5fdbc9c7e847830a": {
+  "text": "la mandíbula.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.36,
+  "heard": "La mandíbula.",
+  "value": 1,
+  "verified": true
+ },
+ "c90bf21eb62f7932": {
+  "text": "el omóplato.",
+  "voice": "cb:dora",
+  "seed": 4000,
+  "seconds": 1.32,
+  "heard": "el homoplató.",
+  "value": 1,
+  "verified": true
+ },
+ "e1a34f802e64439d": {
+  "text": "los órganos.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.28,
+  "heard": "Los órganos.",
+  "value": 1,
+  "verified": true
+ },
+ "8be7a9470d97678d": {
+  "text": "el cerebro.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.24,
+  "heard": "El cerebro.",
+  "value": 1,
+  "verified": true
+ },
+ "d179395ea23d2607": {
+  "text": "el corazón.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "El corazón.",
+  "value": 1,
+  "verified": true
+ },
+ "ec3c561acb02ee4a": {
+  "text": "los pulmones.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "Los pulmones.",
+  "value": 1,
+  "verified": true
+ },
+ "10bbcdd0ba49bf36": {
+  "text": "el calcio.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.2,
+  "heard": "El calcio.",
+  "value": 1,
+  "verified": true
+ },
+ "679997ffb2fd68d2": {
+  "text": "el cartílago.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.32,
+  "heard": "el cartilago.",
+  "value": 1,
+  "verified": true
+ },
+ "7c0c1c488552fa43": {
+  "text": "la pelvis.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.68,
+  "heard": "La pelvis.",
+  "value": 1,
+  "verified": true
+ },
+ "8f56a9a6d20a0bb8": {
+  "text": "sanar.",
+  "voice": "cb:dora",
+  "seed": 4000,
+  "seconds": 0.92,
+  "heard": "Sanar.",
+  "value": 1,
+  "verified": true
+ },
+ "38531984c7b0cc02": {
+  "text": "el hueso roto.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.4,
+  "heard": "El hueso roto.",
+  "value": 1,
+  "verified": true
+ },
+ "a51de3363507c238": {
+  "text": "la célula muscular.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.68,
+  "heard": "La célula muscular.",
+  "value": 1,
+  "verified": true
+ },
+ "28e4d884d22a1169": {
+  "text": "la célula.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.16,
+  "heard": "la célula",
+  "value": 1,
+  "verified": true
+ },
+ "4a2dc452fafec36d": {
+  "text": "el tendón.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.28,
+  "heard": "El tendón",
+  "value": 1,
+  "verified": true
+ },
+ "2787cadd45745778": {
+  "text": "contraerse.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.28,
+  "heard": "Contraerse.",
+  "value": 1,
+  "verified": true
+ },
+ "25b40f69e86e9e98": {
+  "text": "relajarse.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.28,
+  "heard": "relajarse",
+  "value": 1,
+  "verified": true
+ },
+ "a4412e7e8897725e": {
+  "text": "tirar.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.84,
+  "heard": "Tirar",
+  "value": 1,
+  "verified": true
+ },
+ "5a142f54e585e56e": {
+  "text": "más corto.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.2,
+  "heard": "Más corto.",
+  "value": 1,
+  "verified": true
+ },
+ "231d9456a5867a03": {
+  "text": "la energía.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.36,
+  "heard": "La energía.",
+  "value": 1,
+  "verified": true
+ },
+ "8e2a3af407454733": {
+  "text": "la comida.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1,
+  "heard": "La comida.",
+  "value": 1,
+  "verified": true
+ },
+ "a47d28b8362c1b31": {
+  "text": "el oxígeno.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.24,
+  "heard": "El oxígeno.",
+  "value": 1,
+  "verified": true
+ },
+ "83f81867da55c74b": {
+  "text": "el estómago.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.88,
+  "heard": "El estómago.",
+  "value": 1,
+  "verified": true
+ },
+ "10698ce851c75c13": {
+  "text": "el músculo esquelético.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.48,
+  "heard": "El musculo esquelético.",
+  "value": 1,
+  "verified": true
+ },
+ "141d81dca69fa5a0": {
+  "text": "el músculo cardíaco.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.76,
+  "heard": "El músculo cardíaco.",
+  "value": 1,
+  "verified": true
+ },
+ "82be6d5d4d11d7d4": {
+  "text": "el músculo liso.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.52,
+  "heard": "El músculo liso.",
+  "value": 1,
+  "verified": true
+ },
+ "5ea0c0975f509c44": {
+  "text": "el bíceps.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.24,
+  "heard": "El Biceps",
+  "value": 1,
+  "verified": true
+ },
+ "2e43be8ad2f5aee7": {
+  "text": "el tríceps.",
+  "voice": "cb:dora",
+  "seed": 3000,
+  "seconds": 1.28,
+  "heard": "El tríceps.",
+  "value": 1,
+  "verified": true
+ },
+ "bda7613de3e0eebf": {
+  "text": "el ejercicio.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.36,
+  "heard": "El ejercicio.",
+  "value": 1,
+  "verified": true
+ },
+ "cc6f17b41b300ac1": {
+  "text": "respirar.",
+  "voice": "cb:dora",
+  "seed": 4001,
+  "seconds": 1.2,
+  "heard": "Respirar.",
+  "value": 1,
+  "verified": true
+ },
+ "f6f245aa1409fb5e": {
+  "text": "fuerte.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.96,
+  "heard": "Fuerte.",
+  "value": 1,
+  "verified": true
+ },
+ "6f3e01035c3eec5e": {
+  "text": "el país.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.24,
+  "heard": "El país.",
+  "value": 1,
+  "verified": true
+ },
+ "fa0d84de5edcd5ac": {
+  "text": "la región.",
+  "voice": "cb:dora",
+  "seed": 3001,
+  "seconds": 1,
+  "heard": "La región.",
+  "value": 1,
+  "verified": true
+ },
+ "071dcfd7873e7829": {
+  "text": "la montaña.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "La montaña.",
+  "value": 1,
+  "verified": true
+ },
+ "732305b14ee3a103": {
+  "text": "la costa.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.88,
+  "heard": "La costa.",
+  "value": 1,
+  "verified": true
+ },
+ "2c0f86d5850ac988": {
+  "text": "la selva tropical.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.72,
+  "heard": "La Selva Tropical",
+  "value": 1,
+  "verified": true
+ },
+ "99921112070651ec": {
+  "text": "el desierto.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.28,
+  "heard": "El desierto.",
+  "value": 1,
+  "verified": true
+ },
+ "ddfc1f6f1e28969e": {
+  "text": "la ciudad.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.08,
+  "heard": "La ciudad.",
+  "value": 1,
+  "verified": true
+ },
+ "2d47e67137b3c73f": {
+  "text": "la capital.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.28,
+  "heard": "La capital.",
+  "value": 1,
+  "verified": true
+ },
+ "4d712274d0971330": {
+  "text": "el ecuador.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "El Ecuador.",
+  "value": 1,
+  "verified": true
+ },
+ "d844b5dbc7274b47": {
+  "text": "el Caribe.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.16,
+  "heard": "El Caribe.",
+  "value": 1,
+  "verified": true
+ },
+ "6203cedd748b2f87": {
+  "text": "el Pacífico.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "El Pacífico.",
+  "value": 1,
+  "verified": true
+ },
+ "91493321c8cdd278": {
+  "text": "los Andes.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.92,
+  "heard": "Los Andes",
+  "value": 1,
+  "verified": true
+ },
+ "6fc62fb70ec3a9bd": {
+  "text": "la Amazonía.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "La Amazonía",
+  "value": 1,
+  "verified": true
+ },
+ "e7b6f74f4ba7886e": {
+  "text": "la Orinoquía.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.8,
+  "heard": "La orinoquía.",
+  "value": 1,
+  "verified": true
+ },
+ "1c82bbd0b5cfb77f": {
+  "text": "la isla.",
+  "voice": "cb:dora",
+  "seed": 4001,
+  "seconds": 1.12,
+  "heard": "La isla.",
+  "value": 1,
+  "verified": true
+ },
+ "688a0d1e0a851f6b": {
+  "text": "el río.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.88,
+  "heard": "El río.",
+  "value": 1,
+  "verified": true
+ },
+ "1cb881a72f21c1ab": {
+  "text": "los llanos.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.28,
+  "heard": "Los channels.",
+  "value": 0.5,
+  "verified": false
+ },
+ "2f43ffbe98813b0d": {
+  "text": "el café.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.88,
+  "heard": "El café.",
+  "value": 1,
+  "verified": true
+ },
+ "4400fa67c16fb068": {
+  "text": "Sudamérica.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.12,
+  "heard": "Sudamérica.",
+  "value": 1,
+  "verified": true
+ },
+ "5bd6c1cffe35c792": {
+  "text": "el idioma.",
+  "voice": "cb:dora",
+  "seed": 3000,
+  "seconds": 1.16,
+  "heard": "El idioma.",
+  "value": 1,
+  "verified": true
+ },
+ "30e81c26f37d8211": {
+  "text": "el mapa.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.96,
+  "heard": "El mapa.",
+  "value": 1,
+  "verified": true
+ },
+ "f0e7b3dc2f56f48a": {
+  "text": "los metros.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.16,
+  "heard": "Los metros.",
+  "value": 1,
+  "verified": true
+ },
+ "cfdfabcff8abce81": {
+  "text": "frío.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.96,
+  "heard": "frío",
+  "value": 1,
+  "verified": true
+ },
+ "fa3e0231636314e9": {
+  "text": "más frío.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.32,
+  "heard": "Más frío.",
+  "value": 1,
+  "verified": true
+ },
+ "706d4b8bf96c0a2a": {
+  "text": "cálido.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "Calido.",
+  "value": 1,
+  "verified": true
+ },
+ "d15cb25387c93127": {
+  "text": "templado.",
+  "voice": "cb:dora",
+  "seed": 3000,
+  "seconds": 1.2,
+  "heard": "templado",
+  "value": 1,
+  "verified": true
+ },
+ "0d704b163f1c0530": {
+  "text": "los grados.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.08,
+  "heard": "¡Los grados!",
+  "value": 1,
+  "verified": true
+ },
+ "41428987cac1a0fc": {
+  "text": "la temperatura.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.44,
+  "heard": "La temperatura.",
+  "value": 1,
+  "verified": true
+ },
+ "cbec2e843d447b2f": {
+  "text": "los kilómetros.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.36,
+  "heard": "Los kilómetros.",
+  "value": 1,
+  "verified": true
+ },
+ "f7e9875d8385da2d": {
+  "text": "el piso térmico.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 2.04,
+  "heard": "El piso térmico.",
+  "value": 1,
+  "verified": true
+ },
+ "942ffc967561e13c": {
+  "text": "el páramo.",
+  "voice": "cb:dora",
+  "seed": 4001,
+  "seconds": 1.04,
+  "heard": "El páramo.",
+  "value": 1,
+  "verified": true
+ },
+ "cb57f3825fa341de": {
+  "text": "la nieve.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "La nieve.",
+  "value": 1,
+  "verified": true
+ },
+ "ec9ffa3098c237b8": {
+  "text": "el hielo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.28,
+  "heard": "El hielo.",
+  "value": 1,
+  "verified": true
+ },
+ "4ac67a030c885503": {
+  "text": "el glaciar.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.24,
+  "heard": "El glacia.",
+  "value": 0.5,
+  "verified": false
+ },
+ "36a20f26982d1747": {
+  "text": "el agua.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.88,
+  "heard": "El agua.",
+  "value": 1,
+  "verified": true
+ },
+ "146e47ad41cb2409": {
+  "text": "subir.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.8,
+  "heard": "Subir.",
+  "value": 1,
+  "verified": true
+ },
+ "890149f6d43e1ac9": {
+  "text": "el aire.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.28,
+  "heard": "El aire.",
+  "value": 1,
+  "verified": true
+ },
+ "52b3e1ec21d73e95": {
+  "text": "el suelo.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.96,
+  "heard": "El suelo.",
+  "value": 1,
+  "verified": true
+ },
+ "5f19d30439edf7c0": {
+  "text": "la finca.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.08,
+  "heard": "La finca.",
+  "value": 1,
+  "verified": true
+ },
+ "5d98894e661b8331": {
+  "text": "el calentamiento.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.56,
+  "heard": "El calentamiento.",
+  "value": 1,
+  "verified": true
+ },
+ "c8b707797e812ee3": {
+  "text": "el sentimiento.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.52,
+  "heard": "El sentimiento.",
+  "value": 1,
+  "verified": true
+ },
+ "ab0ac9ac68175a58": {
+  "text": "la emoción.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.4,
+  "heard": "La emoción.",
+  "value": 1,
+  "verified": true
+ },
+ "e196f33f86640a9c": {
+  "text": "la inteligencia emocional.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.68,
+  "heard": "La Inteligencia Emocional",
+  "value": 1,
+  "verified": true
+ },
+ "2f762b5a8368ebb3": {
+  "text": "el miedo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.16,
+  "heard": "El miedo.",
+  "value": 1,
+  "verified": true
+ },
+ "d6ccb79ad0311890": {
+  "text": "el enojo.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "El enojo.",
+  "value": 1,
+  "verified": true
+ },
+ "23704fb02ef0ca33": {
+  "text": "la tristeza.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "La tristeza.",
+  "value": 1,
+  "verified": true
+ },
+ "a2d8279cd73bb374": {
+  "text": "la alegría.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "La alegría.",
+  "value": 1,
+  "verified": true
+ },
+ "e13cbc7ad265f056": {
+  "text": "feliz.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "Feliz.",
+  "value": 1,
+  "verified": true
+ },
+ "7de3333021d7a60a": {
+  "text": "asustado.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.12,
+  "heard": "asustado.",
+  "value": 1,
+  "verified": true
+ },
+ "2af95de71fb78d01": {
+  "text": "enojado.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.12,
+  "heard": "enojado.",
+  "value": 1,
+  "verified": true
+ },
+ "c887471c6ea0f5ef": {
+  "text": "nervioso.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.16,
+  "heard": "Nervioso.",
+  "value": 1,
+  "verified": true
+ },
+ "37cc913e4920360a": {
+  "text": "furioso.",
+  "voice": "cb:dora",
+  "seed": 5000,
+  "seconds": 1.32,
+  "heard": "FURIOSO",
+  "value": 1,
+  "verified": true
+ },
+ "b137ca50d8a959af": {
+  "text": "preocupado.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.4,
+  "heard": "Preocupado.",
+  "value": 1,
+  "verified": true
+ },
+ "a30fc089306eb2c8": {
+  "text": "tranquilo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.92,
+  "heard": "Tranquilo.",
+  "value": 1,
+  "verified": true
+ },
+ "071eb9b944de8fa2": {
+  "text": "la sorpresa.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.36,
+  "heard": "La sorpresa.",
+  "value": 1,
+  "verified": true
+ },
+ "889f2d2f687821ec": {
+  "text": "el asco.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "El asco.",
+  "value": 1,
+  "verified": true
+ },
+ "e06a8bf367bc802b": {
+  "text": "el cuerpo.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 1.04,
+  "heard": "El cuerpo.",
+  "value": 1,
+  "verified": true
+ },
+ "8c73ea205660af39": {
+  "text": "notar.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1,
+  "heard": "Notar",
+  "value": 1,
+  "verified": true
+ },
+ "2cf9c706e3e51a45": {
+  "text": "la elección.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.32,
+  "heard": "La elección",
+  "value": 1,
+  "verified": true
+ },
+ "a14fa53353083e28": {
+  "text": "elegir.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.08,
+  "heard": "Elegir.",
+  "value": 1,
+  "verified": true
+ },
+ "2e97a6b480e6e71a": {
+  "text": "el amigo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "El Amigo.",
+  "value": 1,
+  "verified": true
+ },
+ "0257dcb170618d72": {
+  "text": "el nervio.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.16,
+  "heard": "El nervio.",
+  "value": 1,
+  "verified": true
+ },
+ "2f54d4453cf00d75": {
+  "text": "el sistema nervioso.",
+  "voice": "cb:dora",
+  "seed": 2000,
+  "seconds": 1.52,
+  "heard": "El sistema nervioso.",
+  "value": 1,
+  "verified": true
+ },
+ "64bf8f89d6a30a9b": {
+  "text": "la médula espinal.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.52,
+  "heard": "La medula espinal.",
+  "value": 1,
+  "verified": true
+ },
+ "5ad72c68b9dda8ba": {
+  "text": "la neurona.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.28,
+  "heard": "La Neurona.",
+  "value": 1,
+  "verified": true
+ },
+ "1ec469528ed89bde": {
+  "text": "el mensaje.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.36,
+  "heard": "El mensaje",
+  "value": 1,
+  "verified": true
+ },
+ "9f44351f0979f552": {
+  "text": "la señal.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.16,
+  "heard": "La señal.",
+  "value": 1,
+  "verified": true
+ },
+ "12e3d497201e8bb4": {
+  "text": "eléctrico.",
+  "voice": "cb:dora",
+  "seed": 4000,
+  "seconds": 1.36,
+  "heard": "ELECTRICO",
+  "value": 1,
+  "verified": true
+ },
+ "c9a42d9bb9782a18": {
+  "text": "el reflejo.",
+  "voice": "cb:dora",
+  "seed": 5001,
+  "seconds": 1.08,
+  "heard": "El reflejo.",
+  "value": 1,
+  "verified": true
+ },
+ "cd8b7998a4cb68ac": {
+  "text": "el estímulo.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "El estímulo.",
+  "value": 1,
+  "verified": true
+ },
+ "5de0e8e3f65adc7f": {
+  "text": "la respuesta.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.24,
+  "heard": "La respuesta.",
+  "value": 1,
+  "verified": true
+ },
+ "dac9fdc8472d3832": {
+  "text": "el receptor.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.28,
+  "heard": "El receptor.",
+  "value": 1,
+  "verified": true
+ },
+ "3384e38dfedf6fb6": {
+  "text": "la piel.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "La piel.",
+  "value": 1,
+  "verified": true
+ },
+ "bd77dbf2320f6af9": {
+  "text": "el dolor.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "El dolor.",
+  "value": 1,
+  "verified": true
+ },
+ "3bfddb12b9fe6b7a": {
+  "text": "la mano.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 1.04,
+  "heard": "La mano.",
+  "value": 1,
+  "verified": true
+ },
+ "ef0c7a873be6d79a": {
+  "text": "el dedo.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.92,
+  "heard": "el dedo.",
+  "value": 1,
+  "verified": true
+ },
+ "e42414406e828948": {
+  "text": "el ojo.",
+  "voice": "cb:dora",
+  "seed": 1001,
+  "seconds": 0.88,
+  "heard": "El Ojo",
+  "value": 1,
+  "verified": true
+ },
+ "ff07377b963a83f2": {
+  "text": "el sentido.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 1.32,
+  "heard": "El sentido.",
+  "value": 1,
+  "verified": true
+ },
+ "529c3faf51b19bae": {
+  "text": "rápido.",
+  "voice": "cb:dora",
+  "seed": 1000,
+  "seconds": 0.84,
+  "heard": "¡Rápido!",
+  "value": 1,
+  "verified": true
+ },
+ "f06929a27df752e7": {
+  "text": "el mito.",
+  "voice": "cb:dora",
+  "seed": 2001,
+  "seconds": 0.84,
+  "heard": "El mito.",
+  "value": 1,
+  "verified": true
+ }
+}

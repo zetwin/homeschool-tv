@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Materials: Subjects</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,800&display=swap">
+<link rel="stylesheet" href="../lab.css">
+<style>
+/* C. Subjects. Learnt from the Khan Academy Kids Library (subjects first), Teachers Pay Teachers (a cover, then the full page),
+   BrainPOP topic pages (equal cards, each with a time and how it's done) and Apple Books' Library.
+   Ladder: 1 main: the subject with this week's lesson, a large picture. 2 secondary: the other subjects as pictures with their names.
+   3 supporting: how many pages each has. 4 quiet: forms and the parents' shelf as two plain buttons, the bars. */
+:root { --sec: calc(var(--fs) * 1.5); }
+.subjects { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 12.5em; gap: 1em; margin-top: .4em; }
+.subj { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: 0; overflow: hidden; border: 1.5px solid transparent; border-radius: 22px; background: var(--surface); text-align: left; color: var(--ink); box-shadow: 0 1px 2px #17131F14; }
+.subj:hover { border-color: var(--mute); }
+.subj img { width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+.subj .art { position: relative; min-height: 0; overflow: hidden; background: var(--surface2); }
+.subj .art .page { position: absolute; top: 14%; left: 50%; height: 150%; transform: translateX(-50%) rotate(-3deg); box-shadow: 0 0 0 1px var(--line), 0 10px 24px -8px #17131F40; }
+.subj .txt { display: grid; gap: 0; padding: .45em .8em .55em; }
+.subj b { font: 800 var(--fs)/1.15 var(--font); }
+.subj .txt span { font-size: var(--quiet); color: var(--mute); }
+.subj:not(.lead) .txt span { font-size: var(--fs); }
+.subj.lead { grid-column: span 2; grid-row: span 2; }
+.subj.wide { grid-column: span 2; }
+.week { display: flex; flex-wrap: wrap; align-items: center; gap: .6em 1em; margin: .3em 0 .9em; }
+.week b { font-weight: 800; }
+.week .quiet { margin-right: auto; }
+.subj.lead b { font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.subj.lead .txt { padding: .8em 1.2em 1em; gap: .15em; }
+.subj.lead .now { justify-self: start; color: var(--acc); font-size: var(--quiet); }
+.others { display: flex; flex-wrap: wrap; gap: .6em; margin-top: .7em; }
+/* A subject: its topics, each with large page covers */
+.topic { margin: .6em 0 1.6em; }
+.topic h2 { margin-bottom: .7em; font: 800 var(--sec)/1.1 var(--dfont); letter-spacing: -.01em; }
+.covers { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.4em 1.2em; padding-top: .6em; }
+.cover { display: grid; grid-template-columns: minmax(0, 1fr); gap: .45em; align-content: start; padding: 0; border: 0; background: none; text-align: left; }
+.cover .page { transition: transform .15s ease-out; }
+.cover:hover .page { transform: translateY(-3px); }
+.cover span { line-height: 1.2; }
+/* One page, full size, with what it is and the two ways to use it */
+.one { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2.4em; align-items: start; height: 100%; padding-top: .4em; }
+.one > .page { height: min(100%, 600px); }
+.one .info { display: flex; flex-direction: column; gap: .8em; max-width: 34em; }
+.one h2 { font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.one .who { display: flex; flex-wrap: wrap; gap: .4em; }
+.one .acts { display: flex; flex-wrap: wrap; gap: .6em; }
+.tags { display: flex; flex-wrap: wrap; gap: .4em 1.2em; color: var(--mute); }
+.tags span { display: inline-flex; align-items: center; gap: .35em; }
+.tags .ic { width: 1em; height: 1em; }
+@media (max-width: 900px) { .subjects { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 11em; height: auto; } .covers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  :root { --main: 32px; }
+  .subjects { gap: 10px; grid-auto-rows: 9em; } .subj .txt span { font-size: var(--fs); } .subj.lead { grid-row: span 2; } .subj { border-radius: 16px; }
+  .covers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1em 12px; }
+  .one { grid-template-columns: 1fr; gap: 1em; height: auto; } .one > .page { height: 44vh; justify-self: center; }
+  .one .acts .btn { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script src="../../assets/colombia-map.js"></script>
+<script src="../data.js"></script>
+<script src="../thumbs.js"></script>
+<script src="../chrome.js"></script>
+<script>
+(function () {
+  const { kids, SUBJECTS, SHELVES, ITEMS, byId } = window.MAT, { icon, head, nav, page, esc, names, kidChips, STATUS, sheets, SEND, EACH } = window.UI;
+  /* Topics inside a subject come from where each page is from: a lesson's unit, or a kind of practice. */
+  const TOPIC = { 'mu-sheet': 'Human skeleton and muscles', 'sk-label': 'Human skeleton and muscles', 'mu-cross': 'Human skeleton and muscles', 'mu-code': 'Human skeleton and muscles', 'ne-comic': 'Your brain and nerves', 'ex-unit': 'Exams, for parents only', 'fm-exp': 'Experiments', 'co-map': 'Colombia', 'co-floors': 'Colombia', 'sp-cards': 'First words', 'sp-write': 'Writing', 'em-sort': 'What are emotions for?', 'fe-check': 'Every day', 'lf-money': 'Money', 'ma-daily': 'A little every day', 'en-hand': 'A little every day', 'rd-log': 'Reading', 'ch-mate': 'Chess', 'lg-pets': 'Logic', 'mk-cabbage': 'Kitchen science', 'mk-art': 'Art', 'mk-nature': 'Outdoors' };
+  const inSubject = (sid) => ITEMS.filter((i) => i.subject === sid || (sid === 'feelings' && i.id === 'lf-money'));
+  const forms = ITEMS.filter((i) => i.subject === 'all');
+  let route = { at: 'home' };
+  const tile = (s, lead, wide) => { const n = (s.id === 'forms' ? forms : inSubject(s.id)).length;
+    return `<button class="subj ${lead ? 'lead' : ''} ${wide ? 'wide' : ''} ${s.art ? 'drawn' : ''}" data-subject="${s.id}">${s.pic ? `<img src="${s.pic}" alt="">` : `<span class="art">${page(s.art)}</span>`}<span class="txt"><b>${esc(s.name)}</b><span>${lead ? `This week’s lessons. ${n} pages: ${esc(s.say)}` : `${n} ${n === 1 ? 'page' : 'pages'}`}</span></span></button>`; };
+  const cover = (i) => `<button class="cover" data-item="${i.id}">${page(i.kind)}<span>${esc(i.title)}</span><span class="quiet">${i.parentOnly ? 'Parents only' : `${esc(TOPIC[i.id] || '')}. ${i.mins ? `${i.mins} min` : 'Any time'}, ${i.both ? 'paper or device' : 'paper'}`}</span></button>`;
+  function home() {
+    const W = window.MAT.WEEK, total = window.MAT.sheetsOf(W.items, kids.length);
+    return `${head('Materials')}<main class="main"><div class="week"><span><b>This week’s pack</b>: ${W.items.length} pages for ${esc(names(kids))}</span><span class="quiet">${total} sheets of paper</span><button class="btn fill">${icon('print')}Print the week</button></div>
+      <div class="subjects">${SUBJECTS.map((s, n) => tile(s, n === 0, n === SUBJECTS.length - 1)).join('')}</div>
+      <div class="others"><button class="btn" data-subject="forms">${icon('week')}Charts and forms</button><button class="btn" data-item="ex-unit">${icon('lock')}Exam papers, for parents only</button></div></main>`;
+  }
+  function subject(id) {
+    const s = SUBJECTS.find((x) => x.id === id), list = id === 'forms' ? forms : inSubject(id), title = id === 'forms' ? 'Charts and forms' : s.name;
+    /* One grid of pages, in topic order; each says its topic, so no row is left mostly empty. */
+    return `${head(esc(title), 'All subjects')}<main class="main"><div class="covers">${list.map(cover).join('')}</div></main>`;
+  }
+  function item(id) {
+    const i = byId(id), s = SUBJECTS.find((x) => x.id === i.subject);
+    const who = i.parentOnly ? `<p>${icon('lock')} Only parents can see this. Children never get it early.</p>` : `<div class="who" aria-label="Who gets it">${kidChips(kids)}</div>`;
+    return `${head(esc(s ? s.name : 'Charts and forms'), 'Back')}<main class="main"><div class="one">${page(i.kind)}<div class="info">
+      <h2>${esc(i.title)}</h2><p>${esc(i.what)}</p>
+      <p class="tags"><span>${icon('print')}${i.perKid ? EACH() : sheets(i.pages)}</span><span>${icon('week')}${i.mins ? `${i.mins} minutes` : 'Any time'}</span>${i.both && !i.parentOnly ? `<span>${icon('tablet')}On a device too</span>` : ''}</p>
+      ${who}<div class="acts"><button class="btn fill">${icon('print')}Print${i.perKid ? ` for ${names(kids)}` : ''}</button>${i.both && !i.parentOnly ? `<button class="btn">${icon('tablet')}${SEND()}</button>` : ''}</div>
+      <p class="quiet">From: ${esc(i.from)}</p><p class="quiet">${STATUS[i.status]}</p></div></div></main>`;
+  }
+  const trail = [];
+  function draw() {
+    const html = route.at === 'home' ? home() : route.at === 'subject' ? subject(route.id) : item(route.id);
+    document.getElementById('app').innerHTML = `${html}${nav()}`;
+    document.querySelector('.main').scrollTop = 0;
+    if (route.at !== 'home') document.querySelector('[data-back]')?.focus({ preventScroll: true });
+  }
+  const go = (r) => { trail.push(route); route = r; draw(); };
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-subject],[data-item],[data-back]'); if (!t) return;
+    if (t.dataset.subject) go({ at: 'subject', id: t.dataset.subject });
+    else if (t.dataset.item) go({ at: 'item', id: t.dataset.item });
+    else { route = trail.pop() || { at: 'home' }; draw(); }
+  });
+  if (location.hash === '#subject') route = { at: 'subject', id: 'science' };
+  if (location.hash === '#open') { trail.push({ at: 'subject', id: 'science' }); route = { at: 'item', id: 'mu-sheet' }; }
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Materials: This week</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,800&display=swap">
+<link rel="stylesheet" href="../lab.css">
+<style>
+/* B. This week's bag. Learnt from Epic's Assign and Mailbox, Kumon Connect (sheets arrive in order, nothing to search),
+   Workybooks' "find, assign, pick the child", and Apple Books' Want to Read.
+   Ladder: 1 main: "6 pages for this week" and the one red Print all. 2 secondary: the pages themselves, large, in order; "Add more".
+   3 supporting: each page's title and subject; the kinds to add from. 4 quiet: dates, sheet counts, the bars. */
+:root { --sec: calc(var(--fs) * 1.5); }
+.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: .8em 1.4em; margin: .5em 0 .9em; }
+.top h2 { font: 800 var(--main)/1.02 var(--dfont); letter-spacing: -.02em; }
+.top .when { margin-top: .25em; color: var(--mute); }
+.top .acts { display: flex; flex-wrap: wrap; gap: .6em; }
+.who { display: flex; flex-wrap: wrap; align-items: center; gap: .4em; margin-bottom: 1.1em; }
+.who > span { margin-right: .3em; color: var(--mute); }
+.tray { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1.2em; padding: .3em 0 0; }
+.slot { display: grid; gap: .5em; align-content: start; padding: 0; background: none; border: 0; text-align: left; }
+.slot .page { transition: transform .15s ease-out; }
+.slot:hover .page { transform: translateY(-3px); }
+.slot span { line-height: 1.2; }
+.add { display: grid; place-items: center; align-content: center; gap: .3em; aspect-ratio: 210 / 297; border: 2px dashed #A9A3B8; border-radius: 6px; background: transparent; color: var(--mute); }
+.add .ic { width: 1.6em; height: 1.6em; }
+.more { margin-top: 3.4em; }
+.more h2 { margin-bottom: .6em; font: 800 var(--sec)/1.1 var(--dfont); letter-spacing: -.01em; }
+.kinds { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8em; }
+.kind { display: grid; grid-template-columns: 4.4em minmax(0, 1fr); align-items: center; gap: .9em; min-height: 7em; padding: .7em .9em .7em .7em; background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; text-align: left; }
+.kind:hover { border-color: var(--mute); }
+.kind .page { width: 4.4em; box-shadow: 0 0 0 1px var(--line); border-radius: 3px; }
+.kind span { display: grid; gap: .1em; line-height: 1.2; }
+.kind b { font-weight: 800; }
+/* Opened: one page at a time, full screen, with the pages of the week on either side */
+.view { position: fixed; inset: 0; z-index: 10; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: var(--bg); opacity: 0; pointer-events: none; transition: opacity .25s ease-out; }
+.view.open { opacity: 1; pointer-events: auto; }
+.vTop { display: flex; align-items: center; gap: .8em; padding: .7em 1.2em; }
+.vTop h2 { margin-right: auto; font: 800 var(--sec)/1.1 var(--dfont); }
+.vMid { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1em; padding: 0 1.2em; min-height: 0; }
+.vMid > .page { justify-self: center; height: 100%; max-height: 100%; }
+.arrow { display: grid; place-items: center; width: 3.2em; height: 3.2em; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); }
+.arrow[disabled] { visibility: hidden; }
+.arrow.prev .ic { transform: scaleX(-1); }
+.vBot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6em 1.2em; padding: 1em 1.2em max(1em, env(safe-area-inset-bottom, 0px)); }
+.vBot p { flex-basis: 100%; text-align: center; }
+.sheet { position: fixed; inset: 0; z-index: 10; display: grid; align-items: end; background: #17131F66; opacity: 0; pointer-events: none; transition: opacity .25s ease-out; }
+.sheet.open { opacity: 1; pointer-events: auto; }
+.sheetBox { max-height: 88vh; overflow-y: auto; padding: 1.4em 1.6em 1.8em; background: var(--bg); border-radius: 28px 28px 0 0; transform: translateY(40px); transition: transform .3s ease-out; }
+.sheet.open .sheetBox { transform: none; }
+.sheetHead { display: flex; align-items: center; gap: 1em; margin-bottom: 1em; }
+.sheetHead h2 { margin-right: auto; font: 800 var(--sec)/1.1 var(--dfont); }
+.grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.2em; }
+.pick { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5em; align-content: start; }
+.pick .btn { justify-self: stretch; white-space: normal; padding-inline: .6em; }
+.steps { margin: -.4em 0 1.2em; }
+@media (max-width: 900px) { .tray { grid-template-columns: repeat(4, minmax(0, 1fr)); } .kinds { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  :root { --main: 32px; }
+  .top .acts, .top .acts .btn { flex: 1 1 100%; }
+  .tray { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 128px; overflow-x: auto; padding: .3em 0 .6em; scrollbar-width: none; }
+  .vTop { flex-wrap: wrap; } .vTop h2 { order: 2; flex-basis: 100%; } .vTop .quiet { order: 3; }
+  .vMid { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto; row-gap: .6em; }
+  .vMid > .page { grid-column: 1 / -1; grid-row: 1; }
+  .vMid .prev { grid-row: 2; grid-column: 1; justify-self: end; } .vMid .arrow:not(.prev) { grid-row: 2; grid-column: 2; justify-self: start; }
+  .kinds { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vMid { padding: 0 6px; gap: 6px; } .arrow { width: 2.6em; height: 2.6em; }
+  .vBot .btn { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="view" id="view" role="dialog" aria-modal="true" aria-label="A page of this week"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Add a page"><div class="sheetBox" id="sheetBox"></div></div>
+<script src="../../assets/colombia-map.js"></script>
+<script src="../data.js"></script>
+<script src="../thumbs.js"></script>
+<script src="../chrome.js"></script>
+<script>
+(function () {
+  const { kids, SHELVES, ITEMS, WEEK, byId, sheetsOf } = window.MAT, { icon, head, nav, page, esc, names, kidChips, STATUS, sheets, SEND, EACH } = window.UI;
+  const week = [...WEEK.items];
+  const subjectWord = (i) => (i.perKid ? EACH() : { science: 'Science', geography: 'Geography', spanish: 'Spanish', feelings: 'Emotions', maths: 'Maths', english: 'English', games: 'Chess and logic', makers: 'Make and explore' }[i.subject] || '');
+  const kinds = SHELVES.filter((s) => s.id !== 'lessons');
+  function draw() {
+    const total = sheetsOf(week, kids.length);
+    document.getElementById('app').innerHTML = `${head('Materials')}<main class="main">
+      <div class="top"><div><h2>${week.length} pages for this week</h2><p class="when">${esc(WEEK.dates)}. Made from the timetable and this week’s lessons. ${total} sheets of paper in all</p></div>
+        <div class="acts"><button class="btn fill">${icon('print')}Print all</button><button class="btn">${icon('tablet')}${SEND()}</button></div></div>
+      <div class="who" aria-label="Who gets them"><span>For</span>${kidChips(kids)}</div>
+      <section class="tray" aria-label="This week’s pages">${week.map((id, n) => { const i = byId(id); return `<button class="slot" data-view="${n}">${page(i.kind)}<span>${esc(i.title)}</span><span class="quiet">${esc(subjectWord(i))}</span></button>`; }).join('')}
+        <button class="slot" data-kindopen="lessons"><span class="add">${icon('plus')}<span>Add a page</span></span></button></section>
+      <section class="more"><h2>Add more to the week</h2><div class="kinds">${kinds.map((s) => { const list = ITEMS.filter((i) => i.shelf === s.id); return `<button class="kind" data-kindopen="${s.id}">${page(list[0].kind)}<span><b>${esc(s.title)}</b><span class="quiet">${esc(s.say)}</span></span></button>`; }).join('')}</div></section>
+      </main>${nav()}`;
+  }
+  /* One page, full screen, with arrows through the week */
+  const view = document.getElementById('view');
+  function show(n) {
+    const i = byId(week[n]);
+    view.innerHTML = `<div class="vTop"><button class="btn" data-close>${icon('back')}This week</button><h2>${esc(i.title)}</h2><span class="quiet">${n + 1} of ${week.length}</span></div>
+      <div class="vMid"><button class="arrow prev" data-view="${n - 1}" ${n ? '' : 'disabled'} aria-label="Previous page">${icon('next')}</button>${page(i.kind)}<button class="arrow" data-view="${n + 1}" ${n < week.length - 1 ? '' : 'disabled'} aria-label="Next page">${icon('next')}</button></div>
+      <div class="vBot"><p>${esc(i.what)}. <span class="quiet">${i.perKid ? EACH() : sheets(i.pages)}, ${i.mins ? `${i.mins} min` : 'any time'}. ${STATUS[i.status]}</span></p>
+        <button class="btn fill">${icon('print')}Print this page${i.perKid ? ` for ${names(kids)}` : ''}</button>${i.both ? `<button class="btn">${icon('tablet')}${SEND()}</button>` : ''}<button class="link" data-remove="${n}">Take it out of this week</button></div>`;
+    view.classList.add('open'); view.querySelector('[data-close]').focus({ preventScroll: true });
+  }
+  /* A kind of material: its pages, each with "Add to this week" */
+  const sheet = document.getElementById('sheet'), box = document.getElementById('sheetBox');
+  function kind(id) {
+    const s = SHELVES.find((x) => x.id === id), list = ITEMS.filter((i) => i.shelf === id);
+    /* Each child is on their own step of the daily maths: the same path for all, at their own speed. */
+    const STEP = [14, 16, 11, 9, 18, 12];
+    const steps = id === 'daily' ? `<p class="steps">Daily maths goes one step at a time, a little harder each day. ${kids.map((k, n) => `${esc(k.name)} is on step ${STEP[n]}`).join(', ')}, of 40.</p>` : '';
+    box.innerHTML = `<div class="sheetHead"><h2>${esc(s.title)}</h2><button class="btn" data-close>${icon('close')}Close</button></div>${steps}
+      <div class="grid">${list.map((i) => { const inWeek = week.includes(i.id); return `<div class="pick">${page(i.kind)}<span>${esc(i.title)}</span>${i.parentOnly ? '<span class="quiet">Parents only</span>' : ''}<button class="btn" data-addweek="${i.id}" ${inWeek ? 'disabled' : ''}>${inWeek ? `${icon('check')}In this week` : `${icon('plus')}Add to this week`}</button></div>`; }).join('')}</div>`;
+    sheet.classList.add('open'); box.querySelector('[data-close]').focus({ preventScroll: true });
+  }
+  const closeAll = () => { view.classList.remove('open'); sheet.classList.remove('open'); };
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-view],[data-kindopen],[data-close],[data-addweek],[data-remove]');
+    if (!t) { if (e.target === sheet) closeAll(); return; }
+    if (t.dataset.view != null) show(+t.dataset.view);
+    else if (t.dataset.kindopen) kind(t.dataset.kindopen);
+    else if (t.dataset.addweek) { week.push(t.dataset.addweek); draw(); kind(byId(t.dataset.addweek).shelf); }
+    else if (t.dataset.remove) { week.splice(+t.dataset.remove, 1); closeAll(); draw(); }
+    else closeAll();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+  draw();
+  if (location.hash === '#open') show(2);
+  if (location.hash === '#kind') kind('daily');
+})();
+</script>
+</body>
+</html>

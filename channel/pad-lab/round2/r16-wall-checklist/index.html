@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wall and checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Round 2, from 2 Family wall and 10 Checklist. Tests: is one lane per child, each a short checklist
+   (today's classes, then homework) with big tick circles, enough on its own, with nothing else on the wall? */
+:root{
+  --page:#F4F5F7; --ink:#16171B; --sub:#4A4F59; --line:#D5D8DF; --card:#FFFFFF;
+  --red:#B42318; --red-l:#FDE3E0; --amber:#FFD666; --amber-ink:#3D2A00;
+  --ana:#D42A20; --leo:#0F766E; --mia:#1D4ED8;
+  --ana-l:#FCE8E6; --leo-l:#E0F2EF; --mia-l:#E6ECFC;
+  --ana-d:#A71D16; --leo-d:#0B5C56; --mia-d:#1A43BF;
+}
+html{font-size:18px}
+html[data-size="l"]{font-size:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;color:var(--ink);background:var(--page);line-height:1.2;-webkit-font-smoothing:antialiased;overflow:hidden;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+svg.i{width:24px;height:24px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+#pad{height:100vh;display:flex;flex-direction:column;gap:16px;padding:18px 20px 20px}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top .when{flex:1;min-width:0}
+.top .when b{display:block;font-size:1.45rem;line-height:1.1;white-space:nowrap}
+.acts2,.tools{display:flex;gap:10px}
+.top .when span{color:var(--sub)}
+.play{min-height:56px;padding:0 22px 0 16px;border-radius:28px;background:var(--ink);color:#fff;font-weight:700;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:1.05rem}
+.badge{min-height:52px;padding:0 18px 0 8px;border-radius:26px;background:var(--amber);color:var(--amber-ink);font-weight:700;display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
+.badge b{width:36px;height:36px;border-radius:50%;background:var(--amber-ink);color:#fff;display:grid;place-items:center}
+.tool{min-width:52px;min-height:52px;padding:0 14px;border-radius:26px;background:var(--card);box-shadow:0 0 0 2px var(--line) inset;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;white-space:nowrap}
+
+/* the wall: one lane per child */
+.wall{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lane{background:var(--kl);border-radius:28px;padding:14px 14px 14px;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0}
+.lh{display:flex;align-items:center;gap:12px;padding:4px 6px 0;min-height:60px;border-radius:18px}
+.lh .fa{width:54px;height:54px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:30px;flex:none;box-shadow:0 0 0 3px var(--k)}
+.lh .nm{flex:1;min-width:0}
+.lh .nm b{display:block;font-size:1.6rem;line-height:1}
+.lh .nm span{color:var(--sub)}
+.lh .ct{font-size:2.3rem;font-weight:700;color:var(--kd);line-height:1;white-space:nowrap}
+.lh .ct small{font-size:1rem;color:var(--sub)}
+.prog{display:flex;gap:5px;padding:0 6px}
+.prog i{flex:1;height:8px;border-radius:4px;background:rgba(0,0,0,.08)}
+.prog i.on{background:var(--k)}
+.list{background:var(--card);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.list.grow{flex:1;min-height:0}
+.it{display:flex;align-items:center;gap:14px;width:100%;min-height:62px;padding:6px 14px 6px 10px;position:relative;flex:1}
+.it+.it::before{content:"";position:absolute;top:0;left:72px;right:0;height:1px;background:var(--line)}
+.tk{width:50px;height:50px;border-radius:50%;flex:none;display:grid;place-items:center;box-shadow:0 0 0 3px var(--line) inset;color:var(--sub)}
+.tk svg{width:28px;height:28px;stroke-width:3}
+.it.done .tk{background:var(--k);box-shadow:none;color:#fff}
+.it.now{background:var(--kl)}
+.it.now .tk{background:#fff;box-shadow:0 0 0 4px var(--k) inset;color:var(--k)}
+.it.now .tk svg{width:20px;height:20px}
+.it.missed .tk,.it.late .tk{box-shadow:0 0 0 3px var(--red) inset;color:var(--red)}
+.it .tx{flex:1;min-width:0}
+.it .tx b{display:block;font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .tx span{display:block;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it.missed .tx span,.it.late .tx span{color:var(--red);font-weight:700}
+.it.now .tx span{color:var(--kd);font-weight:700}
+.it .mk{font-size:1.5rem;font-weight:700;color:var(--kd)}
+.it.none{color:var(--sub)}
+.it.none .tk{box-shadow:0 0 0 3px var(--line) inset;opacity:.6}
+.gl{font-weight:700;color:var(--sub);padding:2px 8px 0}
+.hw{display:flex;align-items:center;gap:14px;width:100%;min-height:66px;padding:8px 14px 8px 10px;background:var(--card);border-radius:20px}
+.hw .dots{display:flex;gap:6px}
+.tk.sm{width:44px;height:44px}
+.tk.sm svg{width:24px;height:24px}
+.tk.late{box-shadow:0 0 0 3px var(--red) inset;color:var(--red)}
+.hw .tx{flex:1;min-width:0;text-align:right}
+.hw .tx b{display:block;font-size:1.15rem}
+.hw .tx span{color:var(--sub)}
+.hw .tx .lt{color:var(--red);font-weight:700}
+.hw.none{color:var(--sub)}
+.hw.none .tk{opacity:.6}
+.lf{display:flex;align-items:center;gap:8px;padding:0 4px}
+.lf button{min-height:48px;padding:0 14px;border-radius:24px;background:#fff;font-weight:700;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.lf button b{color:var(--kd)}
+
+@media (max-aspect-ratio:1/1){
+  #pad{padding:18px 16px 18px}
+  .tool .lb{display:none}
+  .top .acts2{order:3;width:100%;display:flex;gap:10px}
+  .top .acts2 .play{flex:1;justify-content:center}
+  .wall{gap:10px}
+  .lane{padding:12px 10px;border-radius:24px}
+  .lh{flex-wrap:wrap;gap:10px}
+  .lh .nm{flex-basis:calc(100% - 66px)}
+  .lh .ct{width:100%;padding-left:2px}
+  .it{gap:10px;padding:6px 10px 6px 8px}
+  .it+.it::before{left:66px}
+  .tk{width:48px;height:48px}
+}
+html[data-size="l"] .tool .lb{display:none}
+html[data-size="l"] .it{min-height:56px}
+html[data-size="l"] .tk{width:44px;height:44px}
+html[data-size="l"] .tk svg{width:24px;height:24px}
+html[data-size="l"] .lh .fa{width:46px;height:46px;font-size:26px}
+html[data-size="l"] .top .when b{font-size:1.35rem}
+html[data-size="l"] .lh .ct{font-size:2rem}
+@media (min-aspect-ratio:1/1){
+  html[data-size="l"] .it .tx span.opt{display:none}
+  html[data-size="l"] .top .when span{display:none}
+  html[data-size="l"] .prog{display:none}
+}
+@media (max-aspect-ratio:1/1){
+  html[data-size="l"] .lh .nm span{display:none}
+  html[data-size="l"] .it .tx b{font-size:1.05rem}
+}
+
+/* sheets */
+.dim{position:fixed;inset:0;background:rgba(22,23,27,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.dim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:50;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--page);transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.2)}
+.sheet:not(.on){visibility:hidden;transition:transform .3s,visibility 0s .3s}
+.sheet.on{transform:none}
+.sh{display:flex;align-items:center;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--line);background:var(--card)}
+.sh h2{flex:1;font-size:1.5rem}
+.sb{flex:1;overflow:auto;padding:18px 20px 24px;display:flex;flex-direction:column;gap:14px}
+.sb p{color:var(--sub)}
+.sb .gh{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:50px;padding:0 18px;border-radius:25px;background:var(--card);box-shadow:0 0 0 2px var(--line) inset;font-weight:700}
+.chips button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;min-height:62px;padding:8px 14px}
+.row .m{flex:1;min-width:0}
+.row .m b{display:block}
+.row .m span{color:var(--sub)}
+.row .v{font-size:1.3rem;font-weight:700}
+textarea{width:100%;min-height:110px;border-radius:16px;border:2px solid var(--line);padding:14px;font:inherit;resize:none;background:var(--card)}
+.go{min-height:58px;border-radius:29px;background:var(--ink);color:#fff;font-weight:700;font-size:1.1rem;display:flex;align-items:center;justify-content:center;gap:10px;width:100%}
+.go.soft{background:var(--card);color:var(--ink);box-shadow:0 0 0 2px var(--line) inset}
+.stepper{display:flex;align-items:center;gap:14px}
+.stepper button{width:58px;height:58px;border-radius:50%;background:var(--card);box-shadow:0 0 0 2px var(--line) inset;font-size:1.6rem;font-weight:700;text-align:center}
+.stepper output{font-size:2.2rem;font-weight:700;min-width:100px;text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:16px 24px;border-radius:28px;font-weight:700;transition:transform .3s;z-index:70}
+.toast.on{transform:translate(-50%,0)}
+
+/* Admin: its own page */
+#admin{display:none;height:100vh;overflow:auto;padding:20px 24px 40px}
+body.is-admin #pad{display:none}
+body.is-admin #admin{display:block}
+.atop{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.atop h1{font-size:2.2rem}
+.acols{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}
+.acols section{background:var(--card);border-radius:24px;padding:16px 18px 8px}
+.acols h2{font-size:1.3rem;margin-bottom:6px}
+.acols .r{display:flex;align-items:center;gap:12px;min-height:58px;border-top:1px solid var(--line)}
+.acols .r .m{flex:1;min-width:0}
+.acols .r .m span{display:block;color:var(--sub)}
+.acols .r button{min-height:48px;padding:0 16px;border-radius:24px;box-shadow:0 0 0 2px var(--line) inset;font-weight:700}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="pad"></div>
+<div id="admin"></div>
+<div class="dim" id="dim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true"></aside>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes, A = P.admin;
+const $ = (s, r = document) => r.querySelector(s);
+const KV = ['ana', 'leo', 'mia'];
+const kv = (i) => `--k:var(--${KV[i]});--kd:var(--${KV[i]}-d);--kl:var(--${KV[i]}-l)`;
+const nowC = C.find((c) => c.now), nowI = C.indexOf(nowC), nextC = C[nowI + 1];
+const ic = {
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.8 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3.1 14H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  play: '<path d="M7 4.5v15l13-7.5z" fill="currentColor" stroke="none"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', dash: '<path d="M7 12h10"/>', bang: '<path d="M12 6v8M12 18v.5"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  text: '<path d="M4 19l5-14 5 14M5.8 14h6.4M15 19l3-8 3 8M15.9 16.5h4.2"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/>',
+  book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5"/>',
+};
+const I = (n, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ic[n]}</svg>`;
+const word = { done: 'Done', now: 'Watching now', missed: 'Missed', later: '' };
+const scoreOf = (k) => P.scores.find((s) => s.kid === k.name);
+let given = {};
+const mark = (ci, i) => given[ci + '-' + i] || (C[ci].marks && C[ci].marks[i]) || '';
+const lateHw = P.needsYou.find((n) => n.action === 'Remind');
+
+/* homework as one row of tick circles: a red one for each late piece, an empty one for each on time */
+function hwRow(k, i) {
+  if (!k.homework) return `<div class="hw none"><span class="dots"><span class="tk sm">${I('dash')}</span></span><span class="tx"><b>None</b></span></div>`;
+  const dots = Array.from({ length: k.homework }, (_, n) => n < k.late ? `<span class="tk sm late">${I('bang')}</span>` : '<span class="tk sm"></span>').join('');
+  return `<button class="hw" data-act="kidhw" data-i="${i}" aria-label="${k.name}: ${k.homework} homework to do${k.late ? `, ${k.late} late` : ''}"><span class="dots">${dots}</span><span class="tx"><b>${k.homework} to do</b>${k.late ? `<span class="lt">${k.late} late</span>` : '<span>On time</span>'}</span></button>`;
+}
+function renderPad() {
+  $('#pad').innerHTML = `<header class="top">
+      <div class="when"><b>${P.today}</b><span>${P.now}, ${nowC.subject} now</span></div>
+      <div class="acts2"><button class="play" data-act="play">${I('play')}Play on the TV</button><button class="badge" data-act="answers"><b>3</b>answers to mark</button></div>
+      <div class="tools"><button class="tool" data-act="program" aria-label="Program">${I('book')}<span class="lb">Program</span></button>
+      <button class="tool" data-act="size" aria-label="Text size">${I('text')}</button>
+      <button class="tool" data-act="feedback" aria-label="Send feedback">${I('chat')}</button>
+      <a class="tool" href="#admin" aria-label="Admin" style="color:inherit;text-decoration:none">${I('gear')}<span class="lb">Admin</span></a></div>
+    </header>
+    <div class="wall">${K.map((k, i) => { const sc = scoreOf(k); return `<section class="lane" style="${kv(i)}" aria-label="${k.name}">
+      <button class="lh" data-act="kid" data-i="${i}"><span class="fa">${k.face}</span><span class="nm"><b>${k.name}</b><span>${k.year}</span></span><span class="ct">${k.done}<small> of ${k.of}</small></span></button>
+      <div class="prog">${C.map((c) => `<i class="${c.state[i] === 'done' ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="list grow">${C.map((c, ci) => { const s = c.state[i], m = mark(ci, i); return `<button class="it ${s}" data-act="class" data-c="${ci}" data-i="${i}"><span class="tk">${s === 'done' ? I('check') : s === 'now' ? I('play') : s === 'missed' ? I('dash') : ''}</span><span class="tx"><b>${c.subject}</b><span class="${s === 'done' || s === 'later' ? 'opt' : ''}">${word[s] || c.time}</span></span>${m ? `<span class="mk" aria-label="Mark ${m}">${m}</span>` : ''}</button>`; }).join('')}</div>
+      <div class="gl">Homework</div>
+      ${hwRow(k, i)}
+      <div class="lf"><button data-act="scores">Last test <b>${sc.score}</b></button></div>
+    </section>`; }).join('')}</div>`;
+}
+
+/* sheets slide in from the right, over the wall */
+const sh = $('#sheet'), dim = $('#dim');
+function sheet(title, body) { sh.innerHTML = `<div class="sh"><h2>${title}</h2><button class="tool" data-act="close" aria-label="Close">${I('x')}</button></div><div class="sb">${body}</div>`; sh.classList.add('on'); dim.classList.add('on'); }
+function closeSheet() { sh.classList.remove('on'); dim.classList.remove('on'); }
+let tt; function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => e.classList.remove('on'), 2400); }
+const chips = (arr, on = 0, g = '') => `<div class="chips" data-g="${g}">${arr.map((o, n) => `<button aria-pressed="${n === on}" data-act="opt">${o}</button>`).join('')}</div>`;
+
+function homeworkSheet(ci = nowI) {
+  sheet('Add homework', `<div class="gh">Who</div>${chips(['Everyone', ...K.map((k) => `${k.face} ${k.name} only`)], 0, 'who')}<div class="gh">Class</div>${chips(C.map((c) => c.subject), ci)}
+    <div class="gh">What to do</div><textarea placeholder="For example: read pages 16 to 19"></textarea><div class="gh">Due</div>${chips(['Tomorrow', 'Friday', 'Next week'])}<button class="go" data-act="savehw">Add homework</button>`);
+}
+function kidHwSheet(i) {
+  const k = K[i];
+  sheet(`${k.name}’s homework`, `${k.late ? `<div class="row"><span class="m"><b>${lateHw.detail.split(',')[0]}</b><span>Late, ${lateHw.detail.split(', ')[1]}</span></span><button class="tool" data-act="remind" data-i="${i}">Remind</button></div>` : ''}
+    ${k.homework - k.late ? `<div class="row"><span class="m"><b>${k.homework - k.late} more</b><span>On time</span></span></div>` : ''}
+    <p>New homework goes to everyone. You can pick one child instead.</p><button class="go" data-act="hw">Add homework</button>`);
+}
+function kidSheet(i) {
+  const k = K[i], sc = scoreOf(k);
+  sheet(`${k.face} ${k.name}`, `<div class="row"><span class="m"><b>Classes today</b></span><span class="v">${k.done} of ${k.of}</span></div>
+    <div class="row"><span class="m"><b>Last test</b><span>${sc.what}, ${sc.when.toLowerCase()}</span></span><span class="v">${sc.score}</span></div>
+    <div class="row"><span class="m"><b>Average mark</b><span>All tests</span></span><span class="v">${k.average}</span></div>
+    <div class="row"><span class="m"><b>Homework</b><span>${k.homework ? `${k.homework} to do${k.late ? `, ${k.late} late` : ''}` : 'Nothing set'}</span></span></div>
+    <button class="go soft" data-act="hw">Add homework</button>`);
+}
+function classSheet(ci, i) {
+  const c = C[ci], k = K[i], s = c.state[i], m = mark(ci, i), sc = c.lesson && s === 'done' ? scoreOf(k) : null;
+  let body = `<p>${c.title}</p><div class="row"><span style="font-size:28px">${k.face}</span><span class="m"><b>${k.name}</b><span>${s === 'later' ? 'Starts at ' + c.time : word[s]}</span></span>${m ? `<span class="v">${m} of 12</span>` : ''}</div>`;
+  if (c.lesson) body += `<p>${sc ? `The lesson test marked itself: ${sc.score}.` : 'The lesson test marks itself at the end.'}</p><button class="go" data-act="play">${I('play')}Play on the TV</button>`;
+  else if (s !== 'later') body += `<div class="gh">Add a mark, if you like</div><div class="stepper"><button data-act="step" data-d="-1" aria-label="Lower">−</button><output id="mk">${m || 'None'}</output><button data-act="step" data-d="1" aria-label="Higher">+</button><span style="color:var(--sub)">out of 12</span></div><button class="go" data-act="savemark" data-key="${ci}-${i}">Save</button>`;
+  body += `<button class="go soft" data-act="hwc" data-c="${ci}">Add homework for ${c.subject}</button>`;
+  sheet(`${c.subject}, ${c.time}`, body);
+}
+const act = {
+  close: closeSheet,
+  play: () => { closeSheet(); toast(`Playing ${nowC.subject} on the TV`); },
+  answers: () => sheet('Leo’s written answers', `<p>${P.needsYou[0].detail}. Tests mark themselves; only written answers need you.</p>${[1, 2, 3].map((q) => `<div class="row"><span class="m"><b>Answer ${q}</b></span>${chips(['Right', 'Partly', 'Wrong'], -1)}</div>`).join('')}<button class="go" data-act="saved" data-t="Marks saved for Leo">Save marks</button>`),
+  scores: () => sheet('Scores', `${P.scores.map((s) => { const i = K.findIndex((k) => k.name === s.kid); return `<div class="row"><span style="font-size:26px">${K[i].face}</span><span class="m"><b>${s.kid}</b><span>${s.what}, ${s.when.toLowerCase()}</span></span><span class="v">${s.score}</span></div>`; }).join('')}<div class="gh">Average mark</div>${K.map((k) => `<div class="row"><span style="font-size:26px">${k.face}</span><span class="m"><b>${k.name}</b></span><span class="v">${k.average}</span></div>`).join('')}`),
+  program: () => sheet('Program', `<p>Following ${A.plan}. ${P.program.subjects} subjects, ${P.program.readyLessons} video lessons ready.</p><div class="row"><span class="m"><b>Where we are</b><span>${P.program.where}</span></span></div><div class="gh">${P.needsYou[2].what}</div><p>${P.needsYou[2].detail}</p>${chips(['1 ★', '2 ★', '3 ★', '4 ★', '5 ★'], -1)}<button class="go soft" data-act="saved" data-t="The full program opens here">Open the full program</button>`),
+  kid: (e) => kidSheet(+e.dataset.i), kidhw: (e) => kidHwSheet(+e.dataset.i),
+  hw: () => homeworkSheet(), hwc: (e) => homeworkSheet(+e.dataset.c),
+  savehw: () => { const w = $('[data-g="who"] [aria-pressed="true"]', sh).textContent; closeSheet(); toast(w === 'Everyone' ? 'Homework added for all three' : `Homework added for ${w.split(' ')[1]}`); },
+  class: (e) => classSheet(+e.dataset.c, +e.dataset.i),
+  step: (e) => { const o = $('#mk'); o.textContent = o.textContent === 'None' ? 10 : Math.min(12, Math.max(0, +o.textContent + +e.dataset.d)); },
+  savemark: (e) => { const o = $('#mk').textContent; if (o !== 'None') { given[e.dataset.key] = o; renderPad(); toast('Mark saved'); } closeSheet(); },
+  remind: (e) => toast(`${K[+e.dataset.i].name} will see a reminder on his screen`),
+  saved: (e) => { closeSheet(); toast(e.dataset.t); },
+  opt: (e) => { e.parentNode.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b === e)); if (e.parentNode.dataset.g === 'size') document.documentElement.dataset.size = e.textContent === 'Large' ? 'l' : ''; },
+  size: () => sheet('Text size', `<p>Makes every word bigger. The three lanes stay.</p>${chips(['Normal', 'Large'], document.documentElement.dataset.size === 'l' ? 1 : 0, 'size')}`),
+  feedback: () => sheet('Send feedback', `<p>What works, what doesn’t, and what you wish it did.</p><textarea></textarea><button class="go" data-act="saved" data-t="Thank you. Feedback sent">Send</button>`),
+};
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-act]'); if (a) { act[a.dataset.act]?.(a); return; }
+  if (e.target === dim) closeSheet();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+/* Admin */
+function renderAdmin() {
+  const r = (a, b, c, x = 'saved') => `<div class="r"><span class="m"><b>${a}</b>${b ? `<span>${b}</span>` : ''}</span>${c ? `<button data-act="${x}" data-t="${a} opens here">${c}</button>` : ''}</div>`;
+  const body = [
+    r('Name', A.account.name) + r('Username', A.account.username) + r('Password', '', 'Change') + r('Text size', A.account.textSize, 'Change') + r('Leave this pad', '', 'Sign out'),
+    P.parents.map((p) => r(p.name, p.you ? 'You' : 'Parent')).join('') + K.map((k) => r(`${k.face} ${k.name}`, k.year, 'Edit')).join('') + r('Add a child', '', 'Add'),
+    r('Follows', A.plan) + r('Subjects', P.program.subjects) + r('Word help', A.wordHelp.replace('Spanish key words: ', 'Spanish key words, '), 'Change'),
+    r('Your plan', A.billing) + r('Charged', 'Per child') + r('Other plans', '', 'See plans'),
+    r('Exam PIN', A.examPin, 'Change') + r('Feedback', 'Tell us what to fix', 'Write', 'feedback'),
+  ];
+  $('#admin').innerHTML = `<div class="atop"><a class="tool" href="#" style="color:inherit;text-decoration:none">${I('back')}Back to the wall</a><h1>Admin</h1></div><div class="acols">${A.sections.map((s, n) => `<section><h2>${s}</h2>${body[n]}</section>`).join('')}</div>`;
+}
+function route() {
+  closeSheet();
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('is-admin', admin);
+  document.body.style.overflow = admin ? 'auto' : 'hidden';
+  admin ? renderAdmin() : renderPad();
+}
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materials lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,800&display=swap">
+<link rel="stylesheet" href="lab.css">
+<style>
+/* The lab's front page: three ideas for the parent's Materials page, to open and compare. */
+body { overflow-y: auto; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 1.4em 1.2em 3em; }
+h1 { font: 800 var(--main)/1.05 var(--dfont); letter-spacing: -.02em; }
+.lead { margin: .4em 0 1.4em; max-width: 46em; }
+.ideas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2em; }
+.idea { display: grid; gap: .6em; align-content: start; padding: 1.2em; background: var(--surface); border-radius: 22px; }
+.idea h2 { font: 800 var(--sec, 1.5em)/1.1 var(--dfont); }
+.idea .open { display: flex; flex-wrap: wrap; gap: .5em; }
+.idea a.btn { text-decoration: none; color: inherit; }
+.idea a.btn.fill { color: #fff; }
+.idea ul { margin: 0; padding-left: 1.1em; }
+.kids { display: flex; flex-wrap: wrap; align-items: center; gap: .5em; margin: 1.4em 0 .4em; }
+.kids a { text-decoration: none; color: inherit; }
+.real { margin-top: 1.8em; display: grid; gap: .4em; max-width: 52em; }
+.real h2 { font: 800 1.5em/1.1 var(--dfont); }
+@media (max-width: 900px) { .ideas { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Materials</h1>
+  <p class="lead">The parent’s Materials page. <b>F</b> is your latest direction: categories, then a gallery, then the page on the right with the others on the left. D and E, and the first round A, B and C, are kept to compare.</p>
+  <div class="ideas">
+    <section class="idea"><h2>F. Categories, gallery, page</h2><p>All categories as equal cards, This week one of them. Tap one: its materials fill the screen as a gallery. Tap a material: it opens on the right, and the category’s other materials sit in a list on the left. Back goes to the gallery, then to the categories.</p>
+      <div class="open"><a class="btn fill" href="f-gallery/">Open F</a><a class="btn" href="f-gallery/#week">This week</a><a class="btn" href="f-gallery/#gallery">Science</a><a class="btn" href="f-gallery/#open">A page opened</a></div></section>
+  </div>
+  <h2 style="margin:1.6em 0 .6em;font:800 1.5em/1.1 var(--dfont)">Second round</h2>
+  <div class="ideas">
+    <section class="idea"><h2>D. This week first</h2><p>The list starts with This week: the pack, each lesson with its pages next to it, and pages for the whole week. Then every other kind, as small equal cards. A page opens on the right; the list keeps its place.</p>
+      <div class="open"><a class="btn fill" href="d-week-first/">Open D</a><a class="btn" href="d-week-first/#open">A page opened</a></div></section>
+    <section class="idea"><h2>E. This week as a card</h2><p>All kinds as equal cards, with This week as one of them. Tap a card to see its pages in the list; a page opens on the right.</p>
+      <div class="open"><a class="btn fill" href="e-week-card/">Open E</a><a class="btn" href="e-week-card/#week">This week opened</a><a class="btn" href="e-week-card/#cat">A kind opened</a></div></section>
+    <section class="idea"><h2>On a phone</h2><p>There’s no room for two sides, so the list fills the screen. A page opens over it, with Back to the list and Previous and Next. Back returns to the same place.</p></section>
+  </div>
+  <h2 style="margin:1.6em 0 .6em;font:800 1.5em/1.1 var(--dfont)">First round</h2>
+  <div class="ideas">
+    <section class="idea"><h2>A. Shelves</h2><p>One big pack for the week on top, its pages fanned out. Under it, rows of pages by kind that slide sideways. A page opens in a sheet from the bottom.</p>
+      <p class="quiet">Learnt from the App Store’s Today, Apple Books, Netflix rows, the Khan Kids Library</p>
+      <div class="open"><a class="btn fill" href="a-shelves/">Open A</a><a class="btn" href="a-shelves/#open">A page opened</a></div></section>
+    <section class="idea"><h2>B. This week’s bag</h2><p>The week’s pages first, large and in order, with one Print all. Under them, kinds of material to add more. A page opens full screen, with arrows through the week.</p>
+      <p class="quiet">Learnt from Epic’s Assign and Mailbox, Kumon Connect, Workybooks, Apple Books’ Want to Read</p>
+      <div class="open"><a class="btn fill" href="b-week-bag/">Open B</a><a class="btn" href="b-week-bag/#open">A page opened</a><a class="btn" href="b-week-bag/#kind">Adding more</a></div></section>
+    <section class="idea"><h2>C. Subjects</h2><p>Big pictures of subjects, the one with this week’s lessons largest. A subject shows its pages as large covers by topic, and a page opens full size.</p>
+      <p class="quiet">Learnt from the Khan Kids Library, Teachers Pay Teachers, BrainPOP, Apple Books’ Library</p>
+      <div class="open"><a class="btn fill" href="c-subjects/">Open C</a><a class="btn" href="c-subjects/#subject">Science</a><a class="btn" href="c-subjects/#open">A page opened</a></div></section>
+  </div>
+  <div class="kids"><span>Try with:</span><a class="btn" href="?kids=1" data-k="1">1 child</a><a class="btn" href="?kids=3" data-k="3">3 children</a><a class="btn" href="?kids=6" data-k="6">6 children</a></div>
+  <p class="quiet">The number of children carries into each idea.</p>
+  <section class="real"><h2>What’s real</h2>
+    <p><b>In the app now:</b> lesson worksheets, the exam paper, the week’s tasks and the habit chart (Pages to print, 9 November).</p>
+    <p><b>Planned, made from our lessons:</b> crossword, label the skeleton, Colombia’s regions, the thermal floors, Spanish speaking cards, which feeling, draw a reflex, secret code.</p>
+    <p><b>Ideas, not made yet:</b> daily maths steps, handwriting, chess, logic grids, kitchen science, art, nature journal, reading log, Spanish postcard, feelings check-in, money, experiment record, certificate.</p>
+    <p class="quiet">Each opened page says which of these it is. Nothing here prints or sends yet: buttons are for the look only. The plan is in docs/product/ACTIVITIES.md.</p></section>
+</div>
+<script>
+/* Carry ?kids= into every link, so the number of children follows into each idea. */
+const k = new URLSearchParams(location.search).get('kids');
+if (k) document.querySelectorAll('.idea a').forEach((a) => { const [p, h] = a.getAttribute('href').split('#'); a.href = `${p}?kids=${k}${h ? `#${h}` : ''}`; });
+document.querySelectorAll('[data-k]').forEach((a) => { if (a.dataset.k === (k || '3')) a.classList.add('fill'); });
+</script>
+</body>
+</html>

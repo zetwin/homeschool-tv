@@ -1,0 +1,27 @@
+{
+  "name": "homeschool-tv",
+  "private": true,
+  "description": "A family learning app: lessons on the TV, tests on each child's device, and a parent pad. Family prototype.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zetwin/homeschool-tv.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node tools/serve.mjs --lan",
+    "doctor": "node tools/doctor.mjs",
+    "verify": "node tools/verify.mjs",
+    "check:lessons": "node tools/check-lesson.mjs",
+    "check:lab": "node tools/lab-check.mjs",
+    "voice:setup": "npm --prefix tools/voice install --no-audit --no-fund",
+    "voice": "node tools/voice/generate-mixed.mjs",
+    "voice:clean": "node -e \"require('fs').rmSync('tools/voice/node_modules',{recursive:true,force:true})\"",
+    "art": "node tools/kid-art/render.mjs",
+    "live": "node tools/host/live-guard.mjs && cd .live && HS_DATA=../data/family.json node tools/serve.mjs --lan",
+    "dev": "HS_DATA=data/dev-family.json node tools/serve.mjs --lan 8081",
+    "release": "node tools/release.mjs"
+  }
+}

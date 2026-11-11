@@ -1,0 +1,27 @@
+/* One small 3D object per lesson thing, on a clear background. They share one light, so they belong together. */
+import { THREE, stage, sun, mat, box, cyl, ball, at, group, shadow, param, finish, pbr, tex } from './common.js';
+const item = param('item');
+const st = stage({ transparent: true, exposure: 1.08, env: .85, fov: 20, camera: [3.8, 3.5, 5.6], look: [0, .55, 0] });
+const { scene } = st;
+sun(scene, [-3, 7, 5], 2.3, '#FFF0DA', 3, 2048);
+const glass = (c, o = .85) => mat(c, .1, 0, { transparent: true, opacity: o });
+const book = (c, w = 1.5, d = 1.1, t = .24) => group(at(box(w, t, d, mat(c, .5), .025), 0, 0, 0), at(box(w - .08, t - .08, d + .02, mat('#FFFDF4', .8), .006), .05, 0, 0));
+const M = {
+  flask() { return group(at(ball(.7, glass('#34D399', .92)), 0, .7, 0), at(cyl(.2, .27, .75, glass('#E8FBFF', .7)), 0, 1.55, 0), at(cyl(.26, .26, .08, mat('#F5F0E6', .4)), 0, 1.93, 0), at(ball(.1, mat('#BBF7D0', .2)), .2, .85, .3), at(ball(.07, mat('#BBF7D0', .2)), -.2, 1, .25)); },
+  mountain() { const m = (s, c, x, z) => at(shadow(new THREE.Mesh(new THREE.ConeGeometry(s, s * 1.5, 6), mat(c, .85, 0, { flatShading: true }))), x, s * .75, z); return group(m(.95, '#7C8794', -.1, -.1), at(shadow(new THREE.Mesh(new THREE.ConeGeometry(.42, .63, 6), mat('#FFFFFF', .7, 0, { flatShading: true }))), -.1, 1.12, -.1), m(.62, '#5F9E55', .7, .35), m(.5, '#4F8F48', -.75, .45), at(cyl(1.25, 1.3, .1, mat('#4FA63E', .9)), 0, -.03, 0)); },
+  tools() { return group(at(group(at(box(.2, 1.6, .2, mat('#B97A3F', .5), .05), 0, 0, 0), at(box(.85, .34, .34, mat('#AEB7C4', .28, .9), .05), 0, .78, 0)), -.35, .85, 0, 0, 0, .45), at(group(at(box(.17, 1.45, .12, mat('#E5462F', .4, .4), .04), 0, 0, 0), at(cyl(.28, .28, .12, mat('#C4CCD8', .25, .9)), 0, .76, 0, 0, 1.57)), .55, .8, .15, 0, 0, -.45)); },
+  books() { return group(at(book('#D42A20', 1.7, 1.25, .26), 0, .13, 0, .1), at(book('#1D4ED8', 1.55, 1.15, .24), 0, .38, 0, -.2), at(book('#FFC400', 1.35, 1, .22), 0, .61, 0, .25), at(ball(.15, mat('#F97316', .4)), .05, .86, 0)); },
+  tent() { const t = shadow(new THREE.Mesh(new THREE.ConeGeometry(1, 1.4, 4), mat('#F97316', .7, 0, { flatShading: true }))); t.rotation.y = .78; t.position.y = .7; return group(t, at(box(.42, .72, .02, mat('#3D2A1E', .8), .01), .34, .34, .62, .55), at(cyl(1.25, 1.3, .08, mat('#4FA63E', .9)), 0, -.03, 0)); },
+  test() { const paper = box(1.4, .05, 1.8, mat('#FFFDF4', .8), .02); const lines = [-.45, -.15, .15, .45].map((z) => at(box(.8, .012, .07, mat('#9AA5B5', .7), .004), .15, .035, z)); const ticks = [-.45, -.15, .15, .45].map((z, i) => at(box(.14, .02, .14, mat(i === 3 ? '#E5E0D5' : '#16A34A', .5), .02), -.45, .04, z)); const pencil = group(at(cyl(.07, .07, 1.3, mat('#FFC400', .5), 6), 0, 0, 0), at(cyl(0, .07, .22, mat('#3A2A1C', .5), 6), 0, -.76, 0), at(cyl(.07, .07, .14, mat('#F472B6', .6), 6), 0, .71, 0)); pencil.rotation.set(.95, 0, -.95); pencil.position.set(.5, .35, .25); return group(at(group(paper, ...lines, ...ticks), 0, .05, 0, .12), pencil); },
+  scroll() { return group(at(cyl(.2, .2, 1.6, mat('#F3E2BD', .75)), 0, .28, -.65, 0, 0, 1.57), at(cyl(.2, .2, 1.6, mat('#F3E2BD', .75)), 0, .28, .65, 0, 0, 1.57), at(box(1.45, .04, 1.3, mat('#FAEFD5', .8), .01), 0, .2, 0), at(box(.9, .012, .07, mat('#8B6B45', .7), .004), 0, .225, -.25), at(box(.9, .012, .07, mat('#8B6B45', .7), .004), 0, .225, 0), at(box(.6, .012, .07, mat('#8B6B45', .7), .004), -.15, .225, .25), at(cyl(.16, .16, .05, mat('#D42A20', .4)), .45, .24, .34)); },
+  medal() { const disc = cyl(.62, .62, .13, mat('#FFC400', .22, .9)); disc.rotation.x = 1.57; return group(at(box(.3, 1, .03, mat('#D42A20', .6), .01), -.2, 1.65, -.03, 0, 0, -.2), at(box(.3, 1, .03, mat('#1D4ED8', .6), .01), .2, 1.65, 0, 0, 0, .2), at(disc, 0, .78, 0), at(cyl(.42, .42, .03, mat('#FFE27A', .25, .85)), 0, .78, .08, 0, 1.57)); },
+  run() { const plate = (x, r) => at(cyl(r, r, .16, mat('#2F3644', .35, .45)), x, .62, 0, 0, 0, 1.57); return group(at(cyl(.07, .07, 2.5, mat('#C7CED9', .22, .9)), 0, .62, 0, 0, 0, 1.57), plate(-.95, .6), plate(-.74, .45), plate(.95, .6), plate(.74, .45), at(cyl(.1, .1, .1, mat('#E5462F', .4)), -1.14, .62, 0, 0, 0, 1.57), at(cyl(.1, .1, .1, mat('#E5462F', .4)), 1.14, .62, 0, 0, 0, 1.57)); },
+  backpack() { const b = mat('#E5462F', .72, 0, { normalMap: tex('denim_fabric_nor_gl', 2, false) }), d = mat('#B8301F', .72, 0, { normalMap: tex('denim_fabric_nor_gl', 2, false) }); return group(at(box(1.3, 1.65, .75, b, .3), 0, .9, 0), at(box(1, .72, .28, d, .13), 0, .6, .44), at(box(.82, .08, .04, mat('#FFC400', .3, .7), .02), 0, .85, .58), at(box(.8, .36, .05, d, .03), 0, 1.45, .39), at(cyl(.09, .09, .55, mat('#7A2015', .6)), 0, 1.84, 0, 0, 0, 1.57), at(box(.2, 1.1, .08, mat('#7A2015', .7), .03), -.4, .95, -.41), at(box(.2, 1.1, .08, mat('#7A2015', .7), .03), .4, .95, -.41)); },
+};
+const obj = M[item](); scene.add(obj);
+const bb = new THREE.Box3().setFromObject(obj), mid = bb.getCenter(new THREE.Vector3()), sz = bb.getSize(new THREE.Vector3()).length();
+st.cam.position.copy(mid).add(new THREE.Vector3(.5, .46, .74).normalize().multiplyScalar(sz * 3.15)); st.cam.lookAt(mid);
+/* A soft shadow on nothing, so the object sits down. */
+const bb_min = () => bb.min.y - .02;
+const catcher = shadow(new THREE.Mesh(new THREE.PlaneGeometry(9, 9), new THREE.ShadowMaterial({ opacity: .16 }))); catcher.rotation.x = -1.57; catcher.position.y = bb_min(); catcher.castShadow = false; scene.add(catcher);
+finish(st, {});

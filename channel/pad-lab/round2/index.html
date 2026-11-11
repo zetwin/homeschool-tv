@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parent pad: round 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* The picking page: the owner keeps or drops each direction and says why. Picks are saved on this device and sent to the Mac. */
+  :root { --ink: #16151A; --mute: #5E5B66; --line: #DEDBE4; --bg: #F4F3F7; --keep: #157A3B; --drop: #B42318; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.4 Inter, system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 14px max(16px, env(safe-area-inset-right)) 14px max(16px, env(safe-area-inset-left)); background: rgba(244, 243, 247, .94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  h1 { margin: 0; font-size: 24px; letter-spacing: -.01em; }
+  .count { color: var(--mute); }
+  .send { margin-left: auto; min-height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: var(--ink); color: #fff; font: 700 17px Inter, sans-serif; }
+  .said { width: 100%; margin: 0; font-weight: 600; }
+  .said:empty { display: none; }
+  .intro { max-width: 760px; margin: 18px 16px 0; color: var(--mute); }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; padding: 18px 16px 60px; }
+  .d { display: grid; gap: 10px; align-content: start; background: #fff; border: 2px solid var(--line); border-radius: 16px; padding: 12px; }
+  .d.keep { border-color: var(--keep); } .d.drop { opacity: .55; }
+  .frame { position: relative; aspect-ratio: 1180 / 820; overflow: hidden; border-radius: 10px; background: #000; }
+  .frame iframe { position: absolute; left: 0; top: 0; width: 1180px; height: 820px; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .frame a { position: absolute; inset: 0; }
+  .d h2 { margin: 0; font-size: 19px; } .d p { margin: 0; color: var(--mute); font-size: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .row a, .row button { display: inline-grid; place-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px; border: 2px solid var(--line); background: #fff; color: var(--ink); font: 700 16px Inter, sans-serif; text-decoration: none; }
+  .row [aria-pressed="true"][data-v="keep"] { background: var(--keep); border-color: var(--keep); color: #fff; }
+  .row [aria-pressed="true"][data-v="drop"] { background: var(--drop); border-color: var(--drop); color: #fff; }
+  textarea { width: 100%; min-height: 64px; padding: 10px; border: 2px solid var(--line); border-radius: 10px; font: 16px/1.35 Inter, sans-serif; resize: vertical; }
+  /* Switcher: the main view. One design fills the screen under a slim bar; the grid is a second view at #grid. */
+  body.sw { height: 100dvh; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+  body.sw header, body.sw .intro, body.sw main { display: none; }
+  .bar { display: none; align-items: center; gap: 8px; padding: 6px max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left)); background: #16151A; color: #fff; min-height: 56px; }
+  body.sw .bar { display: flex; }
+  .bar button, .bar a { flex: none; display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 12px; border-radius: 10px; border: 0; background: #2C2A33; color: #fff; font: 700 16px Inter, sans-serif; text-decoration: none; }
+  .nums { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1 1 0; min-width: 0; }
+  .nums button { min-width: 40px; padding: 0 8px; }
+  .nums button[aria-current="true"] { background: #fff; color: #16151A; }
+  .nums button.keep { box-shadow: inset 0 -4px 0 #3BCB6E; } .nums button.drop { opacity: .45; }
+  .bar [data-v="keep"][aria-pressed="true"] { background: #157A3B; } .bar [data-v="drop"][aria-pressed="true"] { background: #B42318; }
+  .bar { overflow: hidden; }
+  .bar input { flex: 0 1 220px; min-width: 90px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; font: 16px Inter, sans-serif; }
+  .bar .name { flex: none; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+  .stage { position: relative; overflow: hidden; background: #000; }
+  .stage iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
+  .wait[hidden] { display: none; }
+  .wait { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font: 600 22px Inter, sans-serif; }
+  @media (max-width: 1500px) { .bar .name { display: none; } }
+  @media (max-width: 900px) { .bar input { display: none; } }
+</style>
+</head>
+<body class="sw">
+<div class="bar" role="toolbar" aria-label="Designs"><button id="prev" aria-label="Previous design">‹</button><div class="nums" id="nums"></div><button id="next" aria-label="Next design">›</button><span class="name" id="name"></span><button id="admin" aria-pressed="false">Admin</button><button data-v="keep" id="bk" aria-pressed="false">Keep</button><button data-v="drop" id="bd" aria-pressed="false">Drop</button><input id="why" placeholder="Why? A few words"><button id="send2">Send</button><a href="#grid" id="toGrid">All</a></div>
+<div class="stage" id="stage"><iframe id="view" title="Design"></iframe><div class="wait" id="wait" hidden>Still being made. Try another number.</div></div>
+<header><a href="#1" style="margin-right:8px">Back to one at a time</a><a href="../" style="margin-right:8px">Round 1</a><h1>Parent pad: round 2</h1><span class="count" id="count"></span><button class="send" id="send">Send my picks</button><p class="said" id="said" role="status"></p></header>
+<p class="intro">Round 2: versions of the 7 designs you kept. Same family, same day. Tap a picture to try it, and the cog in each one opens its Admin page. Keep what you like, drop what you don’t, and say why in a few words. The why is what teaches us your taste.</p>
+<main id="list"></main>
+<script>
+const D = [
+  ['r01-wall-refined', 'Family wall, calmer', 'Round 1 Family wall with marking and homework moved inside.'],
+  ['r02-wall-now', 'Family wall + now', 'A big "on now" card on top, a column per child below.'],
+  ['r03-cards-refined', 'Child cards, clearer', 'Round 1 Child cards, fewer words, bigger shapes.'],
+  ['r04-cards-one', 'One child at a time', 'One big child card fills the screen; swipe or tap faces to switch.'],
+  ['r05-next-children', 'Next thing + children', 'One big "now" card, with a strip of child cards under it.'],
+  ['r06-next-rings', 'Next thing + rings', 'One big "now" card, with each child as a ring.'],
+  ['r07-tiles-light', 'Big tiles, light', 'Round 1 Big tiles in a bright, daytime version.'],
+  ['r08-tiles-children', 'Big tiles per child', 'One huge tile per child, with small tiles for the rest.'],
+  ['r09-checklist-children', 'Checklist by child', 'The checklist grouped by child instead of by time.'],
+  ['r10-checklist-cards', 'Checklist with cards', 'Child cards on top, one short list of what needs you below.'],
+  ['r11-rings-light', 'Rings, light', 'Round 1 Progress rings in a light, softer version.'],
+  ['r12-rings-big', 'Rings, one per child', 'One big ring per child, tap to open that child.'],
+  ['r13-split-children', 'Split view by child', 'Sidebar of children; detail shows that child as cards.'],
+  ['r14-split-tiles', 'Split view with tiles', 'Sidebar plus a tile board in the detail.'],
+  ['r15-tiles-rings', 'Tiles + rings', 'Big tiles where each child tile carries its rings.'],
+  ['r16-wall-checklist', 'Wall + checklist', 'A column per child, each one a short checklist.'],
+];
+const KEY = 'pad-lab-picks-r2';
+const picks = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} count(); };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+function count() { const v = Object.values(picks); document.getElementById('count').textContent = `${v.filter((p) => p.v === 'keep').length} kept, ${v.filter((p) => p.v === 'drop').length} dropped`; }
+document.getElementById('list').innerHTML = D.map(([id, name, ref], i) => { const p = picks[id] || {}; return `<article class="d ${p.v || ''}" data-id="${id}">
+  <div class="frame"><iframe src="${id}/" title="${esc(name)}" loading="lazy" tabindex="-1"></iframe><a href="${id}/" aria-label="Open ${esc(name)}"></a></div>
+  <h2>${i + 1}. ${esc(name)}</h2><p>${esc(ref)}</p>
+  <div class="row"><a href="${id}/">Open</a><a href="${id}/#admin">Its Admin</a><button data-v="keep" aria-pressed="${p.v === 'keep'}">Keep</button><button data-v="drop" aria-pressed="${p.v === 'drop'}">Drop</button></div>
+  <label>Why? <textarea data-why placeholder="A few words: what you like or don’t">${esc(p.why || '')}</textarea></label></article>`; }).join('');
+const fit = () => document.querySelectorAll('.frame').forEach((f) => { f.querySelector('iframe').style.transform = `scale(${f.clientWidth / 1180})`; });
+addEventListener('resize', fit); fit(); count();
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-v]'); if (!b) return;
+  const card = b.closest('.d'), id = card.dataset.id, p = (picks[id] ??= {});
+  p.v = p.v === b.dataset.v ? null : b.dataset.v; card.className = `d ${p.v || ''}`;
+  card.querySelectorAll('[data-v]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === p.v))); save();
+});
+document.addEventListener('input', (e) => { if (!e.target.matches('[data-why]')) return; const id = e.target.closest('.d').dataset.id; (picks[id] ??= {}).why = e.target.value; save(); });
+/* Says what happened on the Send button itself: pop-up messages are blocked in some browsers, so they can't be relied on. */
+function tell(msg, short, ok) {
+  document.getElementById('said').textContent = msg;
+  const b = document.getElementById('send2'); clearTimeout(tell.t);
+  b.textContent = short; b.title = msg; b.style.background = ok ? '#1E7A3C' : ok === false ? '#B3261E' : '#8A5A00';
+  tell.t = setTimeout(() => { b.textContent = 'Send'; b.style.background = ''; b.disabled = false; }, 4000);
+}
+document.getElementById('send').addEventListener('click', async () => {
+  document.getElementById('send2').disabled = true;
+  const lines = D.map(([id, name], i) => { const p = picks[id] || {}; return p.v || p.why ? `${i + 1}. ${name}: ${p.v === 'keep' ? 'KEEP' : p.v === 'drop' ? 'DROP' : 'no choice'}${p.why ? ` because ${p.why}` : ''}` : null; }).filter(Boolean);
+  const said = document.getElementById('said');
+  if (!lines.length) { tell('Keep or drop at least one first.', 'Pick one first', null); return; }
+  const item = { id: Date.now(), at: new Date().toISOString(), kind: 'design', text: `Parent pad lab, round 2:\n${lines.join('\n')}`, by: 'parent', name: 'Owner', page: 'pad-lab' };
+  const ok = await fetch('/api/state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ op: 'feedback', value: item }) }).then((r) => r.ok).catch(() => false);
+  const msg = ok ? 'Sent. Thank you, Claude will read them and learn from them.' : 'Saved on this device, but it didn’t reach the Mac. Check the Wi-Fi or Tailscale.'; tell(msg, ok ? 'Sent ✓' : 'Not sent', ok);
+});
+/* ---------- Switcher ---------- */
+let cur = 0, adminOn = false;
+const nums = document.getElementById('nums'), view = document.getElementById('view'), stage = document.getElementById('stage');
+nums.innerHTML = D.map(([id, name], i) => `<button data-n="${i}" title="${esc(name)}">${i + 1}</button>`).join('');
+function size() { const W = stage.clientWidth, H = stage.clientHeight, full = innerHeight, s = H / full; view.style.width = `${W / s}px`; view.style.height = `${full}px`; view.style.transform = `scale(${s})`; }
+async function show(n, focusBar) {
+  cur = (n + D.length) % D.length; const [id, name] = D[cur], p = picks[id] || {};
+  document.getElementById('name').textContent = `${cur + 1}. ${name}`;
+  nums.querySelectorAll('button').forEach((b, i) => { b.setAttribute('aria-current', String(i === cur)); const v = (picks[D[i][0]] || {}).v; b.className = v || ''; });
+  nums.children[cur].scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  document.getElementById('bk').setAttribute('aria-pressed', String(p.v === 'keep')); document.getElementById('bd').setAttribute('aria-pressed', String(p.v === 'drop'));
+  document.getElementById('why').value = p.why || ''; document.getElementById('admin').setAttribute('aria-pressed', String(adminOn));
+  const ready = await fetch(`${id}/`, { method: 'HEAD' }).then((r) => r.ok).catch(() => false);
+  document.getElementById('wait').hidden = ready; view.hidden = !ready;
+  if (ready) view.src = `${id}/${adminOn ? '#admin' : ''}`;
+  history.replaceState(null, '', `#${cur + 1}`); try { localStorage.setItem('pad-lab-at-r2', String(cur)); } catch (e) {}
+}
+function setView() {
+  const grid = location.hash === '#grid'; document.body.classList.toggle('sw', !grid);
+  if (grid) { document.querySelectorAll('.d').forEach((c) => { const p = picks[c.dataset.id] || {}; c.className = `d ${p.v || ''}`; c.querySelectorAll('[data-v]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === p.v))); c.querySelector('[data-why]').value = p.why || ''; }); fit(); return; }
+  const n = parseInt(location.hash.slice(1), 10); size(); show(Number.isFinite(n) ? n - 1 : (+(localStorage.getItem('pad-lab-at-r2') || 0)));
+}
+addEventListener('resize', () => { if (document.body.classList.contains('sw')) size(); });
+addEventListener('hashchange', setView);
+document.getElementById('prev').onclick = () => show(cur - 1); document.getElementById('next').onclick = () => show(cur + 1);
+nums.addEventListener('click', (e) => { const b = e.target.closest('[data-n]'); if (b) show(+b.dataset.n); });
+document.getElementById('admin').onclick = () => { adminOn = !adminOn; show(cur); };
+['bk', 'bd'].forEach((k) => document.getElementById(k).addEventListener('click', (e) => { const id = D[cur][0], p = (picks[id] ??= {}), v = e.currentTarget.dataset.v; p.v = p.v === v ? null : v; save(); show(cur); }));
+document.getElementById('why').addEventListener('input', (e) => { (picks[D[cur][0]] ??= {}).why = e.target.value; save(); });
+document.getElementById('send2').onclick = () => document.getElementById('send').click();
+document.addEventListener('keydown', (e) => { if (e.target.matches('input, textarea')) return; if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
+setView();
+</script>
+</body>
+</html>

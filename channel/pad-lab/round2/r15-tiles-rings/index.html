@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tiles and rings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+/* Round 2, from 8 Big tiles and 11 Progress rings. Tests: do the children become the biggest tiles on the board,
+   each carrying the same three rings (classes, homework, average), so the parent compares them at a glance? */
+:root{
+  --stage:#0D1120; --tile:#191F31; --tile2:#232A40; --line:#2E3650; --white:#FFFFFF; --mist:#B9C1D7;
+  --violet:#4B2FC4; --violet-deep:#2A1A80; --violet-sub:#DCD4FF; --amber:#F4B63F; --amber-ink:#241600; --late:#FF8A7A;
+  --r-cls:#FF6A5C; --r-hw:#A6E35A; --r-avg:#4CD3EE;
+  --ana:#E0463D; --leo:#14A094; --mia:#4F7DF0;
+}
+html{font-size:18px}
+html[data-size="l"]{font-size:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Archivo",system-ui,sans-serif;color:var(--white);background:var(--stage);line-height:1.2;-webkit-font-smoothing:antialiased;overflow:hidden;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+svg.i{width:1.3em;height:1.3em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wide{font-stretch:118%}
+
+#pad{height:100vh;display:grid;grid-template-rows:auto 1fr;gap:16px;padding:20px 24px 24px}
+.top{display:flex;align-items:center;gap:14px;min-height:56px}
+.top h1{font-size:1.6rem;font-weight:800;font-stretch:112%}
+.top .clock{font-size:1.6rem;color:var(--mist);font-stretch:112%;font-weight:400}
+.top .sp{flex:1}
+.tool{min-width:52px;min-height:52px;padding:0 16px;border-radius:16px;background:rgba(255,255,255,.08);display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700}
+.tool:hover{background:rgba(255,255,255,.14)}
+.badge{min-height:52px;padding:0 18px 0 8px;border-radius:16px;background:var(--amber);color:var(--amber-ink);font-weight:800;display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
+.badge b{width:36px;height:36px;border-radius:11px;background:var(--amber-ink);color:var(--amber);display:grid;place-items:center}
+
+.grid{display:grid;gap:16px;min-height:0;grid-template-columns:repeat(12,1fr);grid-template-rows:1.6fr 1fr;
+  grid-template-areas:"a a a a l l l l m m m m" "now now now now now now sc sc sc pr pr pr"}
+.tile{position:relative;overflow:hidden;border-radius:26px;background:var(--tile);padding:20px 22px;display:flex;flex-direction:column;min-width:0;min-height:0;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
+button.tile:hover{transform:scale(1.02);box-shadow:0 24px 50px rgba(0,0,0,.5);z-index:2}
+button.tile:active{transform:scale(.985)}
+.tile h2{font-size:1.05rem;font-weight:700;color:var(--mist)}
+
+/* a child tile */
+.kid{border-top:6px solid var(--k);padding-top:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--k) 22%,var(--tile)) 0,var(--tile) 42%)}
+.kid .hd{display:flex;align-items:center;gap:12px}
+.kid .fa{width:48px;height:48px;border-radius:50%;background:var(--k);display:grid;place-items:center;font-size:26px;flex:none}
+.kid .nm{font-size:1.65rem;font-weight:900;font-stretch:115%;line-height:1}
+.kid .yr{color:var(--mist);font-size:1rem;display:block;font-stretch:100%;font-weight:500;margin-top:3px}
+.kid .body{display:flex;align-items:center;gap:16px;flex:1;min-height:0;padding:10px 0}
+.rings{flex:none;transform:rotate(-90deg)}
+.rings circle{fill:none;stroke-linecap:round}
+.rings .v{transition:stroke-dashoffset 1.2s cubic-bezier(.25,.8,.25,1)}
+.leg{display:flex;flex-direction:column;gap:10px;min-width:0}
+.leg div{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline}
+.leg i{width:14px;height:14px;border-radius:50%;background:var(--c);grid-row:span 2;align-self:center}
+.leg b{font-size:1.4rem;font-weight:900;font-stretch:110%;white-space:nowrap;line-height:1.05}
+.leg span{color:var(--mist);font-size:1rem;white-space:nowrap}
+.leg .lt{color:var(--late);font-weight:700}
+.kid .ft{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border-radius:12px;background:rgba(255,255,255,.1);font-weight:700}
+.chip.now{background:#fff;color:#14162A}
+.chip.now::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--r-cls);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,106,92,.7)}70%{box-shadow:0 0 0 9px rgba(255,106,92,0)}}
+
+/* now */
+.t-now{grid-area:now;background:linear-gradient(150deg,var(--violet),var(--violet-deep) 85%);flex-direction:row;align-items:stretch;gap:20px;padding:22px 26px}
+.t-now .tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.t-now .lv{font-weight:700;color:var(--violet-sub)}
+.t-now .sj{font-size:3.6rem;font-weight:900;font-stretch:125%;letter-spacing:-.02em;line-height:.95;margin:12px 0 8px}
+.t-now .ti{font-size:1.2rem;font-weight:600}
+.t-now .acts{display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+.play{min-height:62px;padding:0 26px 0 20px;border-radius:20px;background:#fff;color:#1B1340;font-size:1.15rem;font-weight:800;display:inline-flex;align-items:center;gap:12px;white-space:nowrap}
+.ghostb{min-height:52px;padding:0 20px;border-radius:16px;background:rgba(255,255,255,.14);font-weight:700;white-space:nowrap;text-align:center}
+.bar{height:8px;border-radius:4px;background:rgba(255,255,255,.22);margin-top:auto}
+.bar i{display:block;height:100%;width:var(--p);background:#fff;border-radius:4px}
+.t-now .left{color:var(--violet-sub);margin-top:8px}
+
+.t-sc{grid-area:sc}
+.t-sc .rows{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.t-sc .rows div{display:flex;align-items:baseline;gap:10px;border-left:5px solid var(--k);padding-left:10px}
+.t-sc b{font-size:1.45rem;font-weight:900;font-stretch:112%;white-space:nowrap}
+.t-sc .rows div span{color:var(--mist)}
+.t-pr{grid-area:pr;background:var(--tile2)}
+.t-pr p{margin-top:auto;font-size:1.25rem;font-weight:800}
+.segs{display:flex;gap:6px;margin:10px 0 6px}
+.segs i{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.2)}
+.segs i.on{background:#fff}
+.t-pr span{color:var(--mist)}
+
+/* upright */
+@media (max-aspect-ratio:1/1){
+  #pad{padding:20px 20px 22px}
+  .top .clock{display:none}
+  .grid{grid-template-columns:repeat(6,1fr);grid-template-rows:auto 1fr auto;grid-template-areas:"now now now now now now" "a a l l m m" "sc sc sc pr pr pr"}
+  .t-now .sj{font-size:3.4rem}
+  .kid{padding:16px 16px 18px}
+  .kid .hd{flex-direction:column;align-items:flex-start;gap:8px}
+  .kid .body{flex-direction:column;align-items:flex-start;gap:16px;justify-content:center}
+  .tool span{display:none}
+  .t-sc,.t-pr{min-height:170px}
+  .kid .rings{width:200px;height:200px}
+  .kid .body{gap:20px}
+}
+html[data-size="l"] .t-now .sj{font-size:3rem}
+html[data-size="l"] .leg b{font-size:1.25rem}
+html[data-size="l"] .leg{gap:6px}
+html[data-size="l"] .kid .rings{width:136px;height:136px}
+html[data-size="l"] .kid .nm{font-size:1.45rem}
+@media (max-aspect-ratio:1/1){
+  html[data-size="l"] .kid .rings{width:176px;height:176px}
+  html[data-size="l"] .t-sc,html[data-size="l"] .t-pr{min-height:150px}
+  html[data-size="l"] .t-now .ti{display:none}
+}
+@media (min-aspect-ratio:1/1){
+  html[data-size="l"] .top h1{font-size:1.4rem}
+  html[data-size="l"] .top .clock{display:none}
+  html[data-size="l"] .t-now .lv{display:none}
+  html[data-size="l"] .t-now .bar,html[data-size="l"] .t-now .left{display:none}
+  html[data-size="l"] .t-now .ti{margin-top:auto}
+}
+
+/* a child's full screen */
+.screen{position:fixed;inset:0;z-index:40;background:var(--stage);padding:20px 24px 24px;display:flex;flex-direction:column;gap:16px;opacity:0;transform:scale(.97);transition:opacity .25s,transform .3s cubic-bezier(.2,.8,.2,1)}
+.screen.in{opacity:1;transform:none}
+.screen .bar2{display:flex;align-items:center;gap:14px}
+.screen .bar2 h2{font-size:2.2rem;font-weight:900;font-stretch:118%;flex:1;display:flex;align-items:center;gap:14px}
+.screen .bar2 h2 .fa{width:56px;height:56px;border-radius:50%;background:var(--k);display:grid;place-items:center;font-size:30px}
+.kgrid{flex:1;min-height:0;display:grid;gap:16px;grid-template-columns:1.1fr 1fr 1fr;grid-template-rows:1fr 1fr;grid-template-areas:"rg cls cls" "rg hw ts"}
+.k-rg{grid-area:rg;align-items:center;justify-content:center;gap:22px}
+.k-rg .leg{gap:14px}
+.k-rg .leg b{font-size:1.7rem}
+.k-cls{grid-area:cls}
+.cls5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px;flex:1;min-height:0}
+.cls5 button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px 4px;border-radius:18px;background:var(--tile2);min-height:44px}
+.cls5 .tk{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 3px var(--line) inset;color:var(--mist)}
+.cls5 .tk svg{width:36px;height:36px;stroke-width:3}
+.cls5 .done .tk{background:var(--k);box-shadow:none;color:#fff}
+.cls5 .now .tk{box-shadow:0 0 0 3px #fff inset;color:#fff}
+.cls5 .now .tk svg{width:22px;height:22px}
+.cls5 .missed .tk{box-shadow:0 0 0 3px var(--late) inset;color:var(--late)}
+.cls5 b{font-size:1.1rem;font-weight:800;text-align:center}
+.cls5 span{font-size:1rem;color:var(--mist);text-align:center}
+.cls5 .missed span{color:var(--late)}
+.k-hw{grid-area:hw}.k-ts{grid-area:ts}
+.huge{font-size:3rem;font-weight:900;font-stretch:118%;line-height:1;margin-top:auto}
+.huge small{font-size:1.05rem;font-weight:600;font-stretch:100%;margin-left:6px;color:var(--mist)}
+.btnrow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.pill{min-height:52px;padding:0 18px;border-radius:16px;background:rgba(255,255,255,.12);font-weight:700;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.pill.main{background:#fff;color:#14162A}
+.pill.amber{background:var(--amber);color:var(--amber-ink)}
+@media (max-aspect-ratio:1/1){
+  .kgrid{grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr .8fr;grid-template-areas:"rg rg" "cls cls" "hw ts"}
+  .k-rg{flex-direction:row}
+}
+html[data-size="l"] .cls5 .tk{width:56px;height:56px}
+
+/* sheets */
+.veil{position:fixed;inset:0;background:rgba(5,8,18,.7);display:grid;place-items:center;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{width:min(620px,calc(100vw - 40px));max-height:calc(100vh - 60px);overflow:auto;background:var(--tile2);border-radius:28px;padding:22px 24px 24px;transform:scale(.95);transition:transform .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 40px 90px rgba(0,0,0,.6)}
+.veil.on .sheet{transform:none}
+.sheet header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sheet h3{flex:1;font-size:1.55rem;font-weight:900;font-stretch:115%}
+.sheet p{color:var(--mist);margin-bottom:12px}
+.sheet .gh{font-weight:700;color:var(--mist);margin:14px 0 8px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{min-height:52px;padding:0 18px;border-radius:16px;background:rgba(255,255,255,.08);font-weight:700}
+.seg button[aria-pressed="true"]{background:#fff;color:#10142A}
+.kv{display:flex;align-items:center;gap:14px;min-height:60px;border-bottom:1.5px solid rgba(255,255,255,.08)}
+.kv .m{flex:1;min-width:0}
+.kv .m b{display:block}
+.kv .m span{color:var(--mist)}
+.kv .v{font-size:1.25rem;font-weight:900}
+textarea{width:100%;min-height:100px;border-radius:18px;border:2px solid rgba(255,255,255,.18);background:rgba(0,0,0,.2);color:#fff;padding:14px;font:inherit;resize:none}
+textarea::placeholder{color:#9AA3BD}
+.foot{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.stepper{display:flex;align-items:center;gap:16px}
+.stepper button{width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,.1);font-size:1.8rem;font-weight:800;text-align:center}
+.stepper output{font-size:2.4rem;font-weight:900;font-stretch:118%;min-width:110px;text-align:center}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,120px);background:#fff;color:#10142A;padding:16px 24px;border-radius:18px;font-weight:800;transition:transform .3s;z-index:80}
+.toast.on{transform:translate(-50%,0)}
+
+/* Admin: its own page */
+#admin{display:none;height:100vh;overflow:auto;padding:22px 28px 40px}
+body.is-admin #pad{display:none}
+body.is-admin #admin{display:block}
+.adm-top{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.adm-top h1{font-size:2.4rem;font-weight:900;font-stretch:120%}
+.adm{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.adm section{background:var(--tile);border-radius:24px;padding:18px 22px 10px}
+.adm h2{font-size:1.3rem;font-weight:800;font-stretch:110%;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.adm .kv:last-child{border-bottom:0}
+.adm .kv button{min-height:48px;padding:0 16px;border-radius:14px;background:rgba(255,255,255,.1);font-weight:700}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="pad"></div>
+<div id="admin"></div>
+<div class="veil" id="veil"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes, A = P.admin;
+const $ = (s, r = document) => r.querySelector(s);
+const KV = ['ana', 'leo', 'mia'];
+const nowC = C.find((c) => c.now), nowI = C.indexOf(nowC), nextC = C[nowI + 1];
+const ic = {
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.8 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3.1 14H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  play: '<path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', dash: '<path d="M7 12h10"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  text: '<path d="M4 19l5-14 5 14M5.8 14h6.4M15 19l3-8 3 8M15.9 16.5h4.2"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"/>',
+};
+const I = (n, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ic[n]}</svg>`;
+const kc = (i) => `--k:var(--${KV[i]})`;
+const scoreOf = (k) => P.scores.find((s) => s.kid === k.name);
+const frac = (s) => { const m = String(s).match(/(\d+) of (\d+)/); return m ? +m[1] / +m[2] : 0; };
+const mins = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+let given = {};
+const mark = (ci, i) => given[ci + '-' + i] || (C[ci].marks && C[ci].marks[i]) || '';
+
+/* three rings: classes done, homework on time, average mark */
+function ringVals(k) { return [k.done / k.of, k.homework ? (k.homework - k.late) / k.homework : 0, frac(k.average)]; }
+function rings(k, size) {
+  const v = ringVals(k), sw = size * 0.11, gap = sw * 1.14, cols = ['--r-cls', '--r-hw', '--r-avg'];
+  return `<svg class="rings" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true">${v.map((f, n) => {
+    const r = size / 2 - sw / 2 - n * gap, L = 2 * Math.PI * r;
+    return `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" stroke="var(${cols[n]})" stroke-opacity=".2" stroke-width="${sw}"/>` + (f ? `<circle class="v" cx="${size / 2}" cy="${size / 2}" r="${r}" stroke="var(${cols[n]})" stroke-width="${sw}" stroke-dasharray="${L}" stroke-dashoffset="${L}" data-to="${L * (1 - f)}"/>` : '');
+  }).join('')}</svg>`;
+}
+function legend(k) {
+  return `<div class="leg">
+    <div style="--c:var(--r-cls)"><i></i><b>${k.done} of ${k.of}</b><span>classes done</span></div>
+    <div style="--c:var(--r-hw)"><i></i><b>${k.homework ? `${k.homework} to do` : 'None'}</b><span>homework${k.late ? `, <span class="lt">${k.late} late</span>` : ''}</span></div>
+    <div style="--c:var(--r-avg)"><i></i><b>${k.average}</b><span>average mark</span></div></div>`;
+}
+const growRings = (root) => requestAnimationFrame(() => requestAnimationFrame(() => root.querySelectorAll('.rings .v').forEach((c) => { c.style.strokeDashoffset = c.dataset.to; })));
+const RS = () => 150;
+
+function renderPad() {
+  const pct = Math.round((mins(P.now) - mins(nowC.time)) / (mins(nextC.time) - mins(nowC.time)) * 100);
+  $('#pad').innerHTML = `<header class="top"><h1>${P.today}</h1><span class="clock">${P.now}</span><span class="sp"></span>
+      <button class="badge" data-act="answers"><b>3</b>answers to mark</button>
+      <button class="tool" data-act="size" aria-label="Text size">${I('text')}</button>
+      <button class="tool" data-act="feedback" aria-label="Send feedback">${I('chat')}</button>
+      <a class="tool" href="#admin" aria-label="Admin" style="color:inherit;text-decoration:none">${I('gear')}<span>Admin</span></a></header>
+    <div class="grid">
+      ${K.map((k, i) => { const s = nowC.state[i], sc = scoreOf(k); return `<button class="tile kid" style="grid-area:${k.name[0].toLowerCase()};${kc(i)}" data-kid="${i}" aria-label="Open ${k.name}">
+        <span class="hd"><span class="fa">${k.face}</span><span class="nm">${k.name}<span class="yr">${k.year}</span></span></span>
+        <span class="body">${rings(k, RS())}${legend(k)}</span>
+        <span class="ft"><span class="chip ${s === 'now' ? 'now' : ''}">${s === 'now' ? `Watching ${nowC.subject}` : `${nowC.subject} done`}</span></span></button>`; }).join('')}
+      <div class="tile t-now"><div class="tx"><span class="lv">On now, ${nowC.time} to ${nextC.time}</span><span class="sj">${nowC.subject}</span><span class="ti">${nowC.title}</span>
+          <span class="bar" style="--p:${pct}%"><i></i></span><span class="left">${mins(nextC.time) - mins(P.now)} minutes left, then ${nextC.subject}</span></div>
+        <div class="acts"><button class="ghostb" data-act="classes">All classes</button><button class="play" data-act="play">${I('play')}Play on the TV</button></div></div>
+      <button class="tile t-sc" data-act="scores"><h2>Last tests</h2><span class="rows">${P.scores.map((s) => { const i = K.findIndex((k) => k.name === s.kid); return `<div style="${kc(i)}"><b>${s.score}</b><span>${s.kid}</span></div>`; }).join('')}</span></button>
+      <button class="tile t-pr" data-act="program"><h2>Program</h2><p>Human skeleton and muscles</p><span class="segs">${[1, 2, 3, 4].map((n) => `<i class="${n <= 2 ? 'on' : ''}"></i>`).join('')}</span><span>Science, lesson 2 of 4</span></button>
+    </div>`;
+  growRings($('#pad'));
+}
+
+/* a child, full screen */
+const word = { done: 'Done', now: 'Watching', missed: 'Missed', later: '' };
+function kidScreen(i) {
+  closeAll();
+  const k = K[i], sc = scoreOf(k);
+  const s = document.createElement('div'); s.className = 'screen'; s.style.cssText = kc(i); s.setAttribute('role', 'dialog'); s.setAttribute('aria-label', k.name);
+  s.innerHTML = `<div class="bar2"><button class="tool" data-act="closescreen" aria-label="Back">${I('back')}<span>Back</span></button><h2><span class="fa">${k.face}</span>${k.name}</h2><button class="pill" data-act="hw">Add homework</button></div>
+    <div class="kgrid">
+      <div class="tile k-rg">${rings(k, innerHeight > innerWidth ? 220 : 250)}${legend(k)}</div>
+      <div class="tile k-cls"><h2>Today’s classes</h2><div class="cls5">${C.map((c, ci) => { const st = c.state[i], m = mark(ci, i); return `<button class="${st}" data-act="class" data-c="${ci}" data-i="${i}"><span class="tk">${st === 'done' ? I('check') : st === 'now' ? I('play') : st === 'missed' ? I('dash') : ''}</span><b>${c.subject}</b><span>${m ? 'Mark ' + m : word[st] || c.time}</span></button>`; }).join('')}</div></div>
+      <div class="tile k-hw"><h2>Homework</h2><span class="huge">${k.homework}<small>to do</small></span>${k.late ? `<div class="btnrow"><span class="chip" style="color:var(--late)">${k.late} late</span><button class="pill amber" data-act="remind" data-i="${i}">Remind ${k.name}</button></div>` : `<span style="color:var(--mist);margin-top:6px">${k.homework ? 'All on time' : 'Nothing set'}</span>`}</div>
+      <button class="tile k-ts" data-act="scores"><h2>Last test</h2><span class="huge">${sc.score.split(' of ')[0]}<small>of ${sc.score.split(' of ')[1]}</small></span><span style="color:var(--mist);margin-top:6px">${sc.what}, ${sc.when.toLowerCase()}</span></button>
+    </div>`;
+  document.body.append(s); requestAnimationFrame(() => s.classList.add('in')); growRings(s);
+}
+function classesScreen() {
+  closeAll();
+  const s = document.createElement('div'); s.className = 'screen'; s.setAttribute('role', 'dialog'); s.setAttribute('aria-label', 'Today’s classes');
+  s.innerHTML = `<div class="bar2"><button class="tool" data-act="closescreen" aria-label="Back">${I('back')}<span>Back</span></button><h2>Today’s classes</h2><button class="pill" data-act="hw">Add homework</button></div>
+    <div class="tile" style="flex:1;gap:4px;overflow:auto">${C.map((c, ci) => `<div class="kv"><span class="m"><b style="font-size:1.2rem">${c.time}, ${c.subject}</b><span>${c.title}</span></span>${K.map((k, i) => `<button class="chip" style="min-height:48px;${kc(i)};box-shadow:inset 0 0 0 2px var(--k)" data-act="class" data-c="${ci}" data-i="${i}">${k.face} ${mark(ci, i) || word[c.state[i]] || 'Later'}</button>`).join('')}</div>`).join('')}</div>`;
+  document.body.append(s); requestAnimationFrame(() => s.classList.add('in'));
+}
+
+/* sheets */
+const veil = $('#veil'), sh = $('#sheet');
+function sheet(title, body, foot = '') { sh.innerHTML = `<header><h3>${title}</h3><button class="pill" data-act="close">Close</button></header>${body}${foot ? `<div class="foot">${foot}</div>` : ''}`; veil.classList.add('on'); }
+function closeSheet() { veil.classList.remove('on'); }
+function closeAll() { closeSheet(); document.querySelectorAll('.screen').forEach((n) => n.remove()); }
+let tt; function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => e.classList.remove('on'), 2400); }
+const seg = (arr, on = 0, g = '') => `<div class="seg" data-g="${g}">${arr.map((o, n) => `<button aria-pressed="${n === on}" data-act="opt">${o}</button>`).join('')}</div>`;
+function homeworkSheet(ci = nowI) {
+  sheet('Add homework', `<div class="gh">Who</div>${seg(['Everyone', ...K.map((k) => `${k.face} ${k.name} only`)], 0, 'who')}<div class="gh">Class</div>${seg(C.map((c) => c.subject), ci)}
+    <div class="gh">What to do</div><textarea placeholder="For example: read pages 16 to 19"></textarea><div class="gh">Due</div>${seg(['Tomorrow', 'Friday', 'Next week'])}`, `<button class="pill main" data-act="savehw">Add homework</button>`);
+}
+function classSheet(ci, i) {
+  const c = C[ci], k = K[i], s = c.state[i], m = mark(ci, i), sc = c.lesson && s === 'done' ? scoreOf(k) : null;
+  let body = `<p>${c.title}</p><div class="kv"><span style="font-size:28px">${k.face}</span><span class="m"><b>${k.name}</b><span>${s === 'later' ? 'Starts at ' + c.time : word[s]}</span></span>${m ? `<span class="v">${m} of 12</span>` : ''}</div>`;
+  let foot = `<button class="pill" data-act="hwc" data-c="${ci}">Add homework for ${c.subject}</button>`;
+  if (c.lesson) { body += `<p style="margin-top:12px">${sc ? `The lesson test marked itself: ${sc.score}.` : 'The lesson test marks itself at the end.'}</p>`; foot += `<button class="pill main" data-act="play">${I('play')}Play on the TV</button>`; }
+  else if (s !== 'later') { body += `<div class="gh">Add a mark, if you like</div><div class="stepper"><button data-act="step" data-d="-1" aria-label="Lower">−</button><output id="mk">${m || 'None'}</output><button data-act="step" data-d="1" aria-label="Higher">+</button><span style="color:var(--mist)">out of 12</span></div>`; foot += `<button class="pill main" data-act="savemark" data-key="${ci}-${i}">Save</button>`; }
+  sheet(`${c.subject}, ${c.time}`, body, foot);
+}
+const act = {
+  close: closeSheet, closescreen: () => { document.querySelectorAll('.screen').forEach((n) => { n.classList.remove('in'); setTimeout(() => n.remove(), 250); }); },
+  play: () => { closeSheet(); toast(`Playing ${nowC.subject} on the TV`); },
+  classes: classesScreen,
+  answers: () => sheet('Leo’s written answers', `<p>${P.needsYou[0].detail}. Tests mark themselves; only written answers need you.</p>${[1, 2, 3].map((q) => `<div class="kv"><span class="m"><b>Answer ${q}</b></span>${seg(['Right', 'Partly', 'Wrong'], -1)}</div>`).join('')}`, `<button class="pill main" data-act="saved" data-t="Marks saved for Leo">Save marks</button>`),
+  scores: () => sheet('Scores', `${P.scores.map((s) => { const i = K.findIndex((k) => k.name === s.kid); return `<div class="kv"><span style="font-size:26px">${K[i].face}</span><span class="m"><b>${s.kid}</b><span>${s.what}, ${s.when.toLowerCase()}</span></span><span class="v">${s.score}</span></div>`; }).join('')}<div class="gh">Average mark</div>${K.map((k) => `<div class="kv"><span style="font-size:26px">${k.face}</span><span class="m"><b>${k.name}</b></span><span class="v">${k.average}</span></div>`).join('')}`),
+  program: () => sheet('Program', `<p>Following ${A.plan}. ${P.program.subjects} subjects, ${P.program.readyLessons} video lessons ready.</p><div class="kv"><span class="m"><b>Where we are</b><span>${P.program.where}</span></span></div><div class="gh">${P.needsYou[2].what}</div><p>${P.needsYou[2].detail}</p>${seg(['1 ★', '2 ★', '3 ★', '4 ★', '5 ★'], -1)}`, `<button class="pill" data-act="saved" data-t="The full program opens here">Full program</button><button class="pill main" data-act="saved" data-t="Thanks for rating">Done</button>`),
+  hw: () => homeworkSheet(), hwc: (e) => homeworkSheet(+e.dataset.c),
+  savehw: () => { const w = $('[data-g="who"] [aria-pressed="true"]', sh).textContent; closeSheet(); toast(w === 'Everyone' ? 'Homework added for all three' : `Homework added for ${w.split(' ')[1]}`); },
+  class: (e) => classSheet(+e.dataset.c, +e.dataset.i),
+  step: (e) => { const o = $('#mk'); o.textContent = o.textContent === 'None' ? 10 : Math.min(12, Math.max(0, +o.textContent + +e.dataset.d)); },
+  savemark: (e) => { const o = $('#mk').textContent; if (o !== 'None') { given[e.dataset.key] = o; toast('Mark saved'); } closeSheet(); },
+  remind: (e) => toast(`${K[+e.dataset.i].name} will see a reminder on his screen`),
+  saved: (e) => { closeSheet(); toast(e.dataset.t); },
+  opt: (e) => { e.parentNode.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b === e)); if (e.parentNode.dataset.g === 'size') { document.documentElement.dataset.size = e.textContent === 'Large' ? 'l' : ''; renderPad(); } },
+  size: () => sheet('Text size', `<p>Bigger words, same tiles.</p>${seg(['Normal', 'Large'], document.documentElement.dataset.size === 'l' ? 1 : 0, 'size')}`),
+  feedback: () => sheet('Send feedback', `<p>What works, what doesn’t, and what you wish it did.</p><textarea></textarea>`, `<button class="pill main" data-act="saved" data-t="Thank you. Feedback sent">Send</button>`),
+};
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-act]'); if (a) { act[a.dataset.act]?.(a); return; }
+  const k = e.target.closest('[data-kid]'); if (k) { kidScreen(+k.dataset.kid); return; }
+  if (e.target === veil) closeSheet();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (veil.classList.contains('on')) closeSheet(); else act.closescreen(); } });
+
+/* Admin */
+function renderAdmin() {
+  const kvr = (a, b, c) => `<div class="kv"><span class="m"><b>${a}</b>${b ? `<span>${b}</span>` : ''}</span>${c ? `<button data-act="saved" data-t="${a} opens here">${c}</button>` : ''}</div>`;
+  const body = [
+    kvr('Name', A.account.name) + kvr('Username', A.account.username) + kvr('Password', '', 'Change') + kvr('Text size', A.account.textSize, 'Change') + kvr('Leave this pad', '', 'Sign out'),
+    P.parents.map((p) => kvr(p.name, p.you ? 'You' : 'Parent')).join('') + K.map((k) => kvr(`${k.face} ${k.name}`, k.year, 'Edit')).join('') + kvr('Add a child', '', 'Add'),
+    kvr('Follows', A.plan) + kvr('Subjects', P.program.subjects) + kvr('Word help', A.wordHelp.replace('Spanish key words: ', 'Spanish key words, '), 'Change'),
+    kvr('Your plan', A.billing) + kvr('Charged', 'Per child') + kvr('Other plans', '', 'See plans'),
+    kvr('Exam PIN', A.examPin, 'Change') + kvr('Feedback', 'Tell us what to fix', 'Write'),
+  ];
+  $('#admin').innerHTML = `<div class="adm-top"><a class="tool" href="#" style="color:inherit;text-decoration:none">${I('back')}Back</a><h1>Admin</h1></div><div class="adm">${A.sections.map((s, n) => `<section><h2>${s}</h2>${body[n]}</section>`).join('')}</div>`;
+}
+function route() {
+  closeAll();
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('is-admin', admin);
+  document.body.style.overflow = admin ? 'auto' : 'hidden';
+  admin ? renderAdmin() : renderPad();
+}
+addEventListener('hashchange', route);
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!location.hash) renderPad(); }, 150); });
+route();
+</script>
+</body>
+</html>

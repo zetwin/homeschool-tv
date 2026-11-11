@@ -1,0 +1,30 @@
+{
+  "_about": "Every voice setting, in one place. Change a value and run: npm run voice <lesson>. Only the lines it affects are recorded again.",
+  "sampleRate": 24000,
+  "model": { "id": "onnx-community/Kokoro-82M-v1.0-ONNX", "quality": "q8" },
+  "english": {
+    "speed": 1,
+    "voices": { "main": "af_heart", "second": "af_heart" }
+  },
+  "spanish": {
+    "accent": "es-419",
+    "speed": 0.9,
+    "slowSpeed": 0.75,
+    "sounds": 3,
+    "cbMaxWords": 3,
+    "calmFor": { "cb:dora": "ef_dora", "cb:alex": "em_alex" },
+    "voices": { "main": "cb:dora", "second": "cb:alex" }
+  },
+  "timing": {
+    "handoverGap": 0.14,
+    "startPad": 0.06,
+    "endPad": 0.12
+  },
+  "loudness": {
+    "partLevel": -20,
+    "lineTarget": -16,
+    "peak": -1.5,
+    "range": 11
+  },
+  "file": { "bitrate": "64k" }
+}

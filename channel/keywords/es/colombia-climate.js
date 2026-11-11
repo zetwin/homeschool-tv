@@ -1,0 +1,27 @@
+/* Spanish word help for Colombia, lesson 2 (climate). Each pair: the English word as said in the lesson (forms split by |), then the Spanish.
+   Written by Claude on 2026-11-07, in neutral Latin American Spanish. A fluent speaker should read it; parents never have to. See docs/product/LANGUAGES.md. */
+((window.KEYWORDS ??= {}).es ??= {})['colombia-climate'] = [
+  ['cold', 'frío'],
+  ['colder', 'más frío'],
+  ['warm', 'cálido'],
+  ['mild', 'templado'],
+  ['degrees', 'los grados'],
+  ['temperature', 'la temperatura'],
+  ['meters', 'los metros'],
+  ['kilometers', 'los kilómetros'],
+  ['thermal floor|thermal floors', 'el piso térmico'],
+  ['páramo', 'el páramo'],
+  ['snow', 'la nieve'],
+  ['ice', 'el hielo'],
+  ['glacier|glaciers', 'el glaciar'],
+  ['water', 'el agua'],
+  ['mountain|mountains', 'la montaña'],
+  ['climb', 'subir'],
+  ['high|higher|highest', 'alto'],
+  ['air', 'el aire'],
+  ['ground', 'el suelo'],
+  ['farm|farms', 'la finca'],
+  ['coffee', 'el café'],
+  ['equator', 'el ecuador'],
+  ['warming', 'el calentamiento'],
+];

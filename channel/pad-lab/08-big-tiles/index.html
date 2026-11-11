@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big tiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+/* Direction 08. Learns from the Apple TV home screen and Windows Metro tiles:
+   one big tile for what's on now, then tiles of different sizes, each tile one thing.
+   Tap a tile and it lifts, then opens its own full screen. */
+:root {
+  --stage: #0E1322;
+  --stage2: #151B2F;
+  --slate: #1D2539;
+  --slate-hi: #263049;
+  --white: #FFFFFF;
+  --mist: #BAC2D8;
+  --violet: #4B2FC4;
+  --violet-deep: #24166B;
+  --amber: #F4B63F;
+  --amber-ink: #241600;
+  font-size: 18px;
+}
+html.t2 { font-size: 19.5px; }
+html.t3 { font-size: 21px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: 'Archivo', system-ui, sans-serif; color: var(--white); line-height: 1.25;
+  background: radial-gradient(900px 520px at 22% -10%, rgba(75, 47, 196, .42), transparent 70%), var(--stage);
+  -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums;
+}
+button, a { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; text-align: left; }
+:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+svg.i { width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.wide { font-stretch: 125%; }
+
+#pad { height: 100vh; display: grid; grid-template-rows: auto 1fr; padding: 22px 28px 28px; gap: 16px; overflow: hidden; }
+#pad[hidden], #admin[hidden] { display: none; }
+.top { display: flex; align-items: center; gap: 18px; min-height: 56px; }
+.top h1 { margin: 0; font-size: 1.7rem; font-weight: 800; font-stretch: 112%; letter-spacing: -0.01em; }
+.top .clock { font-size: 1.7rem; font-weight: 400; color: var(--mist); font-stretch: 112%; }
+.tools { margin-left: auto; display: flex; gap: 10px; }
+.tool { min-height: 52px; min-width: 52px; padding: 0 18px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: rgba(255, 255, 255, .09); font-weight: 600; text-decoration: none; transition: background .15s, transform .15s; }
+.tool:hover { background: rgba(255, 255, 255, .16); }
+.tool:active { transform: scale(.95); }
+
+/* ---------- The tiles ---------- */
+.grid { display: grid; gap: 16px; min-height: 0;
+  grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: "now now ana leo" "now now mia need" "day score score prog"; }
+.tile { position: relative; overflow: hidden; border-radius: 26px; padding: 20px 22px; background: var(--slate); display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  transition: transform .22s cubic-bezier(.2, .8, .2, 1), box-shadow .22s; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); will-change: transform; }
+.tile::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .2s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .22), transparent 60%); }
+.tile:hover, .tile:focus-visible, .tile.lift { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.035); box-shadow: 0 28px 60px rgba(0, 0, 0, .55); z-index: 2; }
+.tile:hover::after, .tile:focus-visible::after, .tile.lift::after { opacity: 1; }
+.tile:active { transform: scale(.985); transition-duration: .1s; }
+.tile:focus-visible { outline: none; box-shadow: 0 0 0 4px #fff, 0 28px 60px rgba(0, 0, 0, .55); }
+.tile h2 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--mist); }
+.ghost { position: absolute; right: -18px; bottom: -46px; font-size: 13rem; font-weight: 900; font-stretch: 125%; line-height: 1; color: rgba(0, 0, 0, .14); pointer-events: none; }
+.ghost-ic { position: absolute; right: -40px; bottom: -50px; width: 360px; height: 360px; opacity: .13; pointer-events: none; stroke-width: 1.2; }
+
+/* Now (the hero) */
+.t-now { grid-area: now; background: linear-gradient(150deg, var(--violet) 0%, var(--violet-deep) 85%); padding: 28px 30px; }
+.live { display: flex; align-items: center; gap: 12px; font-weight: 700; color: #fff; }
+.live .pulse { width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 0 rgba(255, 255, 255, .7); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
+.live span:last-child { color: #DCD4FF; font-weight: 500; }
+.t-now .subj { font-size: 4.4rem; font-weight: 900; font-stretch: 125%; letter-spacing: -0.03em; line-height: .95; margin: 18px 0 8px; }
+.t-now .title { font-size: 1.45rem; font-weight: 600; max-width: 21ch; }
+.who3 { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+.who3 span { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 999px; background: rgba(255, 255, 255, .13); font-weight: 600; }
+.face { width: 34px; height: 34px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 1.15rem; background: var(--c); flex: none; }
+.playrow { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
+.play { min-height: 64px; padding: 0 30px 0 24px; border-radius: 20px; background: #fff; color: #1B1340; font-size: 1.2rem; font-weight: 800; display: inline-flex; align-items: center; gap: 12px; transition: transform .15s; position: relative; z-index: 1; }
+.play:active { transform: scale(.96); }
+.play svg.i { width: 26px; height: 26px; }
+.clockbar { flex: 1; }
+.clockbar .bar { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .22); overflow: hidden; }
+.clockbar .bar i { display: block; height: 100%; background: #fff; border-radius: 4px; }
+.clockbar div:last-child { display: flex; justify-content: space-between; margin-top: 8px; color: #DCD4FF; font-weight: 500; }
+
+/* A child */
+.t-kid { background: var(--c); }
+.t-kid .name { font-size: 1.6rem; font-weight: 800; font-stretch: 112%; display: flex; align-items: baseline; gap: 10px; }
+.t-kid .name small { font-size: 1rem; font-weight: 500; opacity: .9; font-stretch: 100%; }
+.t-kid .big { font-size: 2.6rem; font-weight: 900; font-stretch: 125%; line-height: 1; margin-top: auto; }
+.t-kid .big small { font-size: 1rem; font-weight: 600; font-stretch: 100%; margin-left: 6px; }
+.segs { display: flex; gap: 5px; margin: 10px 0 10px; }
+.segs i { flex: 1; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .3); }
+.segs i.on { background: #fff; }
+.segs i.now { background: repeating-linear-gradient(90deg, #fff 0 4px, rgba(255, 255, 255, .45) 4px 8px); }
+.t-kid .foot { font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.flag { background: #fff; color: #5A1A00; padding: 2px 10px; border-radius: 8px; font-weight: 800; }
+
+/* Needs you */
+.t-need { grid-area: need; background: var(--amber); color: var(--amber-ink); }
+.t-need h2 { color: var(--amber-ink); }
+.t-need .big { font-size: 5rem; font-weight: 900; font-stretch: 125%; line-height: .9; margin-top: auto; }
+.t-need p { margin: 6px 0 0; font-weight: 700; }
+
+/* Today */
+.t-day { grid-area: day; }
+.mini { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.mini li { display: grid; grid-template-columns: 56px 1fr; font-size: 1rem; color: var(--mist); }
+.mini li.done { color: #8D96B0; text-decoration: line-through; text-decoration-color: rgba(141, 150, 176, .6); }
+.mini li.done { color: #9AA3BD; }
+.mini li.now { color: #fff; font-weight: 800; }
+.mini li.now span:first-child::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #fff; margin: 0 6px 2px -14px; }
+
+/* Scores */
+.t-score { grid-area: score; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: auto; }
+.trio div { border-left: 4px solid var(--c); padding-left: 12px; }
+.trio b { display: block; font-size: 1.65rem; font-weight: 900; font-stretch: 112%; white-space: nowrap; line-height: 1.05; }
+.trio span { display: block; color: var(--mist); font-size: 1rem; }
+
+/* Program */
+.t-prog { grid-area: prog; background: var(--slate-hi); }
+.t-prog p { margin: auto 0 0; font-size: 1.2rem; font-weight: 700; }
+.t-prog .segs i { background: rgba(255, 255, 255, .2); }
+.t-prog .segs i.on { background: #fff; }
+.t-prog span { color: var(--mist); }
+
+/* ---------- Full-screen detail ---------- */
+.screen { position: fixed; inset: 0; z-index: 40; background: var(--stage2); overflow: auto; padding: 22px 28px 40px; opacity: 0; transform: scale(.96); transition: opacity .28s, transform .34s cubic-bezier(.2, .8, .2, 1); }
+.screen.in { opacity: 1; transform: none; }
+.screen .bar { display: flex; align-items: center; gap: 16px; min-height: 56px; margin-bottom: 18px; }
+.screen h2 { margin: 0; font-size: 2.4rem; font-weight: 900; font-stretch: 118%; letter-spacing: -0.02em; }
+.screen .sub { color: var(--mist); margin: 0 0 22px; font-size: 1.15rem; }
+.rows { display: grid; gap: 10px; max-width: 980px; }
+.r { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 20px; background: var(--slate); min-height: 72px; }
+.r b { display: block; font-size: 1.15rem; }
+.r > div > span { display: block; }
+.r span { color: var(--mist); }
+.r .acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.r.now { background: linear-gradient(120deg, var(--violet), var(--violet-deep)); }
+.r.now span { color: #DCD4FF; }
+.r .t { font-weight: 800; font-size: 1.15rem; min-width: 64px; }
+.pill { min-height: 48px; padding: 0 18px; border-radius: 14px; background: rgba(255, 255, 255, .12); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.pill.main { background: #fff; color: #1B1340; }
+.pill.amber { background: var(--amber); color: var(--amber-ink); }
+.pill:active { transform: scale(.96); }
+.state { display: inline-flex; gap: 6px; }
+.state .face { width: 32px; height: 32px; font-size: 1.05rem; }
+.state .face.later { background: transparent; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .35); filter: grayscale(1); opacity: .7; }
+.state .face.missed { background: transparent; box-shadow: inset 0 0 0 2px var(--amber); }
+.state .face.now { box-shadow: 0 0 0 3px #fff; }
+
+/* ---------- Sheets ---------- */
+.veil { position: fixed; inset: 0; background: rgba(5, 8, 18, .66); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: grid; place-items: center; z-index: 60; opacity: 0; transition: opacity .2s; }
+.veil.in { opacity: 1; }
+.sheet { width: min(620px, calc(100vw - 40px)); max-height: calc(100vh - 60px); overflow: auto; background: var(--slate); border-radius: 30px; padding: 24px 26px 26px; transform: scale(.94); transition: transform .3s cubic-bezier(.2, .8, .2, 1); box-shadow: 0 40px 90px rgba(0, 0, 0, .6); }
+.veil.in .sheet { transform: none; }
+.sheet header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.sheet h3 { margin: 0; flex: 1; font-size: 1.6rem; font-weight: 900; font-stretch: 115%; }
+.sheet p { color: var(--mist); margin: 0 0 14px; }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.seg button { min-height: 52px; padding: 0 18px 0 10px; border-radius: 16px; background: rgba(255, 255, 255, .08); font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
+.seg button.plain { padding: 0 18px; }
+.seg button[aria-pressed=true] { background: #fff; color: #10142A; }
+.stepper { display: flex; align-items: center; gap: 20px; margin: 4px 0 20px; }
+.stepper button { width: 64px; height: 64px; border-radius: 20px; background: rgba(255, 255, 255, .1); font-size: 1.8rem; font-weight: 800; text-align: center; }
+.stepper output { font-size: 3.2rem; font-weight: 900; font-stretch: 125%; min-width: 90px; text-align: center; }
+.stepper span { color: var(--mist); }
+.field { width: 100%; min-height: 100px; border-radius: 18px; border: 2px solid rgba(255, 255, 255, .18); background: rgba(0, 0, 0, .2); color: #fff; padding: 14px; font: inherit; resize: none; margin-bottom: 14px; }
+.field::placeholder { color: #9AA3BD; }
+.stars { display: flex; gap: 8px; margin-bottom: 18px; }
+.stars button { width: 60px; height: 60px; border-radius: 18px; background: rgba(255, 255, 255, .08); display: grid; place-items: center; color: #8D96B0; }
+.stars svg { width: 36px; height: 36px; }
+.stars .on { color: var(--amber); }
+.stars .on svg { fill: currentColor; }
+.foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; background: #fff; color: #10142A; padding: 16px 24px; border-radius: 18px; font-weight: 700; transition: .25s; z-index: 80; }
+.toast.in { opacity: 1; transform: translate(-50%, 0); }
+.pop { position: fixed; z-index: 70; background: var(--slate-hi); border-radius: 22px; padding: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); display: grid; gap: 6px; }
+.pop button { min-height: 54px; min-width: 220px; padding: 0 18px; border-radius: 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.pop button[aria-pressed=true] { background: #fff; color: #10142A; }
+
+/* ---------- Admin: tvOS Settings, a big picture beside a list ---------- */
+#admin { min-height: 100vh; display: grid; grid-template-columns: 0.9fr 1.1fr; background: var(--stage2); }
+#admin .side { position: sticky; top: 0; height: 100vh; padding: 22px 28px; display: flex; flex-direction: column; }
+#admin .badge { margin: auto; text-align: center; }
+#admin .badge .disc { width: 220px; height: 220px; border-radius: 56px; margin: 0 auto 22px; display: grid; place-items: center; background: linear-gradient(150deg, #39415C, #1D2539); box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
+#admin .badge .disc svg { width: 120px; height: 120px; stroke-width: 1.4; }
+#admin .badge h1 { margin: 0; font-size: 2.6rem; font-weight: 900; font-stretch: 120%; }
+#admin .badge p { color: var(--mist); margin: 8px 0 0; }
+#admin main { padding: 96px 40px 40px 10px; }
+.sec { width: 100%; min-height: 64px; padding: 0 22px; border-radius: 18px; display: flex; align-items: center; gap: 14px; font-size: 1.15rem; font-weight: 700; transition: background .15s, transform .15s; }
+.sec[aria-expanded=true], .sec:hover { background: rgba(255, 255, 255, .1); }
+.sec .v { margin-left: auto; color: var(--mist); font-weight: 500; font-size: 1rem; }
+.sec svg.chev { transition: transform .2s; }
+.sec[aria-expanded=true] svg.chev { transform: rotate(90deg); }
+.detail { padding: 6px 12px 16px 22px; }
+.kv { display: flex; align-items: center; gap: 14px; min-height: 56px; border-bottom: 1.5px solid rgba(255, 255, 255, .08); }
+.kv span:first-child { flex: 1; }
+.kv .v { color: var(--mist); }
+
+/* ---------- Upright iPad ---------- */
+@media (max-aspect-ratio: 1/1) {
+  #pad { padding: 22px 24px 24px; }
+  .grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 400fr 220fr 197fr 197fr;
+    grid-template-areas: "now now now" "ana leo mia" "need need day" "score score prog"; }
+  .top .clock { display: none; }
+  .t-kid .big { font-size: 2.2rem; }
+  .t-day { padding-top: 16px; padding-bottom: 14px; }
+  .t-now .subj { font-size: 4.8rem; }
+  .t-now .title { max-width: none; }
+  .t-need { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 0 18px; }
+  .t-need h2 { width: 100%; }
+  .t-need .big { margin-top: auto; }
+  .t-need p { flex: 1; margin: 0 0 8px; }
+  #admin { grid-template-columns: 1fr; }
+  #admin .side { position: static; height: auto; padding-bottom: 0; }
+  #admin .badge { margin: 30px auto 10px; }
+  #admin .badge .disc { width: 150px; height: 150px; border-radius: 40px; }
+  #admin .badge .disc svg { width: 84px; height: 84px; }
+  #admin main { padding: 20px 28px 40px; }
+}
+html.t2 .t-kid .big, html.t3 .t-kid .big { font-size: 2rem; }
+.t-kid .big { white-space: nowrap; }
+.mini li { grid-template-columns: 3.2em 1fr; }
+html.t3 .t-now .subj { font-size: 3.8rem; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="pad"></div>
+<div id="admin" hidden></div>
+<script src="../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const I = {
+  science: '<path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3M7.5 15h9"/>',
+  gear: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  play: '<path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  chev: '<path d="M9 5l7 7-7 7"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  text: '<path d="M4 19l5-14 5 14M5.8 14h6.4M15 19l3-8 3 8M15.9 16.5h4.2"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"/>',
+};
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const ic = (n, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+const nowIdx = P.classes.findIndex((c) => c.now);
+const nowC = P.classes[nowIdx], nextC = P.classes[nowIdx + 1];
+const kidBy = (n) => P.kids.find((k) => k.name === n);
+const face = (k, st = '') => `<span class="face ${st}" style="--c:${k.color}" title="${esc(k.name)}">${k.face}</span>`;
+const word = { done: 'done', now: 'watching', later: 'not started', missed: 'missed' };
+const mins = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+
+/* ---------- Home ---------- */
+function renderPad() {
+  const pct = Math.round(((mins(P.now) - mins(nowC.time)) / (mins(nextC.time) - mins(nowC.time))) * 100);
+  const [unit, lesson] = P.program.where.split(': ')[1].split(', ');
+  const [ln, lof] = lesson.match(/\d+/g).map(Number);
+  $('#pad').innerHTML = `
+  <header class="top">
+    <h1>${esc(P.today)}</h1><span class="clock">${P.now}</span>
+    <div class="tools">
+      <button class="tool" data-act="feedback">${ic('chat')}Feedback</button>
+      <button class="tool" data-act="text" aria-label="Text size">${ic('text')}</button>
+      <a class="tool" href="#admin">${ic('gear')}Admin</a>
+    </div>
+  </header>
+  <div class="grid">
+    <div class="tile t-now" data-open="day" role="button" tabindex="0" aria-label="Now: ${esc(nowC.subject)}. Open today">
+      ${ic('science', 'i ghost-ic')}
+      <div class="live"><span class="pulse"></span><span>On now</span><span>${nowC.time} to ${nextC.time}</span></div>
+      <div class="subj">${esc(nowC.subject)}</div>
+      <div class="title">${esc(nowC.title)}</div>
+      <div class="who3">${P.kids.map((k, ki) => `<span>${face(k)}${esc(k.name)} ${word[nowC.state[ki]]}</span>`).join('')}</div>
+      <div class="playrow">
+        <button class="play" data-act="play">${ic('play')}Play on the TV</button>
+        <div class="clockbar"><div class="bar"><i style="width:${pct}%"></i></div><div><span>${mins(nextC.time) - mins(P.now)} minutes left</span><span>Then ${esc(nextC.subject)}</span></div></div>
+      </div>
+    </div>
+    ${P.kids.map((k, ki) => `
+    <button class="tile t-kid" style="grid-area:${k.name.toLowerCase()};--c:${k.color}" data-open="kid" data-k="${ki}">
+      <span class="ghost">${k.name[0]}</span>
+      <span class="name">${esc(k.name)}<small>${esc(k.year)}</small></span>
+      <span class="big">${k.done} of ${k.of}<small>done</small></span>
+      <span class="segs">${P.classes.map((c) => `<i class="${c.state[ki] === 'done' ? 'on' : c.state[ki] === 'now' ? 'now' : ''}"></i>`).join('')}</span>
+      <span class="foot">${k.late ? `<span class="flag">${k.late} homework late</span>` : `Average ${esc(k.average)}`}</span>
+    </button>`).join('')}
+    <button class="tile t-need" data-open="need">
+      <h2>Needs you</h2>
+      <span class="big">${P.needsYou.length}</span>
+      <p>${esc(P.needsYou[0].what)}</p>
+    </button>
+    <button class="tile t-day" data-open="day">
+      <h2>Today</h2>
+      <ul class="mini">${P.classes.map((c, i) => `<li class="${i < nowIdx ? 'done' : i === nowIdx ? 'now' : ''}"><span>${c.time}</span><span>${esc(c.subject)}</span></li>`).join('')}</ul>
+    </button>
+    <button class="tile t-score" data-open="scores">
+      <h2>Latest scores</h2>
+      <div class="trio">${P.scores.map((s) => `<div style="--c:${kidBy(s.kid).color}"><b>${esc(s.score)}</b><span>${esc(s.kid)}, ${esc(s.what.split(',')[0])}${s.when === 'Today' ? '' : ', ' + s.when.toLowerCase()}</span></div>`).join('')}</div>
+    </button>
+    <button class="tile t-prog" data-open="program">
+      <h2>Program</h2>
+      <p>${esc(unit)}</p>
+      <span class="segs">${Array.from({ length: lof }, (_, n) => `<i class="${n < ln ? 'on' : ''}"></i>`).join('')}</span>
+      <span>Lesson ${ln} of ${lof}, Science</span>
+    </button>
+  </div>`;
+  wireTiles();
+}
+function wireTiles() {
+  document.querySelectorAll('.tile').forEach((t) => {
+    t.addEventListener('pointermove', (e) => {
+      const r = t.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      t.style.setProperty('--mx', x * 100 + '%'); t.style.setProperty('--my', y * 100 + '%');
+      t.style.setProperty('--ry', (x - 0.5) * 6 + 'deg'); t.style.setProperty('--rx', (0.5 - y) * 6 + 'deg');
+    });
+    t.addEventListener('pointerleave', () => { ['--rx', '--ry'].forEach((p) => t.style.setProperty(p, '0deg')); });
+    t.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
+  });
+}
+
+/* ---------- Full screens ---------- */
+function screen(title, sub, body) {
+  closeAll();
+  const s = document.createElement('div'); s.className = 'screen'; s.setAttribute('role', 'dialog'); s.setAttribute('aria-label', title);
+  s.innerHTML = `<div class="bar"><button class="tool" data-close>${ic('back')}Back</button></div><h2>${esc(title)}</h2><p class="sub">${sub}</p>${body}`;
+  document.body.append(s); requestAnimationFrame(() => s.classList.add('in'));
+  s.querySelector('[data-close]').addEventListener('click', () => { s.classList.remove('in'); setTimeout(() => s.remove(), 250); });
+  return s;
+}
+function dayScreen() {
+  screen('Today', `${esc(P.today)}. ${nowIdx} of ${P.classes.length} classes done.`, `<div class="rows">${P.classes.map((c, i) => {
+    const st = i < nowIdx ? 'done' : i === nowIdx ? 'now' : 'later';
+    return `<div class="r ${st}"><span class="t">${c.time}</span><div><b>${esc(c.subject)}</b><span>${esc(c.title)}</span>
+      <div class="state" style="margin-top:8px">${P.kids.map((k, ki) => face(k, c.state[ki])).join('')}</div></div>
+      <div class="acts">${c.lesson && st === 'now' ? `<button class="pill main" data-act="play">${ic('play')}Play on the TV</button>` : ''}${st !== 'later' ? `<button class="pill" data-act="mark" data-i="${i}">Give a mark</button>` : ''}<button class="pill" data-act="homework" data-i="${i}">Set homework</button></div></div>`;
+  }).join('')}</div>`);
+}
+function kidScreen(ki) {
+  const k = P.kids[ki];
+  const sc = P.scores.filter((s) => s.kid === k.name);
+  screen(k.name, `${esc(k.year)}. ${k.done} of ${k.of} classes done today. Average mark ${esc(k.average)}. ${k.homework ? `${k.homework} homework to do${k.late ? `, ${k.late} late` : ''}.` : 'No homework.'}`,
+    `<div class="rows">${P.classes.map((c, i) => `<div class="r"><span class="t">${c.time}</span><div><b>${esc(c.subject)}</b><span>${esc(c.title)}</span></div>
+      <div class="acts"><span style="align-self:center;margin-right:6px">${c.state[ki] === 'missed' ? 'Missed' : c.state[ki] === 'done' ? (c.marks && c.marks[ki] ? 'Mark ' + c.marks[ki] : 'Done') : c.state[ki] === 'now' ? 'Watching now' : 'Later'}</span>${c.state[ki] !== 'later' ? `<button class="pill" data-act="mark" data-i="${i}" data-k="${ki}">Give a mark</button>` : ''}</div></div>`).join('')}
+      ${sc.map((s) => `<div class="r"><span class="t">${esc(s.when)}</span><div><b>${esc(s.score)}</b><span>${esc(s.what)}</span></div><span></span></div>`).join('')}</div>`);
+}
+function needScreen() {
+  screen('Needs you', 'Most urgent first.', `<div class="rows">${P.needsYou.map((n, i) => `<div class="r" data-row="${i}"><span class="t">${i + 1}</span><div><b>${esc(n.what)}</b><span>${esc(n.detail)}</span></div><div class="acts"><button class="pill amber" data-act="need" data-n="${i}">${esc(n.action)}</button></div></div>`).join('')}</div>`);
+}
+function scoresScreen() {
+  screen('Scores', `Averages: ${P.kids.map((k) => `${k.name} ${k.average}`).join(', ')}.`, `<div class="rows">${P.scores.map((s) => `<div class="r"><span>${face(kidBy(s.kid))}</span><div><b>${esc(s.kid)}: ${esc(s.score)}</b><span>${esc(s.what)}</span></div><span>${esc(s.when)}</span></div>`).join('')}</div>`);
+}
+function programScreen() {
+  screen('Program', `${P.program.subjects} subjects, following ${esc(P.admin.plan)}. ${P.program.readyLessons} video lessons ready.`, `<div class="rows"><div class="r now"><span>${ic('science')}</span><div><b>We are here</b><span>${esc(P.program.where)}</span></div><button class="pill main" data-act="fullprogram">Open the full program</button></div></div>`);
+}
+
+/* ---------- Sheets ---------- */
+function sheet(title, body) {
+  document.querySelectorAll('.veil, .pop').forEach((n) => n.remove());
+  const v = document.createElement('div'); v.className = 'veil';
+  v.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><h3>${esc(title)}</h3><button class="pill" data-x>Close</button></header>${body}</div>`;
+  document.body.append(v); requestAnimationFrame(() => v.classList.add('in'));
+  v.addEventListener('click', (e) => { if (e.target === v || e.target.closest('[data-x]')) v.remove(); });
+  v.querySelectorAll('.seg').forEach((g) => g.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); }));
+  return v;
+}
+function closeAll() { document.querySelectorAll('.veil, .pop, .screen').forEach((n) => n.remove()); }
+function toast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.append(t); requestAnimationFrame(() => t.classList.add('in')); setTimeout(() => { t.classList.remove('in'); setTimeout(() => t.remove(), 300); }, 2200); }
+const pickKids = (sel, ok = () => true) => `<div class="seg">${P.kids.map((k, ki) => ok(ki) ? `<button aria-pressed="${ki === sel}" data-k="${ki}">${face(k)}${esc(k.name)}</button>` : '').join('')}</div>`;
+function markSheet(i, ki) {
+  const c = P.classes[i];
+  const first = ki ?? Math.max(0, c.marks ? c.marks.findIndex((m, x) => !m && c.state[x] === 'done') : 0);
+  let val = 10;
+  const v = sheet(`Give a mark`, `<p>${esc(c.subject)}: ${esc(c.title)}</p>${pickKids(first, (x) => c.state[x] !== 'later')}
+    <div class="stepper"><button data-d="-1" aria-label="Lower">−</button><output>${val}</output><button data-d="1" aria-label="Higher">+</button><span>out of 12</span></div>
+    <div class="foot"><button class="pill main" data-save>Save the mark</button></div>`);
+  v.querySelectorAll('[data-d]').forEach((b) => b.addEventListener('click', () => { val = Math.min(12, Math.max(0, val + +b.dataset.d)); v.querySelector('output').textContent = val; }));
+  v.querySelector('[data-save]').addEventListener('click', () => { const k = P.kids[+v.querySelector('[aria-pressed=true]').dataset.k]; v.remove(); toast(`Saved: ${k.name}, ${c.subject}, ${val} of 12`); });
+}
+function homeworkSheet(i) {
+  const c = P.classes[i];
+  const v = sheet('Set homework', `<p>${esc(c.subject)}: ${esc(c.title)}</p><div class="seg"><button class="plain" aria-pressed="true">All three</button>${P.kids.map((k) => `<button aria-pressed="false">${face(k)}${esc(k.name)}</button>`).join('')}</div>
+    <textarea class="field" placeholder="What to do, for example: read pages 16 to 18"></textarea>
+    <div class="seg"><button class="plain" aria-pressed="true">Due tomorrow</button><button class="plain" aria-pressed="false">Due Friday</button></div>
+    <div class="foot"><button class="pill main" data-save>Set homework</button></div>`);
+  v.querySelector('[data-save]').addEventListener('click', () => { v.remove(); toast(`Homework set for ${c.subject}`); });
+}
+function needAction(n) {
+  const item = P.needsYou[n];
+  const finish = (msg) => { document.querySelectorAll('.veil').forEach((x) => x.remove()); const r = document.querySelector(`[data-row="${n}"] .acts`); if (r) r.innerHTML = '<span>Done</span>'; toast(msg); };
+  if (item.action === 'Remind') return finish('Leo will see a reminder on his screen');
+  if (item.action === 'Rate') {
+    const v = sheet('Rate the Muscles lesson', `<p>All three children watched it. Your stars sit beside theirs.</p><div class="stars">${[1, 2, 3, 4, 5].map((s) => `<button data-s="${s}" aria-label="${s} stars">${ic('star')}</button>`).join('')}</div><div class="foot"><button class="pill main" data-save>Save my stars</button></div>`);
+    v.querySelectorAll('[data-s]').forEach((b) => b.addEventListener('click', () => v.querySelectorAll('[data-s]').forEach((x) => x.classList.toggle('on', +x.dataset.s <= +b.dataset.s))));
+    v.querySelector('[data-save]').addEventListener('click', () => finish('Stars saved'));
+    return;
+  }
+  const v = sheet('Mark Leo’s answers', `<p>${esc(item.detail)}</p>${[1, 2, 3].map((a) => `<div class="kv"><span>Answer ${a}</span><div class="seg" style="margin:0"><button class="plain" aria-pressed="false">Right</button><button class="plain" aria-pressed="false">Not yet</button></div></div>`).join('')}<div class="foot" style="margin-top:16px"><button class="pill main" data-save>Save marking</button></div>`);
+  v.querySelector('[data-save]').addEventListener('click', () => finish('Marking saved'));
+}
+function feedbackSheet() {
+  const v = sheet('Send feedback', `<p>Tell us what works and what doesn’t. We read every note.</p><textarea class="field"></textarea><div class="foot"><button class="pill main" data-save>Send</button></div>`);
+  v.querySelector('[data-save]').addEventListener('click', () => { v.remove(); toast('Thank you. Feedback sent'); });
+}
+function textPop(btn) {
+  document.querySelectorAll('.pop').forEach((n) => n.remove());
+  const r = btn.getBoundingClientRect(); const p = document.createElement('div'); p.className = 'pop';
+  const cur = ['t2', 't3'].find((c) => document.documentElement.classList.contains(c)) || '';
+  p.innerHTML = [['', 'Large', 1], ['t2', 'Larger', 1.15], ['t3', 'Largest', 1.3]].map(([c, n, z]) => `<button data-t="${c}" aria-pressed="${c === cur}">${n}<span style="font-size:${z}em">Aa</span></button>`).join('');
+  p.style.top = r.bottom + 10 + 'px'; p.style.right = innerWidth - r.right + 'px'; document.body.append(p);
+  p.addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (!b) return; document.documentElement.classList.remove('t2', 't3'); b.dataset.t && document.documentElement.classList.add(b.dataset.t); p.remove(); });
+}
+
+document.addEventListener('click', (e) => {
+  const act = e.target.closest('[data-act]');
+  if (act) {
+    e.stopPropagation();
+    const a = act.dataset.act, i = +act.dataset.i;
+    if (a === 'play') toast('Playing Science on the TV');
+    if (a === 'mark') markSheet(i, act.dataset.k !== undefined ? +act.dataset.k : undefined);
+    if (a === 'homework') homeworkSheet(i);
+    if (a === 'need') needAction(+act.dataset.n);
+    if (a === 'feedback') feedbackSheet();
+    if (a === 'text') textPop(act);
+    if (a === 'fullprogram') toast('The full program opens as its own page');
+    return;
+  }
+  if (!e.target.closest('.pop')) document.querySelectorAll('.pop').forEach((n) => n.remove());
+  const t = e.target.closest('[data-open]'); if (!t) return;
+  t.classList.add('lift');
+  setTimeout(() => {
+    t.classList.remove('lift');
+    const o = t.dataset.open;
+    if (o === 'day') dayScreen();
+    if (o === 'kid') kidScreen(+t.dataset.k);
+    if (o === 'need') needScreen();
+    if (o === 'scores') scoresScreen();
+    if (o === 'program') programScreen();
+  }, 160);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const top = [...document.querySelectorAll('.pop, .veil, .screen')].pop(); top && top.remove(); } });
+
+/* ---------- Admin ---------- */
+const A = P.admin;
+let adminOpen = 0;
+const kv = (k, v, act) => `<div class="kv"><span>${esc(k)}</span>${v ? `<span class="v">${esc(v)}</span>` : ''}${act ? `<button class="pill">${esc(act)}</button>` : ''}</div>`;
+const secSummary = [A.account.name, `${P.parents.length} parents, ${P.kids.length} children`, 'National Curriculum', A.billing, `Exam PIN: ${A.examPin}`];
+function secBody(n) {
+  if (n === 0) return kv('Name', A.account.name) + kv('Username', A.account.username) + kv('Password', '', 'Change') + kv('Text size', A.account.textSize, 'Change') + kv('Sign out', '', 'Sign out');
+  if (n === 1) return P.parents.map((p) => kv(p.name + (p.you ? ' (you)' : ''), p.you ? 'Owner' : 'Parent')).join('') + kv('Invite a parent', '', 'Invite') + P.kids.map((k) => `<div class="kv">${face(k)}<span>${esc(k.name)}</span><span class="v">${esc(k.year)}</span><button class="pill">Edit</button></div>`).join('');
+  if (n === 2) return kv('Follows', A.plan) + kv('Subjects', String(P.program.subjects)) + kv('Video lessons ready', String(P.program.readyLessons)) + kv(A.wordHelp.split(': ')[0], cap(A.wordHelp.split(': ')[1]), 'Change');
+  if (n === 3) return kv('Your plan', A.billing) + kv('Children on the plan', String(P.kids.length));
+  return kv('Exam PIN', A.examPin, 'Change') + kv('Send feedback', '', 'Write');
+}
+function renderAdmin() {
+  $('#admin').innerHTML = `<div class="side"><a class="tool" href="#" style="align-self:flex-start">${ic('back')}Back to home</a>
+    <div class="badge"><div class="disc">${ic('gear')}</div><h1>Admin</h1><p>Account, family and plan. Not needed every day.</p></div></div>
+    <main>${A.sections.map((s, n) => `<button class="sec" data-sec="${n}" aria-expanded="${n === adminOpen}">${esc(s)}<span class="v">${esc(secSummary[n])}</span>${ic('chev', 'i chev')}</button>${n === adminOpen ? `<div class="detail">${secBody(n)}</div>` : ''}`).join('')}</main>`;
+  $('#admin').querySelectorAll('[data-sec]').forEach((b) => b.addEventListener('click', () => { adminOpen = adminOpen === +b.dataset.sec ? -1 : +b.dataset.sec; renderAdmin(); }));
+}
+function route() {
+  closeAll();
+  const admin = location.hash.startsWith('#admin');
+  $('#pad').hidden = admin; $('#admin').hidden = !admin;
+  document.body.style.overflow = admin ? 'auto' : 'hidden';
+  admin ? renderAdmin() : renderPad();
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>

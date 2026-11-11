@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Week map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* Week map: learns from the GitHub contribution grid. One square per class, the week left to right,
+   today opened up so you can read it. Colour = the child. Fill = done. */
+:root{
+  --bg:#EDF0F3; --paper:#FFFFFF; --ink:#18212B; --muted:#47525E; --line:#C9D0D8; --faint:#DEE3E9;
+  --today:#FFF7E6; --todayline:#E2A43B; --now:#8A4B00; --missed:#B42318;
+  --ana:#D42A20; --leo:#0F766E; --mia:#1D4ED8;
+  --r:10px;
+}
+html{font-size:18px}
+html[data-size="s"]{font-size:17px}
+html[data-size="xl"]{font-size:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;font-size:1rem;line-height:1.3;-webkit-font-smoothing:antialiased;overflow:hidden}
+body.is-admin{overflow:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid #1D4ED8;outline-offset:2px}
+
+/* ---------- pad frame ---------- */
+.pad{height:100vh;display:grid;gap:18px 28px;padding:22px 28px 24px;
+  grid-template-columns:minmax(0,1fr) 330px;
+  grid-template-rows:auto auto minmax(0,1fr);
+  grid-template-areas:"top top" "hero side" "map side"}
+.top{grid-area:top;display:flex;align-items:center;gap:12px}
+.top h1{font-size:1.65rem;font-weight:800;letter-spacing:-.01em}
+.top .sub{color:var(--muted);font-size:1rem;margin-left:4px}
+.top .sp{flex:1}
+.tbtn{white-space:nowrap;flex:none;min-height:48px;min-width:48px;padding:0 16px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);border:1.5px solid var(--line);background:var(--paper)}
+.tbtn svg{width:22px;height:22px;flex:none}
+.tbtn.icon{padding:0 14px}
+
+.hero{grid-area:hero;display:flex;align-items:center;gap:20px}
+.hero .txt{flex:1;min-width:0}
+.hero h2{font-size:1.55rem;font-weight:800;line-height:1.15}
+.hero p{color:var(--muted);margin-top:4px}
+.play{flex:none;min-height:56px;padding:0 24px 0 18px;border-radius:28px;background:var(--ink);color:#fff;font-weight:800;font-size:1.05rem;display:inline-flex;align-items:center;gap:10px}
+.play svg{width:22px;height:22px}
+
+/* ---------- the map ---------- */
+.mapwrap{grid-area:map;background:var(--paper);border-radius:16px;padding:14px 16px 10px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--faint)}
+.map{flex:1;min-height:0;display:grid;position:relative;
+  grid-template-columns:150px repeat(5,minmax(0,1fr)) 12px repeat(4,44px);
+  grid-template-rows:38px 62px repeat(3,minmax(0,1fr))}
+.todaybg{grid-column:2/span 5;grid-row:1/span 5;background:var(--today);border:2px solid var(--todayline);border-radius:14px;z-index:0}
+.nowbg{grid-column:4;grid-row:2/span 4;background:#FDE7C2;border-radius:10px;margin:4px 2px;z-index:0}
+.map>*:not(.todaybg):not(.nowbg){z-index:1;position:relative}
+.dayh{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem}
+.dayh.today{justify-content:flex-start;padding-left:14px;gap:10px}
+.dayh.today .tag{font-weight:700;color:var(--now)}
+.future-h{grid-row:1/span 2;flex-direction:column;justify-content:flex-end;padding-bottom:8px;line-height:1.1;border-radius:10px}
+.future-h b{font-size:1rem}
+.future-h span{font-size:1rem;color:var(--muted);font-weight:500}
+.classh{display:flex;flex-direction:column;justify-content:center;padding:0 6px;text-align:center;line-height:1.15}
+.classh .t{color:var(--muted);font-size:1rem}
+.classh .s{font-weight:800;font-size:1rem}
+.classh.now .t{color:var(--now);font-weight:700}
+.kid{display:flex;flex-direction:column;justify-content:center;text-align:left;padding:6px 4px;border-radius:12px;min-height:44px}
+.kid .face{font-size:24px;margin-right:6px;vertical-align:-2px}
+.kid .nm,.kid .ln{display:block}
+.kid .nm{font-weight:800;font-size:1.2rem;line-height:1.1;margin-bottom:3px;white-space:nowrap}
+.kid .ln{font-size:1rem;color:var(--muted);line-height:1.2;margin-top:1px}
+.kid .ln.late{color:var(--missed);font-weight:700}
+.cell{display:flex;align-items:center;justify-content:center;padding:8px 4px}
+.sq{width:min(100%,96px);height:min(100%,104px);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.05;transition:transform .15s}
+.sq:active{transform:scale(.96)}
+.sq .big{font-size:1.75rem;font-weight:800}
+.sq .w{font-size:1rem;font-weight:700}
+.sq.done{background:var(--k);color:#fff}
+.sq.now{background:#fff;border:3px solid var(--k);color:var(--k);position:relative;overflow:hidden}
+.sq.now::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:var(--k);opacity:.14;animation:watch 3.6s ease-in-out infinite alternate}
+@keyframes watch{from{height:30%}to{height:55%}}
+.sq.missed{background:repeating-linear-gradient(135deg,#F6E3E1 0 8px,#FBF1F0 8px 16px);color:var(--missed);border:2px solid #E7B4AF}
+.sq.later{border:2px dashed var(--line);color:var(--muted)}
+.sq.later .w{font-weight:500}
+.fut{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:10px;min-height:44px}
+.fut i{display:block;width:22px;height:18px;border:1.5px solid #AEB7C2;border-radius:5px}
+.legend{display:flex;align-items:center;gap:22px;padding:12px 4px 2px 154px;color:var(--muted);font-size:1rem;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:20px;height:20px;border-radius:5px}
+.legend .l1{background:linear-gradient(135deg,var(--ana) 34%,var(--leo) 34% 66%,var(--mia) 66%)}
+.legend .l2{border:3px solid var(--ink);background:linear-gradient(to top,#d7dbe0 45%,#fff 45%)}
+.legend .l3{background:repeating-linear-gradient(135deg,#F0C8C3 0 4px,#FBF1F0 4px 8px);border:1.5px solid #E7B4AF}
+.legend .l4{border:2px dashed #9AA4B0}
+.legend .total{margin-left:auto;color:var(--ink);font-weight:800}
+
+/* ---------- side ---------- */
+.side{grid-area:side;display:flex;flex-direction:column;gap:22px;min-height:0}
+.blk h3{font-size:1.15rem;font-weight:800;display:flex;align-items:center;gap:10px;min-height:44px}
+.blk h3 .n{background:var(--missed);color:#fff;border-radius:12px;font-size:1rem;padding:1px 10px}
+.blk h3 .lnk{margin-left:auto;font-size:1rem;font-weight:700;color:#1D4ED8;min-height:44px;padding:0 4px;display:inline-flex;align-items:center}
+.need{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.need .t{flex:1;min-width:0}
+.need b{display:block;font-size:1.03rem}
+.need span{display:block;color:var(--muted);font-size:1rem;line-height:1.25}
+.need button{flex:none;min-height:46px;padding:0 14px;border-radius:23px;background:var(--paper);border:1.5px solid var(--ink);font-weight:800}
+.need.first button{background:var(--ink);color:#fff}
+.score{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);min-height:52px;width:100%;text-align:left}
+.score .f{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:19px;flex:none}
+.score .w{flex:1;min-width:0}
+.score .w small{display:block;color:var(--muted);font-size:1rem}
+.score .v{font-weight:800;font-size:1.15rem;white-space:nowrap}
+.prog{border-top:1px solid var(--line);padding-top:10px}
+.prog p{font-size:1rem}
+.lessons{display:flex;gap:6px;margin:10px 0 4px;align-items:center}
+.lessons i{width:30px;height:22px;border-radius:5px;border:1.5px solid #AEB7C2}
+.lessons i.on{background:var(--ink);border-color:var(--ink)}
+.lessons span{margin-left:8px;color:var(--muted)}
+
+/* extra large text, wide screen: fewer items, with the named link to the rest */
+@media (min-aspect-ratio:1/1){
+  html[data-size="xl"] .score:nth-of-type(n+2){display:none}
+  html[data-size="xl"] .need span{display:none}
+  html[data-size="xl"] .side{gap:12px}
+}
+/* portrait: map on top, side below in two columns */
+@media (max-aspect-ratio:1/1){
+  .top .sub{display:none}
+  .pad{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,560px) auto;grid-template-areas:"top" "hero" "map" "side"}
+  .side{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;align-content:start}
+  .side .needs{grid-row:1/span 2}
+}
+
+/* ---------- popover, sheet, toast ---------- */
+.scrim{position:fixed;inset:0;background:rgba(24,33,43,.32);z-index:40;display:none}
+.scrim.on{display:block}
+.scrim.clear{background:transparent}
+.pop{position:fixed;z-index:50;background:var(--paper);border-radius:14px;box-shadow:0 12px 40px rgba(24,33,43,.25),0 0 0 1px rgba(24,33,43,.08);padding:18px;width:340px;display:none}
+.pop.on{display:block}
+.pop::before{content:"";position:absolute;width:16px;height:16px;background:var(--paper);transform:rotate(45deg);left:var(--ax,50%);margin-left:-8px;top:-8px;box-shadow:-1px -1px 0 rgba(24,33,43,.08)}
+.pop.up::before{top:auto;bottom:-8px;box-shadow:1px 1px 0 rgba(24,33,43,.08)}
+.pop h4{font-size:1.2rem;font-weight:800;line-height:1.15}
+.pop .st{color:var(--muted);margin:4px 0 12px}
+.pop .row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{min-height:48px;padding:0 18px;border-radius:24px;font-weight:800;border:1.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.solid{background:var(--ink);color:#fff}
+.marks{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:8px 0 12px}
+.marks button{height:46px;border-radius:10px;border:1.5px solid var(--line);font-weight:800;font-size:1.05rem}
+.marks button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sheet{position:fixed;z-index:50;left:50%;top:50%;transform:translate(-50%,-48%);opacity:0;pointer-events:none;width:min(600px,calc(100vw - 48px));max-height:calc(100vh - 80px);overflow:auto;background:var(--paper);border-radius:18px;padding:24px 28px 26px;transition:.2s;box-shadow:0 20px 60px rgba(24,33,43,.3)}
+.sheet.on{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.sheet .hd{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sheet .hd h4{flex:1;font-size:1.4rem;font-weight:800}
+.sheet table{width:100%;border-collapse:collapse}
+.sheet td,.sheet th{text-align:left;padding:10px 6px;border-top:1px solid var(--line);font-size:1rem}
+.sheet th{color:var(--muted);font-weight:700;border-top:0}
+.sheet p{margin:6px 0}
+.sheet textarea{width:100%;min-height:140px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit}
+.ans{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.ans b{flex:1}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:24px;overflow:hidden}
+.seg button{min-height:46px;padding:0 14px;font-weight:700}
+.seg button.sel{background:var(--ink);color:#fff}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:26px;font-weight:700;opacity:0;transition:.25s;z-index:60;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- admin ---------- */
+.admin{display:none;max-width:980px;margin:0 auto;padding:22px 28px 60px}
+body.is-admin .pad{display:none}
+body.is-admin .admin{display:block}
+.adtop{display:flex;align-items:center;gap:16px;position:sticky;top:0;background:var(--bg);padding:8px 0 14px;z-index:5}
+.adtop h1{font-size:1.65rem;font-weight:800}
+.back{min-height:48px;padding:0 18px 0 12px;border-radius:24px;border:1.5px solid var(--ink);font-weight:800;display:inline-flex;align-items:center;gap:6px;background:var(--paper)}
+.adnav{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 22px}
+.adnav a{min-height:44px;display:inline-flex;align-items:center;padding:0 16px;border-radius:22px;background:var(--paper);color:var(--ink);text-decoration:none;font-weight:700;border:1px solid var(--faint)}
+.adsec{background:var(--paper);border-radius:16px;padding:20px 24px;margin-bottom:18px;border:1px solid var(--faint);scroll-margin-top:90px}
+.adsec h2{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+.adrow{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line);min-height:56px}
+.adrow:first-of-type{border-top:0}
+.adrow .k{width:220px;color:var(--muted)}
+.adrow .v{flex:1;font-weight:700}
+.adrow .face{font-size:24px}
+.adrow button{min-height:44px;padding:0 16px;border-radius:22px;border:1.5px solid var(--line);font-weight:700}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="pad" id="pad">
+  <header class="top">
+    <h1 id="date"></h1><span class="sub" id="sub"></span>
+    <span class="sp"></span>
+    <button class="tbtn" data-act="feedback">Send feedback</button>
+    <button class="tbtn icon" data-act="size" aria-label="Text size"><b style="font-size:1rem">A</b><b style="font-size:1.35rem;margin-left:-4px">A</b></button>
+    <button class="tbtn" data-act="admin" aria-label="Admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Admin</button>
+  </header>
+  <section class="hero" id="hero"></section>
+  <section class="mapwrap" aria-label="This week">
+    <div class="map" id="map"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+  <aside class="side" id="side"></aside>
+</div>
+
+<main class="admin" id="admin"></main>
+
+<div class="scrim" id="scrim"></div>
+<div class="pop" id="pop" role="dialog"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../data.js"></script>
+<script>
+const P = window.PAD, K = P.kids, C = P.classes;
+const $ = (s) => document.querySelector(s);
+const kc = (i) => ['var(--ana)', 'var(--leo)', 'var(--mia)'][i];
+const tint = (i) => ['#FBE4E2', '#DDF1EE', '#E1E9FB'][i];
+const nowIdx = C.findIndex((c) => c.now);
+const nowC = C[nowIdx];
+const future = [['Tue', 10, 'Tuesday'], ['Wed', 11, 'Wednesday'], ['Thu', 12, 'Thursday'], ['Fri', 13, 'Friday']];
+const doneToday = K.reduce((a, k) => a + k.done, 0), allToday = K.reduce((a, k) => a + k.of, 0);
+const marks = {}; // given in this session (not saved)
+
+function names(list) { return list.length === 1 ? list[0] : list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1]; }
+
+function renderTop() {
+  $('#date').textContent = P.today;
+  $('#sub').textContent = P.now + ', week of 9 to 13 November';
+  const watching = K.filter((k, i) => nowC.state[i] === 'now').map((k) => k.name);
+  const finished = K.filter((k, i) => nowC.state[i] === 'done').map((k) => k.name);
+  $('#hero').innerHTML = `<div class="txt"><h2>${nowC.subject} is on now</h2>
+    <p>${names(watching)} ${watching.length > 1 ? 'are' : 'is'} watching “${nowC.title}”. ${names(finished)} has finished it.</p></div>
+    <button class="play" data-act="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>Play on the TV</button>`;
+}
+
+function sqHTML(c, ci, i) {
+  const st = c.state[i], mk = marks[ci + '-' + i] || (c.marks && c.marks[i]);
+  if (st === 'done') return `<span class="big">${mk || '✓'}</span><span class="w">${mk ? 'of 12' : 'done'}</span>`;
+  if (st === 'now') return `<span class="big" aria-hidden="true">▶</span><span class="w">on now</span>`;
+  if (st === 'missed') return `<span class="big" aria-hidden="true">✕</span><span class="w">missed</span>`;
+  return `<span class="w">later</span>`;
+}
+
+function renderMap() {
+  let h = `<div class="todaybg"></div><div class="nowbg" style="grid-column:${2 + nowIdx}"></div>`;
+  h += `<div class="dayh today" style="grid-row:1;grid-column:2/span 5">Monday 9 <span class="tag">today, ${doneToday} of ${allToday} done</span></div>`;
+  future.forEach(([d, n], f) => { h += `<button class="dayh future-h" style="grid-row:1/span 2;grid-column:${8 + f}" data-act="day" data-f="${f}"><b>${d}</b><span>${n}</span></button>`; });
+    C.forEach((c, ci) => { h += `<div class="classh ${c.now ? 'now' : ''}" style="grid-row:2;grid-column:${2 + ci}"><span class="t">${c.now ? 'now' : c.time}</span><span class="s">${c.subject}</span></div>`; });
+  K.forEach((k, i) => {
+    const r = 3 + i;
+    const hw = k.homework === 0 ? 'No homework' : `${k.homework} homework`;
+    h += `<button class="kid" style="grid-row:${r};grid-column:1" data-act="kid" data-i="${i}"><span class="nm" style="color:${kc(i)}"><span class="face" aria-hidden="true">${k.face}</span>${k.name}</span><span class="ln">${k.done} of ${k.of} today</span><span class="ln">${hw}</span>${k.late ? `<span class="ln late">${k.late} late</span>` : ''}</button>`;
+    C.forEach((c, ci) => {
+      h += `<div class="cell" style="grid-row:${r};grid-column:${2 + ci}"><button class="sq ${c.state[i]}" style="--k:${kc(i)}" data-act="class" data-c="${ci}" data-i="${i}" aria-label="${k.name}, ${c.subject}: ${c.state[i]}">${sqHTML(c, ci, i)}</button></div>`;
+    });
+    future.forEach((d, f) => { h += `<button class="fut" style="grid-row:${r};grid-column:${8 + f}" data-act="day" data-f="${f}" aria-label="${d[2]}, ${k.name}: 5 classes planned"><i></i><i></i><i></i><i></i><i></i></button>`; });
+  });
+  $('#map').innerHTML = h;
+  $('#legend').innerHTML = `<span><i class="l1"></i>done</span><span><i class="l2"></i>watching now</span><span><i class="l3"></i>missed</span><span><i class="l4"></i>later</span><span class="total">Week: ${doneToday} of ${allToday * 5} classes</span>`;
+}
+
+function renderSide() {
+  const needs = P.needsYou.map((n, j) => `<div class="need ${j === 0 ? 'first' : ''}"><div class="t"><b>${n.what}</b><span>${n.detail}</span></div><button data-act="need" data-j="${j}">${n.action}</button></div>`).join('');
+  const sc = P.scores.map((s) => { const i = K.findIndex((k) => k.name === s.kid); return `<button class="score" data-act="kid" data-i="${i}"><span class="f" style="background:${tint(i)}">${K[i].face}</span><span class="w">${s.kid}, ${s.what}<small>${s.when}</small></span><span class="v">${s.score}</span></button>`; }).join('');
+  const m = P.program.where.match(/lesson (\d+) of (\d+)/);
+  const at = +m[1], of = +m[2];
+  let ls = ''; for (let n = 1; n <= of; n++) ls += `<i class="${n <= at ? 'on' : ''}"></i>`;
+  $('#side').innerHTML = `
+  <section class="blk needs"><h3>Needs you <span class="n">${P.needsYou.length}</span></h3>${needs}</section>
+  <section class="blk"><h3>Latest scores <button class="lnk" data-act="scores">All scores</button></h3>${sc}</section>
+  <section class="blk"><h3>Program <button class="lnk" data-act="program">Full program</button></h3>
+    <div class="prog"><p>${P.program.where.replace(/, lesson.*/, '')}</p><div class="lessons">${ls}<span>lesson ${at} of ${of}</span></div></div></section>`;
+}
+
+/* ---------- layers ---------- */
+const pop = $('#pop'), sheet = $('#sheet'), scrim = $('#scrim');
+function closeAll() { pop.classList.remove('on'); sheet.classList.remove('on'); scrim.classList.remove('on', 'clear'); }
+function openPop(anchor, html) {
+  closeAll(); pop.innerHTML = html; pop.classList.add('on'); scrim.classList.add('on', 'clear');
+  const r = anchor.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+  let x = Math.min(Math.max(12, r.left + r.width / 2 - pw / 2), innerWidth - pw - 12);
+  let y = r.bottom + 12, up = false;
+  if (y + ph > innerHeight - 12) { y = r.top - ph - 12; up = true; }
+  pop.classList.toggle('up', up);
+  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  pop.style.setProperty('--ax', (r.left + r.width / 2 - x) + 'px');
+}
+function openSheet(title, body) {
+  closeAll();
+  sheet.innerHTML = `<div class="hd"><h4>${title}</h4><button class="btn" data-act="close">Close</button></div>${body}`;
+  sheet.classList.add('on'); scrim.classList.add('on');
+}
+let tt; function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => e.classList.remove('on'), 2400); }
+
+function classPop(el, ci, i) {
+  const c = C[ci], k = K[i], st = c.state[i];
+  const word = { done: 'Done', now: 'Watching now', missed: 'Missed', later: 'Later today' }[st];
+  const cur = marks[ci + '-' + i] || (c.marks && c.marks[i]) || '';
+  let mk = ''; for (let n = 1; n <= 12; n++) mk += `<button class="${String(n) === cur ? 'sel' : ''}" data-act="mark" data-c="${ci}" data-i="${i}" data-n="${n}">${n}</button>`;
+  openPop(el, `<h4 style="color:${kc(i)}">${k.name}, ${c.subject}</h4><p class="st">${c.time}. ${c.title}. ${word}.</p>
+    ${st === 'later' ? '' : `<b>Give a mark, out of 12</b><div class="marks">${mk}</div>`}
+    <div class="row"><button class="btn" data-act="hw" data-c="${ci}" data-i="${i}">Set homework</button>${c.lesson ? '<button class="btn solid" data-act="play">Play on the TV</button>' : ''}</div>`);
+}
+
+function kidSheet(i) {
+  const k = K[i];
+  const rows = C.map((c, ci) => `<tr><td>${c.time}</td><td><b>${c.subject}</b><br>${c.title}</td><td>${{ done: 'Done', now: 'Watching', missed: 'Missed', later: 'Later' }[c.state[i]]}</td><td><b>${marks[ci + '-' + i] || (c.marks && c.marks[i]) || ''}</b></td></tr>`).join('');
+  const sc = P.scores.filter((s) => s.kid === k.name).map((s) => `<p>${s.what}: <b>${s.score}</b>, ${s.when.toLowerCase()}</p>`).join('') || '<p>No new scores this week.</p>';
+  openSheet(`<span style="color:${kc(i)}">${k.face} ${k.name}</span>, ${k.year}`, `
+    <p><b>${k.done} of ${k.of}</b> classes done today. Average mark <b>${k.average}</b>. ${k.homework ? `${k.homework} homework${k.late ? `, <b style="color:var(--missed)">${k.late} late</b>` : ''}.` : 'No homework.'}</p>
+    <table style="margin:12px 0"><tr><th>Time</th><th>Class</th><th>Today</th><th>Mark</th></tr>${rows}</table>${sc}`);
+}
+
+const actions = {
+  admin: () => { location.hash = '#admin'; },
+  back: () => { location.hash = ''; },
+  close: closeAll,
+  play: () => { closeAll(); toast(`Playing “${nowC.title}” on the TV`); },
+  class: (e) => classPop(e, +e.dataset.c, +e.dataset.i),
+  mark: (e) => { const key = e.dataset.c + '-' + e.dataset.i; marks[key] = e.dataset.n; const c = C[+e.dataset.c]; if (c.state[+e.dataset.i] === 'now') c.state[+e.dataset.i] = 'done'; renderMap(); closeAll(); toast(`${K[+e.dataset.i].name} got ${e.dataset.n} of 12 for ${c.subject}`); },
+  hw: (e) => { const c = C[+e.dataset.c], k = K[+e.dataset.i]; openSheet(`Homework for ${k.name}`, `<p>${c.subject}: ${c.title}</p><p style="margin-top:12px"><b>What to do</b></p><textarea placeholder="For example: read pages 16 to 19"></textarea><p style="margin-top:12px"><b>Due</b></p><div class="seg"><button class="sel">Tomorrow</button><button>Friday</button><button>Next week</button></div><div class="row" style="margin-top:20px;display:flex;gap:10px"><button class="btn solid" data-act="hwdone" data-n="${k.name}">Set homework</button></div>`); },
+  hwdone: (e) => { closeAll(); toast(`Homework set for ${e.dataset.n}`); },
+  kid: (e) => kidSheet(+e.dataset.i),
+  day: (e) => { const d = future[+e.dataset.f]; openPop(e, `<h4>${d[2]} ${d[1]} November</h4><p class="st">${C.length} classes planned for each child. Nothing done yet.</p><div class="row"><button class="btn" data-act="soon" data-t="The timetable">Open the timetable</button></div>`); },
+  soon: (e) => { closeAll(); toast(`${e.dataset.t} opens here`); },
+  need: (e) => {
+    const n = P.needsYou[+e.dataset.j];
+    if (n.action === 'Mark now') openSheet('Leo’s written answers', `<p>${n.detail}. Mark each one, then save.</p>${[1, 2, 3].map((q) => `<div class="ans"><b>Answer ${q}</b><div class="seg"><button>Right</button><button>Partly</button><button>Wrong</button></div></div>`).join('')}<div style="margin-top:18px"><button class="btn solid" data-act="soon" data-t="Saved. The marks">Save marks</button></div>`);
+    else if (n.action === 'Remind') { toast('Reminder sent to Leo'); }
+    else openSheet('Rate the Muscles lesson', `<p>${n.detail}. How good was it?</p><div class="row" style="margin:16px 0;display:flex;gap:8px">${[1, 2, 3, 4, 5].map((s) => `<button class="btn" data-act="rated" data-s="${s}">${'★'.repeat(s)}</button>`).join('')}</div>`);
+  },
+  rated: (e) => { closeAll(); toast(`You gave the Muscles lesson ${e.dataset.s} of 5`); },
+  scores: () => {
+    const rows = P.scores.map((s) => `<tr><td>${s.when}</td><td>${s.kid}</td><td>${s.what}</td><td><b>${s.score}</b></td></tr>`).join('');
+    const avg = K.map((k, i) => `<tr><td colspan="3"><span style="color:${kc(i)};font-weight:800">${k.face} ${k.name}</span>, average</td><td><b>${k.average}</b></td></tr>`).join('');
+    openSheet('All scores', `<table><tr><th>When</th><th>Child</th><th>Test</th><th>Score</th></tr>${rows}</table><table style="margin-top:18px">${avg}</table>`);
+  },
+  program: () => openSheet('The program', `<p>${P.admin.plan}. ${P.program.subjects} subjects, ${P.program.readyLessons} video lessons ready so far.</p><p style="margin-top:10px">Now: <b>${P.program.where}</b>.</p><div style="margin-top:18px"><button class="btn solid" data-act="soon" data-t="The program document">Open the program document</button></div>`),
+  feedback: () => openSheet('Send feedback', `<p>What works, what doesn't, what you wish it did.</p><textarea style="margin-top:10px"></textarea><div style="margin-top:16px"><button class="btn solid" data-act="soon" data-t="Thank you. Your feedback">Send</button></div>`),
+  size: (e) => { const cur = document.documentElement.dataset.size || 'l'; openPop(e, `<h4>Text size</h4><p class="st">The whole pad gets bigger or smaller.</p><div class="seg">${[['s', 'Standard'], ['l', 'Large'], ['xl', 'Extra large']].map(([v, t]) => `<button class="${v === cur ? 'sel' : ''}" data-act="setsize" data-v="${v}">${t}</button>`).join('')}</div>`); },
+  setsize: (e) => { document.documentElement.dataset.size = e.dataset.v; closeAll(); },
+};
+document.addEventListener('click', (ev) => {
+  const el = ev.target.closest('[data-act]');
+  if (el) { actions[el.dataset.act]?.(el); return; }
+  if (ev.target === scrim) closeAll();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+const seg = (ev) => { const b = ev.target.closest('.seg button:not([data-act])'); if (b) { b.parentNode.querySelectorAll('button').forEach((x) => x.classList.remove('sel')); b.classList.add('sel'); } };
+document.addEventListener('click', seg);
+
+/* ---------- admin page ---------- */
+function renderAdmin() {
+  const a = P.admin;
+  const secs = [
+    ['account', 'Your account', [['Name', a.account.name], ['Username', a.account.username], ['Text size', a.account.textSize]], 'Change password'],
+    ['family', 'Family', [...P.parents.map((p) => ['Parent', p.name + (p.you ? ' (you)' : '')]), ...K.map((k) => ['Child', `<span class="face">${k.face}</span> ${k.name}, ${k.year}`])], 'Add a child'],
+    ['plan', 'Learning plan', [['Curriculum', a.plan], ['Word help', a.wordHelp], ['Subjects', P.program.subjects + ' subjects']], 'Change the plan'],
+    ['billing', 'Plan and billing', [['Plan', a.billing], ['Charged', 'Per child, when the trial ends']], 'See plans'],
+    ['checks', 'Feedback and checks', [['Exam PIN', a.examPin], ['Feedback', 'Tell us what to fix']], 'Send feedback'],
+  ];
+  $('#admin').innerHTML = `<div class="adtop"><button class="back" data-act="back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M15 5l-7 7 7 7"/></svg>Back to the week</button><h1>Admin</h1></div>
+  <nav class="adnav">${secs.map((s) => `<a href="#admin" data-go="${s[0]}">${s[1]}</a>`).join('')}</nav>
+  ${secs.map((s) => `<section class="adsec" id="ad-${s[0]}"><h2>${s[1]}</h2>${s[2].map((r) => `<div class="adrow"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}<div class="adrow"><span class="k"></span><span class="v"></span><button data-act="${s[0] === 'checks' ? 'feedback' : 'soon'}" data-t="${s[4] || s[3]}">${s[3]}</button></div></section>`).join('')}
+  <section class="adsec"><div class="adrow"><span class="k">Signed in as ${a.account.name}</span><span class="v"></span><button data-act="soon" data-t="Sign out">Sign out</button></div></section>`;
+  document.querySelectorAll('[data-go]').forEach((l) => l.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('ad-' + l.dataset.go).scrollIntoView({ behavior: 'smooth' }); }));
+}
+
+function route() {
+  closeAll();
+  const admin = location.hash === '#admin';
+  document.body.classList.toggle('is-admin', admin);
+  if (admin) { renderAdmin(); scrollTo(0, 0); }
+}
+renderTop(); renderMap(); renderSide(); route();
+addEventListener('hashchange', route);
+</script>
+</body>
+</html>

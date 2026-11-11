@@ -1,0 +1,25 @@
+Home School TV
+Copyright (c) 2026 zetwin. All rights reserved.
+
+The code, lesson scripts, tests, designs, drawings and documents in this
+repository are published so people can read them. No licence is granted to
+copy, change, publish, distribute, sell or use them in another product or
+service, in whole or in part, without written permission from the copyright
+holder.
+
+Third-party material in this repository keeps its own licence and is not
+covered by the notice above. This includes:
+
+- Pictures listed in channel/assets/img/credits.json (Wikimedia Commons,
+  OpenStax and others), each under the licence named there.
+- Icons and avatars from Fluent Emoji by Microsoft (MIT licence).
+- GSAP 3.12.5 in channel/vendor/gsap.min.js (GSAP standard licence).
+- QRCode.js in channel/vendor/qrcode.min.js (MIT licence).
+- Textures in tools/kid-art/tex/ from Poly Haven (CC0).
+- England's National Curriculum documents in channel/official/ and
+  docs/official/ (Crown copyright, Open Government Licence v3.0).
+- Recorded narration made with the Kokoro (Apache 2.0) and Chatterbox (MIT)
+  voice models.
+
+If you would like to use something from this repository, open an issue on
+GitHub to ask.

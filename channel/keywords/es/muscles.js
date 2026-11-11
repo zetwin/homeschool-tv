@@ -1,0 +1,27 @@
+/* Spanish word help for Muscles. Each pair: the English word as said in the lesson (forms split by |), then the Spanish.
+   Written by Claude on 2026-11-07, in neutral Latin American Spanish. A fluent speaker should read it; parents never have to. See docs/product/LANGUAGES.md. */
+((window.KEYWORDS ??= {}).es ??= {})['muscles'] = [
+  ['muscle|muscles', 'el músculo'],
+  ['muscle cell|muscle cells', 'la célula muscular'],
+  ['cell|cells', 'la célula'],
+  ['bone|bones', 'el hueso'],
+  ['joint|joints', 'la articulación'],
+  ['tendon|tendons', 'el tendón'],
+  ['contract|contracts', 'contraerse'],
+  ['relax|relaxes', 'relajarse'],
+  ['pull|pulls', 'tirar'],
+  ['shorter', 'más corto'],
+  ['energy', 'la energía'],
+  ['food', 'la comida'],
+  ['oxygen', 'el oxígeno'],
+  ['heart', 'el corazón'],
+  ['stomach', 'el estómago'],
+  ['skeletal muscle|skeletal', 'el músculo esquelético'],
+  ['cardiac muscle|cardiac', 'el músculo cardíaco'],
+  ['smooth muscle', 'el músculo liso'],
+  ['biceps', 'el bíceps'],
+  ['triceps', 'el tríceps'],
+  ['exercise', 'el ejercicio'],
+  ['breathe', 'respirar'],
+  ['strong|stronger', 'fuerte'],
+];

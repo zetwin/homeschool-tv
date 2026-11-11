@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendar day: three children side by side on a time grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #ffffff; --chrome: #f3f4f6; --grid: #e2e5e9; --grid-half: #eef0f3;
+  --ink: #1b1f25; --muted: #4f5662; --red: #d93025; --red-ink: #b3261e;
+  --line: #cfd4da; --focus: #1a56db; --late: #b3261e;
+  --fs: 17px;
+  font-size: var(--fs);
+}
+:root[data-size="large"] { --fs: 18.5px; }
+:root[data-size="xl"] { --fs: 20px; }
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); background: var(--paper); font-size: 1rem; line-height: 1.3; font-variant-numeric: tabular-nums; overflow: hidden; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+svg.i { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- top bar ---------- */
+.app { height: 100vh; display: grid; grid-template-rows: auto 1fr; }
+.top { display: flex; align-items: center; gap: 10px; padding: 12px 20px 12px 24px; border-bottom: 1px solid var(--grid); }
+.top h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+.top .sp { flex: 1; }
+.tb { height: 48px; min-width: 48px; padding: 0 14px; border-radius: 24px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; }
+.tb:hover { background: var(--chrome); }
+.tb.icon { padding: 0; width: 48px; }
+.tb.admin { border: 1.5px solid var(--line); text-decoration: none; color: var(--ink); }
+
+/* ---------- main area ---------- */
+.main { min-height: 0; display: grid; grid-template-columns: 1fr 360px; }
+.cal { min-height: 0; display: grid; grid-template-rows: auto 1fr; padding: 0 0 14px 0; }
+.heads { display: grid; grid-template-columns: 70px repeat(3, 1fr); border-bottom: 1px solid var(--grid); }
+.kh { display: flex; align-items: center; gap: 12px; padding: 12px 14px; text-align: left; border-left: 1px solid var(--grid); min-height: 76px; }
+.kh:hover { background: var(--chrome); }
+.face { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 26px; flex: none; background: var(--k-tint); box-shadow: inset 0 0 0 2.5px var(--k); }
+.kh .nm { font-size: 1.3rem; font-weight: 700; line-height: 1.1; }
+.kh .sub { color: var(--muted); display: block; line-height: 1.25; }
+.kh .sub b { color: var(--ink); font-weight: 700; }
+.kh .sub .late { color: var(--late); font-weight: 700; }
+
+.grid { position: relative; display: grid; grid-template-columns: 70px repeat(3, 1fr); min-height: 0; margin-top: 10px; }
+.gutter { position: relative; }
+.hour { position: absolute; right: 10px; transform: translateY(-50%); color: var(--muted); font-size: 1rem; font-weight: 500; }
+.col { position: relative; border-left: 1px solid var(--grid); }
+.hl { position: absolute; left: 0; right: 0; border-top: 1px solid var(--grid); }
+.hl.half { border-top: 1px dashed var(--grid-half); }
+.ev { position: absolute; left: 6px; right: 8px; border-radius: 8px; padding: 7px 10px 6px 14px; text-align: left; overflow: hidden; display: flex; flex-direction: column; gap: 1px; transition: transform .12s ease-out, box-shadow .12s; }
+.ev::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--k); }
+.ev .s { font-weight: 700; font-size: 1.06rem; line-height: 1.2; }
+.ev .st { display: flex; align-items: center; gap: 6px; line-height: 1.25; }
+.ev .tt { color: var(--muted); line-height: 1.25; display: none; }
+.ev.now .tt { color: #fff; }
+.ev .st:empty { display: none; }
+@media (orientation: portrait) { .ev .st.lt { display: none; } }
+.ev.crossed { justify-content: space-between; }
+.ev:active { transform: scale(.98); }
+.ev.done { background: var(--k-tint); }
+.ev.done .st svg { color: var(--k); }
+.ev.later { background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--k-line); }
+.ev.later::before { opacity: .45; }
+.ev.later .st { color: var(--muted); }
+.ev.now { background: var(--k); color: #fff; box-shadow: 0 6px 16px -6px var(--k); }
+.ev.now::before { background: rgba(255,255,255,.55); }
+.ev.missed { background: repeating-linear-gradient(135deg, #f1f2f4 0 8px, #e7e9ec 8px 16px); }
+.ev.missed::before { background: #8a919c; }
+.ev.missed .st { color: var(--late); font-weight: 700; }
+.ev .mk { margin-left: auto; font-weight: 800; font-size: 1.05rem; }
+.ev.sel { outline: 3px solid var(--ink); outline-offset: 1px; }
+
+.nowline { position: absolute; left: 62px; right: 0; height: 0; border-top: 2.5px solid var(--red); z-index: 3; pointer-events: none; }
+.nowline::before { content: ''; position: absolute; left: -7px; top: -8px; width: 13px; height: 13px; border-radius: 50%; background: var(--red); }
+.nowtag { position: absolute; left: 0; width: 60px; transform: translateY(-50%); z-index: 3; text-align: right; padding-right: 2px; font-weight: 800; color: var(--red-ink); background: var(--paper); }
+
+/* ---------- side rail ---------- */
+.rail { background: var(--chrome); border-left: 1px solid var(--grid); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.rail h2 { font-size: 1.15rem; font-weight: 700; display: flex; align-items: baseline; gap: 8px; padding: 0 4px; }
+.rail h2 .n { display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 8px; border-radius: 14px; background: var(--red-ink); color: #fff; font-size: 1rem; }
+.need { background: var(--paper); border-radius: 12px; padding: 12px 12px 12px 14px; display: grid; grid-template-columns: 1fr auto; column-gap: 10px; row-gap: 4px; border: 1px solid var(--grid); align-items: start; }
+.need .w { font-weight: 700; font-size: 1.04rem; line-height: 1.25; }
+.need .d { color: var(--muted); grid-column: 1 / -1; }
+.need .act { justify-self: end; height: 44px; padding: 0 18px; border-radius: 22px; background: var(--ink); color: #fff; font-weight: 700; }
+.need .act.soft { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.needs { display: grid; gap: 8px; }
+.scores { display: grid; gap: 0; background: var(--paper); border: 1px solid var(--grid); border-radius: 12px; overflow: hidden; }
+.sc { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 8px; padding: 9px 12px; min-height: 48px; border-top: 1px solid var(--grid); text-align: left; }
+.sc:first-child { border-top: 0; }
+.sc .dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 17px; background: var(--k-tint); }
+.sc .r { font-weight: 800; white-space: nowrap; }
+.sc .wh { line-height: 1.2; }
+.sc .wh small { display: block; color: var(--muted); font-size: 1rem; }
+.rail .more { align-self: stretch; height: 44px; border-radius: 10px; font-weight: 700; text-align: left; padding: 0 6px; display: flex; align-items: center; gap: 6px; }
+.rail .more:hover { background: #e7e9ec; }
+.rail .prog { margin-top: auto; padding: 12px 14px; background: var(--paper); border: 1px solid var(--grid); border-radius: 12px; text-align: left; display: grid; gap: 2px; }
+.rail .prog .l { color: var(--muted); }
+.rail .prog .v { font-weight: 700; }
+.rail .sect { display: grid; gap: 8px; }
+.scoreline { display: none; grid-column: 1 / -1; align-items: center; gap: 16px; padding: 8px 14px; min-height: 52px; background: var(--paper); border: 1px solid var(--grid); border-radius: 12px; text-align: left; }
+.scoreline .l { color: var(--muted); }
+.scoreline .one { display: inline-flex; align-items: center; gap: 6px; }
+.scoreline .one b { white-space: nowrap; }
+
+/* ---------- popover ---------- */
+.scrim { position: fixed; inset: 0; z-index: 20; background: transparent; display: none; }
+.scrim.dim { background: rgba(20, 24, 30, .35); }
+.scrim.on { display: block; }
+.pop { position: fixed; z-index: 21; width: 380px; background: var(--paper); border-radius: 16px; box-shadow: 0 24px 60px -12px rgba(15,20,30,.35), 0 0 0 1px rgba(15,20,30,.08); padding: 18px 18px 16px; display: none; transform-origin: var(--ox, left) center; }
+.pop.on { display: block; animation: pop .22s cubic-bezier(.2,.8,.3,1); }
+@keyframes pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+.pop .arrow { position: absolute; width: 18px; height: 18px; background: var(--paper); transform: rotate(45deg); top: var(--ay, 40px); box-shadow: -1px 1px 0 rgba(15,20,30,.08); }
+.pop .arrow.l { left: -8px; } .pop .arrow.r { right: -8px; box-shadow: 1px -1px 0 rgba(15,20,30,.08); }
+.ph { display: flex; gap: 12px; align-items: flex-start; }
+.ph .face { width: 44px; height: 44px; font-size: 24px; }
+.ph h3 { font-size: 1.35rem; line-height: 1.15; }
+.ph .t { color: var(--muted); margin-top: 2px; }
+.ph .x { margin-left: auto; width: 44px; height: 44px; border-radius: 22px; display: grid; place-items: center; flex: none; margin-top: -8px; margin-right: -8px; }
+.ph .x:hover { background: var(--chrome); }
+.pstate { margin: 12px 0 2px; padding: 10px 12px; border-radius: 10px; background: var(--chrome); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.prow { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-top: 1px solid var(--grid); }
+.prow:first-of-type { margin-top: 10px; }
+.prow .lb { font-weight: 700; flex: 1; }
+.step { display: flex; align-items: center; border: 1.5px solid var(--line); border-radius: 24px; }
+.step button { width: 46px; height: 46px; display: grid; place-items: center; font-size: 1.4rem; font-weight: 600; border-radius: 23px; }
+.step button:hover { background: var(--chrome); }
+.step output { min-width: 66px; text-align: center; font-weight: 800; font-size: 1.15rem; }
+.btn { height: 48px; padding: 0 18px; border-radius: 24px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.pri { background: var(--ink); color: #fff; }
+.btn.sec { box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn.tv { background: var(--red); color: #fff; width: 100%; height: 54px; font-size: 1.08rem; margin-top: 4px; }
+.pfoot { display: flex; gap: 10px; margin-top: 4px; }
+.pfoot .btn { flex: 1; }
+textarea { width: 100%; min-height: 84px; font: inherit; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); resize: none; color: var(--ink); }
+.hwbox { display: none; padding-bottom: 6px; } .hwbox.on { display: grid; gap: 8px; }
+
+/* ---------- sheet (scores, program, marking, feedback) ---------- */
+.sheet { position: fixed; z-index: 21; left: 50%; top: 50%; width: min(640px, calc(100vw - 48px)); max-height: calc(100vh - 80px); transform: translate(-50%, -50%); background: var(--paper); border-radius: 18px; box-shadow: 0 30px 80px -20px rgba(15,20,30,.45); display: none; flex-direction: column; }
+.sheet.on { display: flex; animation: sh .3s cubic-bezier(.2,.8,.3,1); }
+@keyframes sh { from { opacity: 0; transform: translate(-50%, -46%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+.sheet header { display: flex; align-items: center; gap: 12px; padding: 14px 14px 12px 22px; border-bottom: 1px solid var(--grid); }
+.sheet header h3 { font-size: 1.35rem; flex: 1; }
+.sheet .body { padding: 16px 22px 20px; overflow: auto; display: grid; gap: 12px; }
+.sheet table { border-collapse: collapse; width: 100%; }
+.sheet td, .sheet th { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--grid); }
+.sheet th { color: var(--muted); font-weight: 600; }
+.ans { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--grid); }
+.seg { display: flex; border: 1.5px solid var(--line); border-radius: 24px; overflow: hidden; }
+.seg button { height: 46px; padding: 0 14px; font-weight: 600; }
+.seg button + button { border-left: 1.5px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.stars { display: flex; gap: 6px; }
+.stars button { width: 52px; height: 52px; border-radius: 26px; display: grid; place-items: center; }
+.stars svg { width: 34px; height: 34px; stroke: var(--ink); stroke-width: 1.6; fill: none; }
+.stars button.on svg { fill: #f2b01e; stroke: #8a5a00; }
+.sizes { display: grid; gap: 8px; }
+.sizes button { height: 56px; border-radius: 12px; box-shadow: inset 0 0 0 1.5px var(--line); text-align: left; padding: 0 16px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+.sizes button[aria-pressed="true"] { box-shadow: inset 0 0 0 2.5px var(--ink); }
+
+.toast { position: fixed; z-index: 40; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 12px; font-weight: 600; opacity: 0; transition: opacity .2s, transform .25s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Admin page ---------- */
+.adm { display: none; height: 100vh; grid-template-rows: auto 1fr; background: var(--chrome); }
+body.is-admin .app { display: none; }
+body.is-admin .adm { display: grid; }
+.adm .top { background: var(--paper); }
+.back { height: 48px; padding: 0 16px 0 8px; border-radius: 24px; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--focus); font-size: 1.05rem; }
+.back:hover { background: var(--chrome); }
+.adm .top h1 { font-size: 1.5rem; margin-left: 8px; }
+.split { display: grid; grid-template-columns: 330px 1fr; min-height: 0; }
+.alist { padding: 20px 16px; border-right: 1px solid var(--grid); overflow: auto; }
+.alist .who { display: flex; gap: 14px; align-items: center; padding: 14px; background: var(--paper); border-radius: 14px; margin-bottom: 18px; }
+.alist .who .av { width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 1.4rem; font-weight: 700; }
+.alist .who b { font-size: 1.2rem; display: block; }
+.alist .who span span { color: var(--muted); }
+.alist nav { background: var(--paper); border-radius: 14px; overflow: hidden; }
+.alist nav button { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 16px; text-align: left; font-weight: 600; border-top: 1px solid var(--grid); }
+.alist nav button:first-child { border-top: 0; }
+.alist nav button .ic { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; color: #fff; }
+.alist nav button .ic svg { width: 20px; height: 20px; }
+.alist nav button[aria-current="true"] { background: #e3ebfd; }
+.alist nav button .chev { margin-left: auto; color: var(--muted); }
+.adetail { overflow: auto; padding: 26px 34px 40px; }
+.adetail h2 { font-size: 1.9rem; letter-spacing: -0.02em; margin-bottom: 18px; }
+.group { background: var(--paper); border-radius: 14px; overflow: hidden; margin-bottom: 8px; }
+.group .row { display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 10px 18px; border-top: 1px solid var(--grid); }
+.group .row:first-child { border-top: 0; }
+.group .row .k { flex: 1; font-weight: 600; }
+.group .row .v { color: var(--muted); text-align: right; }
+.group .row button.v { color: var(--focus); font-weight: 600; min-height: 44px; }
+.note { color: var(--muted); padding: 0 18px 22px; }
+.gtitle { color: var(--muted); font-weight: 600; padding: 0 18px 8px; }
+
+/* ---------- upright ---------- */
+@media (orientation: portrait) {
+  .main { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
+  .rail { border-left: 0; border-top: 1px solid var(--grid); padding: 14px 18px 16px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto auto; column-gap: 10px; row-gap: 10px; }
+  .rail .sect.needsect { display: contents; }
+  .rail .sect.needsect h2 { grid-column: 1 / -1; }
+  .rail .needs { display: contents; }
+  .rail .scoresect { display: none; }
+  .rail .prog { grid-column: 1 / -1; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+  .rail .prog .v { flex: 1; }
+  .need { grid-template-rows: auto 1fr auto; }
+  .ev .tt { display: block; }
+  .split { grid-template-columns: 300px 1fr; }
+  .need { grid-template-columns: 1fr; }
+  .need .act { grid-row: 3; justify-self: start; margin-top: 6px; }
+  .scoreline { display: flex; }
+  .tb.ic-p .lbl { display: none; }
+  .tb.ic-p { padding: 0; width: 48px; }
+  .top h1 { font-size: 1.5rem; }
+  .ev.crossed .tt { display: none; }
+}
+/* bigger text: fewer things in the rail, nothing cut. The program stays one tap away in the top bar */
+@media (orientation: landscape) { :root[data-size="xl"] .rail .prog, :root[data-size="large"] .rail .prog { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <h1 id="date"></h1>
+    <span class="sp"></span>
+    <button class="tb" data-open="program"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg><span class="lbl">Program</span></button>
+    <button class="tb" data-open="scores"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span class="lbl">Scores</span></button>
+    <button class="tb ic-p" data-open="feedback" aria-label="Feedback"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg><span class="lbl">Feedback</span></button>
+    <button class="tb icon" data-open="size" aria-label="Text size"><svg class="i" viewBox="0 0 24 24"><path d="M3 19l5-13 5 13M4.8 14.5h6.4M14 19l3.5-9 3.5 9M15.2 16h4.6"/></svg></button>
+    <a class="tb admin" href="#admin" aria-label="Admin"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="lbl">Admin</span></a>
+  </header>
+  <div class="main">
+    <section class="cal" aria-label="Today's classes">
+      <div class="heads" id="heads"><div></div></div>
+      <div class="grid" id="grid"></div>
+    </section>
+    <aside class="rail" id="rail"></aside>
+  </div>
+</div>
+
+<div class="adm" id="adm">
+  <header class="top">
+    <button class="back" id="back"><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Today</button>
+    <h1>Admin</h1>
+  </header>
+  <div class="split">
+    <div class="alist"><div class="who" id="who"></div><nav id="anav"></nav></div>
+    <div class="adetail" id="adetail"></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="pop" id="pop" role="dialog" aria-modal="true"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../data.js"></script>
+<script>
+const P = window.PAD;
+const $ = (s, r = document) => r.querySelector(s);
+const tint = { '#D42A20': '#fbe7e5', '#0F766E': '#ddf1ee', '#1D4ED8': '#e2e9fc' };
+const line = { '#D42A20': '#eaa29d', '#0F766E': '#8fc6bf', '#1D4ED8': '#9fb5ef' };
+const kv = (k) => `--k:${k.color};--k-tint:${tint[k.color]};--k-line:${line[k.color]}`;
+const min = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const fmt = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+const LEN = 45, START = min('08:45'), END = min('14:30');
+const pct = (m) => ((m - START) / (END - START)) * 100;
+const ICON = {
+  check: '<svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+  play: '<svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;stroke:none"><path d="M7 4.5v15l13-7.5z"/></svg>',
+  tv: '<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>',
+  x: '<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  star: '<svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>',
+};
+const STATE = { done: 'Done', now: 'Watching now', later: 'Later', missed: 'Missed' };
+const toast = (t) => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 2400); };
+
+/* ---------- pad ---------- */
+$('#date').textContent = P.today;
+const heads = $('#heads');
+P.kids.forEach((k, i) => {
+  const hw = k.late ? `${k.homework} homework, <span class="late">${k.late} late</span>` : k.homework ? `${k.homework} homework` : 'No homework';
+  heads.insertAdjacentHTML('beforeend', `<button class="kh" style="${kv(k)}" data-kid="${i}">
+    <span class="face" aria-hidden="true">${k.face}</span>
+    <span><span class="nm">${k.name}</span><span class="sub"><b>${k.done} of ${k.of}</b> done</span><span class="sub">${hw}</span></span></button>`);
+});
+const grid = $('#grid');
+let g = '<div class="gutter">';
+for (let h = 9; h <= 14; h++) g += `<span class="hour" style="top:${pct(h * 60)}%">${h}:00</span>`;
+g += '</div>';
+P.kids.forEach((k, ki) => {
+  g += `<div class="col" style="${kv(k)}">`;
+  for (let h = 9; h <= 14; h++) g += `<div class="hl" style="top:${pct(h * 60)}%"></div><div class="hl half" style="top:${pct(h * 60 + 30)}%"></div>`;
+  P.classes.forEach((c, ci) => {
+    const s = c.state[ki], st = min(c.time), mark = (c.marks || [])[ki];
+    const icon = s === 'done' ? ICON.check : s === 'now' && c.lesson ? ICON.play : '';
+    const crossed = min(P.now) > st && min(P.now) < st + LEN ? ' crossed' : '';
+    const status = s === 'later' ? '' : `${icon}${STATE[s]}${mark ? `<span class="mk">${mark}</span>` : ''}`;
+    g += `<button class="ev ${s}${crossed}" style="top:calc(${pct(st)}% + 2px);height:calc(${pct(st + LEN) - pct(st)}% - 4px)" data-k="${ki}" data-c="${ci}" aria-label="${k.name}, ${c.subject}, ${STATE[s]}">
+      <span class="s">${c.subject}</span>
+      <span class="tt">${c.title}</span>
+      <span class="st">${status}</span>${s === 'later' ? `<span class="st lt">${fmt(st)} to ${fmt(st + LEN)}</span>` : ''}</button>`;
+  });
+  g += '</div>';
+});
+const nowM = min(P.now);
+g += `<div class="nowline" style="top:${pct(nowM)}%"></div><div class="nowtag" style="top:${pct(nowM)}%">${P.now}</div>`;
+grid.innerHTML = g;
+
+const rail = $('#rail');
+const kidBy = (n) => P.kids.find((k) => k.name === n);
+rail.innerHTML = `<div class="sect needsect"><h2>Needs you <span class="n">${P.needsYou.length}</span></h2><div class="needs">${P.needsYou.map((n, i) => `
+  <div class="need"><div class="w">${n.what}</div><button class="act${i ? ' soft' : ''}" data-need="${i}">${n.action}</button><div class="d">${n.detail}</div></div>`).join('')}</div></div>
+  <div class="sect scoresect"><h2>Latest scores</h2><div class="scores" data-open="scores" role="button" tabindex="0">${P.scores.map((s) => { const k = kidBy(s.kid); return `
+  <div class="sc" style="${kv(k)}"><span class="dot" aria-hidden="true">${k.face}</span><span class="wh">${s.kid}, ${s.what.replace(', lesson test', '')}<small>${s.when}</small></span><span class="r">${s.score}</span></div>`; }).join('')}</div>
+</div>
+  <button class="scoreline" data-open="scores"><span class="l">Latest scores</span>${P.scores.map((x) => `<span class="one"><span aria-hidden="true">${kidBy(x.kid).face}</span>${x.kid} <b>${x.score}</b></span>`).join('')}</button>
+  <button class="prog" data-open="program"><span class="l">In the program</span><span class="v">${P.program.where}</span></button>`;
+
+/* ---------- layers ---------- */
+const pop = $('#pop'), sheet = $('#sheet'), scrim = $('#scrim');
+function closeAll() { pop.classList.remove('on'); sheet.classList.remove('on'); scrim.classList.remove('on', 'dim'); document.querySelectorAll('.ev.sel').forEach((e) => e.classList.remove('sel')); }
+scrim.addEventListener('click', closeAll);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+
+function place(anchor) {
+  const r = anchor.getBoundingClientRect(), W = 380, gap = 14;
+  pop.style.width = Math.min(W, innerWidth - 32) + 'px';
+  pop.classList.add('on');
+  const h = pop.offsetHeight, w = pop.offsetWidth;
+  let left = r.right + gap, side = 'l';
+  if (left + w > innerWidth - 12) { left = r.left - gap - w; side = 'r'; }
+  if (left < 12) { left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2)); side = ''; }
+  const mid = r.top + Math.min(r.height, 120) / 2;
+  let top = Math.max(12, Math.min(innerHeight - h - 12, mid - 48));
+  pop.style.left = left + 'px'; pop.style.top = top + 'px';
+  pop.style.setProperty('--ay', Math.max(18, Math.min(h - 36, mid - top - 9)) + 'px');
+  pop.style.setProperty('--ox', side === 'r' ? 'right' : 'left');
+  const a = pop.querySelector('.arrow'); if (a) { a.className = 'arrow ' + side; a.style.display = side ? '' : 'none'; }
+}
+
+function openClass(btn) {
+  closeAll();
+  const k = P.kids[btn.dataset.k], c = P.classes[btn.dataset.c], s = c.state[btn.dataset.k];
+  const st = min(c.time); let mark = +((c.marks || [])[btn.dataset.k] || 0) || (s === 'done' ? 10 : 0);
+  btn.classList.add('sel');
+  pop.style.cssText = kv(k);
+  pop.innerHTML = `<span class="arrow l"></span>
+    <div class="ph"><span class="face" aria-hidden="true">${k.face}</span><div><h3>${k.name}, ${c.subject}</h3><div class="t">${c.title}</div><div class="t">${fmt(st)} to ${fmt(st + LEN)}</div></div><button class="x" aria-label="Close">${ICON.x}</button></div>
+    <div class="pstate">${s === 'done' ? ICON.check : ''}${STATE[s]}${s === 'done' && (c.marks || [])[btn.dataset.k] ? `, mark ${(c.marks || [])[btn.dataset.k]} of 12` : ''}</div>
+    <div class="prow"><span class="lb">Mark</span><div class="step"><button data-d="-1" aria-label="Lower">−</button><output>${mark ? mark + ' of 12' : 'None'}</output><button data-d="1" aria-label="Higher">+</button></div></div>
+    <div class="prow"><span class="lb">Homework</span><button class="btn sec" data-hw>Set homework</button></div>
+    <div class="hwbox"><textarea placeholder="What should ${k.name} do, and by when?"></textarea></div>
+    ${c.lesson ? `<button class="btn tv" data-tv>${ICON.tv} Play this lesson on the TV</button>` : ''}
+    <div class="pfoot"><button class="btn sec" data-close>Cancel</button><button class="btn pri" data-save>Save</button></div>`;
+  place(btn);
+  scrim.classList.add('on');
+  const out = pop.querySelector('output');
+  pop.querySelectorAll('.step button').forEach((b) => b.onclick = () => { mark = Math.max(0, Math.min(12, mark + +b.dataset.d)); out.textContent = mark ? mark + ' of 12' : 'None'; });
+  pop.querySelector('[data-hw]').onclick = (e) => { pop.querySelector('.hwbox').classList.add('on'); e.target.closest('.prow').style.display = 'none'; place(btn); pop.querySelector('textarea').focus(); };
+  pop.querySelector('.x').onclick = closeAll; pop.querySelector('[data-close]').onclick = closeAll;
+  pop.querySelector('[data-save]').onclick = () => { closeAll(); toast(`Saved for ${k.name}`); };
+  const tv = pop.querySelector('[data-tv]'); if (tv) tv.onclick = () => { closeAll(); toast(`${c.subject} is playing on the TV`); };
+}
+
+function openKid(btn) {
+  closeAll();
+  const k = P.kids[btn.dataset.kid], i = +btn.dataset.kid;
+  const last = P.scores.find((s) => s.kid === k.name);
+  pop.style.cssText = kv(k);
+  pop.innerHTML = `<span class="arrow"></span>
+    <div class="ph"><span class="face" aria-hidden="true">${k.face}</span><div><h3>${k.name}</h3><div class="t">${k.year}</div></div><button class="x" aria-label="Close">${ICON.x}</button></div>
+    <div class="prow"><span class="lb">Today</span><span>${k.done} of ${k.of} classes done</span></div>
+    <div class="prow"><span class="lb">Average</span><span>${k.average}</span></div>
+    <div class="prow"><span class="lb">Homework</span><span>${k.homework ? `${k.homework} open${k.late ? `, <b style="color:var(--late)">${k.late} late</b>` : ''}` : 'None open'}</span></div>
+    ${last ? `<div class="prow"><span class="lb">Latest</span><span>${last.what}, <b>${last.score}</b></span></div>` : ''}
+    <div class="pfoot"><button class="btn sec" data-open="scores">${k.name}'s scores</button></div>`;
+  place(btn); scrim.classList.add('on');
+  pop.querySelector('.x').onclick = closeAll;
+}
+
+function openSheet(kind, arg) {
+  closeAll();
+  let title = '', body = '';
+  if (kind === 'scores') {
+    title = 'Scores';
+    body = `<table><tr><th>Child</th><th>Test</th><th>Score</th><th>When</th></tr>${P.scores.map((s) => `<tr><td><b>${s.kid}</b></td><td>${s.what}</td><td><b>${s.score}</b></td><td>${s.when}</td></tr>`).join('')}</table>
+      <table><tr><th>Child</th><th>Average</th><th>Today</th></tr>${P.kids.map((k) => `<tr><td><b>${k.name}</b>, ${k.year}</td><td>${k.average}</td><td>${k.done} of ${k.of} done</td></tr>`).join('')}</table>`;
+  } else if (kind === 'program') {
+    title = 'Program';
+    body = `<p><b>${P.admin.plan}</b>, ${P.program.subjects} subjects. ${P.program.readyLessons} video lessons are ready to play.</p>
+      <div class="group" style="background:var(--chrome)"><div class="row"><span class="k">Where you are</span></div><div class="row" style="font-size:1.15rem;font-weight:700">${P.program.where}</div></div>
+      <table><tr><th>Time</th><th>Today's class</th></tr>${P.classes.map((c) => `<tr><td>${c.time}</td><td><b>${c.subject}</b>: ${c.title}${c.lesson ? ' (video lesson)' : ''}</td></tr>`).join('')}</table>`;
+  } else if (kind === 'feedback') {
+    title = 'Send feedback';
+    body = `<p>Tell us what works and what doesn't. We read every note.</p><textarea placeholder="Your note"></textarea><div class="pfoot"><button class="btn sec" data-close>Cancel</button><button class="btn pri" data-sent>Send</button></div>`;
+  } else if (kind === 'size') {
+    title = 'Text size';
+    const cur = document.documentElement.dataset.size || 'standard';
+    body = `<div class="sizes">${[['standard', 'Standard', 17], ['large', 'Large', 18.5], ['xl', 'Extra large', 20]].map(([v, n, px]) => `<button data-size="${v}" aria-pressed="${cur === v}" style="font-size:${px}px">${n}<span>Aa</span></button>`).join('')}</div>`;
+  } else if (kind === 'need') {
+    const n = P.needsYou[arg];
+    title = n.what;
+    if (arg === 0) body = `<p>${n.detail}. Read each answer, then choose.</p>${[1, 2, 3].map((q) => `<div class="ans"><span><b>Answer ${q} of 3</b></span><div class="seg" role="group"><button aria-pressed="false">Right</button><button aria-pressed="false">Partly</button><button aria-pressed="false">Wrong</button></div></div>`).join('')}<div class="pfoot"><button class="btn sec" data-close>Later</button><button class="btn pri" data-done="Marking saved">Save marks</button></div>`;
+    if (arg === 1) body = `<p>${n.detail}.</p><p>Leo will see the reminder on his own screen when he signs in.</p><div class="pfoot"><button class="btn sec" data-close>Cancel</button><button class="btn pri" data-done="Reminder sent to Leo">Send reminder</button></div>`;
+    if (arg === 2) body = `<p>${n.detail}. How good was it?</p><div class="stars">${[1, 2, 3, 4, 5].map((s) => `<button data-star="${s}" aria-label="${s} stars">${ICON.star}</button>`).join('')}</div><div class="pfoot"><button class="btn sec" data-close>Cancel</button><button class="btn pri" data-done="Thanks, rating saved">Save rating</button></div>`;
+  }
+  sheet.innerHTML = `<header><h3>${title}</h3><button class="tb icon" data-close aria-label="Close">${ICON.x}</button></header><div class="body">${body}</div>`;
+  sheet.classList.add('on'); scrim.classList.add('on', 'dim');
+  sheet.querySelectorAll('[data-close]').forEach((b) => b.onclick = closeAll);
+  sheet.querySelectorAll('[data-done]').forEach((b) => b.onclick = () => { closeAll(); toast(b.dataset.done); });
+  sheet.querySelectorAll('[data-sent]').forEach((b) => b.onclick = () => { closeAll(); toast('Thanks, feedback sent'); });
+  sheet.querySelectorAll('.seg button').forEach((b) => b.onclick = () => { b.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+  sheet.querySelectorAll('[data-star]').forEach((b) => b.onclick = () => sheet.querySelectorAll('[data-star]').forEach((x) => x.classList.toggle('on', +x.dataset.star <= +b.dataset.star)));
+  sheet.querySelectorAll('[data-size]').forEach((b) => b.onclick = () => { document.documentElement.dataset.size = b.dataset.size; sheet.querySelectorAll('[data-size]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+}
+
+document.addEventListener('click', (e) => {
+  const ev = e.target.closest('.ev'); if (ev) return openClass(ev);
+  const kh = e.target.closest('.kh'); if (kh) return openKid(kh);
+  const o = e.target.closest('[data-open]'); if (o) return openSheet(o.dataset.open);
+  const n = e.target.closest('[data-need]'); if (n) return openSheet('need', +n.dataset.need);
+});
+
+/* ---------- Admin ---------- */
+const A = P.admin;
+const AIC = ['#1a56db', '#0f766e', '#7c3aed', '#b45309', '#b3261e'];
+const ASVG = [
+  '<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/>',
+  '<circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c.6-3.5 3-5.5 6-5.5s5.4 2 6 5.5M15 14.6c2.8-.3 5 1.4 5.8 4.4"/>',
+  '<path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/>',
+  '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>',
+  '<path d="M4 5h16v11H9l-5 4z"/>',
+];
+const row = (k, v, btn) => `<div class="row"><span class="k">${k}</span>${btn ? `<button class="v">${v}</button>` : `<span class="v">${v}</span>`}</div>`;
+const ADETAIL = [
+  () => `<div class="group">${row('Name', A.account.name)}${row('Username', A.account.username)}${row('Password', 'Change', 1)}${row('Text size', { standard: 'Standard', large: 'Large', xl: 'Extra large' }[document.documentElement.dataset.size || 'standard'])}</div><p class="note">Everyone in the family signs in with this one account.</p><div class="group">${row('Sign out', '', 0).replace('class="k"', 'class="k" style="color:var(--late)"')}</div>`,
+  () => `<p class="gtitle">Parents</p><div class="group">${P.parents.map((p) => row(p.name + (p.you ? ' (you)' : ''), p.you ? 'Owner' : 'Parent')).join('')}${row('Invite a parent', 'Invite', 1)}</div><p class="note"></p><p class="gtitle">Children</p><div class="group">${P.kids.map((k) => `<div class="row"><span class="face" style="${kv(k)};width:40px;height:40px;font-size:22px">${k.face}</span><span class="k">${k.name}</span><span class="v">${k.year}</span></div>`).join('')}${row('Add a child', 'Add', 1)}</div><p class="note">Children sign in inside your account. They never need an email.</p>`,
+  () => `<div class="group">${row('Program', A.plan)}${row('Subjects', P.program.subjects)}${row('Video lessons ready', P.program.readyLessons)}${row('Word help', A.wordHelp.replace('Spanish key words: ', 'Spanish key words, '))}${row('Exam PIN', A.examPin)}</div><p class="note">The program follows the National Curriculum for England.</p>`,
+  () => `<div class="group">${row('Your plan', A.billing)}${row('Children on the plan', P.kids.length)}${row('Payment', 'Not needed during the trial')}</div>`,
+  () => `<div class="group">${row('Send feedback', 'Write a note', 1)}${row('Check the TV and voice', 'Run check', 1)}</div>`,
+];
+let asel = 0;
+function renderAdmin() {
+  $('#who').innerHTML = `<span class="av">${A.account.name[0]}</span><span><b>${A.account.name}</b><span>Family account</span></span>`;
+  $('#anav').innerHTML = A.sections.map((s, i) => `<button aria-current="${i === asel}" data-a="${i}"><span class="ic" style="background:${AIC[i]}"><svg class="i" viewBox="0 0 24 24">${ASVG[i]}</svg></span>${s}<span class="chev">›</span></button>`).join('');
+  $('#adetail').innerHTML = `<h2>${A.sections[asel]}</h2>${ADETAIL[asel]()}`;
+}
+$('#anav').addEventListener('click', (e) => { const b = e.target.closest('[data-a]'); if (b) { asel = +b.dataset.a; renderAdmin(); } });
+$('#back').onclick = () => { if (history.state && history.state.fromPad) history.back(); else location.hash = ''; };
+document.querySelector('a.admin').addEventListener('click', (e) => { e.preventDefault(); history.pushState({ fromPad: true }, '', '#admin'); route(); });
+function route() { closeAll(); const a = location.hash === '#admin'; document.body.classList.toggle('is-admin', a); if (a) renderAdmin(); }
+addEventListener('hashchange', route); addEventListener('popstate', route); route();
+</script>
+</body>
+</html>

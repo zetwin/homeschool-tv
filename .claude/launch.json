@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "home-school",
+      "url": "http://localhost:8080"
+    },
+    {
+      "name": "channel",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "tools/serve.mjs",
+        "--lan",
+        "8080"
+      ],
+      "port": 8080
+    }
+  ]
+}

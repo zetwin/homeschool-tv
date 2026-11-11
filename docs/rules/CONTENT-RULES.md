@@ -40,5 +40,5 @@ Lessons keep one feeling: the same colors, fonts, voice and show structure. What
 
 ## The check before showing the owner
 1. Check every title and picture against this page.
-2. Ask a **fresh agent with no background** to do the main test, with first-look instructions (kept with the team's private working files). It sees only the screens, and gets none of my reasoning.
+2. Ask a **fresh agent with no background** to do the main test, using `.claude/agents/first-look-tester.md`. It sees only the screens, and gets none of my reasoning.
 3. Fix what it finds, and only then show the owner.

@@ -43,7 +43,7 @@ A parent with no technical knowledge can do all of this:
 
 ## The GitHub page
 - **README for parents:** what it is, a screenshot, the download buttons, the three steps, and what to do if something goes wrong. Plain words.
-- **For developers:** `docs/SETUP.md` and `CONTRIBUTING.md`.
+- **For developers:** `docs/SETUP.md` and `CLAUDE.md`, as now.
 - **Version numbers** (1.0, 1.1 and so on), with a short "What's new" for each.
 - **Automatic checks on GitHub:** every change runs the checks (`verify`, lesson checks). Every new version builds the downloads for each system by itself.
 - **The labs move out of the app:** they stay in the repository for us, but aren't in the downloads.

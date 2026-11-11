@@ -4,7 +4,7 @@ Last updated: 2026-11-11. Every file has one job. If something new doesn't fit, 
 
 **New here?** [`product/FEATURES.md`](product/FEATURES.md) lists everything we have and how real it is. [`product/HOW-THE-CODE-WORKS.md`](product/HOW-THE-CODE-WORKS.md) explains the code. [`SETUP.md`](SETUP.md) gets it running. [`DESIGN-GALLERY.md`](DESIGN-GALLERY.md) shows the design rounds.
 
-**About this public copy:** the team's day-to-day notes (tasks, decisions, the owner's notes and feedback) stay in a private repository, because they quote a real family. Where a document below mentions "the team's private notes", that's what it means. "The owner" means the product owner, who is also the first family's parent.
+**About this public copy:** the team's day-to-day notes (tasks, decisions, the owner's notes and feedback) stay in a private repository, because they quote a real family. What they taught us about quality is summed up in `rules/QUALITY-NOTES.md`. Where a document below mentions "the team's private notes", that's what it means. "The owner" means the product owner, who is also the first family's parent.
 
 ## Where everything lives
 | Folder | What's in it | When to use it |
@@ -14,6 +14,7 @@ Last updated: 2026-11-11. Every file has one job. If something new doesn't fit, 
 | `docs/research/` | Dated research with sources, and notes on what's unverified | When a rule needs evidence |
 | `docs/official/` | Official programs by subject (England's national curriculum), read before searching the web | Planning a unit |
 | `docs/background/` | Older notes kept for reference: `DESIGN-RESEARCH.md`, `KID-DESIGN-DIRECTIONS.md`, `LESSON-PLAYBOOK.md`. Rules win if they disagree | Rarely |
+| `CLAUDE.md`, `.claude/agents/` | How Claude Code works on the project, and the helpers for each lesson step | When making a lesson |
 | `docs/images/` | Pictures for the README and the design gallery | |
 | `channel/` | The working prototype: TV lessons, child app, parent pad | |
 | `channel/pad-lab/`, `channel/kid-lab/`, `channel/materials-lab/`, `channel/children-lab/` | **Design labs:** clickable samples for the parent pad, the child's screens, Materials and the Children page. Not the real app | Comparing designs |
@@ -24,6 +25,7 @@ Last updated: 2026-11-11. Every file has one job. If something new doesn't fit, 
 ## Rules
 | File | Covers |
 |---|---|
+| `rules/QUALITY-NOTES.md` | **What we learned the hard way. Read before any lesson, test or screen** |
 | `rules/STYLE-GUIDE.md` | App look, tools, motion, options. **Read before any screen** |
 | `rules/DESIGN-VARIATIONS.md` | **Quality level and how to make variations. Read before any prototype** |
 | `rules/AUDIENCE-AND-READING.md` | Who reads each screen, on which device |

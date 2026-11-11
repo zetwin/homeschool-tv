@@ -50,6 +50,7 @@ The last one removes about 500 MB. On first use, the voice model downloads about
 | Read | For |
 |---|---|
 | `README.md` | What it is, and the project map. **Start here** |
+| `CLAUDE.md` | How to work on it with Claude Code, and how to make a lesson |
 | `docs/README.md` | The map of all project knowledge |
 | `docs/product/ROADMAP.md` | The plan and open decisions |
 | `docs/rules/LESSON-RULES.md` | How to make a lesson |

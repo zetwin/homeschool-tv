@@ -1,6 +1,6 @@
 # How the code works
 
-Last updated: 2026-11-06. **What's really there today.** For where it's going, see `ROADMAP.md`. For plain rules, see `rules/` and `CONTRIBUTING.md`.
+Last updated: 2026-11-06. **What's really there today.** For where it's going, see `ROADMAP.md`. For plain rules, see `CLAUDE.md`.
 
 ## The big picture
 There's no build step: plain HTML and JavaScript, loaded by the browser. Edit a file, and reload the page.

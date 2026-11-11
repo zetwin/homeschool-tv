@@ -15,4 +15,6 @@ You're welcome to:
 - Never commit anything from `data/`: it holds a family's names, logins and results.
 
 ## How the work is done
+Lessons are made with Claude Code: see [Make your own lessons](README.md#make-your-own-lessons) and [`CLAUDE.md`](CLAUDE.md).
+
 Every lesson follows [the lesson rules](docs/rules/LESSON-RULES.md), every test [the test rules](docs/rules/TEST-AND-EXAM-RULES.md), and every screen [the style guide](docs/rules/STYLE-GUIDE.md) and [visual hierarchy rules](docs/rules/VISUAL-HIERARCHY.md). Facts need a source; pictures and videos need a licence check first ([compliance and licensing](docs/rules/COMPLIANCE-AND-LICENSING.md)). Write plainly: many readers aren't native English speakers.

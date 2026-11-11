@@ -109,6 +109,17 @@ Open http://localhost:8080. A TV or tablet on the same Wi-Fi can open the addres
 
 More: [the setup guide](docs/SETUP.md).
 
+## Make your own lessons
+
+The lessons are written with [Claude Code](https://claude.com/claude-code), following written rules and checked by helpers, so a new lesson can reach the same quality as the existing ones.
+
+1. Install Claude Code (it needs a paid Claude plan) and open it in this folder. It reads [`CLAUDE.md`](CLAUDE.md) first.
+2. Ask for a lesson in plain words, for example: *"Make Science lesson 3 of the skeleton and muscles unit: Movement."*
+3. Claude follows [the 12 lesson steps](docs/rules/LESSON-RULES.md): it places the lesson in the official program, collects facts with sources, writes the script, finds licensed pictures and video clips, records the voice, and runs the checks. Seven helpers in [`.claude/agents/`](.claude/agents/) do the research, fact-checking, licence checks, a first look as a child, and the TV test.
+4. **You watch the whole lesson and every clip, and listen to the voice.** Claude can't see video or hear sound, so that last check is always a person's.
+
+What makes the quality is written down: [quality notes](docs/rules/QUALITY-NOTES.md) (mistakes made and what worked), [lesson rules](docs/rules/LESSON-RULES.md), [content rules](docs/rules/CONTENT-RULES.md), [video rules](docs/rules/VIDEO-RULES.md) and [test rules](docs/rules/TEST-AND-EXAM-RULES.md). Recording voices needs about 500 MB more (`npm run voice:setup`), and Spanish voices need Python 3.12 ([setup guide](docs/SETUP.md)).
+
 ## Requirements
 
 | What | Why |
@@ -130,6 +141,7 @@ More: [the setup guide](docs/SETUP.md).
 | `channel/pad-lab/`, `kid-lab/`, `materials-lab/`, `children-lab/`, `theme-kit/` | **Design labs.** Clickable design rounds, not the app. See [the design gallery](docs/DESIGN-GALLERY.md) |
 | `channel/round1/`, `test-styles/`, `game/`, `layouts/`, `style-references/` | Older or rejected experiments, kept as a record |
 | [`tools/`](tools/) | The server (`serve.mjs`), checks, voice recording, picture fetching, the home-server scripts |
+| [`CLAUDE.md`](CLAUDE.md), [`.claude/agents/`](.claude/agents/) | How Claude Code works on this project, and the seven helpers that make and check lessons |
 | [`docs/`](docs/) | Product plans, rules for lessons, tests and screens, research with sources. Start at [docs/README.md](docs/README.md) |
 | [`prototype/`](prototype/) | The very first prototype, kept for reference |
 

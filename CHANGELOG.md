@@ -3,6 +3,7 @@
 Dates come from the private working history. Versions before 0.5 were never published; they're listed so the story is clear.
 
 ## 0.5 (2026-11-11): first public copy
+- Lesson-making kit: `CLAUDE.md`, seven helpers in `.claude/agents/`, and quality notes in `docs/rules/QUALITY-NOTES.md`, so a new lesson can be made the same way.
 - A clean public copy of the family prototype, with fresh history. Family notes, real names and home details are left out.
 - New README with pictures, a design gallery, licence, security note and contributing note.
 - Docs agree with the code: 7 lessons, all passing the lesson check; exams mark themselves; Materials is live; backups explained.
